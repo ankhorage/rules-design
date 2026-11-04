@@ -161,9 +161,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>13</strong><span class="muted">public exports</span></div>
+        <div><strong>17</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>10</strong><span class="muted">modules</span></div>
+        <div><strong>14</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -171,7 +171,20 @@
         <li><code>src/index.ts</code></li>
       </ul>
     </section>
+    <section class="panel" data-search="usage ankh rules-design --help Evaluate Design Evidence Register the Design provider with the generic Rules evaluator. examples/provider-evaluation/evaluate.ts">
+    <h2>Usage</h2>
+    <article class="item">
+      <h3>CLI</h3>
+      <pre>ankh rules-design --help</pre>
+    </article>
+    <article class="item" data-search="Evaluate Design Evidence Register the Design provider with the generic Rules evaluator. examples/provider-evaluation/evaluate.ts">
+    <h3>Evaluate Design Evidence</h3>
+    <p class="muted"><code>examples/provider-evaluation/evaluate.ts</code></p>
+    <p>Register the Design provider with the generic Rules evaluator.</p>
     
+    <pre>import { createRuleRegistry, evaluateRules } from &#39;@ankhorage/rules&#39;;</pre>
+  </article>
+  </section>
     <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
     <section class="panel">
       <h2>Modules</h2>
@@ -215,16 +228,36 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/features/catalog/designRuleProfiles.ts</code>, <code>src/types/designRuleCatalog.ts</code></p>
     <p><strong>Exports:</strong> <code>designRulePlanningManifest</code></p>
-  </article><article class="item" data-search="src/index.ts DesignAssessmentKind designRuleCatalog DesignRuleCatalogEntry DesignRuleCatalogFilter DesignRuleEvidence DesignRulePlanningManifest DesignRuleProfile designRuleProfiles designRuleProviderManifest DesignRuleProviderManifest DesignRuleScope DesignRuleStatus filterDesignRuleCatalog">
+  </article><article class="item" data-search="src/features/provider/designRuleProvider.test.ts src/index.ts test/fixtures/designEvidencePresentRule.ts">
+    <h3>src/features/provider/designRuleProvider.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/index.ts</code>, <code>test/fixtures/designEvidencePresentRule.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/features/provider/designRuleProvider.ts src/types/designRuleProvider.ts designRuleProvider">
+    <h3>src/features/provider/designRuleProvider.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/designRuleProvider.ts</code></p>
+    <p><strong>Exports:</strong> <code>designRuleProvider</code></p>
+  </article><article class="item" data-search="src/index.ts DesignAssessmentKind DesignContext DesignEvidence designRuleCatalog DesignRuleCatalogEntry DesignRuleCatalogFilter DesignRuleEvidence DesignRulePlanningManifest DesignRuleProfile designRuleProfiles designRuleProvider DesignRuleProvider designRuleProviderManifest DesignRuleProviderManifest DesignRuleScope DesignRuleStatus filterDesignRuleCatalog">
     <h3>src/index.ts</h3>
     <p class="muted">Configured entrypoint</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>DesignAssessmentKind</code>, <code>designRuleCatalog</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>designRuleProfiles</code>, <code>designRuleProviderManifest</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code>, <code>filterDesignRuleCatalog</code></p>
+    <p><strong>Exports:</strong> <code>DesignAssessmentKind</code>, <code>DesignContext</code>, <code>DesignEvidence</code>, <code>designRuleCatalog</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>designRuleProfiles</code>, <code>designRuleProvider</code>, <code>DesignRuleProvider</code>, <code>designRuleProviderManifest</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code>, <code>filterDesignRuleCatalog</code></p>
   </article><article class="item" data-search="src/types/designRuleCatalog.ts DesignAssessmentKind DesignRuleCatalogEntry DesignRuleCatalogFilter DesignRuleEvidence DesignRulePlanningManifest DesignRuleProfile DesignRuleProviderManifest DesignRuleScope DesignRuleStatus">
     <h3>src/types/designRuleCatalog.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>DesignAssessmentKind</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code></p>
+  </article><article class="item" data-search="src/types/designRuleProvider.ts DesignContext DesignEvidence DesignRuleProvider">
+    <h3>src/types/designRuleProvider.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>DesignContext</code>, <code>DesignEvidence</code>, <code>DesignRuleProvider</code></p>
+  </article><article class="item" data-search="test/fixtures/designEvidencePresentRule.ts src/types/designRuleProvider.ts designEvidencePresentRule">
+    <h3>test/fixtures/designEvidencePresentRule.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/designRuleProvider.ts</code></p>
+    <p><strong>Exports:</strong> <code>designEvidencePresentRule</code></p>
   </article>
     </section>
     <section class="panel">
@@ -303,6 +336,20 @@
               </table>
         <p><strong>Returns:</strong> <code>readonly DesignRuleCatalogEntry[]</code></p>
       </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/provider/designRuleProvider.ts</h3>
+              <article class="item" id="symbol-designruleprovider" data-search="designRuleProvider  value src/features/provider/designRuleProvider.ts Exposes the reusable Design provider through the generic Rules RuleSet contract.">
+    <h4>designRuleProvider</h4>
+    
+    <p class="muted">value • <code>src/features/provider/designRuleProvider.ts:4:14</code></p>
+    <p>Exposes the reusable Design provider through the generic Rules RuleSet contract.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
     
   </article>
             </section>
@@ -581,6 +628,91 @@
     
   </article>
             </section>
+            <section>
+              <h3>src/types/designRuleProvider.ts</h3>
+              <article class="item" id="symbol-designcontext" data-search="DesignContext  type src/types/designRuleProvider.ts The minimal context shared by Design rules without prescribing its source. DesignEvidence">
+    <h4>DesignContext</h4>
+    
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:10:1</code></p>
+    <p>The minimal context shared by Design rules without prescribing its source.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">DesignEvidence</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>evidence</code></td>
+            <td>property</td>
+            <td><code>readonly DesignEvidence[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-designevidence" data-search="DesignEvidence  type src/types/designRuleProvider.ts One provider-neutral design observation supplied by a Design context.">
+    <h4>DesignEvidence</h4>
+    
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:4:1</code></p>
+    <p>One provider-neutral design observation supplied by a Design context.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>id</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>kind</code></td>
+            <td>property</td>
+            <td><code>string</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-designruleprovider" data-search="DesignRuleProvider  type src/types/designRuleProvider.ts The public identity and generic Rules contribution for the Design provider. DesignContext">
+    <h4>DesignRuleProvider</h4>
+    
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:15:1</code></p>
+    <p>The public identity and generic Rules contribution for the Design provider.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">DesignContext</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>id</code></td>
+            <td>property</td>
+            <td><code>&quot;ankhorage.rules-design&quot;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>packageName</code></td>
+            <td>property</td>
+            <td><code>&quot;@ankhorage/rules-design&quot;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>ruleSet</code></td>
+            <td>property</td>
+            <td><code>RuleSet&lt;DesignContext&gt;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article>
+            </section>
     </section>
     <section class="panel">
       <h2>Component registry</h2>
@@ -628,9 +760,21 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
 </div>
     <details>
       <summary>View Mermaid source</summary>
@@ -671,9 +815,21 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
 </pre>
     </details>
   </article><article class="item" data-search="Module relationships diagrams/module-relationships.mmd">
@@ -688,8 +844,12 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProviderManifest_ts
@@ -707,6 +867,10 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
 </div>
     <details>
       <summary>View Mermaid source</summary>
@@ -719,8 +883,12 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProviderManifest_ts
@@ -738,6 +906,10 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
 </pre>
     </details>
   </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
@@ -752,10 +924,19 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
+  export_DesignContext[&quot;DesignContext&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignContext
+  export_DesignContext -.-&gt; export_DesignEvidence
+  export_DesignEvidence[&quot;DesignEvidence&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignEvidence
   export_designRuleCatalog[&quot;designRuleCatalog&quot;]
   module_src_features_catalog_designRuleCatalog_ts --&gt; export_designRuleCatalog
   export_DesignRuleCatalogEntry[&quot;DesignRuleCatalogEntry&quot;]
@@ -775,6 +956,11 @@
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProfile
   export_designRuleProfiles[&quot;designRuleProfiles&quot;]
   module_src_features_catalog_designRuleProfiles_ts --&gt; export_designRuleProfiles
+  export_designRuleProvider[&quot;designRuleProvider&quot;]
+  module_src_features_provider_designRuleProvider_ts --&gt; export_designRuleProvider
+  export_DesignRuleProvider[&quot;DesignRuleProvider&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProvider
+  export_DesignRuleProvider -.-&gt; export_DesignContext
   export_designRuleProviderManifest[&quot;designRuleProviderManifest&quot;]
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; export_designRuleProviderManifest
   export_DesignRuleProviderManifest[&quot;DesignRuleProviderManifest&quot;]
@@ -799,10 +985,19 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
+  module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
+  module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
+  export_DesignContext[&quot;DesignContext&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignContext
+  export_DesignContext -.-&gt; export_DesignEvidence
+  export_DesignEvidence[&quot;DesignEvidence&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignEvidence
   export_designRuleCatalog[&quot;designRuleCatalog&quot;]
   module_src_features_catalog_designRuleCatalog_ts --&gt; export_designRuleCatalog
   export_DesignRuleCatalogEntry[&quot;DesignRuleCatalogEntry&quot;]
@@ -822,6 +1017,11 @@
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProfile
   export_designRuleProfiles[&quot;designRuleProfiles&quot;]
   module_src_features_catalog_designRuleProfiles_ts --&gt; export_designRuleProfiles
+  export_designRuleProvider[&quot;designRuleProvider&quot;]
+  module_src_features_provider_designRuleProvider_ts --&gt; export_designRuleProvider
+  export_DesignRuleProvider[&quot;DesignRuleProvider&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProvider
+  export_DesignRuleProvider -.-&gt; export_DesignContext
   export_designRuleProviderManifest[&quot;designRuleProviderManifest&quot;]
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; export_designRuleProviderManifest
   export_DesignRuleProviderManifest[&quot;DesignRuleProviderManifest&quot;]

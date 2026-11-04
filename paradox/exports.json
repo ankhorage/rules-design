@@ -22,6 +22,75 @@
     "structuredRows": []
   },
   {
+    "name": "DesignContext",
+    "title": null,
+    "description": "The minimal context shared by Design rules without prescribing its source.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/types/designRuleProvider.ts",
+      "line": 10,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "DesignEvidence"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "evidence",
+        "kind": "property",
+        "type": "readonly DesignEvidence[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "DesignEvidence",
+    "title": null,
+    "description": "One provider-neutral design observation supplied by a Design context.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/types/designRuleProvider.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "designRuleCatalog",
     "title": null,
     "description": "Exposes the complete planned atomic and composite design rule catalog.",
@@ -366,6 +435,74 @@
         }
       }
     ]
+  },
+  {
+    "name": "designRuleProvider",
+    "title": null,
+    "description": "Exposes the reusable Design provider through the generic Rules RuleSet contract.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "value",
+    "modulePath": "src/features/provider/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/features/provider/designRuleProvider.ts",
+      "line": 4,
+      "column": 14
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "DesignRuleProvider",
+    "title": null,
+    "description": "The public identity and generic Rules contribution for the Design provider.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/types/designRuleProvider.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "DesignContext"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "\"ankhorage.rules-design\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "packageName",
+        "kind": "property",
+        "type": "\"@ankhorage/rules-design\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "ruleSet",
+        "kind": "property",
+        "type": "RuleSet<DesignContext>",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
   },
   {
     "name": "designRuleProviderManifest",

@@ -7,10 +7,19 @@ graph LR
   module_src_features_catalog_designRuleSemantics_ts["src/features/catalog/designRuleSemantics.ts"]
   module_src_features_catalog_filterDesignRuleCatalog_ts["src/features/catalog/filterDesignRuleCatalog.ts"]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts["src/features/catalog/fixtures/designRuleCatalogManifest.ts"]
+  module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
+  module_src_features_provider_designRuleProvider_ts["src/features/provider/designRuleProvider.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
+  module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
+  module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
   export_DesignAssessmentKind["DesignAssessmentKind"]
   module_src_types_designRuleCatalog_ts --> export_DesignAssessmentKind
+  export_DesignContext["DesignContext"]
+  module_src_types_designRuleProvider_ts --> export_DesignContext
+  export_DesignContext -.-> export_DesignEvidence
+  export_DesignEvidence["DesignEvidence"]
+  module_src_types_designRuleProvider_ts --> export_DesignEvidence
   export_designRuleCatalog["designRuleCatalog"]
   module_src_features_catalog_designRuleCatalog_ts --> export_designRuleCatalog
   export_DesignRuleCatalogEntry["DesignRuleCatalogEntry"]
@@ -30,6 +39,11 @@ graph LR
   module_src_types_designRuleCatalog_ts --> export_DesignRuleProfile
   export_designRuleProfiles["designRuleProfiles"]
   module_src_features_catalog_designRuleProfiles_ts --> export_designRuleProfiles
+  export_designRuleProvider["designRuleProvider"]
+  module_src_features_provider_designRuleProvider_ts --> export_designRuleProvider
+  export_DesignRuleProvider["DesignRuleProvider"]
+  module_src_types_designRuleProvider_ts --> export_DesignRuleProvider
+  export_DesignRuleProvider -.-> export_DesignContext
   export_designRuleProviderManifest["designRuleProviderManifest"]
   module_src_features_catalog_designRuleProviderManifest_ts --> export_designRuleProviderManifest
   export_DesignRuleProviderManifest["DesignRuleProviderManifest"]

@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.0",
+      "value": "v0.2.0",
       "color": "cb3837"
     },
     {
@@ -64,8 +64,20 @@
     "packageName": "@ankhorage/rules-design",
     "command": "ankh rules-design --help"
   },
-  "usageEntries": [],
-  "exampleCount": 0,
+  "usageEntries": [
+    {
+      "area": "examples",
+      "title": "Evaluate Design Evidence",
+      "description": "Register the Design provider with the generic Rules evaluator.",
+      "language": "ts",
+      "code": "import { createRuleRegistry, evaluateRules } from '@ankhorage/rules';",
+      "sourcePath": "examples/provider-evaluation/evaluate.ts",
+      "isReadme": true,
+      "see": [],
+      "security": []
+    }
+  ],
+  "exampleCount": 1,
   "findings": [],
   "config": null,
   "entrypoints": [
@@ -160,11 +172,32 @@
       ]
     },
     {
+      "path": "src/features/provider/designRuleProvider.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts",
+        "test/fixtures/designEvidencePresentRule.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/provider/designRuleProvider.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "designRuleProvider"
+      ]
+    },
+    {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
         "DesignAssessmentKind",
+        "DesignContext",
+        "DesignEvidence",
         "designRuleCatalog",
         "DesignRuleCatalogEntry",
         "DesignRuleCatalogFilter",
@@ -172,6 +205,8 @@
         "DesignRulePlanningManifest",
         "DesignRuleProfile",
         "designRuleProfiles",
+        "designRuleProvider",
+        "DesignRuleProvider",
         "designRuleProviderManifest",
         "DesignRuleProviderManifest",
         "DesignRuleScope",
@@ -193,6 +228,26 @@
         "DesignRuleProviderManifest",
         "DesignRuleScope",
         "DesignRuleStatus"
+      ]
+    },
+    {
+      "path": "src/types/designRuleProvider.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "DesignContext",
+        "DesignEvidence",
+        "DesignRuleProvider"
+      ]
+    },
+    {
+      "path": "test/fixtures/designEvidencePresentRule.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "designEvidencePresentRule"
       ]
     }
   ],
@@ -217,6 +272,75 @@
       "relatedSymbols": [],
       "signatures": [],
       "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignContext",
+      "title": null,
+      "description": "The minimal context shared by Design rules without prescribing its source.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleProvider.ts",
+        "line": 10,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignEvidence"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "evidence",
+          "kind": "property",
+          "type": "readonly DesignEvidence[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignEvidence",
+      "title": null,
+      "description": "One provider-neutral design observation supplied by a Design context.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleProvider.ts",
+        "line": 4,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -566,6 +690,74 @@
       ]
     },
     {
+      "name": "designRuleProvider",
+      "title": null,
+      "description": "Exposes the reusable Design provider through the generic Rules RuleSet contract.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "value",
+      "modulePath": "src/features/provider/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.ts",
+        "line": 4,
+        "column": 14
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleProvider",
+      "title": null,
+      "description": "The public identity and generic Rules contribution for the Design provider.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleProvider.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignContext"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "\"ankhorage.rules-design\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "packageName",
+          "kind": "property",
+          "type": "\"@ankhorage/rules-design\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "ruleSet",
+          "kind": "property",
+          "type": "RuleSet<DesignContext>",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "designRuleProviderManifest",
       "title": null,
       "description": "Declares the released MIT provider surface without exposing unclassified planned rules.",
@@ -897,8 +1089,23 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/provider/designRuleProvider.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/types/designRuleCatalog.ts",
         "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "test/fixtures/designEvidencePresentRule.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "test/fixtures/designEvidencePresentRule.ts"
       },
       {
         "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
@@ -969,6 +1176,21 @@
         "fromPath": "src/features/catalog/filterDesignRuleCatalog.ts",
         "toPath": "src/types/designRuleCatalog.ts",
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "test/fixtures/designEvidencePresentRule.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
       },
       {
         "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
@@ -1076,6 +1298,30 @@
         "toSymbol": "matches",
         "callExpression": "matches",
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "createRuleRegistry",
+        "callExpression": "createRuleRegistry",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
       }
     ],
     "typeReferences": [
@@ -1123,6 +1369,21 @@
         "fromSymbol": "DesignRulePlanningManifest",
         "toType": "DesignRuleProfile",
         "sourcePath": "src/types/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignContext",
+        "toType": "DesignEvidence",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProvider",
+        "toType": "DesignContext",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProvider",
+        "toType": "RuleSet",
+        "sourcePath": "src/types/designRuleProvider.ts"
       }
     ],
     "componentComposition": []

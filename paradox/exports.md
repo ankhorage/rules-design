@@ -6,6 +6,35 @@ Kind: `unknown`
 Module: `src/types/designRuleCatalog.ts`
 Source: `src/types/designRuleCatalog.ts:1:1`
 
+## DesignContext
+
+Kind: `type`
+Module: `src/types/designRuleProvider.ts`
+Source: `src/types/designRuleProvider.ts:10:1`
+
+The minimal context shared by Design rules without prescribing its source.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| evidence | property | `readonly DesignEvidence[]` | yes |  |
+
+## DesignEvidence
+
+Kind: `type`
+Module: `src/types/designRuleProvider.ts`
+Source: `src/types/designRuleProvider.ts:4:1`
+
+One provider-neutral design observation supplied by a Design context.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `string` | yes |  |
+| kind | property | `string` | yes |  |
+
 ## designRuleCatalog
 
 Kind: `value`
@@ -100,6 +129,30 @@ Declares selectable profiles without adding another executable or composite rule
 | Advisory accessibility-oriented checks. | design.wcag.advisory |  |
 | C.R.A.P. composition profile. | design.crap | design.crap |
 | Advisory 60-30-10 visible color-area distribution profile. | design.60-30-10 | design.color.usage-distribution |
+
+## designRuleProvider
+
+Kind: `value`
+Module: `src/features/provider/designRuleProvider.ts`
+Source: `src/features/provider/designRuleProvider.ts:4:14`
+
+Exposes the reusable Design provider through the generic Rules RuleSet contract.
+
+## DesignRuleProvider
+
+Kind: `type`
+Module: `src/types/designRuleProvider.ts`
+Source: `src/types/designRuleProvider.ts:15:1`
+
+The public identity and generic Rules contribution for the Design provider.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `"ankhorage.rules-design"` | yes |  |
+| packageName | property | `"@ankhorage/rules-design"` | yes |  |
+| ruleSet | property | `RuleSet<DesignContext>` | yes |  |
 
 ## designRuleProviderManifest
 

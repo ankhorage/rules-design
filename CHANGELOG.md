@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 41ed755: Expose the reusable Design RuleSet provider through the generic Rules engine.
+
 ## 0.1.0
 
 ### Minor Changes

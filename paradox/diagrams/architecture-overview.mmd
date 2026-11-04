@@ -35,6 +35,18 @@ graph TD
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_types_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_provider_designRuleProvider_test_ts
+  module_src_features_provider_designRuleProvider_test_ts --> module_src_index_ts
+  module_src_features_provider_designRuleProvider_test_ts --> module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_ts["src/features/provider/designRuleProvider.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_ts --> module_src_types_designRuleProvider_ts
   module_src_index_ts["src/index.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
+  module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_designRuleProvider_ts
+  module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_designEvidencePresentRule_ts
+  module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts
