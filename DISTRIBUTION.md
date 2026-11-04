@@ -16,12 +16,12 @@ or make the open package a compatibility shim for unpublished code.
 
 This makes the intended distribution boundary explicit:
 
-| Asset | Distribution |
-| --- | --- |
-| Provider integration and basic provider rules in this repository | Public under MIT |
-| A manifest shipped by this repository | Public under MIT and limited to the rules shipped here |
-| Commercial-pack manifest and executable rule logic | Shipped only with that separately licensed pack |
-| Plugin integration | Uses released public provider APIs; it does not copy or relicense pack logic |
+| Asset                                                            | Distribution                                                                 |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Provider integration and basic provider rules in this repository | Public under MIT                                                             |
+| A manifest shipped by this repository                            | Public under MIT and limited to the rules shipped here                       |
+| Commercial-pack manifest and executable rule logic               | Shipped only with that separately licensed pack                              |
+| Plugin integration                                               | Uses released public provider APIs; it does not copy or relicense pack logic |
 
 The catalog implementation issue must classify every rule as either part of this open provider
 or part of a separately distributed pack before its executable logic is published. It must not
