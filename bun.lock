@@ -6,6 +6,7 @@
       "name": "@ankhorage/rules-design",
       "dependencies": {
         "@ankhorage/rules": "^0.3.0",
+        "@ankhorage/utility": "^0.5.5",
       },
       "devDependencies": {
         "@ankhorage/devtools": "^2.3.47",

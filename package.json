@@ -58,6 +58,7 @@
     "@ankhorage/paradox": "^0.3.6"
   },
   "dependencies": {
-    "@ankhorage/rules": "^0.3.0"
+    "@ankhorage/rules": "^0.3.0",
+    "@ankhorage/utility": "^0.5.5"
   }
 }
