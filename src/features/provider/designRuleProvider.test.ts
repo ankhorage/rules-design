@@ -1,6 +1,7 @@
 import { createRuleRegistry, evaluateRules, type Rule, type RuleSet } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
+import { designEvidencePresentRule } from '../../../test/fixtures/designEvidencePresentRule';
 import {
   type DesignContext,
   type DesignEvidence,
@@ -19,6 +20,7 @@ test('registers and evaluates through the generic Rules engine with an unrelated
   const provider: DesignRuleProvider = designRuleProvider;
   const ruleSets: readonly RuleSet<DesignContext>[] = [
     provider.ruleSet,
+    { id: 'fixture.design-evidence', rules: [designEvidencePresentRule] },
     { id: 'fixture.unrelated', rules: [unrelatedRule] },
   ];
 
@@ -29,6 +31,7 @@ test('registers and evaluates through the generic Rules engine with an unrelated
 
   expect(registry.ruleSets.map((ruleSet) => ruleSet.id)).toEqual([
     'ankhorage.rules-design',
+    'fixture.design-evidence',
     'fixture.unrelated',
   ]);
   expect(result.diagnostics).toEqual([]);
@@ -45,9 +48,13 @@ test('registers and evaluates through the generic Rules engine with an unrelated
   ]);
 });
 
-test('passes the Design rule when the caller supplies Design evidence', () => {
+test('keeps the production Design provider empty while fixture rules can evaluate evidence', () => {
   const evidence: readonly DesignEvidence[] = [{ id: 'hero', kind: 'component' }];
-  const registry = createRuleRegistry([designRuleProvider.ruleSet]);
+  expect(designRuleProvider.ruleSet.rules).toEqual([]);
+  const registry = createRuleRegistry([
+    designRuleProvider.ruleSet,
+    { id: 'fixture.design-evidence', rules: [designEvidencePresentRule] },
+  ]);
   const result = evaluateRules({ evidence }, registry.rules);
 
   expect(result.diagnostics).toEqual([]);
