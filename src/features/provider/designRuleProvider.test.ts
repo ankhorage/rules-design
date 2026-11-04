@@ -25,7 +25,7 @@ test('registers and evaluates through the generic Rules engine with an unrelated
   ];
 
   const registry = createRuleRegistry(ruleSets);
-  const result = evaluateRules({ evidence: [] }, registry.rules, {
+  const result = evaluateRules({ evidence: [], facts: [] }, registry.rules, {
     scope: { id: 'fixture-design', kind: 'design' },
   });
 
@@ -55,7 +55,7 @@ test('keeps the production Design provider empty while fixture rules can evaluat
     designRuleProvider.ruleSet,
     { id: 'fixture.design-evidence', rules: [designEvidencePresentRule] },
   ]);
-  const result = evaluateRules({ evidence }, registry.rules);
+  const result = evaluateRules({ evidence, facts: [] }, registry.rules);
 
   expect(result.diagnostics).toEqual([]);
   expect(result.findings).toEqual([]);

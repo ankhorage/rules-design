@@ -1,3 +1,4 @@
+import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { RuleSet } from '@ankhorage/rules';
 
 /*** One provider-neutral design observation supplied by a Design context. */
@@ -9,6 +10,7 @@ export interface DesignEvidence {
 /*** The minimal context shared by Design rules without prescribing its source. */
 export interface DesignContext {
   readonly evidence: readonly DesignEvidence[];
+  readonly facts?: readonly FactEnvelope[];
 }
 
 /*** The public identity and generic Rules contribution for the Design provider. */
