@@ -56,5 +56,8 @@
     "typescript": "~6.0.3",
     "@ankhorage/devtools": "^2.3.47",
     "@ankhorage/paradox": "^0.3.6"
+  },
+  "dependencies": {
+    "@ankhorage/rules": "^0.3.0"
   }
 }
