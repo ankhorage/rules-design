@@ -1,0 +1,1130 @@
+{
+  "packageName": "@ankhorage/rules-design",
+  "packageId": "@ankhorage/rules-design",
+  "description": "Declarative catalog for reusable design rules.",
+  "collaborators": null,
+  "donation": null,
+  "badges": [
+    {
+      "id": "license",
+      "label": "license",
+      "value": "MIT",
+      "color": "2563eb"
+    },
+    {
+      "id": "npm",
+      "label": "npm",
+      "value": "v0.0.0",
+      "color": "cb3837"
+    },
+    {
+      "id": "runtime",
+      "label": "runtime",
+      "value": "bun",
+      "color": "f59e0b"
+    },
+    {
+      "id": "typescript",
+      "label": "typescript",
+      "value": "strict",
+      "color": "2563eb"
+    },
+    {
+      "id": "eslint",
+      "label": "eslint",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "prettier",
+      "label": "prettier",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "build",
+      "label": "build",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "tests",
+      "label": "tests",
+      "value": "checked",
+      "color": "0a7f3f"
+    },
+    {
+      "id": "docs",
+      "label": "paradox",
+      "value": "canonical",
+      "color": "0a7f3f"
+    }
+  ],
+  "usage": {
+    "packageName": "@ankhorage/rules-design",
+    "command": "ankh rules-design --help"
+  },
+  "usageEntries": [],
+  "exampleCount": 0,
+  "findings": [],
+  "config": null,
+  "entrypoints": [
+    "src/index.ts"
+  ],
+  "modules": [
+    {
+      "path": "src/features/catalog/designRuleCatalog.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleCatalog.ts",
+        "src/features/catalog/designRuleProfiles.ts",
+        "src/features/catalog/designRuleProviderManifest.ts",
+        "src/features/catalog/filterDesignRuleCatalog.ts",
+        "src/features/catalog/fixtures/designRuleCatalogManifest.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/catalog/designRuleCatalog.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleComposites.ts",
+        "src/features/catalog/designRuleSemantics.ts",
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRuleCatalog"
+      ]
+    },
+    {
+      "path": "src/features/catalog/designRuleComposites.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRuleComposites"
+      ]
+    },
+    {
+      "path": "src/features/catalog/designRuleProfiles.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleCatalog.ts",
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRuleProfiles"
+      ]
+    },
+    {
+      "path": "src/features/catalog/designRuleProviderManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRuleProviderManifest"
+      ]
+    },
+    {
+      "path": "src/features/catalog/designRuleSemantics.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRuleSemantics"
+      ]
+    },
+    {
+      "path": "src/features/catalog/filterDesignRuleCatalog.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "filterDesignRuleCatalog"
+      ]
+    },
+    {
+      "path": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleCatalog.ts",
+        "src/features/catalog/designRuleProfiles.ts",
+        "src/types/designRuleCatalog.ts"
+      ],
+      "exports": [
+        "designRulePlanningManifest"
+      ]
+    },
+    {
+      "path": "src/index.ts",
+      "isEntrypoint": true,
+      "dependencies": [],
+      "exports": [
+        "DesignAssessmentKind",
+        "designRuleCatalog",
+        "DesignRuleCatalogEntry",
+        "DesignRuleCatalogFilter",
+        "DesignRuleEvidence",
+        "DesignRulePlanningManifest",
+        "DesignRuleProfile",
+        "designRuleProfiles",
+        "designRuleProviderManifest",
+        "DesignRuleProviderManifest",
+        "DesignRuleScope",
+        "DesignRuleStatus",
+        "filterDesignRuleCatalog"
+      ]
+    },
+    {
+      "path": "src/types/designRuleCatalog.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "DesignAssessmentKind",
+        "DesignRuleCatalogEntry",
+        "DesignRuleCatalogFilter",
+        "DesignRuleEvidence",
+        "DesignRulePlanningManifest",
+        "DesignRuleProfile",
+        "DesignRuleProviderManifest",
+        "DesignRuleScope",
+        "DesignRuleStatus"
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "name": "DesignAssessmentKind",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 1,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "designRuleCatalog",
+      "title": null,
+      "description": "Exposes the complete planned atomic and composite design rule catalog.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "value",
+      "modulePath": "src/features/catalog/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleCatalog.ts",
+        "line": 220,
+        "column": 14
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleCatalogEntry",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 11,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignAssessmentKind",
+        "DesignRuleEvidence",
+        "DesignRuleScope"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "assessmentKind",
+          "kind": "property",
+          "type": "DesignAssessmentKind",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "dependencies",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "evidenceSchemaVersion",
+          "kind": "property",
+          "type": "\"1\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "expectedEvidence",
+          "kind": "property",
+          "type": "DesignRuleEvidence",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "facets",
+          "kind": "property",
+          "type": "{ readonly principles: readonly string[]; readonly scopes: readonly DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "group",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "requiredCapabilities",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "semanticsVersion",
+          "kind": "property",
+          "type": "\"1\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "severity",
+          "kind": "property",
+          "type": "\"advisory\" | \"required\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "kind": "property",
+          "type": "\"planned\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleCatalogFilter",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 32,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleEvidence",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 5,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "assertion",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "observations",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "source",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRulePlanningManifest",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 42,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignRuleCatalogEntry",
+        "DesignRuleProfile"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "profiles",
+          "kind": "property",
+          "type": "readonly DesignRuleProfile[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rules",
+          "kind": "property",
+          "type": "readonly DesignRuleCatalogEntry[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "schemaVersion",
+          "kind": "property",
+          "type": "\"1\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleProfile",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 36,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "description",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rootRuleIds",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "designRuleProfiles",
+      "title": null,
+      "description": "Declares selectable profiles without adding another executable or composite rule.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "value",
+      "modulePath": "src/features/catalog/designRuleProfiles.ts",
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleProfiles.ts",
+        "line": 9,
+        "column": 14
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": [
+        {
+          "values": {
+            "description": "Objective baseline design checks.",
+            "id": "design.quality.base"
+          }
+        },
+        {
+          "values": {
+            "description": "Advisory accessibility-oriented checks.",
+            "id": "design.wcag.advisory"
+          }
+        },
+        {
+          "values": {
+            "description": "C.R.A.P. composition profile.",
+            "id": "design.crap",
+            "rootRuleIds": "design.crap"
+          }
+        },
+        {
+          "values": {
+            "description": "Advisory 60-30-10 visible color-area distribution profile.",
+            "id": "design.60-30-10",
+            "rootRuleIds": "design.color.usage-distribution"
+          }
+        }
+      ]
+    },
+    {
+      "name": "designRuleProviderManifest",
+      "title": null,
+      "description": "Declares the released MIT provider surface without exposing unclassified planned rules.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "value",
+      "modulePath": "src/features/catalog/designRuleProviderManifest.ts",
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleProviderManifest.ts",
+        "line": 4,
+        "column": 14
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleProviderManifest",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 48,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "packageName",
+          "kind": "property",
+          "type": "\"@ankhorage/rules-design\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "providerId",
+          "kind": "property",
+          "type": "\"ankhorage.rules-design\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "publishedRuleIds",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "schemaVersion",
+          "kind": "property",
+          "type": "\"1\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleScope",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 3,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleStatus",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "unknown",
+      "modulePath": "src/types/designRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleCatalog.ts",
+        "line": 2,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "filterDesignRuleCatalog",
+      "title": null,
+      "description": "Selects planned catalog entries matching every supplied controlled facet.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/catalog/filterDesignRuleCatalog.ts",
+      "sourceLocation": {
+        "filePath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "line": 7,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignRuleCatalogEntry",
+        "DesignRuleScope"
+      ],
+      "signatures": [
+        {
+          "label": "(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>) => readonly DesignRuleCatalogEntry[]",
+          "parameters": [
+            {
+              "name": "entries",
+              "type": "readonly DesignRuleCatalogEntry[]",
+              "required": true,
+              "description": null
+            },
+            {
+              "name": "filter",
+              "type": "Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "readonly DesignRuleCatalogEntry[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    }
+  ],
+  "components": [],
+  "sourceFunctions": [
+    {
+      "name": "isAcyclic",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleCatalog.test.ts",
+        "line": 109,
+        "column": 1
+      }
+    },
+    {
+      "name": "visit",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleCatalog.test.ts",
+        "line": 120,
+        "column": 3
+      }
+    },
+    {
+      "name": "group",
+      "description": "Creates complete catalog records from one semantically cohesive rule group.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleCatalog.ts",
+        "line": 226,
+        "column": 1
+      }
+    },
+    {
+      "name": "principlesFor",
+      "description": "Maps catalog IDs to controlled C.R.A.P. facet principles.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleCatalog.ts",
+        "line": 258,
+        "column": 1
+      }
+    },
+    {
+      "name": "designRuleComposites",
+      "description": "Creates the five planned C.R.A.P. composite nodes from their atomic child rules.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleComposites.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "children",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleComposites.ts",
+        "line": 7,
+        "column": 9
+      }
+    },
+    {
+      "name": "composite",
+      "description": "Creates the evidence contract for a planned advisory composite.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleComposites.ts",
+        "line": 42,
+        "column": 1
+      }
+    },
+    {
+      "name": "designRuleSemantics",
+      "description": "Resolves each planned rule into the evidence contract a provider must satisfy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleSemantics.ts",
+        "line": 107,
+        "column": 1
+      }
+    },
+    {
+      "name": "additionalCapabilities",
+      "description": "Adds only the capabilities required by interaction, text, or motion semantics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleSemantics.ts",
+        "line": 126,
+        "column": 1
+      }
+    },
+    {
+      "name": "includesAny",
+      "description": "Returns whether a rule identifier contains one of a definition's semantic terms.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/designRuleSemantics.ts",
+        "line": 138,
+        "column": 1
+      }
+    },
+    {
+      "name": "filterDesignRuleCatalog",
+      "description": "Selects planned catalog entries matching every supplied controlled facet.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "matches",
+      "description": "Returns whether an entry facet contains every requested value.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "line": 21,
+        "column": 1
+      }
+    }
+  ],
+  "sequenceScenarios": [
+    {
+      "kind": "export",
+      "name": "filterDesignRuleCatalog",
+      "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts",
+      "symbolName": "filterDesignRuleCatalog",
+      "description": "Selects planned catalog entries matching every supplied controlled facet.",
+      "isReadme": false
+    }
+  ],
+  "graphs": {
+    "imports": [
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/catalog/designRuleProfiles.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/catalog/designRuleProviderManifest.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
+        "toPath": "src/features/catalog/designRuleProfiles.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
+        "toPath": "src/features/catalog/designRuleProviderManifest.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
+        "toPath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
+        "toPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.ts",
+        "toPath": "src/features/catalog/designRuleComposites.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleCatalog.ts",
+        "toPath": "src/features/catalog/designRuleSemantics.ts",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleComposites.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleComposites.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleProfiles.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleProfiles.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleProfiles.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleProfiles.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleProviderManifest.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleProviderManifest.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleSemantics.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleSemantics.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
+        "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
+        "toPath": "src/features/catalog/designRuleProfiles.ts",
+        "sourcePath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts"
+      }
+    ],
+    "calls": [
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
+        "toSymbol": "isAcyclic",
+        "callExpression": "isAcyclic",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
+        "toSymbol": "filterDesignRuleCatalog",
+        "callExpression": "filterDesignRuleCatalog",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
+        "toSymbol": "visit",
+        "callExpression": "visit",
+        "sourcePath": "src/features/catalog/designRuleCatalog.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.ts",
+        "toSymbol": "group",
+        "callExpression": "group",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.ts",
+        "toSymbol": "designRuleComposites",
+        "callExpression": "designRuleComposites",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.ts",
+        "toSymbol": "designRuleSemantics",
+        "callExpression": "designRuleSemantics",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleCatalog.ts",
+        "toSymbol": "principlesFor",
+        "callExpression": "principlesFor",
+        "sourcePath": "src/features/catalog/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "designRuleComposites",
+        "toSymbol": "composite",
+        "callExpression": "composite",
+        "sourcePath": "src/features/catalog/designRuleComposites.ts"
+      },
+      {
+        "fromSymbol": "designRuleComposites",
+        "toSymbol": "children",
+        "callExpression": "children",
+        "sourcePath": "src/features/catalog/designRuleComposites.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/designRuleSemantics.ts",
+        "toSymbol": "includesAny",
+        "callExpression": "includesAny",
+        "sourcePath": "src/features/catalog/designRuleSemantics.ts"
+      },
+      {
+        "fromSymbol": "designRuleSemantics",
+        "toSymbol": "additionalCapabilities",
+        "callExpression": "additionalCapabilities",
+        "sourcePath": "src/features/catalog/designRuleSemantics.ts"
+      },
+      {
+        "fromSymbol": "additionalCapabilities",
+        "toSymbol": "includesAny",
+        "callExpression": "includesAny",
+        "sourcePath": "src/features/catalog/designRuleSemantics.ts"
+      },
+      {
+        "fromSymbol": "src/features/catalog/filterDesignRuleCatalog.ts",
+        "toSymbol": "matches",
+        "callExpression": "matches",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      }
+    ],
+    "typeReferences": [
+      {
+        "fromSymbol": "filterDesignRuleCatalog",
+        "toType": "DesignRuleCatalogEntry",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "filterDesignRuleCatalog",
+        "toType": "DesignRuleScope",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "filterDesignRuleCatalog",
+        "toType": "Partial",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "filterDesignRuleCatalog",
+        "toType": "Pick",
+        "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleCatalogEntry",
+        "toType": "DesignAssessmentKind",
+        "sourcePath": "src/types/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleCatalogEntry",
+        "toType": "DesignRuleEvidence",
+        "sourcePath": "src/types/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleCatalogEntry",
+        "toType": "DesignRuleScope",
+        "sourcePath": "src/types/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignRulePlanningManifest",
+        "toType": "DesignRuleCatalogEntry",
+        "sourcePath": "src/types/designRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "DesignRulePlanningManifest",
+        "toType": "DesignRuleProfile",
+        "sourcePath": "src/types/designRuleCatalog.ts"
+      }
+    ],
+    "componentComposition": []
+  }
+}
