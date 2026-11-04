@@ -1,7 +1,7 @@
 import type {
   DesignRuleCatalogEntry,
   DesignRuleCatalogFilter,
-} from "../../types/designRuleCatalog";
+} from '../../types/designRuleCatalog';
 
 /*** Selects planned catalog entries matching every supplied controlled facet. */
 export function filterDesignRuleCatalog(
@@ -18,12 +18,6 @@ export function filterDesignRuleCatalog(
 }
 
 /*** Returns whether an entry facet contains every requested value. */
-function matches(
-  values: readonly string[],
-  requested: readonly string[] | undefined,
-): boolean {
-  return (
-    requested === undefined ||
-    requested.every((value) => values.includes(value))
-  );
+function matches(values: readonly string[], requested: readonly string[] | undefined): boolean {
+  return requested === undefined || requested.every((value) => values.includes(value));
 }

@@ -26,15 +26,15 @@
     "build": "rm -rf dist tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo && bun x tsc -p tsconfig.build.json",
     "check-types": "bun x tsc --noEmit -p tsconfig.json",
     "test": "bun test",
-    "lint": "bun x tsc --noEmit -p tsconfig.json",
-    "knip:check": "bun x knip",
-    "format": "bun x prettier --write .",
-    "format:check": "bun x prettier --check ."
+    "lint": "ankhorage-eslint . --max-warnings=0",
+    "knip:check": "ankhorage-knip",
+    "format": "ankhorage-prettier --write .",
+    "format:check": "ankhorage-prettier --check .",
+    "lint:fix": "ankhorage-eslint . --fix --max-warnings=0"
   },
   "devDependencies": {
     "@types/bun": "^1.4.2",
-    "knip": "^5.76.0",
-    "prettier": "^3.7.4",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "@ankhorage/devtools": "^2.3.47"
   }
 }
