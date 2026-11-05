@@ -49,7 +49,7 @@ function evaluateColorPolicyRule(
   ruleId: ColorPolicyRuleId,
   input: RuleEvaluationInput<DesignContext>,
 ) {
-  const facts = input.context.facts.filter(
+  const facts = (input.context.facts ?? []).filter(
     (fact) => fact.kind === ruleId && sameScope(fact, input),
   );
   const observations = facts.map((fact) => ({ fact, observation: parseObservation(fact) }));

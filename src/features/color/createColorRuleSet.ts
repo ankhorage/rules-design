@@ -62,7 +62,7 @@ const usageRule: Rule<DesignContext> = {
 
 /*** Keeps exact rule scope, breakpoint, theme, and coverage measurements isolated. */
 function evaluateUsage(input: RuleEvaluationInput<DesignContext>, options: Options) {
-  const facts = input.context.facts.filter(
+  const facts = (input.context.facts ?? []).filter(
     (fact) => fact.kind === usageRule.identity.id && exactScope(fact, input),
   );
   const observations = facts.map(parseObservation);
@@ -121,6 +121,7 @@ function parseObservation(fact: FactEnvelope): Observation | undefined {
   if (!identity || !pixels) return undefined;
   const total = pixels.base + pixels.secondary + pixels.accent + pixels.unknown;
   return total === pixels.measuredPixels &&
+    pixels.measuredPixels > 0 &&
     pixels.unknown === pixels.unknownPixels &&
     pixels.unknownPixels === 0
     ? {

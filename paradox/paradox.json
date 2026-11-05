@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.2",
+      "value": "v0.3.1",
       "color": "cb3837"
     },
     {
@@ -218,6 +218,42 @@
       ]
     },
     {
+      "path": "src/features/contrast/contrastFacts.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "contrastFact",
+        "missingContrastFact"
+      ]
+    },
+    {
+      "path": "src/features/contrast/createContrastRules.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/contrast/contrastFacts.test.ts",
+        "src/features/contrast/createContrastRules.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/contrast/createContrastRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/contrast/hasValidContrastMeasurement.ts"
+      ],
+      "exports": [
+        "createContrastRules"
+      ]
+    },
+    {
+      "path": "src/features/contrast/hasValidContrastMeasurement.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "hasValidContrastMeasurement"
+      ]
+    },
+    {
       "path": "src/features/provider/designRuleProvider.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -296,6 +332,60 @@
       ]
     },
     {
+      "path": "src/features/typography/createTypographyObservationTools.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/typography.ts"
+      ],
+      "exports": [
+        "createTypographyObservationTools"
+      ]
+    },
+    {
+      "path": "src/features/typography/createTypographyRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/typography/createTypographyRuleSet.ts",
+        "test/fixtures/typographyRuleFacts.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/typography/createTypographyRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/typography/createTypographyObservationTools.ts",
+        "src/features/typography/parseTypographyObservation.ts",
+        "src/features/typography/validateTypographyRulePolicy.ts",
+        "src/types/designRuleProvider.ts",
+        "src/types/typography.ts"
+      ],
+      "exports": [
+        "createTypographyRuleSet",
+        "TypographyRulePolicy"
+      ]
+    },
+    {
+      "path": "src/features/typography/parseTypographyObservation.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/typography.ts"
+      ],
+      "exports": [
+        "parseTypographyObservation"
+      ]
+    },
+    {
+      "path": "src/features/typography/validateTypographyRulePolicy.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/typography.ts"
+      ],
+      "exports": [
+        "validateTypographyRulePolicy"
+      ]
+    },
+    {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
@@ -355,6 +445,15 @@
       ]
     },
     {
+      "path": "src/types/typography.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "TypographyObservation",
+        "TypographyRulePolicy"
+      ]
+    },
+    {
       "path": "test/fixtures/accessibilityFacts.ts",
       "isEntrypoint": false,
       "dependencies": [],
@@ -388,6 +487,21 @@
         "createMissingRepetitionFact",
         "createRepetitionFact",
         "repetitionScope"
+      ]
+    },
+    {
+      "path": "test/fixtures/typographyRuleFacts.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/typography.ts"
+      ],
+      "exports": [
+        "h1Observation",
+        "malformedFact",
+        "missingFact",
+        "observation",
+        "observations",
+        "typographyPolicy"
       ]
     }
   ],
@@ -425,7 +539,7 @@
       "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
         "filePath": "src/types/designRuleProvider.ts",
-        "line": 10,
+        "line": 11,
         "column": 1
       },
       "exportPaths": [
@@ -442,6 +556,13 @@
           "type": "readonly DesignEvidence[]",
           "required": true,
           "description": null
+        },
+        {
+          "name": "facts",
+          "kind": "property",
+          "type": "readonly FactEnvelope[] | undefined",
+          "required": false,
+          "description": null
         }
       ],
       "structuredRows": []
@@ -457,7 +578,7 @@
       "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
         "filePath": "src/types/designRuleProvider.ts",
-        "line": 4,
+        "line": 5,
         "column": 1
       },
       "exportPaths": [
@@ -862,7 +983,7 @@
       "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
         "filePath": "src/types/designRuleProvider.ts",
-        "line": 15,
+        "line": 17,
         "column": 1
       },
       "exportPaths": [
@@ -1635,6 +1756,336 @@
       }
     },
     {
+      "name": "contrastFact",
+      "description": "Wraps one serializable observation as an available portable fact at a chosen scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/contrastFacts.test.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "missingContrastFact",
+      "description": "Wraps one unavailable observation with its producer-declared rule kind and opaque identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/contrastFacts.test.ts",
+        "line": 28,
+        "column": 1
+      }
+    },
+    {
+      "name": "target",
+      "description": "Produces the portable fixture target shared by contrast fact envelopes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/contrastFacts.test.ts",
+        "line": 50,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": "Runs one rule with its declared capabilities and optionally one portable fact observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.test.ts",
+        "line": 178,
+        "column": 1
+      }
+    },
+    {
+      "name": "ruleById",
+      "description": "Finds one group-local rule without registering the group centrally.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.test.ts",
+        "line": 196,
+        "column": 1
+      }
+    },
+    {
+      "name": "observationFor",
+      "description": "Creates a complete passing observation for every frozen rule identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.test.ts",
+        "line": 203,
+        "column": 1
+      }
+    },
+    {
+      "name": "failingObservationFor",
+      "description": "Creates a complete observation that violates the fixed policy of its rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.test.ts",
+        "line": 244,
+        "column": 1
+      }
+    },
+    {
+      "name": "expectedStandard",
+      "description": "Returns the default canonical standard selected by each rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.test.ts",
+        "line": 268,
+        "column": 1
+      }
+    },
+    {
+      "name": "createContrastRules",
+      "description": "Creates the independent Contrast and Visual Hierarchy rule contribution without central registration.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 95,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRule",
+      "description": "Creates one frozen rule whose policy is controlled by validated options or canonical standards.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 100,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": "Evaluates exact-scope observations, rejecting absent, malformed, and self-judging evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 113,
+        "column": 1
+      }
+    },
+    {
+      "name": "matchesRuleScope",
+      "description": "Selects only facts whose producer-declared kind identifies this exact frozen rule and scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 136,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateOptions",
+      "description": "Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 141,
+        "column": 1
+      }
+    },
+    {
+      "name": "supportsStandard",
+      "description": "Confines each frozen rule to the standards its policy can evaluate.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 158,
+        "column": 1
+      }
+    },
+    {
+      "name": "standardFor",
+      "description": "Resolves a canonical or validated standard owned by the rule rather than its fact envelope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 170,
+        "column": 1
+      }
+    },
+    {
+      "name": "toContrastObservation",
+      "description": "Converts one available contrast fact into a fully validated rule observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 190,
+        "column": 1
+      }
+    },
+    {
+      "name": "valid",
+      "description": "Validates rule-specific observations and forbids evidence-provided comparisons or thresholds.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 196,
+        "column": 1
+      }
+    },
+    {
+      "name": "isBaseObservation",
+      "description": "Verifies the evidence fields shared by every Contrast observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 204,
+        "column": 1
+      }
+    },
+    {
+      "name": "passes",
+      "description": "Applies the rule-owned semantic standard to one complete observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 217,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Produces an incomplete result when evidence cannot prove this exact-scope rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 251,
+        "column": 1
+      }
+    },
+    {
+      "name": "failure",
+      "description": "Retains observed evidence and the applied canonical standard for a failed rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 267,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRuleSubject",
+      "description": "Narrows a serializable subject to the Rules finding contract.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 282,
+        "column": 1
+      }
+    },
+    {
+      "name": "isJsonValueArray",
+      "description": "Narrows a JSON value to an immutable sequence of JSON values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 294,
+        "column": 1
+      }
+    },
+    {
+      "name": "isScore",
+      "description": "Narrows a hierarchy entry to a finite observed emphasis score.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/createContrastRules.ts",
+        "line": 299,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidContrastMeasurement",
+      "description": "Verifies the complete observation shape required by one frozen Contrast rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasColorRatio",
+      "description": "Validates a complete foreground-to-effective-background contrast measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 61,
+        "column": 1
+      }
+    },
+    {
+      "name": "isEmphasis",
+      "description": "Narrows ordered hierarchy entries to finite observed emphasis scores.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 66,
+        "column": 1
+      }
+    },
+    {
+      "name": "isJsonValueArray",
+      "description": "Narrows a JSON value to an immutable sequence of JSON values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
+      "name": "number",
+      "description": "Checks finite non-negative numeric observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 80,
+        "column": 1
+      }
+    },
+    {
+      "name": "text",
+      "description": "Checks non-empty textual observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
       "name": "evaluate",
       "description": null,
       "see": [],
@@ -2315,6 +2766,380 @@
         "line": 32,
         "column": 1
       }
+    },
+    {
+      "name": "createTypographyObservationTools",
+      "description": "Creates the shared completeness and viewport grouping operations for Typography evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "measurementsComplete",
+      "description": "Checks required measurements and document-order uniqueness when a rule needs it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "measurementAvailable",
+      "description": "Checks one named observation measurement without indexing dynamic external property names.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "viewports",
+      "description": "Groups observations by responsive viewport so rendered variants remain independent.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "uniqueDocumentOrder",
+      "description": "Confirms that every heading in one viewport has a distinct document position.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 61,
+        "column": 1
+      }
+    },
+    {
+      "name": "orderedHeadings",
+      "description": "Sorts complete heading observations by explicit document order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 70,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasDocumentOrderAndHeadingLevel",
+      "description": "Confirms that an observation can participate in a document heading hierarchy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyObservationTools.ts",
+        "line": 82,
+        "column": 1
+      }
+    },
+    {
+      "name": "context",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.test.ts",
+        "line": 228,
+        "column": 1
+      }
+    },
+    {
+      "name": "createTypographyRuleSet",
+      "description": "Creates the independent Typography and Heading RuleSet from explicit serialized-fact policy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRule",
+      "description": "Builds one pure generic Rules rule from a Typography fact predicate.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 222,
+        "column": 1
+      }
+    },
+    {
+      "name": "definition",
+      "description": "Creates a Typography rule definition with its capability inferred from its stable ID.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 245,
+        "column": 1
+      }
+    },
+    {
+      "name": "typographyEvidence",
+      "description": "Reads scoped Typography facts without discarding malformed or unavailable evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 257,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Returns an explicit incomplete outcome when required measurements cannot support a verdict.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 277,
+        "column": 1
+      }
+    },
+    {
+      "name": "missingEvidenceFinding",
+      "description": "Produces a serializable incomplete finding when a rule has no valid measured observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 282,
+        "column": 1
+      }
+    },
+    {
+      "name": "violationFinding",
+      "description": "Produces a serializable finding for one measured Typography policy violation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 293,
+        "column": 1
+      }
+    },
+    {
+      "name": "configuredValues",
+      "description": "Reads a configured allow-list without treating an unknown role as allowed.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 304,
+        "column": 1
+      }
+    },
+    {
+      "name": "requiredMeasurements",
+      "description": "Builds a completeness predicate from one frozen rule's required measurements.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/createTypographyRuleSet.ts",
+        "line": 312,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseTypographyObservation",
+      "description": "Parses one available serialized fact into a normalized Typography observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNumber",
+      "description": "Narrows an unknown serialized value to a finite number.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 44,
+        "column": 1
+      }
+    },
+    {
+      "name": "nullableBoolean",
+      "description": "Narrows an optional serialized value to a nullable boolean.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 49,
+        "column": 1
+      }
+    },
+    {
+      "name": "nullableHeadingLevel",
+      "description": "Narrows an optional serialized value to a valid nullable heading level.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "nullableNumber",
+      "description": "Narrows an optional serialized value to a nullable finite number.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "nullableString",
+      "description": "Narrows an optional serialized value to a nullable string.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 68,
+        "column": 1
+      }
+    },
+    {
+      "name": "isString",
+      "description": "Narrows an unknown serialized value to a string.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/parseTypographyObservation.ts",
+        "line": 73,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateTypographyRulePolicy",
+      "description": "Rejects malformed policy before rule construction can produce ambiguous verdicts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "invalidTypographyRulePolicy",
+      "description": "Checks every policy invariant required by the Typography rule family.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 13,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidH1Counts",
+      "description": "Checks that H1 count bounds are non-negative integers in ascending order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 30,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidTypographyThresholds",
+      "description": "Checks positive Typography thresholds and paragraph-measure bounds.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasNonEmptyStrings",
+      "description": "Checks a non-empty serializable string allow-list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 50,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasPositiveNumbers",
+      "description": "Checks a non-empty serializable positive numeric allow-list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 59,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasFiniteNumbers",
+      "description": "Checks a non-empty serializable finite numeric allow-list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 64,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasNonNegativeNumbers",
+      "description": "Checks a non-empty serializable non-negative numeric allow-list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 73,
+        "column": 1
+      }
+    },
+    {
+      "name": "isPositiveFiniteNumber",
+      "description": "Checks a finite positive measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 82,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasConfiguredValues",
+      "description": "Checks every named policy role supplies a non-empty valid allow-list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "line": 87,
+        "column": 1
+      }
     }
   ],
   "sequenceScenarios": [
@@ -2368,6 +3193,11 @@
         "fromPath": "test/fixtures/designEvidencePresentRule.ts",
         "toPath": "src/types/designRuleProvider.ts",
         "sourcePath": "test/fixtures/designEvidencePresentRule.ts"
+      },
+      {
+        "fromPath": "test/fixtures/typographyRuleFacts.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
       },
       {
         "fromPath": "src/features/accessibility/createAccessibilityRules.test.ts",
@@ -2465,6 +3295,21 @@
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
       },
       {
+        "fromPath": "src/features/contrast/createContrastRules.test.ts",
+        "toPath": "src/features/contrast/contrastFacts.test.ts",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/contrast/createContrastRules.test.ts",
+        "toPath": "src/features/contrast/createContrastRules.ts",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/contrast/createContrastRules.ts",
+        "toPath": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
         "fromPath": "src/features/provider/designRuleProvider.test.ts",
         "toPath": "test/fixtures/designEvidencePresentRule.ts",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
@@ -2525,6 +3370,56 @@
         "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
       },
       {
+        "fromPath": "src/features/typography/createTypographyObservationTools.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "src/features/typography/createTypographyObservationTools.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toPath": "test/fixtures/typographyRuleFacts.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toPath": "src/features/typography/createTypographyRuleSet.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.ts",
+        "toPath": "src/features/typography/createTypographyObservationTools.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.ts",
+        "toPath": "src/features/typography/parseTypographyObservation.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/typography/createTypographyRuleSet.ts",
+        "toPath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/typography/parseTypographyObservation.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromPath": "src/features/typography/validateTypographyRulePolicy.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
         "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
         "toPath": "src/types/designRuleCatalog.ts",
         "sourcePath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts"
@@ -2541,6 +3436,36 @@
       }
     ],
     "calls": [
+      {
+        "fromSymbol": "observations",
+        "toSymbol": "observation",
+        "callExpression": "observation",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromSymbol": "observation",
+        "toSymbol": "fact",
+        "callExpression": "fact",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromSymbol": "missingFact",
+        "toSymbol": "observation",
+        "callExpression": "observation",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromSymbol": "malformedFact",
+        "toSymbol": "observation",
+        "callExpression": "observation",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromSymbol": "h1Observation",
+        "toSymbol": "fact",
+        "callExpression": "fact",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
       {
         "fromSymbol": "src/features/accessibility/createAccessibilityRules.test.ts",
         "toSymbol": "createAccessibilityRules",
@@ -2900,6 +3825,270 @@
         "toSymbol": "matches",
         "callExpression": "matches",
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "contrastFact",
+        "toSymbol": "target",
+        "callExpression": "target",
+        "sourcePath": "src/features/contrast/contrastFacts.test.ts"
+      },
+      {
+        "fromSymbol": "missingContrastFact",
+        "toSymbol": "target",
+        "callExpression": "target",
+        "sourcePath": "src/features/contrast/contrastFacts.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "createContrastRules",
+        "callExpression": "createContrastRules",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "observationFor",
+        "callExpression": "observationFor",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "failingObservationFor",
+        "callExpression": "failingObservationFor",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "expectedStandard",
+        "callExpression": "expectedStandard",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "ruleById",
+        "callExpression": "ruleById",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "contrastFact",
+        "callExpression": "contrastFact",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.test.ts",
+        "toSymbol": "missingContrastFact",
+        "callExpression": "missingContrastFact",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "contrastFact",
+        "callExpression": "contrastFact",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "failingObservationFor",
+        "toSymbol": "observationFor",
+        "callExpression": "observationFor",
+        "sourcePath": "src/features/contrast/createContrastRules.test.ts"
+      },
+      {
+        "fromSymbol": "validateOptions",
+        "toSymbol": "validateOptions",
+        "callExpression": "validateOptions",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "standardFor",
+        "callExpression": "standardFor",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.ts",
+        "toSymbol": "matchesRuleScope",
+        "callExpression": "matchesRuleScope",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.ts",
+        "toSymbol": "toContrastObservation",
+        "callExpression": "toContrastObservation",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.ts",
+        "toSymbol": "passes",
+        "callExpression": "passes",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.ts",
+        "toSymbol": "failure",
+        "callExpression": "failure",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "validateOptions",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "validateOptions",
+        "toSymbol": "supportsStandard",
+        "callExpression": "supportsStandard",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "standardFor",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "toContrastObservation",
+        "toSymbol": "valid",
+        "callExpression": "valid",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "valid",
+        "toSymbol": "isBaseObservation",
+        "callExpression": "isBaseObservation",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "valid",
+        "toSymbol": "hasValidContrastMeasurement",
+        "callExpression": "hasValidContrastMeasurement",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "isBaseObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "isBaseObservation",
+        "toSymbol": "isRuleSubject",
+        "callExpression": "isRuleSubject",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "passes",
+        "toSymbol": "isJsonValueArray",
+        "callExpression": "isJsonValueArray",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/createContrastRules.ts",
+        "toSymbol": "isScore",
+        "callExpression": "isScore",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "isRuleSubject",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "isScore",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/createContrastRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidContrastMeasurement",
+        "toSymbol": "validator",
+        "callExpression": "validator",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "toSymbol": "number",
+        "callExpression": "number",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "toSymbol": "isEmphasis",
+        "callExpression": "isEmphasis",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "hasColorRatio",
+        "toSymbol": "number",
+        "callExpression": "number",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "hasColorRatio",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "isEmphasis",
+        "toSymbol": "isJsonValueArray",
+        "callExpression": "isJsonValueArray",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
+      },
+      {
+        "fromSymbol": "src/features/contrast/hasValidContrastMeasurement.ts",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
       },
       {
         "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
@@ -3476,6 +4665,312 @@
         "toSymbol": "isRuleId",
         "callExpression": "isRuleId",
         "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyObservationTools.ts",
+        "toSymbol": "measurementAvailable",
+        "callExpression": "measurementAvailable",
+        "sourcePath": "src/features/typography/createTypographyObservationTools.ts"
+      },
+      {
+        "fromSymbol": "measurementsComplete",
+        "toSymbol": "viewports",
+        "callExpression": "viewports",
+        "sourcePath": "src/features/typography/createTypographyObservationTools.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyObservationTools.ts",
+        "toSymbol": "uniqueDocumentOrder",
+        "callExpression": "uniqueDocumentOrder",
+        "sourcePath": "src/features/typography/createTypographyObservationTools.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "createTypographyRuleSet",
+        "callExpression": "createTypographyRuleSet",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "context",
+        "callExpression": "context",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "observations",
+        "callExpression": "observations",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "observation",
+        "callExpression": "observation",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "missingFact",
+        "callExpression": "missingFact",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "malformedFact",
+        "callExpression": "malformedFact",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.test.ts",
+        "toSymbol": "h1Observation",
+        "callExpression": "h1Observation",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "createTypographyObservationTools",
+        "callExpression": "createTypographyObservationTools",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createTypographyRuleSet",
+        "toSymbol": "validateTypographyRulePolicy",
+        "callExpression": "validateTypographyRulePolicy",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "definition",
+        "callExpression": "definition",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "requiredMeasurements",
+        "callExpression": "requiredMeasurements",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "configuredValues",
+        "callExpression": "configuredValues",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "viewports",
+        "callExpression": "typographyObservationTools\n        .viewports",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "viewports",
+        "callExpression": "typographyObservationTools.viewports",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "orderedHeadings",
+        "callExpression": "typographyObservationTools\n          .orderedHeadings",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "orderedHeadings",
+        "callExpression": "typographyObservationTools\n            .orderedHeadings",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "typographyEvidence",
+        "callExpression": "typographyEvidence",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "measurementsComplete",
+        "callExpression": "definition.measurementsComplete",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluate",
+        "callExpression": "definition.evaluate",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "violationFinding",
+        "callExpression": "violationFinding",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "parseTypographyObservation",
+        "callExpression": "parseTypographyObservation",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "incomplete",
+        "toSymbol": "missingEvidenceFinding",
+        "callExpression": "missingEvidenceFinding",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/createTypographyRuleSet.ts",
+        "toSymbol": "measurementsComplete",
+        "callExpression": "typographyObservationTools.measurementsComplete",
+        "sourcePath": "src/features/typography/createTypographyRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "isString",
+        "callExpression": "isString",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "isNumber",
+        "callExpression": "isNumber",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "nullableHeadingLevel",
+        "callExpression": "nullableHeadingLevel",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "nullableNumber",
+        "callExpression": "nullableNumber",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "nullableString",
+        "callExpression": "nullableString",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "parseTypographyObservation",
+        "toSymbol": "nullableBoolean",
+        "callExpression": "nullableBoolean",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "nullableHeadingLevel",
+        "toSymbol": "isNumber",
+        "callExpression": "isNumber",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "nullableNumber",
+        "toSymbol": "isNumber",
+        "callExpression": "isNumber",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "nullableString",
+        "toSymbol": "isString",
+        "callExpression": "isString",
+        "sourcePath": "src/features/typography/parseTypographyObservation.ts"
+      },
+      {
+        "fromSymbol": "validateTypographyRulePolicy",
+        "toSymbol": "invalidTypographyRulePolicy",
+        "callExpression": "invalidTypographyRulePolicy",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasNonEmptyStrings",
+        "callExpression": "hasNonEmptyStrings",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasPositiveNumbers",
+        "callExpression": "hasPositiveNumbers",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasFiniteNumbers",
+        "callExpression": "hasFiniteNumbers",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasNonNegativeNumbers",
+        "callExpression": "hasNonNegativeNumbers",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasConfiguredValues",
+        "callExpression": "hasConfiguredValues",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasValidH1Counts",
+        "callExpression": "hasValidH1Counts",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "invalidTypographyRulePolicy",
+        "toSymbol": "hasValidTypographyThresholds",
+        "callExpression": "hasValidTypographyThresholds",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "hasValidTypographyThresholds",
+        "toSymbol": "isPositiveFiniteNumber",
+        "callExpression": "isPositiveFiniteNumber",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/typography/validateTypographyRulePolicy.ts",
+        "toSymbol": "validate",
+        "callExpression": "validate",
+        "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
       }
     ],
     "typeReferences": [
@@ -3527,6 +5022,11 @@
       {
         "fromSymbol": "DesignContext",
         "toType": "DesignEvidence",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignContext",
+        "toType": "FactEnvelope",
         "sourcePath": "src/types/designRuleProvider.ts"
       },
       {

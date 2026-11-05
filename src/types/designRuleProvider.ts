@@ -7,10 +7,10 @@ export interface DesignEvidence {
   readonly kind: string;
 }
 
-/*** The minimal fact-backed context shared by Design rules without prescribing a host. */
+/*** The minimal context shared by Design rules without prescribing its source. */
 export interface DesignContext {
   readonly evidence: readonly DesignEvidence[];
-  readonly facts: readonly FactEnvelope[];
+  readonly facts?: readonly FactEnvelope[];
 }
 
 /*** The public identity and generic Rules contribution for the Design provider. */

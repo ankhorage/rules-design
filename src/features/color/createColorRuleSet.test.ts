@@ -139,6 +139,22 @@ test('rejects unknown or non-total pixels, absent required coverage, and invalid
   ).not.toEqual([]);
 });
 
+test('does not pass an empty rendered-area observation', () => {
+  const empty = envelope('design.color.usage-distribution', {
+    breakpointId: 'desktop',
+    measuredPixels: 0,
+    rolePixels: { accent: 0, base: 0, secondary: 0, unknown: 0 },
+    scope: 'page',
+    scopeId: 'page',
+    themeId: 'light',
+    unknownPixels: 0,
+  });
+
+  expect(evaluate('design.color.usage-distribution', [empty]).results[0]?.status).toBe(
+    'INCOMPLETE',
+  );
+});
+
 /*** Evaluates one Color rule with its fact-backed context. */
 function evaluate(
   ruleId: string,

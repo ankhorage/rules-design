@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.1
+
+### Patch Changes
+
+- d715c7a: Fix Contrast rule evaluation to apply canonical standards to observed facts.
+
+## 0.3.0
+
+### Minor Changes
+
+- c1bd0c9: Support normalized versioned facts for Typography and Heading rule evaluation.
+
 ## 0.2.2
 
 ### Patch Changes
