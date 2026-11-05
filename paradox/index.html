@@ -127,6 +127,21 @@
               </button>
             </li>
             <li>
+    <button class="nav-button" type="button" data-target="src/features/accessibility/createAccessibilityRules.test.ts">
+      src/features/accessibility/createAccessibilityRules.test.ts
+      <small>5 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/accessibility/createAccessibilityRules.ts">
+      src/features/accessibility/createAccessibilityRules.ts
+      <small>10 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/accessibility/evaluateAccessibilityObservation.ts">
+      src/features/accessibility/evaluateAccessibilityObservation.ts
+      <small>13 functions</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/catalog/designRuleCatalog.test.ts">
       src/features/catalog/designRuleCatalog.test.ts
       <small>2 functions</small>
@@ -163,7 +178,7 @@
       <div class="summary">
         <div><strong>17</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>14</strong><span class="muted">modules</span></div>
+        <div><strong>18</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -188,7 +203,22 @@
     <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
     <section class="panel">
       <h2>Modules</h2>
-      <article class="item" data-search="src/features/catalog/designRuleCatalog.test.ts src/features/catalog/designRuleCatalog.ts src/features/catalog/designRuleProfiles.ts src/features/catalog/designRuleProviderManifest.ts src/features/catalog/filterDesignRuleCatalog.ts src/features/catalog/fixtures/designRuleCatalogManifest.ts">
+      <article class="item" data-search="src/features/accessibility/createAccessibilityRules.test.ts src/features/accessibility/createAccessibilityRules.ts test/fixtures/accessibilityFacts.ts">
+    <h3>src/features/accessibility/createAccessibilityRules.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/accessibility/createAccessibilityRules.ts</code>, <code>test/fixtures/accessibilityFacts.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/features/accessibility/createAccessibilityRules.ts src/features/accessibility/evaluateAccessibilityObservation.ts createAccessibilityRules">
+    <h3>src/features/accessibility/createAccessibilityRules.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/accessibility/evaluateAccessibilityObservation.ts</code></p>
+    <p><strong>Exports:</strong> <code>createAccessibilityRules</code></p>
+  </article><article class="item" data-search="src/features/accessibility/evaluateAccessibilityObservation.ts evaluateAccessibilityObservation">
+    <h3>src/features/accessibility/evaluateAccessibilityObservation.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>evaluateAccessibilityObservation</code></p>
+  </article><article class="item" data-search="src/features/catalog/designRuleCatalog.test.ts src/features/catalog/designRuleCatalog.ts src/features/catalog/designRuleProfiles.ts src/features/catalog/designRuleProviderManifest.ts src/features/catalog/filterDesignRuleCatalog.ts src/features/catalog/fixtures/designRuleCatalogManifest.ts">
     <h3>src/features/catalog/designRuleCatalog.test.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/features/catalog/designRuleProfiles.ts</code>, <code>src/features/catalog/designRuleProviderManifest.ts</code>, <code>src/features/catalog/filterDesignRuleCatalog.ts</code>, <code>src/features/catalog/fixtures/designRuleCatalogManifest.ts</code></p>
@@ -253,6 +283,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>DesignContext</code>, <code>DesignEvidence</code>, <code>DesignRuleProvider</code></p>
+  </article><article class="item" data-search="test/fixtures/accessibilityFacts.ts createAccessibilityFact">
+    <h3>test/fixtures/accessibilityFacts.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>createAccessibilityFact</code></p>
   </article><article class="item" data-search="test/fixtures/designEvidencePresentRule.ts src/types/designRuleProvider.ts designEvidencePresentRule">
     <h3>test/fixtures/designEvidencePresentRule.ts</h3>
     <p class="muted">Referenced module</p>
@@ -727,6 +762,15 @@
   package__ankhorage_rules_design[&quot;@ankhorage/rules-design&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_rules_design --&gt; entrypoint_src_index_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_test_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleCatalog_test_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -772,6 +816,8 @@
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
   module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
@@ -782,6 +828,15 @@
   package__ankhorage_rules_design[&quot;@ankhorage/rules-design&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_rules_design --&gt; entrypoint_src_index_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_test_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleCatalog_test_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -827,6 +882,8 @@
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
   module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
@@ -836,6 +893,9 @@
     <h3>Module relationships</h3>
     <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
     <div class="mermaid">graph LR
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   module_src_features_catalog_designRuleCatalog_ts[&quot;src/features/catalog/designRuleCatalog.ts&quot;]
   module_src_features_catalog_designRuleComposites_ts[&quot;src/features/catalog/designRuleComposites.ts&quot;]
@@ -849,7 +909,11 @@
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
+  module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProviderManifest_ts
@@ -875,6 +939,9 @@
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   module_src_features_catalog_designRuleCatalog_ts[&quot;src/features/catalog/designRuleCatalog.ts&quot;]
   module_src_features_catalog_designRuleComposites_ts[&quot;src/features/catalog/designRuleComposites.ts&quot;]
@@ -888,7 +955,11 @@
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
+  module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_designRuleCatalog_test_ts --&gt; module_src_features_catalog_designRuleProviderManifest_ts
@@ -916,6 +987,9 @@
     <h3>Export graph</h3>
     <p class="muted"><code>diagrams/export-graph.mmd</code></p>
     <div class="mermaid">graph LR
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   module_src_features_catalog_designRuleCatalog_ts[&quot;src/features/catalog/designRuleCatalog.ts&quot;]
   module_src_features_catalog_designRuleComposites_ts[&quot;src/features/catalog/designRuleComposites.ts&quot;]
@@ -929,6 +1003,7 @@
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
@@ -977,6 +1052,9 @@
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
+  module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
+  module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
   module_src_features_catalog_designRuleCatalog_test_ts[&quot;src/features/catalog/designRuleCatalog.test.ts&quot;]
   module_src_features_catalog_designRuleCatalog_ts[&quot;src/features/catalog/designRuleCatalog.ts&quot;]
   module_src_features_catalog_designRuleComposites_ts[&quot;src/features/catalog/designRuleComposites.ts&quot;]
@@ -990,6 +1068,7 @@
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_designRuleCatalog_ts[&quot;src/types/designRuleCatalog.ts&quot;]
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
+  module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
@@ -1039,7 +1118,162 @@
   </article>
     </section>
         </section>
-        <section id="view-src-features-catalog-designrulecatalog-test-ts" class="view" data-view="src/features/catalog/designRuleCatalog.test.ts" hidden>
+        <section id="view-src-features-accessibility-createaccessibilityrules-test-ts" class="view" data-view="src/features/accessibility/createAccessibilityRules.test.ts" hidden>
+    <section class="panel">
+      <h2>src/features/accessibility/createAccessibilityRules.test.ts</h2>
+      <article class="item" data-search="observations src/features/accessibility/createAccessibilityRules.test.ts Builds representative PASS and FAIL observations for one frozen rule invariant.">
+    <h3>observations</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.test.ts:216:1</code></p>
+    <p>Builds representative PASS and FAIL observations for one frozen rule invariant.</p>
+    
+  </article><article class="item" data-search="observation src/features/accessibility/createAccessibilityRules.test.ts Builds one normalized serializable observation without an adapter verdict flag.">
+    <h3>observation</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.test.ts:225:1</code></p>
+    <p>Builds one normalized serializable observation without an adapter verdict flag.</p>
+    
+  </article><article class="item" data-search="evaluate src/features/accessibility/createAccessibilityRules.test.ts Evaluates one rule with a frozen fact at its matching page scope.">
+    <h3>evaluate</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.test.ts:236:1</code></p>
+    <p>Evaluates one rule with a frozen fact at its matching page scope.</p>
+    
+  </article><article class="item" data-search="ruleFor src/features/accessibility/createAccessibilityRules.test.ts Finds one frozen rule identity for its focused semantic regression.">
+    <h3>ruleFor</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.test.ts:247:1</code></p>
+    <p>Finds one frozen rule identity for its focused semantic regression.</p>
+    
+  </article><article class="item" data-search="evaluationOptions src/features/accessibility/createAccessibilityRules.test.ts Supplies the exact declared capabilities and scope for deterministic unit evaluation.">
+    <h3>evaluationOptions</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.test.ts:254:1</code></p>
+    <p>Supplies the exact declared capabilities and scope for deterministic unit evaluation.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-accessibility-createaccessibilityrules-ts" class="view" data-view="src/features/accessibility/createAccessibilityRules.ts" hidden>
+    <section class="panel">
+      <h2>src/features/accessibility/createAccessibilityRules.ts</h2>
+      <article class="item" data-search="createAccessibilityRules src/features/accessibility/createAccessibilityRules.ts Creates the independently owned Accessibility and Semantics rule family.">
+    <h3>createAccessibilityRules</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:7:1</code></p>
+    <p>Creates the independently owned Accessibility and Semantics rule family.</p>
+    
+  </article><article class="item" data-search="definition src/features/accessibility/createAccessibilityRules.ts Defines one frozen rule identity with the observations that can support its verdict.">
+    <h3>definition</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:94:1</code></p>
+    <p>Defines one frozen rule identity with the observations that can support its verdict.</p>
+    
+  </article><article class="item" data-search="createAccessibilityRule src/features/accessibility/createAccessibilityRules.ts Adapts one declared accessibility invariant to the generic Rules contract.">
+    <h3>createAccessibilityRule</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:103:1</code></p>
+    <p>Adapts one declared accessibility invariant to the generic Rules contract.</p>
+    
+  </article><article class="item" data-search="evaluateAccessibilityFact src/features/accessibility/createAccessibilityRules.ts Resolves one scoped fact into an explicit PASS, FAIL, or INCOMPLETE rule outcome.">
+    <h3>evaluateAccessibilityFact</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:118:1</code></p>
+    <p>Resolves one scoped fact into an explicit PASS, FAIL, or INCOMPLETE rule outcome.</p>
+    
+  </article><article class="item" data-search="incomplete src/features/accessibility/createAccessibilityRules.ts Returns the canonical closed outcome when facts cannot defend a verdict.">
+    <h3>incomplete</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:153:1</code></p>
+    <p>Returns the canonical closed outcome when facts cannot defend a verdict.</p>
+    
+  </article><article class="item" data-search="fail src/features/accessibility/createAccessibilityRules.ts Builds findings only from observations that explicitly contradict a rule invariant.">
+    <h3>fail</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:158:1</code></p>
+    <p>Builds findings only from observations that explicitly contradict a rule invariant.</p>
+    
+  </article><article class="item" data-search="parseAccessibilityFactValue src/features/accessibility/createAccessibilityRules.ts Narrows a portable serializable fact value to complete normalized observations.">
+    <h3>parseAccessibilityFactValue</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:175:1</code></p>
+    <p>Narrows a portable serializable fact value to complete normalized observations.</p>
+    
+  </article><article class="item" data-search="parseAccessibilityObservation src/features/accessibility/createAccessibilityRules.ts Narrows one serializable observation without accepting incomplete subject evidence.">
+    <h3>parseAccessibilityObservation</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:182:1</code></p>
+    <p>Narrows one serializable observation without accepting incomplete subject evidence.</p>
+    
+  </article><article class="item" data-search="isRuleSubject src/features/accessibility/createAccessibilityRules.ts Checks the portable subject shape retained in the generic Rules result contract.">
+    <h3>isRuleSubject</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:202:1</code></p>
+    <p>Checks the portable subject shape retained in the generic Rules result contract.</p>
+    
+  </article><article class="item" data-search="isRecord src/features/accessibility/createAccessibilityRules.ts Narrows unknown serializable values before reading their named factual fields.">
+    <h3>isRecord</h3>
+    <p class="muted"><code>src/features/accessibility/createAccessibilityRules.ts:211:1</code></p>
+    <p>Narrows unknown serializable values before reading their named factual fields.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-accessibility-evaluateaccessibilityobservation-ts" class="view" data-view="src/features/accessibility/evaluateAccessibilityObservation.ts" hidden>
+    <section class="panel">
+      <h2>src/features/accessibility/evaluateAccessibilityObservation.ts</h2>
+      <article class="item" data-search="evaluateAccessibilityObservation src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates one normalized observation against its frozen Accessibility rule meaning.">
+    <h3>evaluateAccessibilityObservation</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:40:1</code></p>
+    <p>Evaluates one normalized observation against its frozen Accessibility rule meaning.</p>
+    
+  </article><article class="item" data-search="booleanVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates one boolean semantic property when it belongs to the expected observation kind.">
+    <h3>booleanVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:47:1</code></p>
+    <p>Evaluates one boolean semantic property when it belongs to the expected observation kind.</p>
+    
+  </article><article class="item" data-search="stringVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates a non-empty string semantic property when it belongs to the expected observation kind.">
+    <h3>stringVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:55:1</code></p>
+    <p>Evaluates a non-empty string semantic property when it belongs to the expected observation kind.</p>
+    
+  </article><article class="item" data-search="focusOrderVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Compares normalized focus traversal with the normalized document order it must preserve.">
+    <h3>focusOrderVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:67:1</code></p>
+    <p>Compares normalized focus traversal with the normalized document order it must preserve.</p>
+    
+  </article><article class="item" data-search="reducedMotionVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates measured motion while the reduced-motion preference is active.">
+    <h3>reducedMotionVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:79:1</code></p>
+    <p>Evaluates measured motion while the reduced-motion preference is active.</p>
+    
+  </article><article class="item" data-search="landmarkVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates whether a measured landmark has a valid semantic role and name.">
+    <h3>landmarkVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:90:1</code></p>
+    <p>Evaluates whether a measured landmark has a valid semantic role and name.</p>
+    
+  </article><article class="item" data-search="mainLandmarkVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates whether the measured page landmark summary identifies exactly one main region.">
+    <h3>mainLandmarkVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:109:1</code></p>
+    <p>Evaluates whether the measured page landmark summary identifies exactly one main region.</p>
+    
+  </article><article class="item" data-search="isMainLandmarkCount src/features/accessibility/evaluateAccessibilityObservation.ts Validates the normalized page-level main landmark count before evaluating its invariant.">
+    <h3>isMainLandmarkCount</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:118:1</code></p>
+    <p>Validates the normalized page-level main landmark count before evaluating its invariant.</p>
+    
+  </article><article class="item" data-search="isNormalizedElementOrder src/features/accessibility/evaluateAccessibilityObservation.ts Validates a non-empty unique sequence of normalized element identifiers.">
+    <h3>isNormalizedElementOrder</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:124:1</code></p>
+    <p>Validates a non-empty unique sequence of normalized element identifiers.</p>
+    
+  </article><article class="item" data-search="listSemanticsVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates whether a measured list exposes list and listitem semantics together.">
+    <h3>listSemanticsVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:133:1</code></p>
+    <p>Evaluates whether a measured list exposes list and listitem semantics together.</p>
+    
+  </article><article class="item" data-search="buttonLinkVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates whether measured buttons and links expose behavior matching their semantic role.">
+    <h3>buttonLinkVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:146:1</code></p>
+    <p>Evaluates whether measured buttons and links expose behavior matching their semantic role.</p>
+    
+  </article><article class="item" data-search="statusFeedbackVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates whether a measured dynamic status uses an announcing live-region role.">
+    <h3>statusFeedbackVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:157:1</code></p>
+    <p>Evaluates whether a measured dynamic status uses an announcing live-region role.</p>
+    
+  </article><article class="item" data-search="textAlternativesVerdict src/features/accessibility/evaluateAccessibilityObservation.ts Evaluates alternatives for meaningful media and the omission expected for decorative media.">
+    <h3>textAlternativesVerdict</h3>
+    <p class="muted"><code>src/features/accessibility/evaluateAccessibilityObservation.ts:166:1</code></p>
+    <p>Evaluates alternatives for meaningful media and the omission expected for decorative media.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-catalog-designrulecatalog-test-ts" class="view" data-view="src/features/catalog/designRuleCatalog.test.ts" hidden>
     <section class="panel">
       <h2>src/features/catalog/designRuleCatalog.test.ts</h2>
       <article class="item" data-search="isAcyclic src/features/catalog/designRuleCatalog.test.ts ">
