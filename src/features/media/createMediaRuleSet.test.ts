@@ -233,6 +233,16 @@ test('does not let an adapter supplied applicability flag bypass required media 
   expect(evaluate(rule, nonApplicableFailure).status).toBe('FAIL');
 });
 
+test('marks a contradictory characteristic with malformed measurements incomplete instead of skipping', () => {
+  const rule = mediaRule('design.media.focal-point');
+  const result = evaluate(
+    rule,
+    mediaFact({ hasFocalPoint: false, mediaId: 'hero-image', visibleLeft: 0 }),
+  );
+
+  expect(result.status).toBe('INCOMPLETE');
+});
+
 test('reports a failing media item when another scoped media item passes', () => {
   const rule = mediaRule('design.media.aspect-ratio');
   const [result] = evaluateRules(

@@ -29,6 +29,7 @@ function focalPointApplicability(assessment: MediaAssessment): MediaCheck | null
     Object.hasOwn(assessment.value, 'hasFocalPoint'),
     hasFocalPoint,
     'no declared focal point',
+    ['focalPointX', 'focalPointY', 'visibleBottom', 'visibleLeft', 'visibleRight', 'visibleTop'],
   );
 }
 
@@ -42,6 +43,7 @@ function responsiveSourcesApplicability(
     Object.hasOwn(assessment.value, 'hasResponsiveSources'),
     hasResponsiveSources,
     'no responsive source set',
+    ['devicePixelRatio', 'renderedWidth', 'selectedSourceWidth', 'sourceWidths'],
   );
 }
 
@@ -53,6 +55,7 @@ function textOverlayApplicability(assessment: MediaAssessment): MediaCheck | nul
     Object.hasOwn(assessment.value, 'hasTextOverlay'),
     hasTextOverlay,
     'no text overlay',
+    ['overlayContrastRatio'],
   );
 }
 
@@ -62,16 +65,28 @@ function booleanCharacteristic(
   isDeclared: boolean,
   value: JsonValue,
   reason: string,
+  measurementFields: readonly string[],
 ): MediaCheck | null | undefined {
   if (!isDeclared || value === true) return undefined;
-  return value === false ? skippedCheck(assessment, reason) : null;
+  if (value !== false) return null;
+  return hasMeasuredEvidence(assessment, measurementFields)
+    ? undefined
+    : skippedCheck(assessment, reason);
 }
 
 /*** Applies icon sizing only to media whose validated kind establishes it is not an icon. */
 function iconApplicability(assessment: MediaAssessment): MediaCheck | null | undefined {
   const { mediaKind } = assessment.value;
   if (!Object.hasOwn(assessment.value, 'mediaKind') || mediaKind === 'icon') return undefined;
-  return mediaKind === 'image' ? skippedCheck(assessment, 'media is not an icon') : null;
+  if (mediaKind !== 'image') return null;
+  return hasMeasuredEvidence(assessment, ['actualIconSize', 'expectedIconSize'])
+    ? undefined
+    : skippedCheck(assessment, 'media is not an icon');
+}
+
+/*** Detects rule-specific measurement evidence that contradicts a non-applicability characteristic. */
+function hasMeasuredEvidence(assessment: MediaAssessment, fields: readonly string[]): boolean {
+  return fields.some((field) => Object.hasOwn(assessment.value, field));
 }
 
 /*** Records a rule-specific, validated reason why one media assessment has no policy obligation. */
