@@ -1,82 +1,142 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
-import { evaluateRules, type RuleEvaluationResult, type RuleScope } from '@ankhorage/rules';
+import { evaluateRules, type JsonValue, type RuleScope } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
 import { createSpacingProximityRuleSet } from './createSpacingProximityRuleSet.ts';
 
 const ruleSet = createSpacingProximityRuleSet();
 
-test('declares the frozen group IDs, explicit capabilities, and scope facets', () => {
-  expect(ruleSet.rules.map((rule) => rule.identity.id)).toEqual([
-    'design.spacing.token-allowed',
-    'design.spacing.vertical-rhythm',
-    'design.spacing.section-gap',
-    'design.spacing.container-padding',
-    'design.proximity.related-grouping',
-    'design.proximity.unrelated-separation',
-    'design.proximity.label-control',
-    'design.proximity.heading-content',
-    'design.proximity.card-internals',
-    'design.spacing.double-application',
-    'design.spacing.unexpected-collapse',
-  ]);
-  const tokenRule = ruleSet.rules.find(
-    (rule) => rule.identity.id === 'design.spacing.token-allowed',
-  );
-  const groupingRule = ruleSet.rules.find(
-    (rule) => rule.identity.id === 'design.proximity.related-grouping',
-  );
-  expect(tokenRule?.facets).toContainEqual({ id: 'scope', value: 'project' });
-  expect(tokenRule?.requiredCapabilities).toEqual(['source.style-tokens']);
-  expect(groupingRule?.defaultSeverity).toBe('warning');
-  expect(groupingRule?.requiredCapabilities).toEqual(['dom.layout']);
+test('declares exactly the frozen group IDs with their local capabilities and facets', () => {
+  expect(ruleSet.rules.map((rule) => rule.identity.id)).toEqual(Object.keys(scenarios));
+  expect(
+    ruleSet.rules.find((rule) => rule.identity.id === 'design.spacing.token-allowed')
+      ?.requiredCapabilities,
+  ).toEqual(['source.style-tokens']);
+  expect(
+    ruleSet.rules.find((rule) => rule.identity.id === 'design.proximity.related-grouping')?.facets,
+  ).toContainEqual({ id: 'topic', value: 'proximity' });
 });
 
-for (const rule of ruleSet.rules) {
-  test(`${rule.identity.id} passes, fails, and remains incomplete without an actual measurement`, () => {
-    const scope = scopeFor(rule.identity.id);
-    expect(evaluate(rule.identity.id, 'pass', scope).results[0]?.status).toBe('PASS');
+const scenarios: Readonly<Record<string, Scenario>> = {
+  'design.spacing.token-allowed': scenario(
+    {
+      permittedTokens: [{ name: 'space.2', value: 8 }],
+      tokenUsages: [{ name: 'space.2', value: 8 }],
+    },
+    {
+      permittedTokens: [{ name: 'space.2', value: 8 }],
+      tokenUsages: [{ name: 'space.2', value: 12 }],
+    },
+    {
+      permittedTokens: [
+        { name: 'space.2', value: 8 },
+        { name: 'space.4', value: 16 },
+      ],
+      tokenUsages: [
+        { name: 'space.2', value: 8 },
+        { name: 'space.4', value: 16 },
+      ],
+    },
+  ),
+  'design.spacing.vertical-rhythm': scenario(
+    { gaps: [8], rhythmUnit: 8 },
+    { gaps: [12], rhythmUnit: 8 },
+    { gaps: [8, 16, 24], rhythmUnit: 8 },
+  ),
+  'design.spacing.section-gap': scenario(
+    { gaps: [16], permittedValues: [16, 32] },
+    { gaps: [24], permittedValues: [16, 32] },
+    { gaps: [16, 32], permittedValues: [16, 32] },
+  ),
+  'design.spacing.container-padding': scenario(
+    { containers: [{ bottom: 16, left: 16, right: 16, top: 16 }], permittedValues: [16] },
+    { containers: [{ bottom: 16, left: 16, right: 16, top: 12 }], permittedValues: [16] },
+    { containers: [{ bottom: 24, left: 16, right: 16, top: 24 }], permittedValues: [16, 24] },
+  ),
+  'design.proximity.related-grouping': scenario(
+    { groups: [{ nearestUnrelatedDistance: 12, relatedDistances: [12] }] },
+    { groups: [{ nearestUnrelatedDistance: 12, relatedDistances: [16] }] },
+    { groups: [{ nearestUnrelatedDistance: 24, relatedDistances: [8, 16] }] },
+  ),
+  'design.proximity.unrelated-separation': scenario(
+    { groups: [{ internalDistances: [8], unrelatedDistance: 8.01 }] },
+    { groups: [{ internalDistances: [8], unrelatedDistance: 8 }] },
+    { groups: [{ internalDistances: [8, 12], unrelatedDistance: 16 }] },
+  ),
+  'design.proximity.label-control': scenario(
+    { groups: [{ nearestUnrelatedDistance: 8, relatedDistances: [8] }] },
+    { groups: [{ nearestUnrelatedDistance: 8, relatedDistances: [12] }] },
+    { groups: [{ nearestUnrelatedDistance: 16, relatedDistances: [8] }] },
+  ),
+  'design.proximity.heading-content': scenario(
+    { groups: [{ nearestUnrelatedDistance: 12, relatedDistances: [12] }] },
+    { groups: [{ nearestUnrelatedDistance: 12, relatedDistances: [16] }] },
+    { groups: [{ nearestUnrelatedDistance: 24, relatedDistances: [12] }] },
+  ),
+  'design.proximity.card-internals': scenario(
+    { cards: [{ internalDistances: [16], nearestOutsideDistance: 16 }] },
+    { cards: [{ internalDistances: [20], nearestOutsideDistance: 16 }] },
+    { cards: [{ internalDistances: [8, 16], nearestOutsideDistance: 24 }] },
+  ),
+  'design.spacing.double-application': scenario(
+    { pairs: [{ childSpacing: 16, parentSpacing: 8, renderedDistance: 16 }] },
+    { pairs: [{ childSpacing: 16, parentSpacing: 8, renderedDistance: 24 }] },
+    { pairs: [{ childSpacing: 16, parentSpacing: 16, renderedDistance: 16 }] },
+  ),
+  'design.spacing.unexpected-collapse': scenario(
+    {
+      pairs: [
+        { followingMargin: 8, precedingMargin: 8, renderedDistance: 16, separatesMargins: true },
+      ],
+    },
+    {
+      pairs: [
+        { followingMargin: 8, precedingMargin: 8, renderedDistance: 8, separatesMargins: true },
+      ],
+    },
+    {
+      pairs: [
+        { followingMargin: 8, precedingMargin: 16, renderedDistance: 24, separatesMargins: true },
+      ],
+    },
+  ),
+};
 
-    const failed = evaluate(rule.identity.id, 'fail', scope);
-    expect(failed.results[0]?.status).toBe('FAIL');
-    expect(failed.findings).toHaveLength(1);
-    expect(failed.findings[0]?.ruleId).toBe(rule.identity.id);
-    expect(failed.findings[0]?.message).toBe(`${rule.identity.id} failed from measured geometry.`);
-    expect(failed.findings[0]?.evidence).toEqual({
-      detail: `${rule.identity.id} failed from measured geometry.`,
+for (const [ruleId, scenario] of Object.entries(scenarios)) {
+  test(`${ruleId} derives PASS, FAIL, INCOMPLETE, and its measurement boundary`, () => {
+    const scope = scopeFor(ruleId);
+    expect(evaluate(ruleId, scenario.pass, scope).results[0]?.status).toBe('PASS');
+    const failure = evaluate(ruleId, scenario.fail, scope);
+    expect(failure.results[0]?.status).toBe('FAIL');
+    expect(failure.findings[0]?.evidence).toMatchObject({
       factId: 'spacing-proximity-fact',
       scopeId: scope.id,
     });
-
-    expect(evaluate(rule.identity.id, 'incomplete', scope).results[0]?.status).toBe('INCOMPLETE');
-    expect(evaluateWithoutMeasurements(rule.identity.id, scope).results[0]?.status).toBe(
-      'INCOMPLETE',
-    );
+    expect(evaluate(ruleId, scenario.boundary, scope).results[0]?.status).toBe('PASS');
+    expect(evaluate(ruleId, {}, scope).results[0]?.status).toBe('INCOMPLETE');
+    expect(evaluateWithoutEvidence(ruleId, scope).results[0]?.status).toBe('INCOMPLETE');
   });
 }
 
-function evaluate(ruleId: string, outcome: Outcome, scope: RuleScope): RuleEvaluationResult {
+interface Scenario {
+  readonly boundary: JsonValue;
+  readonly fail: JsonValue;
+  readonly pass: JsonValue;
+}
+
+function scenario(boundary: JsonValue, fail: JsonValue, pass: JsonValue): Scenario {
+  return { boundary, fail, pass };
+}
+
+function evaluate(ruleId: string, observation: JsonValue, scope: RuleScope) {
   return evaluateRules(
-    [measurementsFact(ruleId, outcome, scope)],
+    [fact(ruleId, observation, scope)],
     ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
     { capabilities: ['dom.layout', 'source.style-tokens'], scope },
   );
 }
 
-function evaluateWithoutMeasurements(ruleId: string, scope: RuleScope): RuleEvaluationResult {
-  return evaluateRules(
-    [],
-    ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
-    {
-      capabilities: ['dom.layout', 'source.style-tokens'],
-      scope,
-    },
-  );
-}
-
-type Outcome = 'fail' | 'incomplete' | 'pass';
-
-function measurementsFact(ruleId: string, outcome: Outcome, scope: RuleScope): FactEnvelope {
+function fact(ruleId: string, observation: JsonValue, scope: RuleScope): FactEnvelope {
   return {
     contentHash: 'sha256:spacing-proximity-fact',
     id: 'spacing-proximity-fact',
@@ -93,17 +153,19 @@ function measurementsFact(ruleId: string, outcome: Outcome, scope: RuleScope): F
       target: { kind: 'fixture', projectId: 'project', targetId: 'target', tenantId: 'tenant' },
     },
     status: 'available',
-    value: {
-      evaluations: [
-        {
-          detail: `${ruleId} ${outcome === 'fail' ? 'failed from measured geometry.' : 'was measured.'}`,
-          outcome,
-          ruleId,
-        },
-      ],
-      schemaVersion: 1,
-    },
+    value: { observations: [{ kind: ruleId, value: observation }], schemaVersion: 2 },
   };
+}
+
+function evaluateWithoutEvidence(ruleId: string, scope: RuleScope) {
+  return evaluateRules(
+    [],
+    ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
+    {
+      capabilities: ['dom.layout', 'source.style-tokens'],
+      scope,
+    },
+  );
 }
 
 function scopeFor(ruleId: string): RuleScope {
