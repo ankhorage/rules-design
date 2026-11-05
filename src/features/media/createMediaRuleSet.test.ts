@@ -154,12 +154,23 @@ test('owns the overlay contrast threshold instead of accepting one from factual 
   expect(result.findings[0]).toMatchObject({ evidence: { expected: 4.5 } });
 });
 
-test('keeps explicit non-applicability separate from missing media measurements', () => {
+test('does not let explicit non-applicability bypass required media measurements', () => {
   const rule = mediaRule('design.media.focal-point');
   const nonApplicable = mediaFact({ applicable: false, mediaId: 'decorative-divider' });
+  const nonApplicableFailure = mediaFact({
+    applicable: false,
+    focalPointX: 0.8,
+    focalPointY: 0.5,
+    mediaId: 'decorative-divider',
+    visibleBottom: 1,
+    visibleLeft: 0,
+    visibleRight: 0.6,
+    visibleTop: 0,
+  });
   const missingMeasurement = mediaFact({ mediaId: 'hero-image' });
 
-  expect(evaluate(rule, nonApplicable).status).toBe('PASS');
+  expect(evaluate(rule, nonApplicable).status).toBe('INCOMPLETE');
+  expect(evaluate(rule, nonApplicableFailure).status).toBe('FAIL');
   expect(evaluate(rule, missingMeasurement).status).toBe('INCOMPLETE');
 });
 

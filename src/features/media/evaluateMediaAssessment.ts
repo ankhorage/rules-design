@@ -8,7 +8,6 @@ export function evaluateMediaAssessment(
   aspectRatioTolerance: number,
   assessment: MediaAssessment,
 ): MediaCheck | null {
-  if (assessment.value.applicable === false) return skippedCheck(assessment);
   switch (definition.id) {
     case 'design.media.aspect-ratio':
       return aspectRatio(assessment, aspectRatioTolerance);
@@ -258,16 +257,6 @@ function check(
     mediaId: assessment.id,
     message: `${assessment.id} has ${label} ${JSON.stringify(actual)} but requires ${JSON.stringify(expected)}.`,
     passed,
-  };
-}
-
-/*** Marks explicitly inapplicable media without conflating it with a missing measurement. */
-function skippedCheck(assessment: MediaAssessment): MediaCheck {
-  return {
-    evidence: { applicability: false, factId: assessment.id },
-    mediaId: assessment.id,
-    message: `${assessment.id} is explicitly not applicable to this rule.`,
-    passed: true,
   };
 }
 

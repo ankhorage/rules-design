@@ -104,7 +104,7 @@ function toMediaAssessment(fact: FactEnvelope): readonly MediaAssessment[] {
     : [];
 }
 
-/*** Converts failed media checks to rule findings while omitting explicitly inapplicable media. */
+/*** Converts failed media checks to rule findings from every scoped assessment. */
 function failedOutcome(
   definition: MediaRuleDefinition,
   checks: readonly MediaCheck[],
