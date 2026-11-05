@@ -118,6 +118,38 @@ for (const [ruleId, scenario] of Object.entries(scenarios)) {
   });
 }
 
+test('returns incomplete for contradictory observations instead of selecting the first', () => {
+  const ruleId = 'design.spacing.section-gap';
+  const scope = scopeFor(ruleId);
+  const result = evaluateObservations(
+    ruleId,
+    [
+      { gaps: [16], permittedValues: [16, 32] },
+      { gaps: [24], permittedValues: [16, 32] },
+    ],
+    scope,
+  );
+
+  expect(result.results[0]?.status).toBe('INCOMPLETE');
+});
+
+test('returns incomplete when an unexpected-collapse margin pair is malformed', () => {
+  const ruleId = 'design.spacing.unexpected-collapse';
+  const scope = scopeFor(ruleId);
+  const result = evaluate(
+    ruleId,
+    {
+      pairs: [
+        {},
+        { followingMargin: 8, precedingMargin: 8, renderedDistance: 16, separatesMargins: true },
+      ],
+    },
+    scope,
+  );
+
+  expect(result.results[0]?.status).toBe('INCOMPLETE');
+});
+
 interface Scenario {
   readonly boundary: JsonValue;
   readonly fail: JsonValue;
@@ -129,14 +161,22 @@ function scenario(boundary: JsonValue, fail: JsonValue, pass: JsonValue): Scenar
 }
 
 function evaluate(ruleId: string, observation: JsonValue, scope: RuleScope) {
+  return evaluateObservations(ruleId, [observation], scope);
+}
+
+function evaluateObservations(
+  ruleId: string,
+  observations: readonly JsonValue[],
+  scope: RuleScope,
+) {
   return evaluateRules(
-    [fact(ruleId, observation, scope)],
+    [fact(ruleId, observations, scope)],
     ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
     { capabilities: ['dom.layout', 'source.style-tokens'], scope },
   );
 }
 
-function fact(ruleId: string, observation: JsonValue, scope: RuleScope): FactEnvelope {
+function fact(ruleId: string, observations: readonly JsonValue[], scope: RuleScope): FactEnvelope {
   return {
     contentHash: 'sha256:spacing-proximity-fact',
     id: 'spacing-proximity-fact',
@@ -153,7 +193,10 @@ function fact(ruleId: string, observation: JsonValue, scope: RuleScope): FactEnv
       target: { kind: 'fixture', projectId: 'project', targetId: 'target', tenantId: 'tenant' },
     },
     status: 'available',
-    value: { observations: [{ kind: ruleId, value: observation }], schemaVersion: 2 },
+    value: {
+      observations: observations.map((observation) => ({ kind: ruleId, value: observation })),
+      schemaVersion: 2,
+    },
   };
 }
 

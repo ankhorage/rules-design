@@ -69,16 +69,19 @@ function evaluate(
 ): RuleEvaluationOutcome {
   const fact = matchingFact(facts, scope);
   if (fact === null || fact.status === 'missing') return incomplete();
-  const observation = parseSpacingProximityMeasurements(fact.value)?.find(
+  const observations = parseSpacingProximityMeasurements(fact.value)?.filter(
     (candidate) => candidate.kind === definition.id,
   );
-  if (observation === undefined) return incomplete();
-  const failure = assessSpacingProximityObservation(observation);
-  return failure === undefined
-    ? incomplete()
-    : failure === null
-      ? { findings: [], status: 'PASS' }
-      : failed(definition, fact, scope, failure);
+  if (observations === undefined || observations.length === 0) return incomplete();
+  const assessments = observations.map(assessSpacingProximityObservation);
+  if (assessments.some((assessment) => assessment === undefined)) return incomplete();
+  const failures = assessments.filter(
+    (assessment): assessment is NonNullable<typeof assessment> => assessment !== null,
+  );
+  if (failures.length === 0) return { findings: [], status: 'PASS' };
+  return failures.length === assessments.length
+    ? failed(definition, fact, scope, failures)
+    : incomplete();
 }
 
 /*** Selects exactly one scope-local fact to prevent ambiguous evidence from passing. */
@@ -95,18 +98,16 @@ function failed(
   definition: Definition,
   fact: FactEnvelope,
   scope: RuleScope,
-  failure: { readonly message: string; readonly values: readonly number[] },
+  failures: readonly { readonly message: string; readonly values: readonly number[] }[],
 ): RuleEvaluationOutcome {
   return {
-    findings: [
-      {
-        evidence: { factId: fact.id, scopeId: scope.id, values: failure.values },
-        message: failure.message,
-        ruleId: definition.id,
-        severity: definition.severity,
-        subjects: [{ id: scope.id, kind: scope.kind }],
-      },
-    ],
+    findings: failures.map((failure) => ({
+      evidence: { factId: fact.id, scopeId: scope.id, values: failure.values },
+      message: failure.message,
+      ruleId: definition.id,
+      severity: definition.severity,
+      subjects: [{ id: scope.id, kind: scope.kind }],
+    })),
     status: 'FAIL',
   };
 }

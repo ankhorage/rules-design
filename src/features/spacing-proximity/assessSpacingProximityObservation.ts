@@ -170,9 +170,11 @@ function collapsed(value: unknown): Failure | null | undefined {
   const source = record(value);
   const pairs = source?.pairs;
   if (!Array.isArray(pairs) || pairs.length === 0) return undefined;
-  const invalid = pairs
-    .map(collapse)
-    .find((item) => item?.separates && item.rendered < item.preceding + item.following);
+  const margins = pairs.map(collapse);
+  if (margins.some((margin) => margin === undefined)) return undefined;
+  const invalid = margins.find(
+    (margin) => margin?.separates && margin.rendered < margin.preceding + margin.following,
+  );
   return invalid === undefined
     ? null
     : {
