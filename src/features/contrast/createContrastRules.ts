@@ -104,7 +104,7 @@ function createRule(definition: Definition): Rule<Context> {
     identity: { id: definition.id, version: '1.0.0' },
     requiredCapabilities: definition.requiredCapabilities,
     summary: definition.summary,
-    validateOptions: validateOptions,
+    validateOptions: (options) => validateOptions(definition.id, options),
     evaluate: ({ context, options, scope }) => evaluate(definition, context.facts, options, scope),
   };
 }
@@ -117,14 +117,8 @@ function evaluate(
   scope: RuleScope,
 ): RuleEvaluationOutcome {
   const standard = standardFor(definition.id, options);
-  const scoped = facts.filter(
-    (fact) =>
-      fact.kind === 'design.contrast.measurement' &&
-      fact.scope.id === scope.id &&
-      fact.scope.kind === scope.kind,
-  );
-  if (scoped.length === 0 || scoped.some((fact) => fact.status !== 'available'))
-    return incomplete(definition.id, scope);
+  const scoped = facts.filter((fact) => matchesRuleScope(fact, definition.id, scope));
+  if (scoped.length === 0) return incomplete(definition.id, scope);
   const observations = scoped.flatMap((fact) => toContrastObservation(fact, definition.id));
   if (observations.length !== scoped.length) return incomplete(definition.id, scope);
   const failures = observations.filter(
@@ -138,12 +132,25 @@ function evaluate(
       };
 }
 
+/*** Selects only available observations that declare this exact frozen rule identity and scope. */
+function matchesRuleScope(fact: FactEnvelope, id: RuleId, scope: RuleScope): boolean {
+  return (
+    fact.kind === 'design.contrast.measurement' &&
+    fact.scope.id === scope.id &&
+    fact.scope.kind === scope.kind &&
+    fact.status === 'available' &&
+    isRecord(fact.value) &&
+    fact.value.ruleId === id
+  );
+}
+
 /*** Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria. */
-function validateOptions(options: JsonValue | undefined) {
+function validateOptions(id: RuleId, options: JsonValue | undefined) {
   return options === undefined ||
     (isRecord(options) &&
       options.version === 1 &&
       typeof options.standard === 'string' &&
+      supportsStandard(id, options.standard) &&
       Object.keys(options).every((key) => key === 'version' || key === 'standard'))
     ? []
     : [
@@ -152,6 +159,18 @@ function validateOptions(options: JsonValue | undefined) {
           message: 'Options must contain version 1 and a standard.',
         },
       ];
+}
+
+/*** Confines each frozen rule to the standards its policy can evaluate. */
+function supportsStandard(id: RuleId, standard: string): boolean {
+  if (id === 'design.contrast.text-ratio')
+    return ['wcag-aa-large', 'wcag-aa-normal', 'wcag-aaa-large', 'wcag-aaa-normal'].includes(
+      standard,
+    );
+  if (id === 'design.contrast.cta-prominence' || id === 'design.contrast.visual-hierarchy')
+    return ['heuristic-clear', 'heuristic-strong'].includes(standard);
+  if (id === 'design.contrast.text-background-resolved') return standard === 'heuristic-clear';
+  return standard === 'wcag-aa-nontext';
 }
 
 /*** Resolves a canonical or validated standard owned by the rule rather than its fact envelope. */

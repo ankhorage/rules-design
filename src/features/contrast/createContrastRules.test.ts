@@ -86,6 +86,31 @@ test('comparison operators and acceptance thresholds in facts cannot determine a
   expect(result.results[0]?.status).toBe('INCOMPLETE');
 });
 
+test('each rule selects only its exact fact when all frozen rules share a scope', () => {
+  const outcome = evaluateRules(
+    {
+      facts: rules.map((rule) => contrastFact(observationFor(rule.identity.id), scope)),
+    },
+    rules,
+    {
+      capabilities: rules.flatMap((rule) => rule.requiredCapabilities ?? []),
+      scope,
+    },
+  );
+
+  expect(outcome.results).toHaveLength(rules.length);
+  expect(outcome.results.every((result) => result.status === 'PASS')).toBe(true);
+});
+
+test.each(rules)('$identity.id rejects unsupported standard options', (rule) => {
+  expect(rule.validateOptions?.({ standard: 'unsupported-standard', version: 1 })).toEqual([
+    {
+      code: 'invalid-contrast-options',
+      message: 'Options must contain version 1 and a standard.',
+    },
+  ]);
+});
+
 /*** Runs one rule with its declared capabilities and optionally one portable fact observation. */
 function evaluate(
   rule: Rule<{ readonly facts: readonly FactEnvelope[] }>,
