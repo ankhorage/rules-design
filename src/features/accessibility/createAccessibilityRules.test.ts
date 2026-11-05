@@ -31,8 +31,8 @@ const cases: Readonly<
   ),
   'design.a11y.focus-order': observations(
     'focus-sequence',
-    { order: 'meaningful' },
-    { order: 'invalid' },
+    { documentOrder: ['name', 'email', 'submit'], focusOrder: ['name', 'email', 'submit'] },
+    { documentOrder: ['name', 'email', 'submit'], focusOrder: ['email', 'name', 'submit'] },
   ),
   'design.a11y.color-only': observations(
     'information-cue',
@@ -41,8 +41,8 @@ const cases: Readonly<
   ),
   'design.a11y.reduced-motion': observations(
     'motion-response',
-    { reducedMotion: 'respected' },
-    { reducedMotion: 'ignored' },
+    { motionObserved: false, prefersReducedMotion: true },
+    { motionObserved: true, prefersReducedMotion: true },
   ),
   'design.a11y.landmarks': observations(
     'landmark',
@@ -109,6 +109,77 @@ test('does not use an adapter supplied generic passed flag', () => {
   expect(result.status).toBe('FAIL');
 });
 
+test('evaluates focus order from normalized focus and document-order evidence', () => {
+  const rule = ruleFor('design.a11y.focus-order');
+  expect(evaluate(rule, observation('focus-sequence', { order: 'meaningful' })).status).toBe(
+    'INCOMPLETE',
+  );
+  expect(
+    evaluate(
+      rule,
+      observation('focus-sequence', {
+        documentOrder: ['name', 'email'],
+        focusOrder: ['name', 'email'],
+      }),
+    ).status,
+  ).toBe('PASS');
+  expect(
+    evaluate(
+      rule,
+      observation('focus-sequence', {
+        documentOrder: ['name', 'email'],
+        focusOrder: ['email', 'name'],
+      }),
+    ).status,
+  ).toBe('FAIL');
+  expect(
+    evaluate(
+      rule,
+      observation('focus-sequence', {
+        documentOrder: ['name', 'name'],
+        focusOrder: ['name', 'name'],
+      }),
+    ).status,
+  ).toBe('INCOMPLETE');
+});
+
+test('evaluates reduced-motion behavior while the preference is active', () => {
+  const rule = ruleFor('design.a11y.reduced-motion');
+  expect(
+    evaluate(rule, observation('motion-response', { reducedMotion: 'respected' })).status,
+  ).toBe('INCOMPLETE');
+  expect(
+    evaluate(
+      rule,
+      observation('motion-response', { motionObserved: false, prefersReducedMotion: true }),
+    ).status,
+  ).toBe('PASS');
+  expect(
+    evaluate(
+      rule,
+      observation('motion-response', { motionObserved: true, prefersReducedMotion: true }),
+    ).status,
+  ).toBe('FAIL');
+  expect(
+    evaluate(
+      rule,
+      observation('motion-response', { motionObserved: false, prefersReducedMotion: false }),
+    ).status,
+  ).toBe('INCOMPLETE');
+});
+
+test('accepts only finite non-negative integer main-landmark counts', () => {
+  const rule = ruleFor('design.a11y.main-landmark');
+  expect(evaluate(rule, observation('landmark-summary', { mainCount: 1 })).status).toBe('PASS');
+  expect(evaluate(rule, observation('landmark-summary', { mainCount: 0 })).status).toBe('FAIL');
+  expect(evaluate(rule, observation('landmark-summary', { mainCount: 2 })).status).toBe('FAIL');
+  for (const mainCount of [NaN, Infinity, -1, 1.5]) {
+    expect(evaluate(rule, observation('landmark-summary', { mainCount })).status).toBe(
+      'INCOMPLETE',
+    );
+  }
+});
+
 test('fails closed for missing, unavailable, and scope-mismatched facts', () => {
   const [rule] = rules;
   const available = createAccessibilityFact({
@@ -170,6 +241,13 @@ function evaluate(
   const fact = createAccessibilityFact({ observation: observed, ruleId: rule.identity.id });
   const value = observedValues === undefined ? fact.value : { observations: observedValues };
   return evaluateRules({ facts: [{ ...fact, value }] }, [rule], evaluationOptions(rule)).results[0];
+}
+
+/*** Finds one frozen rule identity for its focused semantic regression. */
+function ruleFor(id: string): Rule<{ readonly facts: readonly unknown[] }> {
+  const rule = rules.find((candidate) => candidate.identity.id === id);
+  if (rule === undefined) throw new Error(`Expected frozen rule ${id}.`);
+  return rule;
 }
 
 /*** Supplies the exact declared capabilities and scope for deterministic unit evaluation. */

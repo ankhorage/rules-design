@@ -22,25 +22,12 @@ const ruleEvaluators: readonly (readonly [string, ObservationEvaluator])[] = [
     'design.a11y.keyboard-reachability',
     (o) => booleanVerdict(o, 'interactive-element', o.properties.keyboardReachable),
   ],
-  [
-    'design.a11y.focus-order',
-    (o) => classificationVerdict(o, 'focus-sequence', o.properties.order, 'meaningful', 'invalid'),
-  ],
+  ['design.a11y.focus-order', focusOrderVerdict],
   [
     'design.a11y.color-only',
     (o) => booleanVerdict(o, 'information-cue', o.properties.hasNonColorIndicator),
   ],
-  [
-    'design.a11y.reduced-motion',
-    (o) =>
-      classificationVerdict(
-        o,
-        'motion-response',
-        o.properties.reducedMotion,
-        'respected',
-        'ignored',
-      ),
-  ],
+  ['design.a11y.reduced-motion', reducedMotionVerdict],
   ['design.a11y.landmarks', landmarkVerdict],
   ['design.a11y.main-landmark', mainLandmarkVerdict],
   ['design.a11y.list-semantics', listSemanticsVerdict],
@@ -76,21 +63,28 @@ function stringVerdict(
       ? 'FAIL'
       : 'PASS';
 }
-/*** Evaluates a finite semantic classification while leaving unknown classifications incomplete. */
-function classificationVerdict(
-  o: AccessibilityObservation,
-  kind: string,
-  value: unknown,
-  passing: string,
-  failing: string,
-): ObservationVerdict {
-  return o.kind !== kind || typeof value !== 'string'
+/*** Compares normalized focus traversal with the normalized document order it must preserve. */
+function focusOrderVerdict(o: AccessibilityObservation): ObservationVerdict {
+  const { documentOrder, focusOrder } = o.properties;
+  return o.kind !== 'focus-sequence' ||
+    !isNormalizedElementOrder(documentOrder) ||
+    !isNormalizedElementOrder(focusOrder)
     ? 'INCOMPLETE'
-    : value === passing
+    : documentOrder.length === focusOrder.length &&
+        documentOrder.every((elementId, index) => elementId === focusOrder.at(index))
       ? 'PASS'
-      : value === failing
-        ? 'FAIL'
-        : 'INCOMPLETE';
+      : 'FAIL';
+}
+/*** Evaluates measured motion while the reduced-motion preference is active. */
+function reducedMotionVerdict(o: AccessibilityObservation): ObservationVerdict {
+  const { motionObserved, prefersReducedMotion } = o.properties;
+  return o.kind !== 'motion-response' ||
+    prefersReducedMotion !== true ||
+    typeof motionObserved !== 'boolean'
+    ? 'INCOMPLETE'
+    : motionObserved
+      ? 'FAIL'
+      : 'PASS';
 }
 /*** Evaluates whether a measured landmark has a valid semantic role and name. */
 function landmarkVerdict(o: AccessibilityObservation): ObservationVerdict {
@@ -114,11 +108,26 @@ function landmarkVerdict(o: AccessibilityObservation): ObservationVerdict {
 /*** Evaluates whether the measured page landmark summary identifies exactly one main region. */
 function mainLandmarkVerdict(o: AccessibilityObservation): ObservationVerdict {
   const { mainCount } = o.properties;
-  return o.kind !== 'landmark-summary' || typeof mainCount !== 'number'
+  return o.kind !== 'landmark-summary' || !isMainLandmarkCount(mainCount)
     ? 'INCOMPLETE'
     : mainCount === 1
       ? 'PASS'
       : 'FAIL';
+}
+/*** Validates the normalized page-level main landmark count before evaluating its invariant. */
+function isMainLandmarkCount(value: unknown): value is number {
+  return (
+    typeof value === 'number' && Number.isFinite(value) && Number.isInteger(value) && value >= 0
+  );
+}
+/*** Validates a non-empty unique sequence of normalized element identifiers. */
+function isNormalizedElementOrder(value: unknown): value is readonly string[] {
+  return (
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every((elementId) => typeof elementId === 'string' && elementId.trim() !== '') &&
+    new Set(value).size === value.length
+  );
 }
 /*** Evaluates whether a measured list exposes list and listitem semantics together. */
 function listSemanticsVerdict(o: AccessibilityObservation): ObservationVerdict {
