@@ -11,11 +11,18 @@ export function selectResponsiveFact(
   scope: RuleScope,
 ): AvailableResponsiveFact | null {
   const matches = facts.filter(
-    (fact): fact is AvailableResponsiveFact =>
-      fact.status === 'available' &&
+    (fact) =>
       fact.kind === 'design.responsive.viewport-matrix' &&
       fact.scope.id === scope.id &&
       fact.scope.kind === scope.kind,
   );
-  return matches.length === 1 ? (matches[0] ?? null) : null;
+  const [fact] = matches;
+  return matches.length === 1 && isAvailableResponsiveFact(fact) ? fact : null;
+}
+
+/*** Identifies the one scoped responsive matrix that can be evaluated. */
+function isAvailableResponsiveFact(
+  fact: FactEnvelope | undefined,
+): fact is AvailableResponsiveFact {
+  return fact?.status === 'available' && fact.kind === 'design.responsive.viewport-matrix';
 }

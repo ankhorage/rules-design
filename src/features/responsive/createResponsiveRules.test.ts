@@ -67,6 +67,28 @@ test('keeps every responsive rule incomplete for facts outside the exact evaluat
   expect(result.results.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
 });
 
+test('keeps every responsive rule incomplete when an exact-scope matrix is also missing', () => {
+  const fact = completeResponsiveFact();
+  const { value: _value, ...missingFact } = fact;
+  const result = evaluateRules(
+    {
+      facts: [
+        fact,
+        {
+          ...missingFact,
+          id: `${fact.id}:missing`,
+          missing: { code: 'unavailable', message: 'Responsive measurements were unavailable.' },
+          status: 'missing',
+        },
+      ],
+    },
+    rules,
+    { capabilities, scope },
+  );
+
+  expect(result.results.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
+});
+
 test('keeps every responsive rule incomplete when a declared breakpoint has no viewport evidence', () => {
   const fact = completeResponsiveFact();
   const result = evaluateRules(
