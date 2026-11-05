@@ -2,7 +2,8 @@ import { evaluateRules } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
 import {
-  createRepetitionRuleFact,
+  createMissingRepetitionFact,
+  createRepetitionFact,
   repetitionScope,
 } from '../../../test/fixtures/repetitionRuleFacts.ts';
 import { designRuleCatalog } from '../catalog/designRuleCatalog.ts';
@@ -15,7 +16,7 @@ test('implements exactly the canonical Repetition catalog IDs with their declare
     .filter((entry) => entry.group === 'Repetition & Components')
     .map((entry) => entry.id);
 
-  expect(repetitionRules.map((rule) => rule.identity.id)).toEqual(catalogIds);
+  expect(repetitionRules.map((rule) => rule.identity.id) as readonly string[]).toEqual(catalogIds);
   expect(
     repetitionRules.every((rule) => rule.requiredCapabilities?.[0] === 'ui.component-tree'),
   ).toBe(true);
@@ -24,8 +25,8 @@ test('implements exactly the canonical Repetition catalog IDs with their declare
 for (const rule of repetitionRules) {
   test(`${rule.identity.id} passes when its inspected value matches the expected repeated value`, () => {
     const context: RepetitionRuleContext = {
-      repetitionFacts: [
-        createRepetitionRuleFact(rule.identity.id, { radius: 8, tokens: ['space-2', 'space-4'] }),
+      facts: [
+        createRepetitionFact(rule.identity.id, { radius: 8, tokens: ['space-2', 'space-4'] }),
       ],
     };
 
@@ -34,7 +35,7 @@ for (const rule of repetitionRules) {
 
   test(`${rule.identity.id} fails when its inspected value differs from the expected repeated value`, () => {
     const context: RepetitionRuleContext = {
-      repetitionFacts: [createRepetitionRuleFact(rule.identity.id, { radius: 4 }, { radius: 8 })],
+      facts: [createRepetitionFact(rule.identity.id, { radius: 4 }, { radius: 8 })],
     };
 
     const result = evaluate(rule, context);
@@ -53,10 +54,19 @@ for (const rule of repetitionRules) {
 
   test(`${rule.identity.id} is incomplete without inspected facts for its exact scope`, () => {
     const context: RepetitionRuleContext = {
-      repetitionFacts: [
+      facts: [
         {
-          ...createRepetitionRuleFact(rule.identity.id, { value: 'matching' }),
-          scope: { id: 'other-component', kind: 'component' },
+          ...createRepetitionFact(rule.identity.id, { value: 'matching' }),
+          scope: {
+            id: 'other-component',
+            kind: 'component',
+            target: {
+              kind: 'application',
+              projectId: 'checkout',
+              targetId: 'other-component',
+              tenantId: 'test-tenant',
+            },
+          },
         },
       ],
     };
@@ -71,8 +81,8 @@ for (const rule of repetitionRules) {
 
 test('does not mutate supplied Repetition facts while evaluating every rule', () => {
   const context: RepetitionRuleContext = {
-    repetitionFacts: repetitionRules.map((rule) =>
-      createRepetitionRuleFact(rule.identity.id, { value: rule.identity.id }),
+    facts: repetitionRules.map((rule) =>
+      createRepetitionFact(rule.identity.id, { value: rule.identity.id }),
     ),
   };
   const before = structuredClone(context);
@@ -89,8 +99,8 @@ test('does not mutate supplied Repetition facts while evaluating every rule', ()
 test('compares object facts by their normalized values rather than property insertion order', () => {
   const [rule] = repetitionRules;
   const context: RepetitionRuleContext = {
-    repetitionFacts: [
-      createRepetitionRuleFact(
+    facts: [
+      createRepetitionFact(
         rule.identity.id,
         { color: 'blue', radius: 8 },
         { radius: 8, color: 'blue' },
@@ -99,6 +109,18 @@ test('compares object facts by their normalized values rather than property inse
   };
 
   expect(evaluate(rule, context).status).toBe('PASS');
+});
+
+test('is incomplete for explicit missing, malformed, or foreign-scoped facts', () => {
+  const [rule] = repetitionRules;
+  const available = createRepetitionFact(rule.identity.id, { value: 'matching' });
+  const contexts: readonly RepetitionRuleContext[] = [
+    { facts: [available, createMissingRepetitionFact(rule.identity.id)] },
+    { facts: [available, { ...available, value: { actual: { value: 'matching' } } }] },
+    { facts: [{ ...available, scope: { ...available.scope, kind: 'page' } }] },
+  ];
+
+  for (const context of contexts) expect(evaluate(rule, context).status).toBe('INCOMPLETE');
 });
 
 function evaluate(rule: (typeof repetitionRules)[number], context: RepetitionRuleContext) {
