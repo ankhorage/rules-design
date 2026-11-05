@@ -276,4 +276,3 @@ function expectedStandard(ruleId: string): string {
   if (ruleId === 'design.contrast.text-background-resolved') return 'heuristic-clear';
   return 'wcag-aa-nontext';
 }
-
