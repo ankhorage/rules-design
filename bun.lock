@@ -7,6 +7,7 @@
       "dependencies": {
         "@ankhorage/contracts": "^26.4.0",
         "@ankhorage/rules": "^0.3.0",
+        "@ankhorage/utility": "^0.5.5",
       },
       "devDependencies": {
         "@ankhorage/devtools": "^2.3.47",

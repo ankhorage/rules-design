@@ -1,30 +1,17 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
-import type { Rule, RuleEvaluationOutcome, RuleFinding } from '@ankhorage/rules';
+import type {
+  JsonValue,
+  Rule,
+  RuleEvaluationOutcome,
+  RuleFinding,
+  RuleScope,
+  RuleSubject,
+} from '@ankhorage/rules';
+import { isRecord } from '@ankhorage/utility/object';
 
-interface ContrastContext {
-  readonly facts: readonly FactEnvelope[];
-}
+import { hasValidContrastMeasurement } from './hasValidContrastMeasurement';
 
-interface ContrastMeasurement {
-  readonly actual: number;
-  readonly comparison: 'at-least' | 'at-most' | 'equal';
-  readonly expected: number;
-  readonly ruleId: ContrastRuleId;
-  readonly subject: {
-    readonly id: string;
-    readonly kind: string;
-    readonly path?: string;
-  };
-}
-
-interface ContrastRuleDefinition {
-  readonly id: ContrastRuleId;
-  readonly requiredCapabilities: readonly string[];
-  readonly severity: 'error' | 'warning';
-  readonly summary: string;
-}
-
-type ContrastRuleId =
+type RuleId =
   | 'design.contrast.text-ratio'
   | 'design.contrast.nontext-ratio'
   | 'design.contrast.focus-visible'
@@ -34,172 +21,269 @@ type ContrastRuleId =
   | 'design.contrast.text-background-resolved'
   | 'design.contrast.cta-prominence'
   | 'design.contrast.visual-hierarchy';
-
-const contrastRuleDefinitions: readonly ContrastRuleDefinition[] = [
+interface Context {
+  readonly facts: readonly FactEnvelope[];
+}
+interface ContrastObservation {
+  readonly subject: RuleSubject;
+  readonly value: Readonly<Record<string, JsonValue>>;
+}
+interface Definition {
+  readonly id: RuleId;
+  readonly requiredCapabilities: readonly string[];
+  readonly severity: 'error' | 'warning';
+  readonly summary: string;
+}
+const definitions: readonly Definition[] = [
   {
     id: 'design.contrast.text-ratio',
     requiredCapabilities: ['dom.computed-style', 'dom.text-content'],
     severity: 'error',
-    summary: 'Require measured effective text contrast to meet its supplied standard.',
+    summary: 'Require observed effective text contrast to meet the selected WCAG standard.',
   },
   {
     id: 'design.contrast.nontext-ratio',
-    requiredCapabilities: ['dom.computed-style', 'dom.text-content'],
+    requiredCapabilities: ['dom.computed-style'],
     severity: 'error',
-    summary: 'Require measured non-text contrast to meet its supplied standard.',
+    summary: 'Require observed non-text contrast to meet WCAG AA.',
   },
   {
     id: 'design.contrast.focus-visible',
     requiredCapabilities: ['dom.computed-style', 'browser.interaction-state'],
     severity: 'error',
-    summary: 'Require a measured focus indicator to meet its supplied visibility threshold.',
+    summary: 'Require a visible focus indicator with sufficient contrast.',
   },
   {
     id: 'design.contrast.surface-separation',
-    requiredCapabilities: ['dom.computed-style', 'dom.text-content'],
+    requiredCapabilities: ['dom.computed-style'],
     severity: 'error',
-    summary: 'Require adjacent surfaces to meet their supplied separation threshold.',
+    summary: 'Require adjacent effective surfaces to remain distinguishable.',
   },
   {
     id: 'design.contrast.state-distinction',
-    requiredCapabilities: ['dom.computed-style'],
+    requiredCapabilities: ['dom.computed-style', 'browser.interaction-state'],
     severity: 'error',
-    summary: 'Require measured interactive states to meet their supplied distinction threshold.',
+    summary: 'Require observed interactive states to remain distinct.',
   },
   {
     id: 'design.contrast.link-distinction',
     requiredCapabilities: ['dom.computed-style'],
     severity: 'error',
-    summary: 'Require measured links to meet their supplied distinction threshold.',
+    summary: 'Require links to have a non-color cue or sufficient distinction.',
   },
   {
     id: 'design.contrast.text-background-resolved',
     requiredCapabilities: ['dom.computed-style'],
     severity: 'error',
-    summary: 'Require resolved effective text-background measurements.',
+    summary: 'Require an observed effective text background.',
   },
   {
     id: 'design.contrast.cta-prominence',
     requiredCapabilities: ['dom.computed-style'],
     severity: 'warning',
-    summary: 'Advisory check that primary calls to action meet a supplied prominence threshold.',
+    summary: 'Require a primary CTA to exceed competing visual prominence.',
   },
   {
     id: 'design.contrast.visual-hierarchy',
     requiredCapabilities: ['dom.computed-style'],
     severity: 'warning',
-    summary: 'Advisory check that measured visual emphasis meets a supplied hierarchy threshold.',
+    summary: 'Require observed visual emphasis to descend through a hierarchy.',
   },
 ];
 
-/*** Creates the independent Contrast and Visual Hierarchy rule contribution from portable facts. */
-export function createContrastRules(): readonly Rule<ContrastContext>[] {
-  return contrastRuleDefinitions.map(createContrastRule);
+/*** Creates the independent Contrast and Visual Hierarchy rule contribution without central registration. */
+export function createContrastRules(): readonly Rule<Context>[] {
+  return definitions.map(createRule);
 }
 
-/*** Creates one deterministic rule from its frozen catalog identity and capability requirements. */
-function createContrastRule(definition: ContrastRuleDefinition): Rule<ContrastContext> {
+/*** Creates one frozen rule whose policy is controlled by validated options or canonical standards. */
+function createRule(definition: Definition): Rule<Context> {
   return {
     defaultSeverity: definition.severity,
     dependencies: [],
-    evaluate: ({ context, scope }) => evaluateContrastRule(definition, context.facts, scope.id),
     identity: { id: definition.id, version: '1.0.0' },
     requiredCapabilities: definition.requiredCapabilities,
     summary: definition.summary,
+    validateOptions: validateOptions,
+    evaluate: ({ context, options, scope }) => evaluate(definition, context.facts, options, scope),
   };
 }
 
-/*** Evaluates measurements for one exact scope without treating absent or malformed facts as passing. */
-function evaluateContrastRule(
-  definition: ContrastRuleDefinition,
+/*** Evaluates exact-scope observations, rejecting absent, malformed, and self-judging evidence. */
+function evaluate(
+  definition: Definition,
   facts: readonly FactEnvelope[],
-  scopeId: string,
+  options: JsonValue | undefined,
+  scope: RuleScope,
 ): RuleEvaluationOutcome {
-  const measurements = facts.flatMap((fact) => toContrastMeasurement(fact, definition.id, scopeId));
-  if (measurements.length === 0) return incomplete(definition.id, scopeId);
-
-  const failures = measurements.filter((measurement) => !matchesExpectation(measurement));
+  const standard = standardFor(definition.id, options);
+  const scoped = facts.filter(
+    (fact) =>
+      fact.kind === 'design.contrast.measurement' &&
+      fact.scope.id === scope.id &&
+      fact.scope.kind === scope.kind,
+  );
+  if (scoped.length === 0 || scoped.some((fact) => fact.status !== 'available'))
+    return incomplete(definition.id, scope);
+  const observations = scoped.flatMap((fact) => toContrastObservation(fact, definition.id));
+  if (observations.length !== scoped.length) return incomplete(definition.id, scope);
+  const failures = observations.filter(
+    (observation) => !passes(definition.id, observation.value, standard),
+  );
   return failures.length === 0
     ? { findings: [], status: 'PASS' }
     : {
-        findings: failures.map((measurement) => failure(definition.id, measurement)),
+        findings: failures.map((observation) => failure(definition, standard, observation)),
         status: 'FAIL',
       };
 }
 
-/*** Selects one available, scope-matched portable measurement with an exact rule identity. */
-function toContrastMeasurement(
-  fact: FactEnvelope,
-  ruleId: ContrastRuleId,
-  scopeId: string,
-): readonly ContrastMeasurement[] {
-  if (fact.status !== 'available' || fact.kind !== 'design.contrast.measurement') return [];
-  if (fact.scope.id !== scopeId || !isContrastMeasurement(fact.value, ruleId)) return [];
-  return [fact.value];
+/*** Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria. */
+function validateOptions(options: JsonValue | undefined) {
+  return options === undefined ||
+    (isRecord(options) &&
+      options.version === 1 &&
+      typeof options.standard === 'string' &&
+      Object.keys(options).every((key) => key === 'version' || key === 'standard'))
+    ? []
+    : [
+        {
+          code: 'invalid-contrast-options',
+          message: 'Options must contain version 1 and a standard.',
+        },
+      ];
 }
 
-/*** Validates the JSON fact payload before the rule compares its explicit observed and expected values. */
-function isContrastMeasurement(
-  value: unknown,
-  ruleId: ContrastRuleId,
-): value is ContrastMeasurement {
-  if (!isRecord(value) || value.ruleId !== ruleId || !isRecord(value.subject)) return false;
+/*** Resolves a canonical or validated standard owned by the rule rather than its fact envelope. */
+function standardFor(id: RuleId, options: JsonValue | undefined): string {
+  const selected =
+    isRecord(options) && typeof options.standard === 'string' ? options.standard : undefined;
+  if (id === 'design.contrast.text-ratio') {
+    return ['wcag-aa-large', 'wcag-aa-normal', 'wcag-aaa-large', 'wcag-aaa-normal'].includes(
+      selected ?? '',
+    )
+      ? (selected ?? 'wcag-aa-normal')
+      : 'wcag-aa-normal';
+  }
+  return id === 'design.contrast.cta-prominence' || id === 'design.contrast.visual-hierarchy'
+    ? selected === 'heuristic-strong'
+      ? selected
+      : 'heuristic-clear'
+    : id === 'design.contrast.text-background-resolved'
+      ? 'heuristic-clear'
+      : 'wcag-aa-nontext';
+}
+
+/*** Converts one available contrast fact into a fully validated rule observation. */
+function toContrastObservation(fact: FactEnvelope, id: RuleId): readonly ContrastObservation[] {
+  if (fact.status !== 'available' || !valid(fact.value, id)) return [];
+  return [{ subject: fact.value.subject, value: fact.value }];
+}
+
+/*** Validates rule-specific observations and forbids evidence-provided comparisons or thresholds. */
+function valid(
+  value: JsonValue,
+  id: RuleId,
+): value is Readonly<Record<string, JsonValue>> & { readonly subject: RuleSubject } {
+  return isBaseObservation(value, id) && hasValidContrastMeasurement(id, value);
+}
+
+/*** Verifies the evidence fields shared by every Contrast observation. */
+function isBaseObservation(
+  value: JsonValue,
+  id: RuleId,
+): value is Readonly<Record<string, JsonValue>> & { readonly subject: RuleSubject } {
   return (
-    isFiniteNumber(value.actual) &&
-    isFiniteNumber(value.expected) &&
-    (value.comparison === 'at-least' ||
-      value.comparison === 'at-most' ||
-      value.comparison === 'equal') &&
-    typeof value.subject.id === 'string' &&
-    typeof value.subject.kind === 'string' &&
-    (value.subject.path === undefined || typeof value.subject.path === 'string')
+    isRecord(value) &&
+    value.ruleId === id &&
+    isRuleSubject(value.subject) &&
+    !['comparison', 'expected', 'minimum', 'operator', 'threshold'].some((key) => key in value)
   );
 }
 
-/*** Compares a supplied observation to its versioned adapter-provided expectation without hidden thresholds. */
-function matchesExpectation(measurement: ContrastMeasurement): boolean {
-  if (measurement.comparison === 'at-least') return measurement.actual >= measurement.expected;
-  if (measurement.comparison === 'at-most') return measurement.actual <= measurement.expected;
-  return measurement.actual === measurement.expected;
+/*** Applies the rule-owned semantic standard to one complete observation. */
+function passes(id: RuleId, value: Record<string, JsonValue>, standard: string): boolean {
+  if (id === 'design.contrast.text-background-resolved') return true;
+  if (id === 'design.contrast.cta-prominence')
+    return (
+      Number(value.primaryProminence) - Number(value.competingProminence) >=
+      (standard === 'heuristic-strong' ? 0.2 : 0.1)
+    );
+  if (id === 'design.contrast.visual-hierarchy') {
+    const { emphasis } = value;
+    if (!isJsonValueArray(emphasis) || emphasis.length < 2) return false;
+    return emphasis.slice(1).every((entry, index) => {
+      const previous = emphasis.at(index);
+      return (
+        isScore(entry) &&
+        isScore(previous) &&
+        previous.score - entry.score >= (standard === 'heuristic-strong' ? 0.2 : 0.1)
+      );
+    });
+  }
+  if (id === 'design.contrast.link-distinction')
+    return value.nonColorCueVisible === true || Number(value.distinguishingContrastRatio) >= 3;
+  if (id === 'design.contrast.focus-visible')
+    return value.focusIndicatorVisible === true && Number(value.contrastRatio) >= 3;
+  return (
+    Number(value.contrastRatio) >=
+    (standard === 'wcag-aaa-normal'
+      ? 7
+      : standard === 'wcag-aa-large' || standard === 'wcag-aa-nontext'
+        ? 3
+        : 4.5)
+  );
 }
 
-/*** Explains that no usable measurement was available for the selected rule and scope. */
-function incomplete(ruleId: ContrastRuleId, scopeId: string): RuleEvaluationOutcome {
+/*** Produces an incomplete result when evidence cannot prove this exact-scope rule. */
+function incomplete(id: RuleId, scope: RuleScope): RuleEvaluationOutcome {
   return {
     findings: [
       {
-        evidence: { scopeId },
-        message: `Rule "${ruleId}" requires an available design.contrast.measurement fact for scope "${scopeId}".`,
-        ruleId,
+        evidence: { scopeId: scope.id, scopeKind: scope.kind },
+        message: `Rule "${id}" is incomplete for scope "${scope.kind}:${scope.id}".`,
+        ruleId: id,
         severity: 'info',
-        subjects: [{ id: scopeId, kind: 'rule-scope' }],
+        subjects: [{ id: scope.id, kind: scope.kind }],
       },
     ],
     status: 'INCOMPLETE',
   };
 }
 
-/*** Creates one serializable finding that retains the observed measurement and exact affected subject. */
-function failure(ruleId: ContrastRuleId, measurement: ContrastMeasurement): RuleFinding {
+/*** Retains observed evidence and the applied canonical standard for a failed rule. */
+function failure(
+  definition: Definition,
+  standard: string,
+  observation: ContrastObservation,
+): RuleFinding {
   return {
-    evidence: {
-      actual: measurement.actual,
-      comparison: measurement.comparison,
-      expected: measurement.expected,
-    },
-    message: `Measured value ${measurement.actual} does not satisfy ${measurement.comparison} ${measurement.expected}.`,
-    ruleId,
-    severity: 'info',
-    subjects: [measurement.subject],
+    evidence: { observation: observation.value, standard },
+    message: `Observed ${definition.id} evidence does not meet the ${standard} standard.`,
+    ruleId: definition.id,
+    severity: definition.severity,
+    subjects: [observation.subject],
   };
 }
 
-/*** Narrows an unknown JSON value to a plain record without relying on prototype behavior. */
-function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+/*** Narrows a serializable subject to the Rules finding contract. */
+function isRuleSubject(value: unknown): value is RuleSubject {
+  return (
+    isRecord(value) &&
+    typeof value.id === 'string' &&
+    value.id.length > 0 &&
+    typeof value.kind === 'string' &&
+    value.kind.length > 0 &&
+    (value.path === undefined || (typeof value.path === 'string' && value.path.length > 0))
+  );
 }
 
-/*** Identifies finite numeric measurements so non-numeric serialized values remain incomplete. */
-function isFiniteNumber(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value);
+/*** Narrows a JSON value to an immutable sequence of JSON values. */
+function isJsonValueArray(value: JsonValue | undefined): value is readonly JsonValue[] {
+  return Array.isArray(value);
+}
+
+/*** Narrows a hierarchy entry to a finite observed emphasis score. */
+function isScore(value: JsonValue | undefined): value is { readonly score: number } {
+  return isRecord(value) && typeof value.score === 'number' && Number.isFinite(value.score);
 }
