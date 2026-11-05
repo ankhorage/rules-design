@@ -8,19 +8,39 @@ export interface AlignmentRuleContext {
 }
 
 interface AlignmentMetric {
-  readonly expected: number;
   readonly measurement: string;
   readonly observed: number;
   readonly subjectIds: readonly string[];
-  readonly tolerance: number;
 }
+
+type AlignmentRuleId =
+  | 'design.alignment.shared-edges'
+  | 'design.alignment.grid-tracks'
+  | 'design.alignment.baselines'
+  | 'design.alignment.text'
+  | 'design.alignment.flex-items'
+  | 'design.alignment.component-axes'
+  | 'design.layout.container-width'
+  | 'design.layout.grid-gap'
+  | 'design.layout.horizontal-overflow'
+  | 'design.layout.vertical-clipping'
+  | 'design.layout.unintended-overlap'
+  | 'design.layout.unnecessary-wrapper'
+  | 'design.layout.visual-balance';
 
 interface AlignmentRuleDefinition {
   readonly assessment: 'heuristic' | 'objective';
   readonly capability: string;
-  readonly id: string;
+  readonly criterion: string;
+  readonly id: AlignmentRuleId;
   readonly measurement: string;
   readonly summary: string;
+  readonly tolerance: number;
+}
+
+/*** Configures trusted, group-local acceptance tolerances by frozen Alignment and Layout rule ID. */
+export interface AlignmentRuleOptions {
+  readonly tolerances?: Partial<Record<AlignmentRuleId, number>>;
 }
 
 const definitions: readonly AlignmentRuleDefinition[] = [
@@ -55,13 +75,24 @@ const definitions: readonly AlignmentRuleDefinition[] = [
       'Unexpected horizontal overflow is absent.',
     ),
     capability: 'viewport.layout',
+    criterion: 'horizontal overflow',
   },
-  metricRule(
-    'design.layout.vertical-clipping',
-    'vertical-clipping',
-    'Unexpected vertical clipping is absent.',
-  ),
-  metricRule('design.layout.unintended-overlap', 'overlap-area', 'Unexpected overlap is absent.'),
+  {
+    ...metricRule(
+      'design.layout.vertical-clipping',
+      'vertical-clipping',
+      'Unexpected vertical clipping is absent.',
+    ),
+    criterion: 'vertical clipping',
+  },
+  {
+    ...metricRule(
+      'design.layout.unintended-overlap',
+      'overlap-area',
+      'Unexpected overlap is absent.',
+    ),
+    criterion: 'unintended overlap area',
+  },
   {
     ...metricRule(
       'design.layout.unnecessary-wrapper',
@@ -69,6 +100,7 @@ const definitions: readonly AlignmentRuleDefinition[] = [
       'Avoidable structural wrappers are identified.',
     ),
     assessment: 'heuristic',
+    criterion: 'avoidable wrapper count',
   },
   {
     ...metricRule(
@@ -78,12 +110,18 @@ const definitions: readonly AlignmentRuleDefinition[] = [
     ),
     assessment: 'heuristic',
     capability: 'rendered.area-analysis',
+    criterion: 'visual weight imbalance',
+    tolerance: 0.1,
   },
 ];
 
 /*** Creates the independently registrable Alignment and Layout rules without mutating a provider registry. */
-export function createAlignmentRules(): readonly Rule<AlignmentRuleContext>[] {
-  return definitions.map(createAlignmentRule);
+export function createAlignmentRules(
+  options: AlignmentRuleOptions = {},
+): readonly Rule<AlignmentRuleContext>[] {
+  return definitions.map((definition) =>
+    createAlignmentRule({ ...definition, tolerance: resolveTolerance(definition, options) }),
+  );
 }
 
 /*** Creates one pure rule from its frozen catalog definition. */
@@ -111,10 +149,9 @@ function evaluateAlignmentMetric(
   const metric = findAlignmentMetric(input.context.facts, definition, input.scope);
   if (!metric) return incompleteOutcome(definition, input);
 
-  const deviation = Math.abs(metric.observed - metric.expected);
-  if (deviation <= metric.tolerance) return { findings: [], status: 'PASS' as const };
+  if (metric.observed <= definition.tolerance) return { findings: [], status: 'PASS' as const };
 
-  return { findings: [finding(definition, input, metric, deviation)], status: 'FAIL' as const };
+  return { findings: [finding(definition, input, metric)], status: 'FAIL' as const };
 }
 
 /*** Finds one unambiguous, valid metric fact at the exact active Rules scope. */
@@ -143,19 +180,15 @@ function scopeMatches(factScope: FactEnvelope['scope'], scope: RuleScope): boole
   return factScope.id === scope.id && factScope.kind === scope.kind;
 }
 
-/*** Validates the group-local serializable metric payload without trusting a host adapter. */
+/*** Validates the group-local observed geometry payload without trusting adapter acceptance criteria. */
 function parseMetric(value: unknown, measurement: string): AlignmentMetric | undefined {
   if (!isRecord(value)) return undefined;
-  const { expected, measurement: candidateMeasurement, observed, subjectIds, tolerance } = value;
+  const { measurement: candidateMeasurement, observed, subjectIds } = value;
   if (
-    typeof expected !== 'number' ||
-    !Number.isFinite(expected) ||
     candidateMeasurement !== measurement ||
     typeof observed !== 'number' ||
     !Number.isFinite(observed) ||
-    typeof tolerance !== 'number' ||
-    !Number.isFinite(tolerance) ||
-    tolerance < 0 ||
+    observed < 0 ||
     !Array.isArray(subjectIds) ||
     subjectIds.length === 0 ||
     !subjectIds.every((id) => typeof id === 'string' && id.trim().length > 0) ||
@@ -163,16 +196,14 @@ function parseMetric(value: unknown, measurement: string): AlignmentMetric | und
   ) {
     return undefined;
   }
-  return { expected, measurement, observed, subjectIds, tolerance };
+  return { measurement, observed, subjectIds };
 }
 
-/*** Requires duplicate facts to state the same complete normalized measurement. */
+/*** Requires duplicate facts to state the same complete normalized observation. */
 function sameMetric(metric: AlignmentMetric, otherMetric: AlignmentMetric | undefined): boolean {
   return (
-    otherMetric?.expected === metric.expected &&
-    metric.measurement === otherMetric.measurement &&
+    otherMetric?.measurement === metric.measurement &&
     metric.observed === otherMetric.observed &&
-    metric.tolerance === otherMetric.tolerance &&
     metric.subjectIds.length === otherMetric.subjectIds.length &&
     metric.subjectIds.every((subjectId, index) => subjectId === otherMetric.subjectIds.at(index))
   );
@@ -197,28 +228,49 @@ function incompleteOutcome(
   };
 }
 
-/*** Describes a metric deviation with the supplied serializable evidence. */
+/*** Describes an observation that exceeds this rule's trusted acceptance tolerance. */
 function finding(
   definition: AlignmentRuleDefinition,
   input: RuleEvaluationInput<AlignmentRuleContext>,
   metric: AlignmentMetric,
-  deviation: number,
 ): RuleFinding {
   return {
     evidence: {
-      deviation,
-      expected: metric.expected,
       observed: metric.observed,
-      tolerance: metric.tolerance,
+      tolerance: definition.tolerance,
     },
-    message: `${definition.summary} Observed deviation ${deviation} exceeds tolerance ${metric.tolerance}.`,
+    message: `${definition.summary} Observed ${definition.criterion} ${metric.observed} exceeds tolerance ${definition.tolerance}.`,
     ruleId: definition.id,
     severity: definition.assessment === 'objective' ? 'warning' : 'info',
     subjects: metric.subjectIds.map((id) => ({ id, kind: input.scope.kind })),
   };
 }
 
-/*** Builds one objective layout metric rule definition. */
-function metricRule(id: string, measurement: string, summary: string): AlignmentRuleDefinition {
-  return { assessment: 'objective', capability: 'dom.layout', id, measurement, summary };
+/*** Resolves a trusted policy override and rejects invalid acceptance thresholds at the factory boundary. */
+function resolveTolerance(
+  definition: AlignmentRuleDefinition,
+  options: AlignmentRuleOptions,
+): number {
+  const tolerance = options.tolerances?.[definition.id] ?? definition.tolerance;
+  if (!Number.isFinite(tolerance) || tolerance < 0) {
+    throw new TypeError(`Tolerance for "${definition.id}" must be a finite non-negative number.`);
+  }
+  return tolerance;
+}
+
+/*** Builds one objective layout metric rule definition with a zero-deviation semantic default. */
+function metricRule(
+  id: AlignmentRuleId,
+  measurement: string,
+  summary: string,
+): AlignmentRuleDefinition {
+  return {
+    assessment: 'objective',
+    capability: 'dom.layout',
+    criterion: 'layout deviation',
+    id,
+    measurement,
+    summary,
+    tolerance: 0,
+  };
 }
