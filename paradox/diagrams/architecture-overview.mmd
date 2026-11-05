@@ -78,6 +78,26 @@ graph TD
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts["src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"]
   package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts --> module_src_types_spacingProximity_ts
+  module_src_features_typography_createTypographyObservationTools_ts["src/features/typography/createTypographyObservationTools.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_typography_createTypographyObservationTools_ts
+  module_src_features_typography_createTypographyObservationTools_ts --> module_src_types_typography_ts
+  module_src_features_typography_createTypographyRuleSet_test_ts["src/features/typography/createTypographyRuleSet.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_typography_createTypographyRuleSet_test_ts
+  module_src_features_typography_createTypographyRuleSet_test_ts --> module_src_features_typography_createTypographyRuleSet_ts
+  module_src_features_typography_createTypographyRuleSet_test_ts --> module_test_fixtures_typographyRuleFacts_ts
+  module_src_features_typography_createTypographyRuleSet_ts["src/features/typography/createTypographyRuleSet.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_typography_createTypographyRuleSet_ts
+  module_src_features_typography_createTypographyRuleSet_ts --> module_src_features_typography_createTypographyObservationTools_ts
+  module_src_features_typography_createTypographyRuleSet_ts --> module_src_features_typography_parseTypographyObservation_ts
+  module_src_features_typography_createTypographyRuleSet_ts --> module_src_features_typography_validateTypographyRulePolicy_ts
+  module_src_features_typography_createTypographyRuleSet_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_typography_createTypographyRuleSet_ts --> module_src_types_typography_ts
+  module_src_features_typography_parseTypographyObservation_ts["src/features/typography/parseTypographyObservation.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_typography_parseTypographyObservation_ts
+  module_src_features_typography_parseTypographyObservation_ts --> module_src_types_typography_ts
+  module_src_features_typography_validateTypographyRulePolicy_ts["src/features/typography/validateTypographyRulePolicy.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_typography_validateTypographyRulePolicy_ts
+  module_src_features_typography_validateTypographyRulePolicy_ts --> module_src_types_typography_ts
   module_src_index_ts["src/index.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
@@ -85,6 +105,8 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_types_designRuleProvider_ts
   module_src_types_spacingProximity_ts["src/types/spacingProximity.ts"]
   package__ankhorage_rules_design -.-> module_src_types_spacingProximity_ts
+  module_src_types_typography_ts["src/types/typography.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_typography_ts
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
@@ -94,3 +116,6 @@ graph TD
   module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts
   module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_repetitionRuleFacts_ts
+  module_test_fixtures_typographyRuleFacts_ts["test/fixtures/typographyRuleFacts.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_typographyRuleFacts_ts
+  module_test_fixtures_typographyRuleFacts_ts --> module_src_types_typography_ts

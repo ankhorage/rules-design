@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- c1bd0c9: Support normalized versioned facts for Typography and Heading rule evaluation.
+
 ## 0.2.2
 
 ### Patch Changes

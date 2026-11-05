@@ -32,7 +32,7 @@
     "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
       "filePath": "src/types/designRuleProvider.ts",
-      "line": 10,
+      "line": 11,
       "column": 1
     },
     "exportPaths": [
@@ -49,6 +49,13 @@
         "type": "readonly DesignEvidence[]",
         "required": true,
         "description": null
+      },
+      {
+        "name": "facts",
+        "kind": "property",
+        "type": "readonly FactEnvelope[] | undefined",
+        "required": false,
+        "description": null
       }
     ],
     "structuredRows": []
@@ -64,7 +71,7 @@
     "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
       "filePath": "src/types/designRuleProvider.ts",
-      "line": 4,
+      "line": 5,
       "column": 1
     },
     "exportPaths": [
@@ -469,7 +476,7 @@
     "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
       "filePath": "src/types/designRuleProvider.ts",
-      "line": 15,
+      "line": 17,
       "column": 1
     },
     "exportPaths": [

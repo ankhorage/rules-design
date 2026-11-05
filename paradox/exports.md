@@ -10,7 +10,7 @@ Source: `src/types/designRuleCatalog.ts:1:1`
 
 Kind: `type`
 Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:10:1`
+Source: `src/types/designRuleProvider.ts:11:1`
 
 The minimal context shared by Design rules without prescribing its source.
 
@@ -19,12 +19,13 @@ The minimal context shared by Design rules without prescribing its source.
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | evidence | property | `readonly DesignEvidence[]` | yes |  |
+| facts | property | `readonly FactEnvelope[] \| undefined` | no |  |
 
 ## DesignEvidence
 
 Kind: `type`
 Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:4:1`
+Source: `src/types/designRuleProvider.ts:5:1`
 
 One provider-neutral design observation supplied by a Design context.
 
@@ -142,7 +143,7 @@ Exposes the reusable Design provider through the generic Rules RuleSet contract.
 
 Kind: `type`
 Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:15:1`
+Source: `src/types/designRuleProvider.ts:17:1`
 
 The public identity and generic Rules contribution for the Design provider.
 
