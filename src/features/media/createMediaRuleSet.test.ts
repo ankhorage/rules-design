@@ -48,19 +48,47 @@ const mediaCases: readonly {
     pass: { actualObjectFit: 'cover', expectedObjectFit: 'cover', mediaId: 'hero-image' },
   },
   {
-    fail: { focalPointPreserved: false, mediaId: 'hero-image' },
+    fail: {
+      focalPointX: 0.8,
+      focalPointY: 0.5,
+      mediaId: 'hero-image',
+      visibleBottom: 1,
+      visibleLeft: 0,
+      visibleRight: 0.6,
+      visibleTop: 0,
+    },
     id: 'design.media.focal-point',
-    pass: { focalPointPreserved: true, mediaId: 'hero-image' },
+    pass: {
+      focalPointX: 0.5,
+      focalPointY: 0.5,
+      mediaId: 'hero-image',
+      visibleBottom: 0.8,
+      visibleLeft: 0.2,
+      visibleRight: 0.8,
+      visibleTop: 0.2,
+    },
   },
   {
-    fail: { hasResponsiveSource: false, mediaId: 'hero-image' },
+    fail: {
+      devicePixelRatio: 2,
+      mediaId: 'hero-image',
+      renderedWidth: 400,
+      selectedSourceWidth: 480,
+      sourceWidths: [480, 800],
+    },
     id: 'design.media.responsive-sources',
-    pass: { hasResponsiveSource: true, mediaId: 'hero-image' },
+    pass: {
+      devicePixelRatio: 2,
+      mediaId: 'hero-image',
+      renderedWidth: 400,
+      selectedSourceWidth: 800,
+      sourceWidths: [480, 800, 1200],
+    },
   },
   {
-    fail: { mediaId: 'hero-image', minimumOverlayContrastRatio: 4.5, overlayContrastRatio: 3 },
+    fail: { mediaId: 'hero-image', overlayContrastRatio: 3 },
     id: 'design.media.overlay-legibility',
-    pass: { mediaId: 'hero-image', minimumOverlayContrastRatio: 4.5, overlayContrastRatio: 4.5 },
+    pass: { mediaId: 'hero-image', overlayContrastRatio: 4.5 },
   },
   {
     fail: { actualIconSize: 20, expectedIconSize: 24, mediaId: 'menu-icon' },
@@ -101,6 +129,62 @@ test('never passes an explicitly missing media measurement', () => {
   expect(result.findings[0]?.message).toContain('explicitly unavailable');
 });
 
+test('uses the configured aspect-ratio tolerance instead of an adapter-supplied threshold', () => {
+  const fact = mediaFact({
+    actualAspectRatio: 1.48,
+    expectedAspectRatio: 1.5,
+    mediaId: 'hero-image',
+    tolerance: 1,
+  });
+  const defaultRule = mediaRule('design.media.aspect-ratio');
+  const tolerantRule = mediaRule('design.media.aspect-ratio', { aspectRatioTolerance: 0.02 });
+
+  expect(evaluate(defaultRule, fact).status).toBe('FAIL');
+  expect(evaluate(tolerantRule, fact).status).toBe('PASS');
+});
+
+test('owns the overlay contrast threshold instead of accepting one from factual evidence', () => {
+  const rule = mediaRule('design.media.overlay-legibility');
+  const result = evaluate(
+    rule,
+    mediaFact({ mediaId: 'hero-image', minimumOverlayContrastRatio: 1, overlayContrastRatio: 3 }),
+  );
+
+  expect(result.status).toBe('FAIL');
+  expect(result.findings[0]).toMatchObject({ evidence: { expected: 4.5 } });
+});
+
+test('keeps explicit non-applicability separate from missing media measurements', () => {
+  const rule = mediaRule('design.media.focal-point');
+  const nonApplicable = mediaFact({ applicable: false, mediaId: 'decorative-divider' });
+  const missingMeasurement = mediaFact({ mediaId: 'hero-image' });
+
+  expect(evaluate(rule, nonApplicable).status).toBe('PASS');
+  expect(evaluate(rule, missingMeasurement).status).toBe('INCOMPLETE');
+});
+
+test('reports a failing media item when another scoped media item passes', () => {
+  const rule = mediaRule('design.media.aspect-ratio');
+  const [result] = evaluateRules(
+    {
+      facts: [
+        mediaFact({ actualAspectRatio: 1.5, expectedAspectRatio: 1.5, mediaId: 'hero-image' }),
+        mediaFact({ actualAspectRatio: 1, expectedAspectRatio: 1.5, mediaId: 'card-image' }),
+      ],
+    },
+    [rule],
+    {
+      capabilities: ['media.metadata'],
+      scope: { id: scope.id, kind: scope.kind },
+    },
+  ).results;
+
+  expect(result).toMatchObject({ status: 'FAIL' });
+  expect(result.findings).toEqual([
+    expect.objectContaining({ subjects: [{ id: 'card-image', kind: 'media' }] }),
+  ]);
+});
+
 test('declares the frozen catalog IDs and media capability without central registration', () => {
   const ruleSet = createMediaRuleSet();
   expect(ruleSet.id).toBe('ankhorage.rules-design.media');
@@ -118,8 +202,11 @@ const provenance = {
   source: { id: 'fixture-page', revision: '1' },
 } as const;
 
-function mediaRule(id: string): Rule<{ readonly facts: readonly FactEnvelope[] }> {
-  const rule = createMediaRuleSet().rules.find((candidate) => candidate.identity.id === id);
+function mediaRule(
+  id: string,
+  options: Parameters<typeof createMediaRuleSet>[0] = {},
+): Rule<{ readonly facts: readonly FactEnvelope[] }> {
+  const rule = createMediaRuleSet(options).rules.find((candidate) => candidate.identity.id === id);
   if (rule === undefined) throw new Error(`Missing media rule ${id}.`);
   return rule;
 }
