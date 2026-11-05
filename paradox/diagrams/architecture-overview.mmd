@@ -2,6 +2,15 @@ graph TD
   package__ankhorage_rules_design["@ankhorage/rules-design"]
   entrypoint_src_index_ts["src/index.ts"]
   package__ankhorage_rules_design --> entrypoint_src_index_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts["src/features/accessibility/createAccessibilityRules.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_accessibility_createAccessibilityRules_test_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --> module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_test_ts --> module_test_fixtures_accessibilityFacts_ts
+  module_src_features_accessibility_createAccessibilityRules_ts["src/features/accessibility/createAccessibilityRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_accessibility_createAccessibilityRules_ts --> module_src_features_accessibility_evaluateAccessibilityObservation_ts
+  module_src_features_accessibility_evaluateAccessibilityObservation_ts["src/features/accessibility/evaluateAccessibilityObservation.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_catalog_designRuleCatalog_test_ts["src/features/catalog/designRuleCatalog.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_catalog_designRuleCatalog_test_ts
   module_src_features_catalog_designRuleCatalog_test_ts --> module_src_features_catalog_designRuleCatalog_ts
@@ -47,6 +56,8 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleProvider_ts
+  module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_designEvidencePresentRule_ts
   module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts
