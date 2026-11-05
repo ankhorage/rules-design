@@ -1,11 +1,8 @@
-import type { Rule, RuleEvaluationOutcome, RuleFinding } from '@ankhorage/rules';
+import type { FactEnvelope } from '@ankhorage/contracts/rules';
+import type { Rule, RuleEvaluationOutcome, RuleScope } from '@ankhorage/rules';
+import { isRecord } from '@ankhorage/utility/object';
 
-import type {
-  DesignColorPolicyFact,
-  DesignColorPolicyRuleId,
-  DesignContext,
-} from '../../types/designRuleProvider';
-
+import type { DesignColorPolicyRuleId, DesignContext } from '../../types/designRuleProvider';
 const policyRuleIds: readonly DesignColorPolicyRuleId[] = [
   'design.color.syntax-valid',
   'design.color.token-exists',
@@ -20,92 +17,82 @@ const policyRuleIds: readonly DesignColorPolicyRuleId[] = [
   'design.color.disabled-state',
   'design.color.theme-coverage',
 ];
-
-/*** Creates the twelve independent Color and Tokens policy rules from normalized host facts. */
+const factKind = 'design.color-policy.observations';
+/*** Creates the twelve frozen Color and Tokens rules from factual observations. */
 export function createColorPolicyRules(): readonly Rule<DesignContext>[] {
   return policyRuleIds.map(createColorPolicyRule);
 }
-
-/*** Creates one evidence-backed atomic policy rule from normalized host facts. */
+/*** Creates one rule whose verdict is derived from raw expected and observed values. */
 function createColorPolicyRule(ruleId: DesignColorPolicyRuleId): Rule<DesignContext> {
   return {
     defaultSeverity: 'warning',
     dependencies: [],
-    evaluate: ({ context }) => evaluateColorPolicyRule(ruleId, context.colorPolicyFacts ?? []),
+    evaluate: ({ context, scope }) => evaluateColorPolicyRule(ruleId, context.facts ?? [], scope),
     identity: { id: ruleId, version: '1.0.0' },
     requiredCapabilities: ['design.color-policy-facts'],
     summary: colorPolicySummary(ruleId),
   };
 }
-
-/*** Evaluates one atomic color policy only when the host supplied its normalized observation. */
+/*** Assesses exactly one scope-local normalized observation rather than an adapter verdict. */
 function evaluateColorPolicyRule(
   ruleId: DesignColorPolicyRuleId,
-  facts: readonly DesignColorPolicyFact[],
+  facts: readonly FactEnvelope[],
+  scope: RuleScope,
 ): RuleEvaluationOutcome {
-  const ruleFacts = facts.filter((fact) => fact.ruleId === ruleId);
-  if (ruleFacts.length === 0) {
-    return incompleteOutcome(ruleId, 'No normalized color policy fact was supplied.');
-  }
-  const failedFacts = ruleFacts.filter((fact) => fact.outcome === 'fail');
-  return failedFacts.length === 0
+  const matching = facts.filter((fact) => fact.kind === factKind && sameScope(fact, scope));
+  if (matching.length !== 1 || matching[0]?.status !== 'available') return incomplete();
+  const observations = parseObservations(matching[0].value);
+  const observation = observations?.filter((candidate) => candidate.ruleId === ruleId);
+  if (observation?.length !== 1) return incomplete();
+  const [value] = observation;
+  return value.actual === value.expected
     ? { findings: [], status: 'PASS' }
-    : { findings: failedFacts.map((fact) => policyFinding(ruleId, fact)), status: 'FAIL' };
+    : {
+        findings: [
+          {
+            evidence: { actual: value.actual, expected: value.expected, factId: matching[0].id },
+            message: `${colorPolicySummary(ruleId)} Expected ${value.expected}; observed ${value.actual}.`,
+            ruleId,
+            severity: 'warning',
+            subjects: [{ id: scope.id, kind: scope.kind }],
+          },
+        ],
+        status: 'FAIL',
+      };
 }
-
-/*** Creates a deterministic incomplete finding for absent or insufficient evidence. */
-function incompleteOutcome(ruleId: string, message: string): RuleEvaluationOutcome {
-  return {
-    findings: [
-      {
-        evidence: { reason: message },
-        message,
-        ruleId,
-        severity: 'info',
-        subjects: [{ id: 'design-context', kind: 'design-context' }],
-      },
-    ],
-    status: 'INCOMPLETE',
-  };
+/*** Parses the versioned adapter observation schema without admitting precomputed outcomes. */
+function parseObservations(value: unknown):
+  | readonly {
+      readonly actual: string;
+      readonly expected: string;
+      readonly ruleId: DesignColorPolicyRuleId;
+    }[]
+  | undefined {
+  if (!isRecord(value) || value.schemaVersion !== 1 || !Array.isArray(value.observations))
+    return undefined;
+  const observations = value.observations.map((item) =>
+    isRecord(item) &&
+    typeof item.actual === 'string' &&
+    typeof item.expected === 'string' &&
+    isRuleId(item.ruleId)
+      ? { actual: item.actual, expected: item.expected, ruleId: item.ruleId }
+      : undefined,
+  );
+  return observations.every((item) => item !== undefined) ? observations : undefined;
 }
-
-/*** Creates a finding from a host-normalized policy violation without mutating its evidence. */
-function policyFinding(ruleId: DesignColorPolicyRuleId, fact: DesignColorPolicyFact): RuleFinding {
-  return {
-    evidence: fact.evidence,
-    message: `${colorPolicySummary(ruleId)} Expected ${fact.evidence.expected}; observed ${fact.evidence.actual}.`,
-    ruleId,
-    severity: 'warning',
-    subjects: [{ id: fact.scopeId, kind: 'design-color-scope' }],
-  };
+/*** Confirms that an adapter may name only one of the frozen policy identities. */
+function isRuleId(value: unknown): value is DesignColorPolicyRuleId {
+  return typeof value === 'string' && policyRuleIds.includes(value as DesignColorPolicyRuleId);
 }
-
+/*** Matches a fact only when its complete semantic scope equals this evaluation. */
+function sameScope(fact: FactEnvelope, scope: RuleScope): boolean {
+  return fact.scope.id === scope.id && fact.scope.kind === scope.kind;
+}
+/*** Fails closed for missing, ambiguous, or malformed normalized observations. */
+function incomplete(): RuleEvaluationOutcome {
+  return { findings: [], status: 'INCOMPLETE' };
+}
 /*** Supplies the catalog-aligned concise summary for each implemented policy rule. */
 function colorPolicySummary(ruleId: DesignColorPolicyRuleId): string {
-  switch (ruleId) {
-    case 'design.color.active-state':
-      return 'Active color variation follows policy.';
-    case 'design.color.alpha-composition':
-      return 'Transparency is evaluated against the actual backdrop.';
-    case 'design.color.disabled-state':
-      return 'Disabled colors communicate disabled state.';
-    case 'design.color.hover-state':
-      return 'Hover color variation follows policy.';
-    case 'design.color.literal-drift':
-      return 'Unnecessary literal values do not drift from tokens.';
-    case 'design.color.ramp-consistency':
-      return 'Defined color ramps remain consistent.';
-    case 'design.color.semantic-role':
-      return 'Foreground, background, and border roles are semantically correct.';
-    case 'design.color.surface-role':
-      return 'Surface colors consistently express their role.';
-    case 'design.color.syntax-valid':
-      return 'Colors are syntactically valid.';
-    case 'design.color.theme-coverage':
-      return 'Light and dark theme tokens are available.';
-    case 'design.color.token-allowed':
-      return 'Only permitted palette tokens are used.';
-    case 'design.color.token-exists':
-      return 'Referenced color tokens exist.';
-  }
+  return `${ruleId.replace('design.color.', '').replaceAll('-', ' ')} follows policy.`;
 }

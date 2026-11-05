@@ -1,3 +1,4 @@
+import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { RuleSet } from '@ankhorage/rules';
 
 export type DesignColorPolicyRuleId =
@@ -13,43 +14,17 @@ export type DesignColorPolicyRuleId =
   | 'design.color.theme-coverage'
   | 'design.color.token-allowed'
   | 'design.color.token-exists';
-
-export type DesignColorRole = 'accent' | 'base' | 'secondary' | 'unknown';
 export type DesignColorUsageScope = 'page' | 'scroll-sample' | 'viewport';
-
-export interface DesignColorPolicyFact {
-  readonly evidence: {
-    readonly actual: string;
-    readonly expected: string;
-  };
-  readonly outcome: 'fail' | 'pass';
-  readonly ruleId: DesignColorPolicyRuleId;
-  readonly scopeId: string;
+/*** The provider-neutral facts supplied to Design rules by an outer observation adapter. */
+export interface DesignContext {
+  readonly evidence: readonly DesignEvidence[];
+  readonly facts?: readonly FactEnvelope[];
 }
-
-export interface DesignColorUsageDistributionFact {
-  readonly breakpointId: string;
-  readonly measuredPixels: number;
-  readonly rolePixels: Readonly<Record<DesignColorRole, number>>;
-  readonly scope: DesignColorUsageScope;
-  readonly scopeId: string;
-  readonly themeId: string;
-  readonly unknownPixels: number;
-}
-
 /*** One provider-neutral design observation supplied by a Design context. */
 export interface DesignEvidence {
   readonly id: string;
   readonly kind: string;
 }
-
-/*** The minimal context shared by Design rules without prescribing its source. */
-export interface DesignContext {
-  readonly colorPolicyFacts?: readonly DesignColorPolicyFact[];
-  readonly colorUsageDistributionFacts?: readonly DesignColorUsageDistributionFact[];
-  readonly evidence: readonly DesignEvidence[];
-}
-
 /*** The public identity and generic Rules contribution for the Design provider. */
 export interface DesignRuleProvider {
   readonly id: 'ankhorage.rules-design';
