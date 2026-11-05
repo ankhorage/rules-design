@@ -132,16 +132,17 @@ function evaluate(
       };
 }
 
-/*** Selects only available observations that declare this exact frozen rule identity and scope. */
+/*** Selects only facts that identify this exact frozen rule identity and scope. */
 function matchesRuleScope(fact: FactEnvelope, id: RuleId, scope: RuleScope): boolean {
-  return (
-    fact.kind === 'design.contrast.measurement' &&
-    fact.scope.id === scope.id &&
-    fact.scope.kind === scope.kind &&
-    fact.status === 'available' &&
-    isRecord(fact.value) &&
-    fact.value.ruleId === id
-  );
+  if (
+    fact.kind !== 'design.contrast.measurement' ||
+    fact.scope.id !== scope.id ||
+    fact.scope.kind !== scope.kind
+  )
+    return false;
+  return fact.status === 'missing'
+    ? fact.id === id
+    : isRecord(fact.value) && fact.value.ruleId === id;
 }
 
 /*** Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria. */

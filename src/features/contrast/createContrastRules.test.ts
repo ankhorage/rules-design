@@ -102,6 +102,38 @@ test('each rule selects only its exact fact when all frozen rules share a scope'
   expect(outcome.results.every((result) => result.status === 'PASS')).toBe(true);
 });
 
+test('does not let a missing fact for another rule affect a complete rule observation', () => {
+  const rule = ruleById('design.contrast.text-ratio');
+  const result = evaluateRules(
+    {
+      facts: [
+        contrastFact(observationFor(rule.identity.id), scope),
+        missingContrastFact('design.contrast.nontext-ratio'),
+      ],
+    },
+    [rule],
+    { capabilities: rule.requiredCapabilities, scope },
+  );
+
+  expect(result.results[0]?.status).toBe('PASS');
+});
+
+test('does not pass when a required observation for the same rule is missing', () => {
+  const rule = ruleById('design.contrast.text-ratio');
+  const result = evaluateRules(
+    {
+      facts: [
+        contrastFact(observationFor(rule.identity.id), scope),
+        missingContrastFact(rule.identity.id),
+      ],
+    },
+    [rule],
+    { capabilities: rule.requiredCapabilities, scope },
+  );
+
+  expect(result.results[0]?.status).toBe('INCOMPLETE');
+});
+
 test.each(rules)('$identity.id rejects unsupported standard options', (rule) => {
   expect(rule.validateOptions?.({ standard: 'unsupported-standard', version: 1 })).toEqual([
     {
@@ -240,5 +272,31 @@ function contrastFact(
     },
     status: 'available',
     value,
+  };
+}
+
+/*** Wraps one explicitly unavailable observation with its owning frozen rule identity. */
+function missingContrastFact(ruleId: string): FactEnvelope {
+  return {
+    contentHash: 'sha256:missing-contrast-fact',
+    id: ruleId,
+    kind: 'design.contrast.measurement',
+    missing: { code: 'unavailable', message: 'Contrast measurement is unavailable.' },
+    provenance: {
+      collectedAt: '2026-11-05T00:00:00.000Z',
+      producer: { id: 'test', version: '1.0.0' },
+      source: { id: 'fixture', revision: '1' },
+    },
+    schemaVersion: 1,
+    scope: {
+      ...scope,
+      target: {
+        kind: 'screen',
+        projectId: 'project-1',
+        targetId: 'target-1',
+        tenantId: 'tenant-1',
+      },
+    },
+    status: 'missing',
   };
 }
