@@ -1,15 +1,15 @@
+import type { SerializableValue } from '@ankhorage/contracts';
 import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
 
 interface AccessibilityFactInput {
-  readonly detail: string;
-  readonly passed: boolean;
+  readonly observation: SerializableValue;
   readonly ruleId: string;
 }
 
 /*** Creates one frozen portable fact for the accessibility rule family tests. */
 export function createAccessibilityFact(input: AccessibilityFactInput): AvailableFactEnvelope {
   return {
-    contentHash: `fixture-${input.ruleId}-${input.passed ? 'pass' : 'fail'}`,
+    contentHash: `fixture-${input.ruleId}`,
     id: `fixture-${input.ruleId}`,
     kind: input.ruleId,
     provenance: {
@@ -29,15 +29,6 @@ export function createAccessibilityFact(input: AccessibilityFactInput): Availabl
       },
     },
     status: 'available',
-    value: {
-      observations: [
-        {
-          detail: input.detail,
-          id: `fixture-observation-${input.ruleId}`,
-          passed: input.passed,
-          subject: { id: 'fixture-subject', kind: 'element' },
-        },
-      ],
-    },
+    value: { observations: [input.observation] },
   };
 }
