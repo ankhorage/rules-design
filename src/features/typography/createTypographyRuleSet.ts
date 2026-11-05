@@ -141,16 +141,13 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     'design.heading.h1-count',
     'A page does not exceed the configured number of H1 headings.',
     (facts, policy) =>
-      typographyObservationTools
-        .viewports(facts)
-        .flatMap((factsForViewport) =>
-          factsForViewport.filter((fact) => fact.headingLevel === 1).length > policy.maximumH1Count
-            ? factsForViewport
-                .filter((fact) => fact.headingLevel === 1)
-                .slice(policy.maximumH1Count)
-            : [],
-        ),
-    requiredMeasurements('headingLevel', 'viewport'),
+      typographyObservationTools.viewports(facts).flatMap((factsForViewport) => {
+        const h1Headings = typographyObservationTools
+          .orderedHeadings(factsForViewport)
+          .filter((fact) => fact.headingLevel === 1);
+        return h1Headings.slice(policy.maximumH1Count);
+      }),
+    requiredMeasurements('documentOrder', 'headingLevel', 'viewport'),
     'error',
     'design.heading-facts',
   ),
