@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/rules-design",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Declarative catalog for reusable design rules.",
   "license": "MIT",
   "homepage": "https://github.com/ankhorage/rules-design#readme",
@@ -60,6 +60,6 @@
   "dependencies": {
     "@ankhorage/contracts": "^26.4.0",
     "@ankhorage/rules": "^0.4.0",
-    "@ankhorage/utility": "^0.5.5"
+    "@ankhorage/utility": "^1.10.0"
   }
 }

@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.1",
+      "value": "v0.2.2",
       "color": "cb3837"
     },
     {
@@ -109,6 +109,25 @@
       "dependencies": [],
       "exports": [
         "evaluateAccessibilityObservation"
+      ]
+    },
+    {
+      "path": "src/features/alignment/createAlignmentRules.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/alignment/createAlignmentRules.ts",
+        "test/fixtures/alignmentMetricFact.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/alignment/createAlignmentRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "AlignmentRuleContext",
+        "AlignmentRuleOptions",
+        "createAlignmentRules"
       ]
     },
     {
@@ -218,6 +237,65 @@
       ]
     },
     {
+      "path": "src/features/repetition/createRepetitionRules.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleCatalog.ts",
+        "src/features/repetition/createRepetitionRules.ts",
+        "test/fixtures/repetitionRuleFacts.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/repetition/createRepetitionRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "createRepetitionRules",
+        "RepetitionRuleContext"
+      ]
+    },
+    {
+      "path": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/spacingProximity.ts"
+      ],
+      "exports": [
+        "assessSpacingProximityObservation"
+      ]
+    },
+    {
+      "path": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "src/types/spacingProximity.ts"
+      ],
+      "exports": [
+        "createSpacingProximityRuleSet"
+      ]
+    },
+    {
+      "path": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/spacingProximity.ts"
+      ],
+      "exports": [
+        "parseSpacingProximityMeasurements"
+      ]
+    },
+    {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
@@ -268,11 +346,28 @@
       ]
     },
     {
+      "path": "src/types/spacingProximity.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "SpacingProximityObservation",
+        "SpacingProximityRuleId"
+      ]
+    },
+    {
       "path": "test/fixtures/accessibilityFacts.ts",
       "isEntrypoint": false,
       "dependencies": [],
       "exports": [
         "createAccessibilityFact"
+      ]
+    },
+    {
+      "path": "test/fixtures/alignmentMetricFact.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "alignmentMetricFact"
       ]
     },
     {
@@ -283,6 +378,16 @@
       ],
       "exports": [
         "designEvidencePresentRule"
+      ]
+    },
+    {
+      "path": "test/fixtures/repetitionRuleFacts.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "createMissingRepetitionFact",
+        "createRepetitionFact",
+        "repetitionScope"
       ]
     }
   ],
@@ -1266,6 +1371,138 @@
       }
     },
     {
+      "name": "measurementFor",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.test.ts",
+        "line": 214,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAlignmentRules",
+      "description": "Creates the independently registrable Alignment and Layout rules without mutating a provider registry.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 119,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAlignmentRule",
+      "description": "Creates one pure rule from its frozen catalog definition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 128,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateAlignmentMetric",
+      "description": "Evaluates the normalized metric for one fact at the exact rule scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 145,
+        "column": 1
+      }
+    },
+    {
+      "name": "findAlignmentMetric",
+      "description": "Finds one unambiguous, valid metric fact at the exact active Rules scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 158,
+        "column": 1
+      }
+    },
+    {
+      "name": "scopeMatches",
+      "description": "Compares the full Rules scope rather than accepting another scope with the same identifier.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 179,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseMetric",
+      "description": "Validates the group-local observed geometry payload without trusting adapter acceptance criteria.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 184,
+        "column": 1
+      }
+    },
+    {
+      "name": "sameMetric",
+      "description": "Requires duplicate facts to state the same complete normalized observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 203,
+        "column": 1
+      }
+    },
+    {
+      "name": "incompleteOutcome",
+      "description": "Produces an explicit incomplete result when an adapter supplied no usable metric.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 213,
+        "column": 1
+      }
+    },
+    {
+      "name": "finding",
+      "description": "Describes an observation that exceeds this rule's trusted acceptance tolerance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 232,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveTolerance",
+      "description": "Resolves a trusted policy override and rejects invalid acceptance thresholds at the factory boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 250,
+        "column": 1
+      }
+    },
+    {
+      "name": "metricRule",
+      "description": "Builds one objective layout metric rule definition with a zero-deviation semantic default.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/alignment/createAlignmentRules.ts",
+        "line": 262,
+        "column": 1
+      }
+    },
+    {
       "name": "isAcyclic",
       "description": null,
       "see": [],
@@ -1396,6 +1633,688 @@
         "line": 21,
         "column": 1
       }
+    },
+    {
+      "name": "evaluate",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.test.ts",
+        "line": 126,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRepetitionRules",
+      "description": "Creates the atomic Repetition and Components Rules from normalized inspected facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRepetitionRule",
+      "description": "Constructs one fact-driven Repetition rule with the catalog's component-tree capability.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 44,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateRepetitionFacts",
+      "description": "Evaluates inspected facts for one rule without treating absent scope evidence as a pass.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRepetitionFactForScope",
+      "description": "Accepts only the provider's component-observation envelopes for the exact evaluation scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 96,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeRepetitionObservation",
+      "description": "Validates the normalized portable observation payload before repetition policy consumes it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 110,
+        "column": 1
+      }
+    },
+    {
+      "name": "isValidFactEnvelope",
+      "description": "Verifies that required FactEnvelope identity, scope, provenance, availability, and hash fields are usable.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 124,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidFactIdentity",
+      "description": "Verifies stable identity fields and content integrity metadata on one portable fact.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidFactScope",
+      "description": "Verifies the complete target partition attached to one portable fact scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 139,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidFactProvenance",
+      "description": "Verifies that a portable fact retains a traceable producer and inspected source.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 151,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasValidFactAvailability",
+      "description": "Verifies that available values and unavailable reasons remain explicitly represented.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 162,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasText",
+      "description": "Narrows a non-empty serializable text field without accepting whitespace-only identities.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 169,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRepetitionRuleId",
+      "description": "Narrows one observation rule identifier to the frozen Repetition catalog.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 174,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRuleSubject",
+      "description": "Narrows an observation subject without admitting anonymous or host-specific values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 179,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": "Narrows an unknown JSON value to a non-array record before reading named fields.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 190,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSameJsonValue",
+      "description": "Compares normalized JSON facts structurally so host-specific object identity cannot affect results.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 195,
+        "column": 1
+      }
+    },
+    {
+      "name": "isJsonArray",
+      "description": "Narrows one serializable JSON value to an ordered JSON array.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 221,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSameJsonArray",
+      "description": "Compares JSON arrays in order without relying on host object identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/repetition/createRepetitionRules.ts",
+        "line": 226,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessSpacingProximityObservation",
+      "description": "Applies the frozen rule-specific policy to complete normalized adapter evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokens",
+      "description": "Confirms each used token name and value exists in the permitted token inventory.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "rhythm",
+      "description": "Confirms measured vertical gaps are whole units of the supplied rhythm.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
+      "name": "allowed",
+      "description": "Confirms each measured gap is a permitted spacing value.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 72,
+        "column": 1
+      }
+    },
+    {
+      "name": "padding",
+      "description": "Confirms all four measured container edges use permitted padding values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 82,
+        "column": 1
+      }
+    },
+    {
+      "name": "related",
+      "description": "Confirms related members are no farther apart than their nearest unrelated group.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 100,
+        "column": 1
+      }
+    },
+    {
+      "name": "unrelated",
+      "description": "Confirms unrelated groups exceed every internal grouping distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "pairs",
+      "description": "Confirms each label-control or heading-content pair beats its unrelated distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 130,
+        "column": 1
+      }
+    },
+    {
+      "name": "card",
+      "description": "Confirms card internals remain closer than outside content.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 141,
+        "column": 1
+      }
+    },
+    {
+      "name": "doubled",
+      "description": "Detects cumulative parent and child spacing in a rendered distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 156,
+        "column": 1
+      }
+    },
+    {
+      "name": "collapsed",
+      "description": "Detects a collapsed gap where structure proves margins should remain separated.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 169,
+        "column": 1
+      }
+    },
+    {
+      "name": "numbers",
+      "description": "Parses a finite non-negative measurement list.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 187,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenList",
+      "description": "Parses named spacing tokens.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 191,
+        "column": 1
+      }
+    },
+    {
+      "name": "edges",
+      "description": "Parses a four-edge padding measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 197,
+        "column": 1
+      }
+    },
+    {
+      "name": "relatedGroups",
+      "description": "Parses groups of related distances and their nearest unrelated distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 207,
+        "column": 1
+      }
+    },
+    {
+      "name": "unrelatedGroups",
+      "description": "Parses groups of internal distances and their unrelated-group distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 224,
+        "column": 1
+      }
+    },
+    {
+      "name": "cardGroups",
+      "description": "Parses card-internal distances and their nearest outside-content distance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 241,
+        "column": 1
+      }
+    },
+    {
+      "name": "spacingTriples",
+      "description": "Parses raw parent, child, and rendered spacing measurements.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 258,
+        "column": 1
+      }
+    },
+    {
+      "name": "collapse",
+      "description": "Parses one margin pair and its structural relationship.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 278,
+        "column": 1
+      }
+    },
+    {
+      "name": "record",
+      "description": "Narrows a record-shaped serializable value.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 293,
+        "column": 1
+      }
+    },
+    {
+      "name": "token",
+      "description": "Narrows a token record.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 297,
+        "column": 1
+      }
+    },
+    {
+      "name": "group",
+      "description": "Narrows a complete parsed group.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 306,
+        "column": 1
+      }
+    },
+    {
+      "name": "isTriple",
+      "description": "Narrows a complete parsed spacing triple.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 312,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": "Narrows a serializable record.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 318,
+        "column": 1
+      }
+    },
+    {
+      "name": "measurement",
+      "description": "Narrows a finite non-negative layout measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 322,
+        "column": 1
+      }
+    },
+    {
+      "name": "positive",
+      "description": "Narrows a finite positive layout measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "line": 326,
+        "column": 1
+      }
+    },
+    {
+      "name": "scenario",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 159,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 163,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateObservations",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 167,
+        "column": 1
+      }
+    },
+    {
+      "name": "fact",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 179,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateWithoutEvidence",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 203,
+        "column": 1
+      }
+    },
+    {
+      "name": "scopeFor",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "line": 214,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSpacingProximityRuleSet",
+      "description": "Creates the independently owned Spacing and Proximity Rules contribution.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRule",
+      "description": "Creates one deterministic rule from its frozen catalog definition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": "Evaluates one rule from normalized evidence, never from an adapter-supplied verdict.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "matchingFact",
+      "description": "Selects exactly one scope-local fact to prevent ambiguous evidence from passing.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 88,
+        "column": 1
+      }
+    },
+    {
+      "name": "failed",
+      "description": "Produces an evidence-backed failure without accepting an adapter-provided pass or fail state.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 97,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Produces an incomplete result whenever factual measurements cannot be established.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 116,
+        "column": 1
+      }
+    },
+    {
+      "name": "facets",
+      "description": "Creates controlled rule facets for capability consumers and catalog queries.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "line": 121,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseSpacingProximityMeasurements",
+      "description": "Parses a complete versioned sequence of raw spacing and proximity observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseObservation",
+      "description": "Parses one adapter observation containing a frozen rule ID and raw serializable evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "isObservation",
+      "description": "Narrows a parsed value to a complete spacing or proximity observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": "Narrows a serializable unknown value to a record without assuming a prototype.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRuleId",
+      "description": "Narrows the only frozen rule IDs permitted in this group-local evidence schema.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "line": 32,
+        "column": 1
+      }
     }
   ],
   "sequenceScenarios": [
@@ -1464,6 +2383,16 @@
         "fromPath": "src/features/accessibility/createAccessibilityRules.ts",
         "toPath": "src/features/accessibility/evaluateAccessibilityObservation.ts",
         "sourcePath": "src/features/accessibility/createAccessibilityRules.ts"
+      },
+      {
+        "fromPath": "src/features/alignment/createAlignmentRules.test.ts",
+        "toPath": "test/fixtures/alignmentMetricFact.ts",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/alignment/createAlignmentRules.test.ts",
+        "toPath": "src/features/alignment/createAlignmentRules.ts",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
       },
       {
         "fromPath": "src/features/catalog/designRuleCatalog.test.ts",
@@ -1549,6 +2478,51 @@
         "fromPath": "src/features/provider/designRuleProvider.ts",
         "toPath": "src/types/designRuleProvider.ts",
         "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
+        "toPath": "test/fixtures/repetitionRuleFacts.ts",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
+        "toPath": "src/features/repetition/createRepetitionRules.ts",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "toPath": "src/types/spacingProximity.ts",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "toPath": "src/types/spacingProximity.ts",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "toPath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "toPath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "toPath": "src/types/spacingProximity.ts",
+        "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
       },
       {
         "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
@@ -1736,6 +2710,108 @@
         "sourcePath": "src/features/accessibility/evaluateAccessibilityObservation.ts"
       },
       {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "createAlignmentRules",
+        "callExpression": "createAlignmentRules",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "alignmentMetricFact",
+        "callExpression": "alignmentMetricFact",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.test.ts",
+        "toSymbol": "measurementFor",
+        "callExpression": "measurementFor",
+        "sourcePath": "src/features/alignment/createAlignmentRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "metricRule",
+        "callExpression": "metricRule",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "createAlignmentRule",
+        "callExpression": "createAlignmentRule",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "resolveTolerance",
+        "callExpression": "resolveTolerance",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateAlignmentMetric",
+        "callExpression": "evaluateAlignmentMetric",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateAlignmentMetric",
+        "toSymbol": "findAlignmentMetric",
+        "callExpression": "findAlignmentMetric",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateAlignmentMetric",
+        "toSymbol": "incompleteOutcome",
+        "callExpression": "incompleteOutcome",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateAlignmentMetric",
+        "toSymbol": "finding",
+        "callExpression": "finding",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "scopeMatches",
+        "callExpression": "scopeMatches",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "parseMetric",
+        "callExpression": "parseMetric",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/alignment/createAlignmentRules.ts",
+        "toSymbol": "sameMetric",
+        "callExpression": "sameMetric",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
+        "fromSymbol": "parseMetric",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/alignment/createAlignmentRules.ts"
+      },
+      {
         "fromSymbol": "src/features/catalog/designRuleCatalog.test.ts",
         "toSymbol": "test",
         "callExpression": "test",
@@ -1848,6 +2924,558 @@
         "toSymbol": "expect",
         "callExpression": "expect",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "createRepetitionRules",
+        "callExpression": "createRepetitionRules",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "createRepetitionFact",
+        "callExpression": "createRepetitionFact",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
+        "toSymbol": "createMissingRepetitionFact",
+        "callExpression": "createMissingRepetitionFact",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.ts",
+        "toSymbol": "createRepetitionRule",
+        "callExpression": "createRepetitionRule",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateRepetitionFacts",
+        "callExpression": "evaluateRepetitionFacts",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.ts",
+        "toSymbol": "isRepetitionFactForScope",
+        "callExpression": "isRepetitionFactForScope",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.ts",
+        "toSymbol": "normalizeRepetitionObservation",
+        "callExpression": "normalizeRepetitionObservation",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/repetition/createRepetitionRules.ts",
+        "toSymbol": "isSameJsonValue",
+        "callExpression": "isSameJsonValue",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "normalizeRepetitionObservation",
+        "toSymbol": "isValidFactEnvelope",
+        "callExpression": "isValidFactEnvelope",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "normalizeRepetitionObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "normalizeRepetitionObservation",
+        "toSymbol": "isRepetitionRuleId",
+        "callExpression": "isRepetitionRuleId",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "normalizeRepetitionObservation",
+        "toSymbol": "isRuleSubject",
+        "callExpression": "isRuleSubject",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "normalizeRepetitionObservation",
+        "toSymbol": "isSerializableValue",
+        "callExpression": "isSerializableValue",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isValidFactEnvelope",
+        "toSymbol": "hasValidFactIdentity",
+        "callExpression": "hasValidFactIdentity",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isValidFactEnvelope",
+        "toSymbol": "hasValidFactScope",
+        "callExpression": "hasValidFactScope",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isValidFactEnvelope",
+        "toSymbol": "hasValidFactProvenance",
+        "callExpression": "hasValidFactProvenance",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isValidFactEnvelope",
+        "toSymbol": "hasValidFactAvailability",
+        "callExpression": "hasValidFactAvailability",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidFactIdentity",
+        "toSymbol": "hasText",
+        "callExpression": "hasText",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidFactScope",
+        "toSymbol": "hasText",
+        "callExpression": "hasText",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidFactProvenance",
+        "toSymbol": "hasText",
+        "callExpression": "hasText",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidFactAvailability",
+        "toSymbol": "isSerializableValue",
+        "callExpression": "isSerializableValue",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "hasValidFactAvailability",
+        "toSymbol": "hasText",
+        "callExpression": "hasText",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isRuleSubject",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isRuleSubject",
+        "toSymbol": "hasText",
+        "callExpression": "hasText",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isSameJsonValue",
+        "toSymbol": "isJsonArray",
+        "callExpression": "isJsonArray",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "isSameJsonValue",
+        "toSymbol": "isSameJsonArray",
+        "callExpression": "isSameJsonArray",
+        "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "tokens",
+        "callExpression": "tokens",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "rhythm",
+        "callExpression": "rhythm",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "allowed",
+        "callExpression": "allowed",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "padding",
+        "callExpression": "padding",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "related",
+        "callExpression": "related",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "unrelated",
+        "callExpression": "unrelated",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "pairs",
+        "callExpression": "pairs",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "card",
+        "callExpression": "card",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "doubled",
+        "callExpression": "doubled",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "assessSpacingProximityObservation",
+        "toSymbol": "collapsed",
+        "callExpression": "collapsed",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "tokens",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "tokens",
+        "toSymbol": "tokenList",
+        "callExpression": "tokenList",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "rhythm",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "rhythm",
+        "toSymbol": "numbers",
+        "callExpression": "numbers",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "rhythm",
+        "toSymbol": "positive",
+        "callExpression": "positive",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "allowed",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "allowed",
+        "toSymbol": "numbers",
+        "callExpression": "numbers",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "padding",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "padding",
+        "toSymbol": "numbers",
+        "callExpression": "numbers",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "related",
+        "toSymbol": "relatedGroups",
+        "callExpression": "relatedGroups",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "unrelated",
+        "toSymbol": "unrelatedGroups",
+        "callExpression": "unrelatedGroups",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "pairs",
+        "toSymbol": "relatedGroups",
+        "callExpression": "relatedGroups",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "card",
+        "toSymbol": "cardGroups",
+        "callExpression": "cardGroups",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "doubled",
+        "toSymbol": "spacingTriples",
+        "callExpression": "spacingTriples",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "collapsed",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "edges",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "edges",
+        "toSymbol": "measurement",
+        "callExpression": "measurement",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "relatedGroups",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "toSymbol": "numbers",
+        "callExpression": "numbers",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
+        "toSymbol": "measurement",
+        "callExpression": "measurement",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "unrelatedGroups",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "cardGroups",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "spacingTriples",
+        "toSymbol": "record",
+        "callExpression": "record",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "collapse",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "collapse",
+        "toSymbol": "measurement",
+        "callExpression": "measurement",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "record",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "token",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "token",
+        "toSymbol": "measurement",
+        "callExpression": "measurement",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "positive",
+        "toSymbol": "measurement",
+        "callExpression": "measurement",
+        "sourcePath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "createSpacingProximityRuleSet",
+        "callExpression": "createSpacingProximityRuleSet",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "scenario",
+        "callExpression": "scenario",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "scopeFor",
+        "callExpression": "scopeFor",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "evaluateWithoutEvidence",
+        "callExpression": "evaluateWithoutEvidence",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
+        "toSymbol": "evaluateObservations",
+        "callExpression": "evaluateObservations",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateObservations",
+        "callExpression": "evaluateObservations",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateObservations",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateObservations",
+        "toSymbol": "fact",
+        "callExpression": "fact",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateWithoutEvidence",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createRule",
+        "toSymbol": "facets",
+        "callExpression": "facets",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "matchingFact",
+        "callExpression": "matchingFact",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "parseSpacingProximityMeasurements",
+        "callExpression": "parseSpacingProximityMeasurements",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "failed",
+        "callExpression": "failed",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseSpacingProximityMeasurements",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "isRuleId",
+        "callExpression": "isRuleId",
+        "sourcePath": "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"
       }
     ],
     "typeReferences": [
