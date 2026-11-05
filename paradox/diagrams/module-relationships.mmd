@@ -2,6 +2,8 @@ graph LR
   module_src_features_accessibility_createAccessibilityRules_test_ts["src/features/accessibility/createAccessibilityRules.test.ts"]
   module_src_features_accessibility_createAccessibilityRules_ts["src/features/accessibility/createAccessibilityRules.ts"]
   module_src_features_accessibility_evaluateAccessibilityObservation_ts["src/features/accessibility/evaluateAccessibilityObservation.ts"]
+  module_src_features_alignment_createAlignmentRules_test_ts["src/features/alignment/createAlignmentRules.test.ts"]
+  module_src_features_alignment_createAlignmentRules_ts["src/features/alignment/createAlignmentRules.ts"]
   module_src_features_catalog_designRuleCatalog_test_ts["src/features/catalog/designRuleCatalog.test.ts"]
   module_src_features_catalog_designRuleCatalog_ts["src/features/catalog/designRuleCatalog.ts"]
   module_src_features_catalog_designRuleComposites_ts["src/features/catalog/designRuleComposites.ts"]
@@ -12,14 +14,25 @@ graph LR
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts["src/features/catalog/fixtures/designRuleCatalogManifest.ts"]
   module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
   module_src_features_provider_designRuleProvider_ts["src/features/provider/designRuleProvider.ts"]
+  module_src_features_repetition_createRepetitionRules_test_ts["src/features/repetition/createRepetitionRules.test.ts"]
+  module_src_features_repetition_createRepetitionRules_ts["src/features/repetition/createRepetitionRules.ts"]
+  module_src_features_spacing_proximity_assessSpacingProximityObservation_ts["src/features/spacing-proximity/assessSpacingProximityObservation.ts"]
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts["src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"]
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts["src/features/spacing-proximity/createSpacingProximityRuleSet.ts"]
+  module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts["src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
   module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
+  module_src_types_spacingProximity_ts["src/types/spacingProximity.ts"]
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
+  module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
   module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
+  module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
   module_src_features_accessibility_createAccessibilityRules_test_ts --> module_src_features_accessibility_createAccessibilityRules_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --> module_test_fixtures_accessibilityFacts_ts
   module_src_features_accessibility_createAccessibilityRules_ts --> module_src_features_accessibility_evaluateAccessibilityObservation_ts
+  module_src_features_alignment_createAlignmentRules_test_ts --> module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_alignment_createAlignmentRules_test_ts --> module_test_fixtures_alignmentMetricFact_ts
   module_src_features_catalog_designRuleCatalog_test_ts --> module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleCatalog_test_ts --> module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_designRuleCatalog_test_ts --> module_src_features_catalog_designRuleProviderManifest_ts
@@ -40,4 +53,13 @@ graph LR
   module_src_features_provider_designRuleProvider_test_ts --> module_src_index_ts
   module_src_features_provider_designRuleProvider_test_ts --> module_test_fixtures_designEvidencePresentRule_ts
   module_src_features_provider_designRuleProvider_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_test_fixtures_repetitionRuleFacts_ts
+  module_src_features_spacing_proximity_assessSpacingProximityObservation_ts --> module_src_types_spacingProximity_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts --> module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_types_spacingProximity_ts
+  module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts --> module_src_types_spacingProximity_ts
   module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts

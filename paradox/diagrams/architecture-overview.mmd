@@ -11,6 +11,12 @@ graph TD
   module_src_features_accessibility_createAccessibilityRules_ts --> module_src_features_accessibility_evaluateAccessibilityObservation_ts
   module_src_features_accessibility_evaluateAccessibilityObservation_ts["src/features/accessibility/evaluateAccessibilityObservation.ts"]
   package__ankhorage_rules_design -.-> module_src_features_accessibility_evaluateAccessibilityObservation_ts
+  module_src_features_alignment_createAlignmentRules_test_ts["src/features/alignment/createAlignmentRules.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_alignment_createAlignmentRules_test_ts
+  module_src_features_alignment_createAlignmentRules_test_ts --> module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_alignment_createAlignmentRules_test_ts --> module_test_fixtures_alignmentMetricFact_ts
+  module_src_features_alignment_createAlignmentRules_ts["src/features/alignment/createAlignmentRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_alignment_createAlignmentRules_ts
   module_src_features_catalog_designRuleCatalog_test_ts["src/features/catalog/designRuleCatalog.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_catalog_designRuleCatalog_test_ts
   module_src_features_catalog_designRuleCatalog_test_ts --> module_src_features_catalog_designRuleCatalog_ts
@@ -51,13 +57,40 @@ graph TD
   module_src_features_provider_designRuleProvider_ts["src/features/provider/designRuleProvider.ts"]
   package__ankhorage_rules_design -.-> module_src_features_provider_designRuleProvider_ts
   module_src_features_provider_designRuleProvider_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_repetition_createRepetitionRules_test_ts["src/features/repetition/createRepetitionRules.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_repetition_createRepetitionRules_test_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_repetition_createRepetitionRules_test_ts --> module_test_fixtures_repetitionRuleFacts_ts
+  module_src_features_repetition_createRepetitionRules_ts["src/features/repetition/createRepetitionRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_spacing_proximity_assessSpacingProximityObservation_ts["src/features/spacing-proximity/assessSpacingProximityObservation.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
+  module_src_features_spacing_proximity_assessSpacingProximityObservation_ts --> module_src_types_spacingProximity_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts["src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts --> module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts["src/features/spacing-proximity/createSpacingProximityRuleSet.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --> module_src_types_spacingProximity_ts
+  module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts["src/features/spacing-proximity/parseSpacingProximityMeasurements.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts --> module_src_types_spacingProximity_ts
   module_src_index_ts["src/index.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleProvider_ts
+  module_src_types_spacingProximity_ts["src/types/spacingProximity.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_spacingProximity_ts
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_accessibilityFacts_ts
+  module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_alignmentMetricFact_ts
   module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_designEvidencePresentRule_ts
   module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts
+  module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_repetitionRuleFacts_ts
