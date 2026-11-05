@@ -4,8 +4,14 @@ export interface ResponsiveDesignContext {
   readonly facts: readonly FactEnvelope[];
 }
 
+/*** One deterministic Responsive rule result derived from normalized measurements. */
+export interface ResponsiveEvaluation {
+  readonly failingIds: readonly string[];
+  readonly message: string;
+  readonly status: 'FAIL' | 'INCOMPLETE' | 'PASS';
+}
+
 export interface ResponsiveMatrix {
-  readonly minimumTouchTarget: number;
   readonly requiredBreakpointIds: readonly string[];
   readonly requiredOrientations: readonly ('landscape' | 'portrait')[];
   readonly viewports: readonly ResponsiveViewport[];

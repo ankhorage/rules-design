@@ -3,7 +3,6 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 type AvailableFact = Extract<FactEnvelope, { readonly status: 'available' }>;
 type ResponsiveFact = Omit<AvailableFact, 'value'> & { readonly value: ResponsiveFactValue };
 type ResponsiveFactValue = {
-  readonly minimumTouchTarget: number;
   readonly requiredBreakpointIds: readonly string[];
   readonly requiredOrientations: readonly ('landscape' | 'portrait')[];
   readonly viewports: readonly ResponsiveViewportValue[];
@@ -55,7 +54,6 @@ function responsiveFact(value: ResponsiveFactValue): ResponsiveFact {
 /*** Provides complete representative viewport facts for responsive rule tests. */
 export function completeResponsiveFact(): ResponsiveFact {
   return responsiveFact({
-    minimumTouchTarget: 24,
     requiredBreakpointIds: ['mobile', 'desktop'],
     requiredOrientations: ['portrait', 'landscape'],
     viewports: [viewport('mobile', 'portrait', 1), viewport('desktop', 'landscape', 2)],
@@ -65,7 +63,6 @@ export function completeResponsiveFact(): ResponsiveFact {
 /*** Provides one viewport matrix that fails every measurable Responsive policy. */
 export function failingResponsiveFact(): ResponsiveFact {
   return responsiveFact({
-    minimumTouchTarget: 24,
     requiredBreakpointIds: ['mobile'],
     requiredOrientations: ['portrait', 'landscape'],
     viewports: [

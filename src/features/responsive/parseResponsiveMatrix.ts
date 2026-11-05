@@ -11,17 +11,13 @@ import type {
 /*** Parses the serializable responsive fact payload without assuming host runtime objects. */
 export function parseResponsiveMatrix(value: unknown): ResponsiveMatrix | null {
   if (!isRecord(value)) return null;
-  const { minimumTouchTarget, requiredBreakpointIds, requiredOrientations, viewports } = value;
+  const { requiredBreakpointIds, requiredOrientations, viewports } = value;
   const parsedBreakpoints = parseStrings(requiredBreakpointIds);
   const parsedOrientations = parseOrientations(requiredOrientations);
   const parsedViewports = parseViewports(viewports);
-  return parsedBreakpoints === null ||
-    parsedOrientations === null ||
-    parsedViewports === null ||
-    !isPositiveFiniteNumber(minimumTouchTarget)
+  return parsedBreakpoints === null || parsedOrientations === null || parsedViewports === null
     ? null
     : {
-        minimumTouchTarget,
         requiredBreakpointIds: parsedBreakpoints,
         requiredOrientations: parsedOrientations,
         viewports: parsedViewports,

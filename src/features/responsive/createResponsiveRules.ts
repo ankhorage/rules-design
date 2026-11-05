@@ -4,19 +4,15 @@ import type { Rule, RuleEvaluationOutcome, RuleFinding, RuleScope } from '@ankho
 import type {
   ResponsiveDesignContext,
   ResponsiveElement,
+  ResponsiveEvaluation,
   ResponsiveMatrix,
   ResponsiveViewport,
 } from '../../types/responsive';
+import { evaluateResponsiveOrder } from './evaluateResponsiveOrder';
 import { isContainedInResponsiveBounds } from './isContainedInResponsiveBounds';
 import { parseResponsiveMatrix } from './parseResponsiveMatrix';
 import { responsiveElementsOfKind } from './responsiveElementsOfKind';
 import { selectResponsiveFact } from './selectResponsiveFact';
-
-interface ResponsiveEvaluation {
-  readonly failingIds: readonly string[];
-  readonly message: string;
-  readonly status: 'FAIL' | 'INCOMPLETE' | 'PASS';
-}
 
 interface ResponsiveRuleDefinition {
   readonly evaluate: (matrix: ResponsiveMatrix) => ResponsiveEvaluation;
@@ -79,14 +75,12 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
       const controls = responsiveElementsOfKind(matrix, 'control');
       if (controls.length === 0) return incomplete('No control measurements were supplied.');
       const tooSmall = controls.filter(
-        (element) =>
-          element.bounds.width < matrix.minimumTouchTarget ||
-          element.bounds.height < matrix.minimumTouchTarget,
+        (element) => element.bounds.width < 24 || element.bounds.height < 24,
       );
       return tooSmall.length === 0
         ? pass()
         : fail(
-            'Controls do not meet the configured touch target.',
+            'Controls do not meet the 24 CSS pixel touch-target policy.',
             tooSmall.map((item) => item.id),
           );
     },
@@ -95,20 +89,7 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
     summary: 'Require measured controls to meet the responsive touch target.',
   },
   {
-    evaluate: (matrix) => {
-      const ordered = responsiveElementsOfKind(matrix, 'text').filter(
-        (element) => element.readingOrder !== null && element.visualOrder !== null,
-      );
-      if (ordered.length === 0)
-        return incomplete('No reading and visual order measurements were supplied.');
-      const reordered = ordered.filter((element) => element.readingOrder !== element.visualOrder);
-      return reordered.length === 0
-        ? pass()
-        : fail(
-            'Visual order differs from reading order.',
-            reordered.map((item) => item.id),
-          );
-    },
+    evaluate: evaluateResponsiveOrder,
     id: 'design.responsive.order',
     severity: 'warning',
     summary: 'Require important text to retain its reading order when reflowed.',
@@ -213,14 +194,22 @@ function evaluateResponsiveRule(
 ): RuleEvaluationOutcome {
   const fact = selectResponsiveFact(facts, scope);
   if (fact === null) {
-    return outcome('INCOMPLETE', 'Responsive viewport measurements are unavailable.', []);
+    return outcome(
+      definition.id,
+      'INCOMPLETE',
+      'Responsive viewport measurements are unavailable.',
+      [],
+    );
   }
   const matrix = parseResponsiveMatrix(fact.value);
   if (matrix === null) {
-    return outcome('INCOMPLETE', 'Responsive viewport measurements are malformed.', [fact.id]);
+    return outcome(definition.id, 'INCOMPLETE', 'Responsive viewport measurements are malformed.', [
+      fact.id,
+    ]);
   }
   if (matrix.viewports.length === 0) {
     return outcome(
+      definition.id,
       'INCOMPLETE',
       'No responsive viewport measurements were supplied.',
       [],
@@ -230,6 +219,7 @@ function evaluateResponsiveRule(
   const missingBreakpointIds = requiredBreakpointIds(matrix);
   if (missingBreakpointIds.length > 0) {
     return outcome(
+      definition.id,
       'INCOMPLETE',
       'Required breakpoint viewport measurements were not supplied.',
       missingBreakpointIds,
@@ -237,7 +227,9 @@ function evaluateResponsiveRule(
     );
   }
   const evaluation = definition.evaluate(matrix);
-  return outcome(evaluation.status, evaluation.message, evaluation.failingIds, [fact.id]);
+  return outcome(definition.id, evaluation.status, evaluation.message, evaluation.failingIds, [
+    fact.id,
+  ]);
 }
 
 /*** Lists declared breakpoint IDs that lack their required viewport evidence. */
@@ -248,6 +240,7 @@ function requiredBreakpointIds(matrix: ResponsiveMatrix): readonly string[] {
 
 /*** Builds an engine finding without allowing a missing measurement to look successful. */
 function outcome(
+  ruleId: string,
   status: ResponsiveEvaluation['status'],
   message: string,
   subjectIds: readonly string[],
@@ -260,7 +253,7 @@ function outcome(
           {
             evidence: { factIds, subjectIds },
             message,
-            ruleId: 'assigned-by-engine',
+            ruleId,
             severity: 'info',
             subjects: subjectIds.map((id) => ({ id, kind: 'responsive-measurement' })),
           } satisfies RuleFinding,
