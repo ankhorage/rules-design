@@ -116,7 +116,7 @@ const ruleDefinitions: readonly RuleDefinition[] = [
       facts.filter(
         (fact) =>
           fact.responsiveRole !== null &&
-          !configuredNumberValues(policy.responsiveFontSizes, fact.responsiveRole).includes(
+          !configuredValues(policy.responsiveFontSizes, fact.responsiveRole).includes(
             fact.fontSize,
           ),
       ),
@@ -145,7 +145,9 @@ const ruleDefinitions: readonly RuleDefinition[] = [
         .viewports(facts)
         .flatMap((factsForViewport) =>
           factsForViewport.filter((fact) => fact.headingLevel === 1).length > policy.maximumH1Count
-            ? factsForViewport.filter((fact) => fact.headingLevel === 1).slice(1)
+            ? factsForViewport
+                .filter((fact) => fact.headingLevel === 1)
+                .slice(policy.maximumH1Count)
             : [],
         ),
     requiredMeasurements('headingLevel', 'viewport'),
@@ -177,7 +179,7 @@ const ruleDefinitions: readonly RuleDefinition[] = [
       facts.filter(
         (fact) =>
           fact.semanticStyle !== null &&
-          !configuredStringValues(policy.allowedSemanticStyles, `h${fact.headingLevel}`).includes(
+          !configuredValues(policy.allowedSemanticStyles, `h${fact.headingLevel}`).includes(
             fact.semanticStyle,
           ),
       ),
@@ -225,8 +227,8 @@ function createRule(definition: RuleDefinition, policy: TypographyRulePolicy): R
     defaultSeverity: definition.severity,
     dependencies: [],
     evaluate: ({ context, scope }) => {
-      const observations = typographyObservations(context, definition.capability, scope);
-      if (observations.length === 0 || !definition.measurementsComplete(observations))
+      const [complete, observations] = typographyEvidence(context, definition.capability, scope);
+      if (!complete || observations.length === 0 || !definition.measurementsComplete(observations))
         return incomplete(definition.id);
       const violations = definition.evaluate(observations, policy);
       return violations.length === 0
@@ -254,20 +256,24 @@ function definition(
   return { capability, evaluate, id, measurementsComplete, severity, summary };
 }
 
-/*** Reads valid normalized Typography observations from available versioned fact envelopes. */
-function typographyObservations(
+/*** Reads scoped Typography facts without discarding malformed or unavailable evidence. */
+function typographyEvidence(
   context: DesignContext,
   capability: RuleDefinition['capability'],
   scope: RuleScope,
-): readonly TypographyObservation[] {
-  return (context.facts ?? []).flatMap((fact) =>
-    fact.status === 'available' &&
-    fact.kind === capability &&
-    fact.scope.id === scope.id &&
-    fact.scope.kind === scope.kind
-      ? parseTypographyObservation(fact.value, fact.id)
-      : [],
-  );
+): readonly [boolean, readonly TypographyObservation[]] {
+  const factObservations = (context.facts ?? [])
+    .filter(
+      (fact) =>
+        fact.kind === capability && fact.scope.id === scope.id && fact.scope.kind === scope.kind,
+    )
+    .map((fact) =>
+      fact.status === 'available' ? parseTypographyObservation(fact.value, fact.id) : [],
+    );
+  return [
+    factObservations.every((observations) => observations.length > 0),
+    factObservations.flat(),
+  ];
 }
 
 /*** Returns an explicit incomplete outcome when required measurements cannot support a verdict. */
@@ -298,18 +304,10 @@ function violationFinding(ruleId: TypographyRuleId, fact: TypographyObservation)
 }
 
 /*** Reads a configured allow-list without treating an unknown role as allowed. */
-function configuredNumberValues(
-  values: Readonly<Record<string, readonly number[]>>,
+function configuredValues<T>(
+  values: Readonly<Record<string, readonly T[]>>,
   key: string,
-): readonly number[] {
-  return Object.entries(values).find(([candidate]) => candidate === key)?.[1] ?? [];
-}
-
-/*** Reads a configured string allow-list without treating an unknown role as allowed. */
-function configuredStringValues(
-  values: Readonly<Record<string, readonly string[]>>,
-  key: string,
-): readonly string[] {
+): readonly T[] {
   return Object.entries(values).find(([candidate]) => candidate === key)?.[1] ?? [];
 }
 

@@ -2,6 +2,7 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import { evaluateRules } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
+import type { TypographyObservation } from '../../types/typography';
 import { createTypographyRuleSet, type TypographyRulePolicy } from './createTypographyRuleSet.ts';
 
 const capabilities = ['design.heading-facts', 'design.typography-facts'];
@@ -150,6 +151,27 @@ test('marks every rule incomplete when normalized evidence is absent', () => {
 });
 
 test.each([
+  ['Typography', 'design.typography-facts', missingFact('body')],
+  ['Heading', 'design.heading-facts', missingFact('h1')],
+  ['Typography', 'design.typography-facts', malformedFact('body')],
+  ['Heading', 'design.heading-facts', malformedFact('h1')],
+] as const)(
+  'fails closed for mixed valid and incomplete %s evidence',
+  (_, capability, incompleteFact) => {
+    const result = evaluateRules(
+      context([...observations(), incompleteFact]),
+      ruleSet.rules,
+      evaluationOptions,
+    );
+    const rulePrefix =
+      capability === 'design.typography-facts' ? 'design.typography.' : 'design.heading.';
+    const groupResults = result.results.filter((entry) => entry.rule.id.startsWith(rulePrefix));
+
+    expect(groupResults.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
+  },
+);
+
+test.each([
   ['design.typography.font-family', 'body'],
   ['design.typography.scale', 'body'],
   ['design.typography.weight', 'body'],
@@ -200,6 +222,31 @@ test('keeps heading counts and hierarchy separate for each responsive viewport',
 
   expect(statuses).toEqual(['PASS', 'PASS']);
 });
+
+test.each([
+  [1, 2],
+  [2, 3],
+  [3, 4],
+] as const)(
+  'reports only H1 observations beyond the configured maximum of %i',
+  (maximumH1Count, h1Count) => {
+    const facts = Array.from({ length: h1Count }, (_, index) => h1Observation(index + 1));
+    const result = evaluateRules(
+      context(facts),
+      createTypographyRuleSet({ ...policy, maximumH1Count }).rules,
+      evaluationOptions,
+    );
+    const ruleResult = result.results.find((entry) => entry.rule.id === 'design.heading.h1-count');
+
+    expect(ruleResult).toMatchObject({ status: 'FAIL' });
+    expect(ruleResult?.findings.map((finding) => finding.evidence)).toEqual(
+      Array.from({ length: h1Count - maximumH1Count }, (_, index) => ({
+        observationId: `h1-${maximumH1Count + index + 1}`,
+        viewport: 'desktop',
+      })),
+    );
+  },
+);
 
 test('rejects malformed policy configuration before evaluation', () => {
   expect(() =>
@@ -267,21 +314,14 @@ function missingFact(id: string): FactEnvelope {
   };
 }
 
-type TypographyFact = Extract<FactEnvelope, { readonly status: 'available' }>;
-
-interface TypographyValue {
-  readonly documentOrder: number | null;
-  readonly fontFamily: string;
-  readonly fontSize: number;
-  readonly fontWeight: string;
-  readonly headingLevel: number | null;
-  readonly letterSpacing: number;
-  readonly lineHeight: number;
-  readonly marginAfter: number | null;
-  readonly marginBefore: number | null;
-  readonly paragraphMeasure: number | null;
-  readonly responsiveRole: string | null;
-  readonly semanticStyle: string | null;
-  readonly textClipped: boolean | null;
-  readonly viewport: string;
+function malformedFact(id: string): TypographyFact {
+  const available = observation(id);
+  return { ...available, value: { fontSize: 'not-a-number' } };
 }
+
+function h1Observation(index: number): TypographyFact {
+  return fact(`h1-${index}`, { ...observationDefaults.h1, documentOrder: index });
+}
+
+type TypographyFact = Extract<FactEnvelope, { readonly status: 'available' }>;
+type TypographyValue = Omit<TypographyObservation, 'id'>;
