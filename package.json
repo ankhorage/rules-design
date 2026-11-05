@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "@ankhorage/contracts": "^26.4.0",
-    "@ankhorage/rules": "^0.4.0"
+    "@ankhorage/rules": "^0.4.0",
+    "@ankhorage/utility": "^1.10.0"
   }
 }
