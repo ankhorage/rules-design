@@ -1,5 +1,5 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
-import type { Rule, RuleEvaluationOutcome, RuleFinding } from '@ankhorage/rules';
+import type { Rule, RuleEvaluationOutcome, RuleFinding, RuleScope } from '@ankhorage/rules';
 
 import type {
   ResponsiveDesignContext,
@@ -7,7 +7,10 @@ import type {
   ResponsiveMatrix,
   ResponsiveViewport,
 } from '../../types/responsive';
+import { isContainedInResponsiveBounds } from './isContainedInResponsiveBounds';
 import { parseResponsiveMatrix } from './parseResponsiveMatrix';
+import { responsiveElementsOfKind } from './responsiveElementsOfKind';
+import { selectResponsiveFact } from './selectResponsiveFact';
 
 interface ResponsiveEvaluation {
   readonly failingIds: readonly string[];
@@ -29,13 +32,7 @@ export function createResponsiveRules(): readonly Rule<ResponsiveDesignContext>[
 
 const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
   {
-    evaluate: (matrix) => {
-      const observedIds = new Set(matrix.viewports.map((viewport) => viewport.id));
-      const missingIds = matrix.requiredBreakpointIds.filter((id) => !observedIds.has(id));
-      return missingIds.length === 0
-        ? pass()
-        : fail('Required breakpoint ranges were not measured.', missingIds);
-    },
+    evaluate: () => pass(),
     id: 'design.responsive.breakpoint-coverage',
     severity: 'warning',
     summary: 'Require every declared breakpoint range to have a viewport measurement.',
@@ -44,7 +41,7 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
     evaluate: (matrix) =>
       evaluateViewportBoolean(
         matrix,
-        (viewport) => !viewport.layout.reflowed,
+        (viewport) => viewport.layout.renderedWidth > viewport.size.width,
         'Layouts did not reflow.',
       ),
     id: 'design.responsive.reflow',
@@ -55,7 +52,7 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
     evaluate: (matrix) =>
       evaluateViewportBoolean(
         matrix,
-        (viewport) => viewport.layout.horizontalOverflow,
+        (viewport) => viewport.layout.scrollWidth > viewport.size.width,
         'Layouts overflow horizontally.',
       ),
     id: 'design.responsive.horizontal-overflow',
@@ -67,7 +64,10 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
       evaluateElementBoolean(
         matrix,
         'text',
-        (element) => element.textWrapsMeaningfully,
+        (element) =>
+          element.textLineCount === null || element.textUnwrappedWidth === null
+            ? null
+            : element.textUnwrappedWidth <= element.bounds.width || element.textLineCount > 1,
         'Text does not wrap meaningfully.',
       ),
     id: 'design.responsive.text-wrap',
@@ -76,7 +76,7 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
   },
   {
     evaluate: (matrix) => {
-      const controls = elementsOfKind(matrix, 'control');
+      const controls = responsiveElementsOfKind(matrix, 'control');
       if (controls.length === 0) return incomplete('No control measurements were supplied.');
       const tooSmall = controls.filter(
         (element) =>
@@ -96,7 +96,7 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
   },
   {
     evaluate: (matrix) => {
-      const ordered = elementsOfKind(matrix, 'text').filter(
+      const ordered = responsiveElementsOfKind(matrix, 'text').filter(
         (element) => element.readingOrder !== null && element.visualOrder !== null,
       );
       if (ordered.length === 0)
@@ -118,7 +118,10 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
       evaluateElementBoolean(
         matrix,
         'image',
-        (element) => element.focalPointVisible,
+        (element) =>
+          element.focalPointBounds === null
+            ? null
+            : isContainedInResponsiveBounds(element.bounds, element.focalPointBounds),
         'Image crops hide declared focal content.',
       ),
     id: 'design.responsive.image-crop',
@@ -127,8 +130,13 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
   },
   {
     evaluate: (matrix) => {
-      const problematic = allElements(matrix).filter(
-        (element) => element.hasProblematicFixedDimensions,
+      const problematic = matrix.viewports.flatMap((viewport) =>
+        viewport.elements.filter(
+          (element) =>
+            element.fixedSize !== null &&
+            (element.fixedSize.width > viewport.size.width ||
+              element.fixedSize.height > viewport.size.height),
+        ),
       );
       return problematic.length === 0
         ? pass()
@@ -145,7 +153,9 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
     evaluate: (matrix) => {
       const zoomed = matrix.viewports.filter((viewport) => viewport.zoom > 1);
       if (zoomed.length === 0) return incomplete('No zoomed viewport measurement was supplied.');
-      const failures = zoomed.filter((viewport) => !viewport.layout.zoomReflowed);
+      const failures = zoomed.filter(
+        (viewport) => viewport.layout.renderedWidth > viewport.size.width,
+      );
       return failures.length === 0
         ? pass()
         : fail(
@@ -165,7 +175,11 @@ const responsiveRuleDefinitions: readonly ResponsiveRuleDefinition[] = [
       );
       if (missing.length > 0)
         return incomplete('Required orientation measurements were not supplied.', missing);
-      const failures = matrix.viewports.filter((viewport) => !viewport.layout.orientationRobust);
+      const failures = matrix.viewports.filter(
+        (viewport) =>
+          viewport.layout.renderedWidth > viewport.size.width ||
+          viewport.layout.scrollWidth > viewport.size.width,
+      );
       return failures.length === 0
         ? pass()
         : fail(
@@ -184,7 +198,7 @@ function createResponsiveRule(definition: ResponsiveRuleDefinition): Rule<Respon
   return {
     defaultSeverity: definition.severity,
     dependencies: [],
-    evaluate: ({ context }) => evaluateResponsiveRule(context.facts, definition),
+    evaluate: ({ context, scope }) => evaluateResponsiveRule(context.facts, definition, scope),
     identity: { id: definition.id, version: '1.0.0' },
     requiredCapabilities: ['viewport.layout', 'viewport.matrix'],
     summary: definition.summary,
@@ -195,9 +209,10 @@ function createResponsiveRule(definition: ResponsiveRuleDefinition): Rule<Respon
 function evaluateResponsiveRule(
   facts: readonly FactEnvelope[],
   definition: ResponsiveRuleDefinition,
+  scope: RuleScope,
 ): RuleEvaluationOutcome {
-  const fact = facts.find(isResponsiveMatrixFact);
-  if (fact === undefined) {
+  const fact = selectResponsiveFact(facts, scope);
+  if (fact === null) {
     return outcome('INCOMPLETE', 'Responsive viewport measurements are unavailable.', []);
   }
   const matrix = parseResponsiveMatrix(fact.value);
@@ -212,8 +227,23 @@ function evaluateResponsiveRule(
       [fact.id],
     );
   }
+  const missingBreakpointIds = requiredBreakpointIds(matrix);
+  if (missingBreakpointIds.length > 0) {
+    return outcome(
+      'INCOMPLETE',
+      'Required breakpoint viewport measurements were not supplied.',
+      missingBreakpointIds,
+      [fact.id],
+    );
+  }
   const evaluation = definition.evaluate(matrix);
   return outcome(evaluation.status, evaluation.message, evaluation.failingIds, [fact.id]);
+}
+
+/*** Lists declared breakpoint IDs that lack their required viewport evidence. */
+function requiredBreakpointIds(matrix: ResponsiveMatrix): readonly string[] {
+  const observedIds = new Set(matrix.viewports.map((viewport) => viewport.id));
+  return matrix.requiredBreakpointIds.filter((id) => !observedIds.has(id));
 }
 
 /*** Builds an engine finding without allowing a missing measurement to look successful. */
@@ -276,7 +306,7 @@ function evaluateElementBoolean(
   observed: (element: ResponsiveElement) => boolean | null,
   message: string,
 ): ResponsiveEvaluation {
-  const elements = elementsOfKind(matrix, kind);
+  const elements = responsiveElementsOfKind(matrix, kind);
   if (elements.length === 0) return incomplete(`No ${kind} measurements were supplied.`);
   const unknown = elements.filter((element) => observed(element) === null);
   if (unknown.length > 0)
@@ -291,27 +321,4 @@ function evaluateElementBoolean(
         message,
         failures.map((item) => item.id),
       );
-}
-
-/*** Returns all normalized elements of one semantic kind across measured viewports. */
-function elementsOfKind(
-  matrix: ResponsiveMatrix,
-  kind: ResponsiveElement['kind'],
-): readonly ResponsiveElement[] {
-  return allElements(matrix).filter((element) => element.kind === kind);
-}
-
-/*** Flattens measured viewport elements without mutating their fact data. */
-function allElements(matrix: ResponsiveMatrix): readonly ResponsiveElement[] {
-  return matrix.viewports.flatMap((viewport) => viewport.elements);
-}
-
-/*** Narrows an available frozen fact envelope to the responsive matrix fact kind. */
-function isResponsiveMatrixFact(fact: FactEnvelope): fact is Extract<
-  FactEnvelope,
-  { readonly status: 'available' }
-> & {
-  readonly kind: 'design.responsive.viewport-matrix';
-} {
-  return fact.status === 'available' && fact.kind === 'design.responsive.viewport-matrix';
 }

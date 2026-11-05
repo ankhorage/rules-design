@@ -15,22 +15,32 @@ export interface ResponsiveViewport {
   readonly elements: readonly ResponsiveElement[];
   readonly id: string;
   readonly layout: {
-    readonly horizontalOverflow: boolean;
-    readonly orientationRobust: boolean;
-    readonly reflowed: boolean;
-    readonly zoomReflowed: boolean;
+    readonly renderedWidth: number;
+    readonly scrollWidth: number;
   };
   readonly orientation: 'landscape' | 'portrait';
+  readonly size: ResponsiveDimensions;
   readonly zoom: number;
 }
 
 export interface ResponsiveElement {
-  readonly bounds: { readonly height: number; readonly width: number };
-  readonly focalPointVisible: boolean | null;
-  readonly hasProblematicFixedDimensions: boolean;
+  readonly bounds: ResponsiveBounds;
+  readonly fixedSize: ResponsiveDimensions | null;
+  readonly focalPointBounds: ResponsiveBounds | null;
   readonly id: string;
   readonly kind: 'control' | 'image' | 'text';
   readonly readingOrder: number | null;
-  readonly textWrapsMeaningfully: boolean | null;
+  readonly textLineCount: number | null;
+  readonly textUnwrappedWidth: number | null;
   readonly visualOrder: number | null;
+}
+
+export interface ResponsiveBounds extends ResponsiveDimensions {
+  readonly x: number;
+  readonly y: number;
+}
+
+export interface ResponsiveDimensions {
+  readonly height: number;
+  readonly width: number;
 }

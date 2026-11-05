@@ -1,6 +1,8 @@
 import { isRecord } from '@ankhorage/utility/object';
 
 import type {
+  ResponsiveBounds,
+  ResponsiveDimensions,
   ResponsiveElement,
   ResponsiveMatrix,
   ResponsiveViewport,
@@ -16,8 +18,7 @@ export function parseResponsiveMatrix(value: unknown): ResponsiveMatrix | null {
   return parsedBreakpoints === null ||
     parsedOrientations === null ||
     parsedViewports === null ||
-    typeof minimumTouchTarget !== 'number' ||
-    minimumTouchTarget <= 0
+    !isPositiveFiniteNumber(minimumTouchTarget)
     ? null
     : {
         minimumTouchTarget,
@@ -42,23 +43,23 @@ function isViewport(value: ResponsiveViewport | null): value is ResponsiveViewpo
 /*** Parses one measured viewport while retaining only explicit responsive facts. */
 function parseViewport(value: unknown): ResponsiveViewport | null {
   if (!isRecord(value) || !isRecord(value.layout)) return null;
-  const { elements, id, orientation, zoom } = value;
-  const { horizontalOverflow, orientationRobust, reflowed, zoomReflowed } = value.layout;
+  const { elements, id, orientation, size, zoom } = value;
+  const { renderedWidth, scrollWidth } = value.layout;
   const parsedElements = parseElements(elements);
   return typeof id !== 'string' ||
     !isOrientation(orientation) ||
-    typeof zoom !== 'number' ||
-    !isBoolean(horizontalOverflow) ||
-    !isBoolean(orientationRobust) ||
-    !isBoolean(reflowed) ||
-    !isBoolean(zoomReflowed) ||
+    !isPositiveFiniteNumber(zoom) ||
+    !isDimensions(size) ||
+    !isNonNegativeFiniteNumber(renderedWidth) ||
+    !isNonNegativeFiniteNumber(scrollWidth) ||
     parsedElements === null
     ? null
     : {
         elements: parsedElements,
         id,
-        layout: { horizontalOverflow, orientationRobust, reflowed, zoomReflowed },
+        layout: { renderedWidth, scrollWidth },
         orientation,
+        size,
         zoom,
       };
 }
@@ -78,34 +79,26 @@ function isElement(value: ResponsiveElement | null): value is ResponsiveElement 
 /*** Parses one measured text, control, or image element. */
 function parseElement(value: unknown): ResponsiveElement | null {
   if (!isRecord(value) || !isRecord(value.bounds)) return null;
-  const {
-    focalPointVisible,
-    hasProblematicFixedDimensions,
-    id,
-    kind,
-    readingOrder,
-    textWrapsMeaningfully,
-    visualOrder,
-  } = value;
-  const { height, width } = value.bounds;
+  const { fixedSize, focalPointBounds, id, kind, readingOrder, textLineCount, visualOrder } = value;
   return typeof id !== 'string' ||
     !isElementKind(kind) ||
-    typeof width !== 'number' ||
-    typeof height !== 'number' ||
-    !isBoolean(hasProblematicFixedDimensions) ||
-    !isNullableBoolean(focalPointVisible) ||
-    !isNullableBoolean(textWrapsMeaningfully) ||
-    !isNullableNumber(readingOrder) ||
-    !isNullableNumber(visualOrder)
+    !isBounds(value.bounds) ||
+    !isNullableDimensions(fixedSize) ||
+    !isNullableBounds(focalPointBounds) ||
+    !isNullableFiniteNumber(readingOrder) ||
+    !isNullablePositiveInteger(textLineCount) ||
+    !isNullablePositiveFiniteNumber(value.textUnwrappedWidth) ||
+    !isNullableFiniteNumber(visualOrder)
     ? null
     : {
-        bounds: { height, width },
-        focalPointVisible,
-        hasProblematicFixedDimensions,
+        bounds: value.bounds,
+        fixedSize,
+        focalPointBounds,
         id,
         kind,
         readingOrder,
-        textWrapsMeaningfully,
+        textLineCount,
+        textUnwrappedWidth: value.textUnwrappedWidth,
         visualOrder,
       };
 }
@@ -130,17 +123,56 @@ function isElementKind(value: unknown): value is ResponsiveElement['kind'] {
   return value === 'control' || value === 'image' || value === 'text';
 }
 
-/*** Checks a required boolean fact. */
-function isBoolean(value: unknown): value is boolean {
-  return typeof value === 'boolean';
-}
-
-/*** Checks an optional boolean fact whose unknown state is explicit. */
-function isNullableBoolean(value: unknown): value is boolean | null {
-  return value === null || isBoolean(value);
-}
-
 /*** Checks an optional numeric ordering fact whose unknown state is explicit. */
-function isNullableNumber(value: unknown): value is number | null {
-  return value === null || typeof value === 'number';
+function isNullableFiniteNumber(value: unknown): value is number | null {
+  return value === null || isFiniteNumber(value);
+}
+
+/*** Checks finite, positive viewport or fixed dimensions. */
+function isDimensions(value: unknown): value is ResponsiveDimensions {
+  return (
+    isRecord(value) && isPositiveFiniteNumber(value.width) && isPositiveFiniteNumber(value.height)
+  );
+}
+
+/*** Checks finite element or focal-point geometry with a positive rendered area. */
+function isBounds(value: unknown): value is ResponsiveBounds {
+  return (
+    isDimensions(value) && isRecord(value) && isFiniteNumber(value.x) && isFiniteNumber(value.y)
+  );
+}
+
+/*** Checks an explicitly absent or complete fixed-size measurement. */
+function isNullableDimensions(value: unknown): value is ResponsiveDimensions | null {
+  return value === null || isDimensions(value);
+}
+
+/*** Checks an explicitly absent or complete focal-point geometry measurement. */
+function isNullableBounds(value: unknown): value is ResponsiveBounds | null {
+  return value === null || isBounds(value);
+}
+
+/*** Checks a finite numeric measurement. */
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+/*** Checks a finite measurement that cannot be negative. */
+function isNonNegativeFiniteNumber(value: unknown): value is number {
+  return isFiniteNumber(value) && value >= 0;
+}
+
+/*** Checks a finite measurement that must describe a non-zero dimension or zoom. */
+function isPositiveFiniteNumber(value: unknown): value is number {
+  return isFiniteNumber(value) && value > 0;
+}
+
+/*** Checks an explicitly absent or positive whole line-count measurement. */
+function isNullablePositiveInteger(value: unknown): value is number | null {
+  return value === null || (isFiniteNumber(value) && Number.isInteger(value) && value > 0);
+}
+
+/*** Checks an explicitly absent or finite positive intrinsic inline-size measurement. */
+function isNullablePositiveFiniteNumber(value: unknown): value is number | null {
+  return value === null || isPositiveFiniteNumber(value);
 }
