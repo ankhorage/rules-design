@@ -134,9 +134,7 @@ function evaluate(
 
 /*** Selects only facts whose producer-declared kind identifies this exact frozen rule and scope. */
 function matchesRuleScope(fact: FactEnvelope, id: RuleId, scope: RuleScope): boolean {
-  if (fact.kind !== id || fact.scope.id !== scope.id || fact.scope.kind !== scope.kind)
-    return false;
-  return fact.status === 'missing' || (isRecord(fact.value) && fact.value.ruleId === id);
+  return fact.kind === id && fact.scope.id === scope.id && fact.scope.kind === scope.kind;
 }
 
 /*** Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria. */

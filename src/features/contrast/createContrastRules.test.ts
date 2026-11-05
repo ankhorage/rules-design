@@ -2,6 +2,7 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import { evaluateRules, type JsonValue, type Rule } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
+import { contrastFact, missingContrastFact } from './contrastFacts.test.ts';
 import { createContrastRules } from './createContrastRules.ts';
 
 const rules = createContrastRules();
@@ -143,6 +144,27 @@ test('uses producer-declared kinds, not opaque fact IDs, to isolate mixed eviden
   expect(result.results.map(({ status }) => status).sort()).toEqual(['INCOMPLETE', 'PASS']);
 });
 
+test('returns incomplete when valid evidence is accompanied by malformed same-rule evidence', () => {
+  const rule = ruleById('design.contrast.text-ratio');
+  const result = evaluateRules(
+    {
+      facts: [
+        contrastFact(rule.identity.id, observationFor(rule.identity.id), scope, 'producer:valid'),
+        contrastFact(
+          rule.identity.id,
+          { ...observationFor(rule.identity.id), ruleId: 'design.contrast.nontext-ratio' },
+          scope,
+          'producer:contradictory',
+        ),
+      ],
+    },
+    [rule],
+    { capabilities: rule.requiredCapabilities, scope },
+  );
+
+  expect(result.results[0]?.status).toBe('INCOMPLETE');
+});
+
 test.each(rules)('$identity.id rejects unsupported standard options', (rule) => {
   expect(rule.validateOptions?.({ standard: 'unsupported-standard', version: 1 })).toEqual([
     {
@@ -255,63 +277,3 @@ function expectedStandard(ruleId: string): string {
   return 'wcag-aa-nontext';
 }
 
-/*** Wraps one serializable observation as an available portable fact at a chosen scope. */
-function contrastFact(
-  ruleId: string,
-  value: Record<string, JsonValue>,
-  factScope: { readonly id: string; readonly kind: string },
-  id = 'producer:contrast-observation:5bd53cb4',
-): FactEnvelope {
-  return {
-    contentHash: 'sha256:contrast-fact',
-    id,
-    kind: ruleId,
-    provenance: {
-      collectedAt: '2026-11-05T00:00:00.000Z',
-      producer: { id: 'test', version: '1.0.0' },
-      source: { id: 'fixture', revision: '1' },
-    },
-    schemaVersion: 1,
-    scope: {
-      ...factScope,
-      target: {
-        kind: 'screen',
-        projectId: 'project-1',
-        targetId: 'target-1',
-        tenantId: 'tenant-1',
-      },
-    },
-    status: 'available',
-    value,
-  };
-}
-
-/*** Wraps one unavailable observation with its producer-declared rule kind and opaque identity. */
-function missingContrastFact(
-  ruleId: string,
-  factScope = scope,
-  id = 'producer:contrast-observation:8b0dff2c',
-): FactEnvelope {
-  return {
-    contentHash: 'sha256:missing-contrast-fact',
-    id,
-    kind: ruleId,
-    missing: { code: 'unavailable', message: 'Contrast measurement is unavailable.' },
-    provenance: {
-      collectedAt: '2026-11-05T00:00:00.000Z',
-      producer: { id: 'test', version: '1.0.0' },
-      source: { id: 'fixture', revision: '1' },
-    },
-    schemaVersion: 1,
-    scope: {
-      ...factScope,
-      target: {
-        kind: 'screen',
-        projectId: 'project-1',
-        targetId: 'target-1',
-        tenantId: 'tenant-1',
-      },
-    },
-    status: 'missing',
-  };
-}
