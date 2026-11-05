@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### Patch Changes
+
+- bc8863f: Add the published contracts and utility dependencies required by the alignment rules.
+
 ## 0.2.1
 
 ### Patch Changes
