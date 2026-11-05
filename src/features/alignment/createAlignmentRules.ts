@@ -1,5 +1,5 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
-import type { Rule, RuleEvaluationInput, RuleFinding } from '@ankhorage/rules';
+import type { Rule, RuleEvaluationInput, RuleFinding, RuleScope } from '@ankhorage/rules';
 import { isRecord } from '@ankhorage/utility/object';
 
 /*** Supplies portable layout facts to the Alignment and Layout rule family. */
@@ -9,6 +9,7 @@ export interface AlignmentRuleContext {
 
 interface AlignmentMetric {
   readonly expected: number;
+  readonly measurement: string;
   readonly observed: number;
   readonly subjectIds: readonly string[];
   readonly tolerance: number;
@@ -18,33 +19,63 @@ interface AlignmentRuleDefinition {
   readonly assessment: 'heuristic' | 'objective';
   readonly capability: string;
   readonly id: string;
+  readonly measurement: string;
   readonly summary: string;
 }
 
 const definitions: readonly AlignmentRuleDefinition[] = [
-  metricRule('design.alignment.shared-edges', 'Shared visual edges align.'),
-  metricRule('design.alignment.grid-tracks', 'Elements follow grid tracks.'),
-  metricRule('design.alignment.baselines', 'Typical baselines align.'),
-  metricRule('design.alignment.text', 'Text alignment is intentional and consistent.'),
-  metricRule('design.alignment.flex-items', 'Flex alignment follows its defined pattern.'),
-  metricRule('design.alignment.component-axes', 'Equivalent components share axes.'),
-  metricRule('design.layout.container-width', 'Container widths obey configured bounds.'),
-  metricRule('design.layout.grid-gap', 'Grid gaps follow the system.'),
+  metricRule('design.alignment.shared-edges', 'edge-offset', 'Shared visual edges align.'),
+  metricRule('design.alignment.grid-tracks', 'grid-track-offset', 'Elements follow grid tracks.'),
+  metricRule('design.alignment.baselines', 'baseline-offset', 'Typical baselines align.'),
+  metricRule(
+    'design.alignment.text',
+    'text-alignment-offset',
+    'Text alignment is intentional and consistent.',
+  ),
+  metricRule(
+    'design.alignment.flex-items',
+    'flex-alignment-offset',
+    'Flex alignment follows its defined pattern.',
+  ),
+  metricRule(
+    'design.alignment.component-axes',
+    'component-axis-offset',
+    'Equivalent components share axes.',
+  ),
+  metricRule(
+    'design.layout.container-width',
+    'container-width-deviation',
+    'Container widths obey configured bounds.',
+  ),
+  metricRule('design.layout.grid-gap', 'grid-gap-deviation', 'Grid gaps follow the system.'),
   {
-    ...metricRule('design.layout.horizontal-overflow', 'Unexpected horizontal overflow is absent.'),
+    ...metricRule(
+      'design.layout.horizontal-overflow',
+      'horizontal-overflow',
+      'Unexpected horizontal overflow is absent.',
+    ),
     capability: 'viewport.layout',
   },
-  metricRule('design.layout.vertical-clipping', 'Unexpected vertical clipping is absent.'),
-  metricRule('design.layout.unintended-overlap', 'Unexpected overlap is absent.'),
+  metricRule(
+    'design.layout.vertical-clipping',
+    'vertical-clipping',
+    'Unexpected vertical clipping is absent.',
+  ),
+  metricRule('design.layout.unintended-overlap', 'overlap-area', 'Unexpected overlap is absent.'),
   {
     ...metricRule(
       'design.layout.unnecessary-wrapper',
+      'avoidable-wrapper-count',
       'Avoidable structural wrappers are identified.',
     ),
     assessment: 'heuristic',
   },
   {
-    ...metricRule('design.layout.visual-balance', 'Visual weight is balanced.'),
+    ...metricRule(
+      'design.layout.visual-balance',
+      'visual-weight-imbalance',
+      'Visual weight is balanced.',
+    ),
     assessment: 'heuristic',
     capability: 'rendered.area-analysis',
   },
@@ -64,6 +95,7 @@ function createAlignmentRule(definition: AlignmentRuleDefinition): Rule<Alignmen
     facets: [
       { id: 'assessment', value: definition.assessment },
       { id: 'group', value: 'alignment-layout' },
+      { id: 'measurement', value: definition.measurement },
     ],
     identity: { id: definition.id, version: '1.0.0' },
     requiredCapabilities: [definition.capability],
@@ -76,7 +108,7 @@ function evaluateAlignmentMetric(
   definition: AlignmentRuleDefinition,
   input: RuleEvaluationInput<AlignmentRuleContext>,
 ) {
-  const metric = findAlignmentMetric(input.context.facts, definition.id, input.scope.id);
+  const metric = findAlignmentMetric(input.context.facts, definition, input.scope);
   if (!metric) return incompleteOutcome(definition, input);
 
   const deviation = Math.abs(metric.observed - metric.expected);
@@ -85,33 +117,65 @@ function evaluateAlignmentMetric(
   return { findings: [finding(definition, input, metric, deviation)], status: 'FAIL' as const };
 }
 
-/*** Finds one available metric fact whose scope is exactly the active Rules scope. */
+/*** Finds one unambiguous, valid metric fact at the exact active Rules scope. */
 function findAlignmentMetric(
   facts: readonly FactEnvelope[],
-  ruleId: string,
-  scopeId: string,
+  definition: AlignmentRuleDefinition,
+  scope: RuleScope,
 ): AlignmentMetric | undefined {
-  const fact = facts.find(
-    (fact): fact is FactEnvelope & { readonly status: 'available' } =>
-      fact.kind === ruleId && fact.scope.id === scopeId && fact.status === 'available',
+  const matchingFacts = facts.filter(
+    (fact) => fact.kind === definition.id && scopeMatches(fact.scope, scope),
   );
-  return fact ? parseMetric(fact.value) : undefined;
+  const metrics = matchingFacts.map((fact) =>
+    fact.status === 'available' ? parseMetric(fact.value, definition.measurement) : undefined,
+  );
+  const [metric, ...otherMetrics] = metrics;
+
+  if (!metric || otherMetrics.some((otherMetric) => !sameMetric(metric, otherMetric))) {
+    return undefined;
+  }
+
+  return metric;
+}
+
+/*** Compares the full Rules scope rather than accepting another scope with the same identifier. */
+function scopeMatches(factScope: FactEnvelope['scope'], scope: RuleScope): boolean {
+  return factScope.id === scope.id && factScope.kind === scope.kind;
 }
 
 /*** Validates the group-local serializable metric payload without trusting a host adapter. */
-function parseMetric(value: unknown): AlignmentMetric | undefined {
+function parseMetric(value: unknown, measurement: string): AlignmentMetric | undefined {
   if (!isRecord(value)) return undefined;
-  const { expected, observed, subjectIds, tolerance } = value;
+  const { expected, measurement: candidateMeasurement, observed, subjectIds, tolerance } = value;
   if (
     typeof expected !== 'number' ||
+    !Number.isFinite(expected) ||
+    candidateMeasurement !== measurement ||
     typeof observed !== 'number' ||
+    !Number.isFinite(observed) ||
     typeof tolerance !== 'number' ||
+    !Number.isFinite(tolerance) ||
+    tolerance < 0 ||
     !Array.isArray(subjectIds) ||
-    !subjectIds.every((id) => typeof id === 'string')
+    subjectIds.length === 0 ||
+    !subjectIds.every((id) => typeof id === 'string' && id.trim().length > 0) ||
+    new Set(subjectIds).size !== subjectIds.length
   ) {
     return undefined;
   }
-  return { expected, observed, subjectIds, tolerance };
+  return { expected, measurement, observed, subjectIds, tolerance };
+}
+
+/*** Requires duplicate facts to state the same complete normalized measurement. */
+function sameMetric(metric: AlignmentMetric, otherMetric: AlignmentMetric | undefined): boolean {
+  return (
+    otherMetric?.expected === metric.expected &&
+    metric.measurement === otherMetric.measurement &&
+    metric.observed === otherMetric.observed &&
+    metric.tolerance === otherMetric.tolerance &&
+    metric.subjectIds.length === otherMetric.subjectIds.length &&
+    metric.subjectIds.every((subjectId, index) => subjectId === otherMetric.subjectIds.at(index))
+  );
 }
 
 /*** Produces an explicit incomplete result when an adapter supplied no usable metric. */
@@ -155,6 +219,6 @@ function finding(
 }
 
 /*** Builds one objective layout metric rule definition. */
-function metricRule(id: string, summary: string): AlignmentRuleDefinition {
-  return { assessment: 'objective', capability: 'dom.layout', id, summary };
+function metricRule(id: string, measurement: string, summary: string): AlignmentRuleDefinition {
+  return { assessment: 'objective', capability: 'dom.layout', id, measurement, summary };
 }

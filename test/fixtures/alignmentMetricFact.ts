@@ -1,13 +1,24 @@
-import type { FactEnvelope } from '@ankhorage/contracts/rules';
+import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
+
+interface AlignmentMetricFact extends AvailableFactEnvelope {
+  readonly value: {
+    readonly expected: number;
+    readonly measurement: string;
+    readonly observed: number;
+    readonly subjectIds: readonly string[];
+    readonly tolerance: number;
+  };
+}
 
 /*** Creates a portable available metric fact for one Alignment and Layout rule fixture. */
 export function alignmentMetricFact(
   ruleId: string,
   scopeId: string,
+  measurement: string,
   expected: number,
   observed: number,
   tolerance: number,
-): FactEnvelope {
+): AlignmentMetricFact {
   return {
     contentHash: `fixture-${ruleId}-${scopeId}-${expected}-${observed}-${tolerance}`,
     id: `${ruleId}:${scopeId}`,
@@ -29,6 +40,6 @@ export function alignmentMetricFact(
       },
     },
     status: 'available',
-    value: { expected, observed, subjectIds: ['fixture-subject'], tolerance },
+    value: { expected, measurement, observed, subjectIds: ['fixture-subject'], tolerance },
   };
 }
