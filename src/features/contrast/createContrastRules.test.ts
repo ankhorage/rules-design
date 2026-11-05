@@ -89,7 +89,9 @@ test('comparison operators and acceptance thresholds in facts cannot determine a
 test('each rule selects only its exact fact when all frozen rules share a scope', () => {
   const outcome = evaluateRules(
     {
-      facts: rules.map((rule) => contrastFact(observationFor(rule.identity.id), scope)),
+      facts: rules.map((rule) =>
+        contrastFact(rule.identity.id, observationFor(rule.identity.id), scope),
+      ),
     },
     rules,
     {
@@ -102,36 +104,43 @@ test('each rule selects only its exact fact when all frozen rules share a scope'
   expect(outcome.results.every((result) => result.status === 'PASS')).toBe(true);
 });
 
-test('does not let a missing fact for another rule affect a complete rule observation', () => {
-  const rule = ruleById('design.contrast.text-ratio');
+test('uses producer-declared kinds, not opaque fact IDs, to isolate mixed evidence', () => {
+  const textRatio = ruleById('design.contrast.text-ratio');
+  const nontextRatio = ruleById('design.contrast.nontext-ratio');
   const result = evaluateRules(
     {
       facts: [
-        contrastFact(observationFor(rule.identity.id), scope),
-        missingContrastFact('design.contrast.nontext-ratio'),
+        contrastFact(
+          textRatio.identity.id,
+          observationFor(textRatio.identity.id),
+          scope,
+          'producer:7cf858c8',
+        ),
+        missingContrastFact(textRatio.identity.id, scope, 'producer:ee43a4d1'),
+        contrastFact(
+          nontextRatio.identity.id,
+          observationFor(nontextRatio.identity.id),
+          scope,
+          'producer:9f4d1a9b',
+        ),
+        missingContrastFact(
+          'design.contrast.focus-visible',
+          { id: scope.id, kind: 'component' },
+          'producer:5a1c8d48',
+        ),
       ],
     },
-    [rule],
-    { capabilities: rule.requiredCapabilities, scope },
-  );
-
-  expect(result.results[0]?.status).toBe('PASS');
-});
-
-test('does not pass when a required observation for the same rule is missing', () => {
-  const rule = ruleById('design.contrast.text-ratio');
-  const result = evaluateRules(
+    [textRatio, nontextRatio],
     {
-      facts: [
-        contrastFact(observationFor(rule.identity.id), scope),
-        missingContrastFact(rule.identity.id),
+      capabilities: [
+        ...(textRatio.requiredCapabilities ?? []),
+        ...(nontextRatio.requiredCapabilities ?? []),
       ],
+      scope,
     },
-    [rule],
-    { capabilities: rule.requiredCapabilities, scope },
   );
 
-  expect(result.results[0]?.status).toBe('INCOMPLETE');
+  expect(result.results.map(({ status }) => status).sort()).toEqual(['INCOMPLETE', 'PASS']);
 });
 
 test.each(rules)('$identity.id rejects unsupported standard options', (rule) => {
@@ -151,7 +160,7 @@ function evaluate(
   options?: JsonValue,
 ) {
   return evaluateRules(
-    { facts: observation ? [contrastFact(observation, factScope)] : [] },
+    { facts: observation ? [contrastFact(rule.identity.id, observation, factScope)] : [] },
     [rule],
     {
       capabilities: rule.requiredCapabilities,
@@ -248,13 +257,15 @@ function expectedStandard(ruleId: string): string {
 
 /*** Wraps one serializable observation as an available portable fact at a chosen scope. */
 function contrastFact(
+  ruleId: string,
   value: Record<string, JsonValue>,
   factScope: { readonly id: string; readonly kind: string },
+  id = 'producer:contrast-observation:5bd53cb4',
 ): FactEnvelope {
   return {
     contentHash: 'sha256:contrast-fact',
-    id: 'fact:contrast-measurement',
-    kind: 'design.contrast.measurement',
+    id,
+    kind: ruleId,
     provenance: {
       collectedAt: '2026-11-05T00:00:00.000Z',
       producer: { id: 'test', version: '1.0.0' },
@@ -275,12 +286,16 @@ function contrastFact(
   };
 }
 
-/*** Wraps one explicitly unavailable observation with its owning frozen rule identity. */
-function missingContrastFact(ruleId: string): FactEnvelope {
+/*** Wraps one unavailable observation with its producer-declared rule kind and opaque identity. */
+function missingContrastFact(
+  ruleId: string,
+  factScope = scope,
+  id = 'producer:contrast-observation:8b0dff2c',
+): FactEnvelope {
   return {
     contentHash: 'sha256:missing-contrast-fact',
-    id: ruleId,
-    kind: 'design.contrast.measurement',
+    id,
+    kind: ruleId,
     missing: { code: 'unavailable', message: 'Contrast measurement is unavailable.' },
     provenance: {
       collectedAt: '2026-11-05T00:00:00.000Z',
@@ -289,7 +304,7 @@ function missingContrastFact(ruleId: string): FactEnvelope {
     },
     schemaVersion: 1,
     scope: {
-      ...scope,
+      ...factScope,
       target: {
         kind: 'screen',
         projectId: 'project-1',
