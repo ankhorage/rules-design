@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+### Patch Changes
+
+- d715c7a: Fix Contrast rule evaluation to apply canonical standards to observed facts.
+
 ## 0.3.0
 
 ### Minor Changes

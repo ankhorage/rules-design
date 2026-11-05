@@ -50,6 +50,17 @@ graph TD
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_types_designRuleCatalog_ts
+  module_src_features_contrast_contrastFacts_test_ts["src/features/contrast/contrastFacts.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts["src/features/contrast/createContrastRules.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_contrast_createContrastRules_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --> module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --> module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts["src/features/contrast/createContrastRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts --> module_src_features_contrast_hasValidContrastMeasurement_ts
+  module_src_features_contrast_hasValidContrastMeasurement_ts["src/features/contrast/hasValidContrastMeasurement.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_provider_designRuleProvider_test_ts
   module_src_features_provider_designRuleProvider_test_ts --> module_src_index_ts

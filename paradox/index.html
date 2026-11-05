@@ -177,6 +177,26 @@
       <small>2 functions</small>
     </button>
   </li><li>
+    <button class="nav-button" type="button" data-target="src/features/contrast/contrastFacts.test.ts">
+      src/features/contrast/contrastFacts.test.ts
+      <small>3 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/contrast/createContrastRules.test.ts">
+      src/features/contrast/createContrastRules.test.ts
+      <small>5 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/contrast/createContrastRules.ts">
+      src/features/contrast/createContrastRules.ts
+      <small>16 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/contrast/hasValidContrastMeasurement.ts">
+      src/features/contrast/hasValidContrastMeasurement.ts
+      <small>6 functions</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/repetition/createRepetitionRules.test.ts">
       src/features/repetition/createRepetitionRules.test.ts
       <small>1 function</small>
@@ -243,7 +263,7 @@
       <div class="summary">
         <div><strong>17</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>36</strong><span class="muted">modules</span></div>
+        <div><strong>40</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -333,6 +353,26 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/features/catalog/designRuleProfiles.ts</code>, <code>src/types/designRuleCatalog.ts</code></p>
     <p><strong>Exports:</strong> <code>designRulePlanningManifest</code></p>
+  </article><article class="item" data-search="src/features/contrast/contrastFacts.test.ts contrastFact missingContrastFact">
+    <h3>src/features/contrast/contrastFacts.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>contrastFact</code>, <code>missingContrastFact</code></p>
+  </article><article class="item" data-search="src/features/contrast/createContrastRules.test.ts src/features/contrast/contrastFacts.test.ts src/features/contrast/createContrastRules.ts">
+    <h3>src/features/contrast/createContrastRules.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/contrast/contrastFacts.test.ts</code>, <code>src/features/contrast/createContrastRules.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/features/contrast/createContrastRules.ts src/features/contrast/hasValidContrastMeasurement.ts createContrastRules">
+    <h3>src/features/contrast/createContrastRules.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/contrast/hasValidContrastMeasurement.ts</code></p>
+    <p><strong>Exports:</strong> <code>createContrastRules</code></p>
+  </article><article class="item" data-search="src/features/contrast/hasValidContrastMeasurement.ts hasValidContrastMeasurement">
+    <h3>src/features/contrast/hasValidContrastMeasurement.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>hasValidContrastMeasurement</code></p>
   </article><article class="item" data-search="src/features/provider/designRuleProvider.test.ts src/index.ts test/fixtures/designEvidencePresentRule.ts">
     <h3>src/features/provider/designRuleProvider.test.ts</h3>
     <p class="muted">Referenced module</p>
@@ -971,6 +1011,17 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_createContrastRules_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts --&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
@@ -1095,6 +1146,17 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_createContrastRules_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts --&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
@@ -1183,6 +1245,10 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
@@ -1228,6 +1294,9 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts --&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
@@ -1269,6 +1338,10 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
@@ -1314,6 +1387,9 @@
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_contrastFacts_test_ts
+  module_src_features_contrast_createContrastRules_test_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_contrast_createContrastRules_ts --&gt; module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
   module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
@@ -1357,6 +1433,10 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
@@ -1440,6 +1520,10 @@
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   module_src_features_catalog_filterDesignRuleCatalog_ts[&quot;src/features/catalog/filterDesignRuleCatalog.ts&quot;]
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts[&quot;src/features/catalog/fixtures/designRuleCatalogManifest.ts&quot;]
+  module_src_features_contrast_contrastFacts_test_ts[&quot;src/features/contrast/contrastFacts.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_test_ts[&quot;src/features/contrast/createContrastRules.test.ts&quot;]
+  module_src_features_contrast_createContrastRules_ts[&quot;src/features/contrast/createContrastRules.ts&quot;]
+  module_src_features_contrast_hasValidContrastMeasurement_ts[&quot;src/features/contrast/hasValidContrastMeasurement.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
@@ -1818,6 +1902,176 @@
     <h3>matches</h3>
     <p class="muted"><code>src/features/catalog/filterDesignRuleCatalog.ts:21:1</code></p>
     <p>Returns whether an entry facet contains every requested value.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-contrast-contrastfacts-test-ts" class="view" data-view="src/features/contrast/contrastFacts.test.ts" hidden>
+    <section class="panel">
+      <h2>src/features/contrast/contrastFacts.test.ts</h2>
+      <article class="item" data-search="contrastFact src/features/contrast/contrastFacts.test.ts Wraps one serializable observation as an available portable fact at a chosen scope.">
+    <h3>contrastFact</h3>
+    <p class="muted"><code>src/features/contrast/contrastFacts.test.ts:5:1</code></p>
+    <p>Wraps one serializable observation as an available portable fact at a chosen scope.</p>
+    
+  </article><article class="item" data-search="missingContrastFact src/features/contrast/contrastFacts.test.ts Wraps one unavailable observation with its producer-declared rule kind and opaque identity.">
+    <h3>missingContrastFact</h3>
+    <p class="muted"><code>src/features/contrast/contrastFacts.test.ts:28:1</code></p>
+    <p>Wraps one unavailable observation with its producer-declared rule kind and opaque identity.</p>
+    
+  </article><article class="item" data-search="target src/features/contrast/contrastFacts.test.ts Produces the portable fixture target shared by contrast fact envelopes.">
+    <h3>target</h3>
+    <p class="muted"><code>src/features/contrast/contrastFacts.test.ts:50:1</code></p>
+    <p>Produces the portable fixture target shared by contrast fact envelopes.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-contrast-createcontrastrules-test-ts" class="view" data-view="src/features/contrast/createContrastRules.test.ts" hidden>
+    <section class="panel">
+      <h2>src/features/contrast/createContrastRules.test.ts</h2>
+      <article class="item" data-search="evaluate src/features/contrast/createContrastRules.test.ts Runs one rule with its declared capabilities and optionally one portable fact observation.">
+    <h3>evaluate</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.test.ts:178:1</code></p>
+    <p>Runs one rule with its declared capabilities and optionally one portable fact observation.</p>
+    
+  </article><article class="item" data-search="ruleById src/features/contrast/createContrastRules.test.ts Finds one group-local rule without registering the group centrally.">
+    <h3>ruleById</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.test.ts:196:1</code></p>
+    <p>Finds one group-local rule without registering the group centrally.</p>
+    
+  </article><article class="item" data-search="observationFor src/features/contrast/createContrastRules.test.ts Creates a complete passing observation for every frozen rule identity.">
+    <h3>observationFor</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.test.ts:203:1</code></p>
+    <p>Creates a complete passing observation for every frozen rule identity.</p>
+    
+  </article><article class="item" data-search="failingObservationFor src/features/contrast/createContrastRules.test.ts Creates a complete observation that violates the fixed policy of its rule.">
+    <h3>failingObservationFor</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.test.ts:244:1</code></p>
+    <p>Creates a complete observation that violates the fixed policy of its rule.</p>
+    
+  </article><article class="item" data-search="expectedStandard src/features/contrast/createContrastRules.test.ts Returns the default canonical standard selected by each rule.">
+    <h3>expectedStandard</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.test.ts:268:1</code></p>
+    <p>Returns the default canonical standard selected by each rule.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-contrast-createcontrastrules-ts" class="view" data-view="src/features/contrast/createContrastRules.ts" hidden>
+    <section class="panel">
+      <h2>src/features/contrast/createContrastRules.ts</h2>
+      <article class="item" data-search="createContrastRules src/features/contrast/createContrastRules.ts Creates the independent Contrast and Visual Hierarchy rule contribution without central registration.">
+    <h3>createContrastRules</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:95:1</code></p>
+    <p>Creates the independent Contrast and Visual Hierarchy rule contribution without central registration.</p>
+    
+  </article><article class="item" data-search="createRule src/features/contrast/createContrastRules.ts Creates one frozen rule whose policy is controlled by validated options or canonical standards.">
+    <h3>createRule</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:100:1</code></p>
+    <p>Creates one frozen rule whose policy is controlled by validated options or canonical standards.</p>
+    
+  </article><article class="item" data-search="evaluate src/features/contrast/createContrastRules.ts Evaluates exact-scope observations, rejecting absent, malformed, and self-judging evidence.">
+    <h3>evaluate</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:113:1</code></p>
+    <p>Evaluates exact-scope observations, rejecting absent, malformed, and self-judging evidence.</p>
+    
+  </article><article class="item" data-search="matchesRuleScope src/features/contrast/createContrastRules.ts Selects only facts whose producer-declared kind identifies this exact frozen rule and scope.">
+    <h3>matchesRuleScope</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:136:1</code></p>
+    <p>Selects only facts whose producer-declared kind identifies this exact frozen rule and scope.</p>
+    
+  </article><article class="item" data-search="validateOptions src/features/contrast/createContrastRules.ts Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria.">
+    <h3>validateOptions</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:141:1</code></p>
+    <p>Validates a closed versioned standard choice rather than arbitrary numeric acceptance criteria.</p>
+    
+  </article><article class="item" data-search="supportsStandard src/features/contrast/createContrastRules.ts Confines each frozen rule to the standards its policy can evaluate.">
+    <h3>supportsStandard</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:158:1</code></p>
+    <p>Confines each frozen rule to the standards its policy can evaluate.</p>
+    
+  </article><article class="item" data-search="standardFor src/features/contrast/createContrastRules.ts Resolves a canonical or validated standard owned by the rule rather than its fact envelope.">
+    <h3>standardFor</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:170:1</code></p>
+    <p>Resolves a canonical or validated standard owned by the rule rather than its fact envelope.</p>
+    
+  </article><article class="item" data-search="toContrastObservation src/features/contrast/createContrastRules.ts Converts one available contrast fact into a fully validated rule observation.">
+    <h3>toContrastObservation</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:190:1</code></p>
+    <p>Converts one available contrast fact into a fully validated rule observation.</p>
+    
+  </article><article class="item" data-search="valid src/features/contrast/createContrastRules.ts Validates rule-specific observations and forbids evidence-provided comparisons or thresholds.">
+    <h3>valid</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:196:1</code></p>
+    <p>Validates rule-specific observations and forbids evidence-provided comparisons or thresholds.</p>
+    
+  </article><article class="item" data-search="isBaseObservation src/features/contrast/createContrastRules.ts Verifies the evidence fields shared by every Contrast observation.">
+    <h3>isBaseObservation</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:204:1</code></p>
+    <p>Verifies the evidence fields shared by every Contrast observation.</p>
+    
+  </article><article class="item" data-search="passes src/features/contrast/createContrastRules.ts Applies the rule-owned semantic standard to one complete observation.">
+    <h3>passes</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:217:1</code></p>
+    <p>Applies the rule-owned semantic standard to one complete observation.</p>
+    
+  </article><article class="item" data-search="incomplete src/features/contrast/createContrastRules.ts Produces an incomplete result when evidence cannot prove this exact-scope rule.">
+    <h3>incomplete</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:251:1</code></p>
+    <p>Produces an incomplete result when evidence cannot prove this exact-scope rule.</p>
+    
+  </article><article class="item" data-search="failure src/features/contrast/createContrastRules.ts Retains observed evidence and the applied canonical standard for a failed rule.">
+    <h3>failure</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:267:1</code></p>
+    <p>Retains observed evidence and the applied canonical standard for a failed rule.</p>
+    
+  </article><article class="item" data-search="isRuleSubject src/features/contrast/createContrastRules.ts Narrows a serializable subject to the Rules finding contract.">
+    <h3>isRuleSubject</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:282:1</code></p>
+    <p>Narrows a serializable subject to the Rules finding contract.</p>
+    
+  </article><article class="item" data-search="isJsonValueArray src/features/contrast/createContrastRules.ts Narrows a JSON value to an immutable sequence of JSON values.">
+    <h3>isJsonValueArray</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:294:1</code></p>
+    <p>Narrows a JSON value to an immutable sequence of JSON values.</p>
+    
+  </article><article class="item" data-search="isScore src/features/contrast/createContrastRules.ts Narrows a hierarchy entry to a finite observed emphasis score.">
+    <h3>isScore</h3>
+    <p class="muted"><code>src/features/contrast/createContrastRules.ts:299:1</code></p>
+    <p>Narrows a hierarchy entry to a finite observed emphasis score.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-contrast-hasvalidcontrastmeasurement-ts" class="view" data-view="src/features/contrast/hasValidContrastMeasurement.ts" hidden>
+    <section class="panel">
+      <h2>src/features/contrast/hasValidContrastMeasurement.ts</h2>
+      <article class="item" data-search="hasValidContrastMeasurement src/features/contrast/hasValidContrastMeasurement.ts Verifies the complete observation shape required by one frozen Contrast rule.">
+    <h3>hasValidContrastMeasurement</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:5:1</code></p>
+    <p>Verifies the complete observation shape required by one frozen Contrast rule.</p>
+    
+  </article><article class="item" data-search="hasColorRatio src/features/contrast/hasValidContrastMeasurement.ts Validates a complete foreground-to-effective-background contrast measurement.">
+    <h3>hasColorRatio</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:61:1</code></p>
+    <p>Validates a complete foreground-to-effective-background contrast measurement.</p>
+    
+  </article><article class="item" data-search="isEmphasis src/features/contrast/hasValidContrastMeasurement.ts Narrows ordered hierarchy entries to finite observed emphasis scores.">
+    <h3>isEmphasis</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:66:1</code></p>
+    <p>Narrows ordered hierarchy entries to finite observed emphasis scores.</p>
+    
+  </article><article class="item" data-search="isJsonValueArray src/features/contrast/hasValidContrastMeasurement.ts Narrows a JSON value to an immutable sequence of JSON values.">
+    <h3>isJsonValueArray</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:75:1</code></p>
+    <p>Narrows a JSON value to an immutable sequence of JSON values.</p>
+    
+  </article><article class="item" data-search="number src/features/contrast/hasValidContrastMeasurement.ts Checks finite non-negative numeric observations.">
+    <h3>number</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:80:1</code></p>
+    <p>Checks finite non-negative numeric observations.</p>
+    
+  </article><article class="item" data-search="text src/features/contrast/hasValidContrastMeasurement.ts Checks non-empty textual observations.">
+    <h3>text</h3>
+    <p class="muted"><code>src/features/contrast/hasValidContrastMeasurement.ts:85:1</code></p>
+    <p>Checks non-empty textual observations.</p>
     
   </article>
     </section>
