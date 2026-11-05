@@ -18,12 +18,13 @@ export function parseTypographyObservation(
   )
     return [];
   const headingLevel = nullableHeadingLevel(value.headingLevel);
-  if (value.headingLevel !== undefined && headingLevel === undefined) return [];
+  if (headingLevel === undefined) return [];
   return [
     {
       fontFamily: value.fontFamily,
       fontSize: value.fontSize,
       fontWeight: value.fontWeight,
+      documentOrder: nullableNumber(value.documentOrder),
       headingLevel: headingLevel ?? null,
       id,
       letterSpacing: value.letterSpacing,

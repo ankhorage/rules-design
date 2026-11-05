@@ -1,11 +1,24 @@
-import type { Rule, RuleFinding, RuleSet } from '@ankhorage/rules';
+import type {
+  Rule,
+  RuleEvaluationOutcome,
+  RuleFinding,
+  RuleScope,
+  RuleSet,
+} from '@ankhorage/rules';
 
 import type { DesignContext } from '../../types/designRuleProvider';
-import type { TypographyObservation } from '../../types/typography';
+import type { TypographyObservation, TypographyRulePolicy } from '../../types/typography';
+import { createTypographyObservationTools } from './createTypographyObservationTools';
 import { parseTypographyObservation } from './parseTypographyObservation';
+import { validateTypographyRulePolicy } from './validateTypographyRulePolicy';
+
+export type { TypographyRulePolicy } from '../../types/typography';
+
+const typographyObservationTools = createTypographyObservationTools();
 
 /*** Creates the independent Typography and Heading RuleSet from explicit serialized-fact policy. */
 export function createTypographyRuleSet(policy: TypographyRulePolicy): RuleSet<DesignContext> {
+  validateTypographyRulePolicy(policy);
   return {
     id: 'ankhorage.rules-design.typography',
     rules: ruleDefinitions.map((definition) => createRule(definition, policy)),
@@ -29,23 +42,6 @@ type TypographyRuleId =
   | 'design.heading.spacing-after'
   | 'design.heading.text-clipping';
 
-interface TypographyRulePolicy {
-  readonly allowedFontFamilies: readonly string[];
-  readonly allowedFontSizes: readonly number[];
-  readonly allowedFontWeights: readonly string[];
-  readonly allowedLetterSpacings: readonly number[];
-  readonly allowedLineHeights: readonly number[];
-  readonly allowedSemanticStyles: Readonly<Record<string, readonly string[]>>;
-  readonly allowedSpacingAfter: readonly number[];
-  readonly allowedSpacingBefore: readonly number[];
-  readonly maximumH1Count: number;
-  readonly maximumParagraphMeasure: number;
-  readonly minimumBodyFontSize: number;
-  readonly minimumH1Count: number;
-  readonly minimumParagraphMeasure: number;
-  readonly responsiveFontSizes: Readonly<Record<string, readonly number[]>>;
-}
-
 interface RuleDefinition {
   readonly capability: 'design.heading-facts' | 'design.typography-facts';
   readonly evaluate: (
@@ -53,6 +49,7 @@ interface RuleDefinition {
     policy: TypographyRulePolicy,
   ) => readonly TypographyObservation[];
   readonly id: TypographyRuleId;
+  readonly measurementsComplete: (observations: readonly TypographyObservation[]) => boolean;
   readonly severity: 'error' | 'warning';
   readonly summary: string;
 }
@@ -63,27 +60,32 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     'Typography uses configured font families.',
     (facts, policy) =>
       facts.filter((fact) => !policy.allowedFontFamilies.includes(fact.fontFamily)),
+    requiredMeasurements('fontFamily'),
   ),
   definition(
     'design.typography.scale',
     'Typography sizes use the configured scale.',
     (facts, policy) => facts.filter((fact) => !policy.allowedFontSizes.includes(fact.fontSize)),
+    requiredMeasurements('fontSize'),
   ),
   definition(
     'design.typography.weight',
     'Typography uses configured font weights.',
     (facts, policy) => facts.filter((fact) => !policy.allowedFontWeights.includes(fact.fontWeight)),
+    requiredMeasurements('fontWeight'),
   ),
   definition(
     'design.typography.line-height',
     'Typography uses configured line heights.',
     (facts, policy) => facts.filter((fact) => !policy.allowedLineHeights.includes(fact.lineHeight)),
+    requiredMeasurements('lineHeight'),
   ),
   definition(
     'design.typography.letter-spacing',
     'Typography uses configured letter spacing.',
     (facts, policy) =>
       facts.filter((fact) => !policy.allowedLetterSpacings.includes(fact.letterSpacing)),
+    requiredMeasurements('letterSpacing'),
   ),
   definition(
     'design.typography.paragraph-measure',
@@ -91,10 +93,11 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     (facts, policy) =>
       facts.filter(
         (fact) =>
-          fact.paragraphMeasure === null ||
-          fact.paragraphMeasure < policy.minimumParagraphMeasure ||
-          fact.paragraphMeasure > policy.maximumParagraphMeasure,
+          fact.paragraphMeasure !== null &&
+          (fact.paragraphMeasure < policy.minimumParagraphMeasure ||
+            fact.paragraphMeasure > policy.maximumParagraphMeasure),
       ),
+    requiredMeasurements('paragraphMeasure'),
     'warning',
   ),
   definition(
@@ -104,6 +107,7 @@ const ruleDefinitions: readonly RuleDefinition[] = [
       facts.filter(
         (fact) => fact.headingLevel === null && fact.fontSize < policy.minimumBodyFontSize,
       ),
+    () => true,
   ),
   definition(
     'design.typography.responsive-scale',
@@ -111,19 +115,25 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     (facts, policy) =>
       facts.filter(
         (fact) =>
-          fact.responsiveRole === null ||
+          fact.responsiveRole !== null &&
           !configuredNumberValues(policy.responsiveFontSizes, fact.responsiveRole).includes(
             fact.fontSize,
           ),
       ),
+    requiredMeasurements('responsiveRole', 'fontSize'),
   ),
   definition(
     'design.heading.h1-presence',
     'A page contains the configured minimum number of H1 headings.',
     (facts, policy) =>
-      facts.filter((fact) => fact.headingLevel === 1).length < policy.minimumH1Count
-        ? facts.slice(0, 1)
-        : [],
+      typographyObservationTools
+        .viewports(facts)
+        .flatMap((factsForViewport) =>
+          factsForViewport.filter((fact) => fact.headingLevel === 1).length < policy.minimumH1Count
+            ? factsForViewport.slice(0, 1)
+            : [],
+        ),
+    requiredMeasurements('headingLevel', 'viewport'),
     'error',
     'design.heading-facts',
   ),
@@ -131,9 +141,14 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     'design.heading.h1-count',
     'A page does not exceed the configured number of H1 headings.',
     (facts, policy) =>
-      facts.filter((fact) => fact.headingLevel === 1).length > policy.maximumH1Count
-        ? facts.slice(0, 1)
-        : [],
+      typographyObservationTools
+        .viewports(facts)
+        .flatMap((factsForViewport) =>
+          factsForViewport.filter((fact) => fact.headingLevel === 1).length > policy.maximumH1Count
+            ? factsForViewport.filter((fact) => fact.headingLevel === 1).slice(1)
+            : [],
+        ),
+    requiredMeasurements('headingLevel', 'viewport'),
     'error',
     'design.heading-facts',
   ),
@@ -141,13 +156,17 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     'design.heading.level-order',
     'Heading levels do not skip hierarchy levels.',
     (facts) =>
-      facts.filter(
-        (fact, index) =>
-          fact.headingLevel !== null &&
-          index > 0 &&
-          facts[index - 1]?.headingLevel !== null &&
-          fact.headingLevel > (facts[index - 1]?.headingLevel ?? 0) + 1,
-      ),
+      typographyObservationTools
+        .viewports(facts)
+        .flatMap((factsForViewport) =>
+          typographyObservationTools
+            .orderedHeadings(factsForViewport)
+            .filter(
+              (fact, index, ordered) =>
+                index > 0 && fact.headingLevel > (ordered[index - 1]?.headingLevel ?? 0) + 1,
+            ),
+        ),
+    requiredMeasurements('documentOrder', 'headingLevel'),
     'error',
     'design.heading-facts',
   ),
@@ -157,12 +176,12 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     (facts, policy) =>
       facts.filter(
         (fact) =>
-          fact.headingLevel !== null &&
-          (fact.semanticStyle === null ||
-            !configuredStringValues(policy.allowedSemanticStyles, `h${fact.headingLevel}`).includes(
-              fact.semanticStyle,
-            )),
+          fact.semanticStyle !== null &&
+          !configuredStringValues(policy.allowedSemanticStyles, `h${fact.headingLevel}`).includes(
+            fact.semanticStyle,
+          ),
       ),
+    requiredMeasurements('headingLevel', 'semanticStyle'),
     'error',
     'design.heading-facts',
   ),
@@ -172,9 +191,9 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     (facts, policy) =>
       facts.filter(
         (fact) =>
-          fact.headingLevel !== null &&
-          (fact.marginBefore === null || !policy.allowedSpacingBefore.includes(fact.marginBefore)),
+          fact.marginBefore !== null && !policy.allowedSpacingBefore.includes(fact.marginBefore),
       ),
+    requiredMeasurements('headingLevel', 'marginBefore'),
     'error',
     'design.heading-facts',
   ),
@@ -184,16 +203,17 @@ const ruleDefinitions: readonly RuleDefinition[] = [
     (facts, policy) =>
       facts.filter(
         (fact) =>
-          fact.headingLevel !== null &&
-          (fact.marginAfter === null || !policy.allowedSpacingAfter.includes(fact.marginAfter)),
+          fact.marginAfter !== null && !policy.allowedSpacingAfter.includes(fact.marginAfter),
       ),
+    requiredMeasurements('headingLevel', 'marginAfter'),
     'error',
     'design.heading-facts',
   ),
   definition(
     'design.heading.text-clipping',
     'Heading text is not clipped in the rendered layout.',
-    (facts) => facts.filter((fact) => fact.headingLevel !== null && fact.textClipped !== false),
+    (facts) => facts.filter((fact) => fact.textClipped === true),
+    requiredMeasurements('headingLevel', 'textClipped'),
     'error',
     'design.heading-facts',
   ),
@@ -204,14 +224,10 @@ function createRule(definition: RuleDefinition, policy: TypographyRulePolicy): R
   return {
     defaultSeverity: definition.severity,
     dependencies: [],
-    evaluate: ({ context }) => {
-      const observations = typographyObservations(context, definition.capability);
-      if (observations.length === 0) {
-        return {
-          findings: [missingEvidenceFinding(definition.id)],
-          status: 'INCOMPLETE',
-        };
-      }
+    evaluate: ({ context, scope }) => {
+      const observations = typographyObservations(context, definition.capability, scope);
+      if (observations.length === 0 || !definition.measurementsComplete(observations))
+        return incomplete(definition.id);
       const violations = definition.evaluate(observations, policy);
       return violations.length === 0
         ? { findings: [], status: 'PASS' }
@@ -231,22 +247,32 @@ function definition(
   id: TypographyRuleId,
   summary: string,
   evaluate: RuleDefinition['evaluate'],
+  measurementsComplete: RuleDefinition['measurementsComplete'],
   severity: RuleDefinition['severity'] = 'error',
   capability: RuleDefinition['capability'] = 'design.typography-facts',
 ): RuleDefinition {
-  return { capability, evaluate, id, severity, summary };
+  return { capability, evaluate, id, measurementsComplete, severity, summary };
 }
 
 /*** Reads valid normalized Typography observations from available versioned fact envelopes. */
 function typographyObservations(
   context: DesignContext,
   capability: RuleDefinition['capability'],
+  scope: RuleScope,
 ): readonly TypographyObservation[] {
   return (context.facts ?? []).flatMap((fact) =>
-    fact.status === 'available' && fact.kind === capability
+    fact.status === 'available' &&
+    fact.kind === capability &&
+    fact.scope.id === scope.id &&
+    fact.scope.kind === scope.kind
       ? parseTypographyObservation(fact.value, fact.id)
       : [],
   );
+}
+
+/*** Returns an explicit incomplete outcome when required measurements cannot support a verdict. */
+function incomplete(ruleId: TypographyRuleId): RuleEvaluationOutcome {
+  return { findings: [missingEvidenceFinding(ruleId)], status: 'INCOMPLETE' };
 }
 
 /*** Produces a serializable incomplete finding when a rule has no valid measured observation. */
@@ -285,4 +311,11 @@ function configuredStringValues(
   key: string,
 ): readonly string[] {
   return Object.entries(values).find(([candidate]) => candidate === key)?.[1] ?? [];
+}
+
+/*** Builds a completeness predicate from one frozen rule's required measurements. */
+function requiredMeasurements(
+  ...keys: readonly (keyof TypographyObservation)[]
+): RuleDefinition['measurementsComplete'] {
+  return (observations) => typographyObservationTools.measurementsComplete(observations, keys);
 }

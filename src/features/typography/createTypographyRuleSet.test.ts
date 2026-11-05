@@ -2,11 +2,13 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import { evaluateRules } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
-import { createTypographyRuleSet } from './createTypographyRuleSet.ts';
+import { createTypographyRuleSet, type TypographyRulePolicy } from './createTypographyRuleSet.ts';
 
 const capabilities = ['design.heading-facts', 'design.typography-facts'];
+const evaluationOptions = { capabilities, scope: { id: 'page', kind: 'page' } };
 const observationDefaults: Record<string, TypographyValue> = {
   body: {
+    documentOrder: 1,
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: '400',
@@ -22,6 +24,7 @@ const observationDefaults: Record<string, TypographyValue> = {
     viewport: 'desktop',
   },
   h1: {
+    documentOrder: 1,
     fontFamily: 'Inter',
     fontSize: 32,
     fontWeight: '700',
@@ -37,6 +40,7 @@ const observationDefaults: Record<string, TypographyValue> = {
     viewport: 'desktop',
   },
   h2: {
+    documentOrder: 2,
     fontFamily: 'Inter',
     fontSize: 24,
     fontWeight: '700',
@@ -52,7 +56,7 @@ const observationDefaults: Record<string, TypographyValue> = {
     viewport: 'desktop',
   },
 };
-const ruleSet = createTypographyRuleSet({
+const policy: TypographyRulePolicy = {
   allowedFontFamilies: ['Inter'],
   allowedFontSizes: [16, 24, 32],
   allowedFontWeights: ['400', '700'],
@@ -67,10 +71,11 @@ const ruleSet = createTypographyRuleSet({
   minimumH1Count: 1,
   minimumParagraphMeasure: 45,
   responsiveFontSizes: { body: [16], hero: [32], section: [24] },
-});
+};
+const ruleSet = createTypographyRuleSet(policy);
 
 test('passes every Typography and Heading rule with valid normalized facts', () => {
-  const result = evaluateRules(context(observations()), ruleSet.rules, { capabilities });
+  const result = evaluateRules(context(observations()), ruleSet.rules, evaluationOptions);
 
   expect(result.diagnostics).toEqual([]);
   expect(result.findings).toEqual([]);
@@ -119,7 +124,11 @@ test.each([
   ['design.heading.spacing-after', observation('h1', { marginAfter: 12 })],
   ['design.heading.text-clipping', observation('h1', { textClipped: true })],
 ] as const)('fails %s when its measured policy condition is violated', (ruleId, replacement) => {
-  const result = evaluateRules(context(observations(replacement)), ruleSet.rules, { capabilities });
+  const result = evaluateRules(
+    context(observations(replacement)),
+    ruleSet.rules,
+    evaluationOptions,
+  );
   const ruleResult = result.results.find((entry) => entry.rule.id === ruleId);
 
   expect(ruleResult).toMatchObject({ status: 'FAIL' });
@@ -130,7 +139,7 @@ test.each([
 });
 
 test('marks every rule incomplete when normalized evidence is absent', () => {
-  const result = evaluateRules(context([]), ruleSet.rules, { capabilities });
+  const result = evaluateRules(context([]), ruleSet.rules, evaluationOptions);
 
   expect(result.diagnostics).toEqual([]);
   expect(result.results.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
@@ -140,8 +149,69 @@ test('marks every rule incomplete when normalized evidence is absent', () => {
   );
 });
 
+test.each([
+  ['design.typography.font-family', 'body'],
+  ['design.typography.scale', 'body'],
+  ['design.typography.weight', 'body'],
+  ['design.typography.line-height', 'body'],
+  ['design.typography.letter-spacing', 'body'],
+  ['design.typography.paragraph-measure', 'body'],
+  ['design.typography.body-minimum', 'body'],
+  ['design.typography.responsive-scale', 'body'],
+  ['design.heading.h1-presence', 'h1'],
+  ['design.heading.h1-count', 'h1'],
+  ['design.heading.level-order', 'h1'],
+  ['design.heading.semantic-style', 'h1'],
+  ['design.heading.spacing-before', 'h1'],
+  ['design.heading.spacing-after', 'h1'],
+  ['design.heading.text-clipping', 'h1'],
+] as const)('marks %s incomplete when its required measurement fact is missing', (ruleId, id) => {
+  const result = evaluateRules(context([missingFact(id)]), ruleSet.rules, evaluationOptions);
+  const ruleResult = result.results.find((entry) => entry.rule.id === ruleId);
+
+  expect(ruleResult).toMatchObject({ status: 'INCOMPLETE' });
+});
+
+test('requires the exact FactEnvelope scope ID and kind', () => {
+  const facts = observations().map((value) => ({
+    ...value,
+    scope: { ...value.scope, id: 'another-page' },
+  }));
+  const result = evaluateRules(context(facts), ruleSet.rules, evaluationOptions);
+
+  expect(result.results.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
+});
+
+test('keeps heading counts and hierarchy separate for each responsive viewport', () => {
+  const facts = [
+    observation('h2', { documentOrder: 2 }),
+    observation('h1', { documentOrder: 1 }),
+    observation('h1', { documentOrder: 1, viewport: 'mobile' }),
+    observation('h2', { documentOrder: 2, viewport: 'mobile' }),
+  ];
+  const result = evaluateRules(context(facts), ruleSet.rules, evaluationOptions);
+  const statuses = result.results
+    .filter(
+      (entry) =>
+        entry.rule.id === 'design.heading.h1-count' ||
+        entry.rule.id === 'design.heading.level-order',
+    )
+    .map((entry) => entry.status);
+
+  expect(statuses).toEqual(['PASS', 'PASS']);
+});
+
+test('rejects malformed policy configuration before evaluation', () => {
+  expect(() =>
+    createTypographyRuleSet({ ...policy, maximumH1Count: 0, minimumH1Count: 1 }),
+  ).toThrow('Typography rule policy must contain complete, internally consistent measurements.');
+});
+
 test('declares group-specific capabilities instead of treating missing browser facts as a pass', () => {
-  const result = evaluateRules(context(observations()), ruleSet.rules, { capabilities: [] });
+  const result = evaluateRules(context(observations()), ruleSet.rules, {
+    capabilities: [],
+    scope: evaluationOptions.scope,
+  });
 
   expect(result.findings).toEqual([]);
   expect(result.diagnostics).toHaveLength(15);
@@ -188,9 +258,19 @@ function fact(id: string, value: TypographyValue): TypographyFact {
   };
 }
 
+function missingFact(id: string): FactEnvelope {
+  const available = observation(id);
+  return {
+    ...available,
+    missing: { code: 'unavailable', message: 'The browser did not supply this measurement.' },
+    status: 'missing',
+  };
+}
+
 type TypographyFact = Extract<FactEnvelope, { readonly status: 'available' }>;
 
 interface TypographyValue {
+  readonly documentOrder: number | null;
   readonly fontFamily: string;
   readonly fontSize: number;
   readonly fontWeight: string;
