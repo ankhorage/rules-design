@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- ca19eea: Depend on the published Rules facts contract for independently owned Design rule families.
+
 ## 0.2.0
 
 ### Minor Changes
