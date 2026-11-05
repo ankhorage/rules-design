@@ -2,11 +2,27 @@ import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
 import type { JsonValue } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
-import { createColorRuleSet } from './createColorRuleSet';
+import { type ColorRulePolicy, createColorRuleSet } from './createColorRuleSet';
 
 const scope = { id: 'home', kind: 'page' };
-const options: JsonValue = {
+const policy: ColorRulePolicy = {
+  acceptedValues: {
+    'design.color.active-state': true,
+    'design.color.alpha-composition': true,
+    'design.color.disabled-state': true,
+    'design.color.hover-state': true,
+    'design.color.literal-drift': true,
+    'design.color.ramp-consistency': true,
+    'design.color.semantic-role': true,
+    'design.color.surface-role': true,
+    'design.color.syntax-valid': true,
+    'design.color.theme-coverage': true,
+    'design.color.token-allowed': true,
+    'design.color.token-exists': true,
+  },
+  requiredBreakpointIds: ['desktop'],
   requiredScopes: ['page'],
+  requiredThemeIds: ['light'],
   roleTargets: { accent: 0.1, base: 0.6, secondary: 0.3 },
   roleTolerances: { accent: 0.05, base: 0.05, secondary: 0.05 },
   version: 1,
@@ -28,23 +44,23 @@ const ruleIds = [
 ];
 
 test('creates all thirteen frozen Color and Tokens rules', () =>
-  expect(createColorRuleSet().rules.map((rule) => rule.identity.id)).toEqual(ruleIds));
+  expect(createColorRuleSet(policy).rules.map((rule) => rule.identity.id)).toEqual(ruleIds));
 
 test.each(ruleIds.slice(0, -1))(
   '%s assesses normalized observations rather than adapter verdicts',
   (ruleId) => {
     const pass = evaluate(ruleId, [
       fact(ruleId, {
-        actual: 'token',
-        expected: 'token',
+        actual: true,
+        expected: false,
         outcome: 'fail',
         subject: { id: 'button', kind: 'component' },
       }),
     ]);
     const fail = evaluate(ruleId, [
       fact(ruleId, {
-        actual: 'red',
-        expected: 'token',
+        actual: false,
+        expected: true,
         outcome: 'pass',
         subject: { id: 'button', kind: 'component' },
       }),
@@ -56,8 +72,8 @@ test.each(ruleIds.slice(0, -1))(
 test('requires exact fact scope and kind for every atomic rule', () => {
   const [ruleId] = ruleIds;
   const source = fact(ruleId, {
-    actual: 'token',
-    expected: 'token',
+    actual: true,
+    expected: false,
     subject: { id: 'button', kind: 'component' },
   });
   expect(
@@ -83,7 +99,7 @@ test('evaluates full-page 60-30-10 facts independently by breakpoint and theme w
     ),
   ];
   const result = evaluate('design.color.usage-distribution', facts, {
-    ...options,
+    ...policy,
     requiredScopes: ['page', 'viewport', 'scroll-sample'],
   });
   expect(result.results[0]?.status).toBe('INCOMPLETE');
@@ -93,7 +109,7 @@ test('evaluates full-page 60-30-10 facts independently by breakpoint and theme w
       distribution('page'),
       distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'hero'),
     ],
-    { ...options, requiredScopes: ['page', 'viewport'] },
+    { ...policy, requiredScopes: ['page', 'viewport'] },
   );
   expect(isolated.results[0]?.status).toBe('PASS');
   expect(isolated.findings.every((finding) => finding.severity === 'info')).toBe(true);
@@ -127,16 +143,22 @@ test('rejects unknown or non-total pixels, absent required coverage, and invalid
   expect(
     evaluate('design.color.usage-distribution', [distribution('viewport')]).results[0]?.status,
   ).toBe('INCOMPLETE');
-  const rule = createColorRuleSet().rules.at(-1);
-  expect(
-    rule?.validateOptions?.({
-      ...options,
-      roleTargets: { accent: 0.1, base: 0.5, secondary: 0.3 },
-    }),
-  ).not.toEqual([]);
-  expect(
-    rule?.validateOptions?.({ ...options, roleTolerances: { accent: 2, base: 0, secondary: 0 } }),
-  ).not.toEqual([]);
+  expect(() =>
+    createColorRuleSet({ ...policy, roleTargets: { accent: 0.1, base: 0.5, secondary: 0.3 } }),
+  ).toThrow('Color rule policy must define complete acceptance and coverage configuration.');
+  expect(() =>
+    createColorRuleSet({ ...policy, roleTolerances: { accent: 2, base: 0, secondary: 0 } }),
+  ).toThrow('Color rule policy must define complete acceptance and coverage configuration.');
+});
+
+test('does not pass when trusted breakpoint and theme coverage is absent from otherwise valid facts', () => {
+  const result = evaluate('design.color.usage-distribution', [distribution('page')], {
+    ...policy,
+    requiredBreakpointIds: ['desktop', 'mobile'],
+    requiredThemeIds: ['light', 'dark'],
+  });
+
+  expect(result.results[0]?.status).toBe('INCOMPLETE');
 });
 
 test('does not pass an empty rendered-area observation', () => {
@@ -159,14 +181,16 @@ test('does not pass an empty rendered-area observation', () => {
 function evaluate(
   ruleId: string,
   facts: readonly AvailableFactEnvelope[],
-  configuredOptions: JsonValue = options,
+  configuredPolicy: ColorRulePolicy = policy,
 ) {
-  const rule = createColorRuleSet().rules.find((candidate) => candidate.identity.id === ruleId);
+  const rule = createColorRuleSet(configuredPolicy).rules.find(
+    (candidate) => candidate.identity.id === ruleId,
+  );
   if (!rule) throw new Error(`Missing ${ruleId}`);
   const outcome = rule.evaluate({
     context: { evidence: [], facts },
     dependencyResults: [],
-    options: configuredOptions,
+    options: undefined,
     scope,
   });
   return { findings: outcome.findings, results: [outcome] };

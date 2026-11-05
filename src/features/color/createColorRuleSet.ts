@@ -1,16 +1,11 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
-import type {
-  JsonValue,
-  Rule,
-  RuleEvaluationInput,
-  RuleFinding,
-  RuleOptionDiagnostic,
-  RuleSet,
-} from '@ankhorage/rules';
+import type { JsonValue, Rule, RuleEvaluationInput, RuleFinding, RuleSet } from '@ankhorage/rules';
 import { isRecord } from '@ankhorage/utility/object';
 
 import type { DesignContext } from '../../types/designRuleProvider';
-import { createColorPolicyRules } from './createColorPolicyRules';
+import { type ColorRulePolicy, createColorPolicyRules } from './createColorPolicyRules';
+
+export type { ColorRulePolicy } from './createColorPolicyRules';
 
 type Role = 'accent' | 'base' | 'secondary';
 type CoverageScope = 'page' | 'scroll-sample' | 'viewport';
@@ -19,13 +14,6 @@ interface RoleValues {
   readonly accent: number;
   readonly base: number;
   readonly secondary: number;
-}
-interface Options {
-  readonly [key: string]: JsonValue;
-  readonly requiredScopes: readonly CoverageScope[];
-  readonly roleTargets: RoleValues;
-  readonly roleTolerances: RoleValues;
-  readonly version: 1;
 }
 interface Observation {
   readonly breakpointId: string;
@@ -36,40 +24,37 @@ interface Observation {
   readonly themeId: string;
   readonly unknownPixels: number;
 }
-const defaults: Options = {
-  requiredScopes: ['page'],
-  roleTargets: { accent: 0.1, base: 0.6, secondary: 0.3 },
-  roleTolerances: { accent: 0, base: 0, secondary: 0 },
-  version: 1,
-};
-
 /*** Creates the isolated Color and Tokens contribution without central registration. */
-export function createColorRuleSet(): RuleSet<DesignContext> {
-  return { id: 'ankhorage.rules-design.color', rules: [...createColorPolicyRules(), usageRule] };
+export function createColorRuleSet(policy: ColorRulePolicy): RuleSet<DesignContext> {
+  return {
+    id: 'ankhorage.rules-design.color',
+    rules: [...createColorPolicyRules(policy), createUsageRule(policy)],
+  };
 }
 
 /*** Evaluates rendered color areas against provider-owned targets and tolerances. */
-const usageRule: Rule<DesignContext> = {
-  defaultSeverity: 'warning',
-  dependencies: [],
-  evaluate: (input) => evaluateUsage(input, isOptions(input.options) ? input.options : defaults),
-  identity: { id: 'design.color.usage-distribution', version: '1.0.0' },
-  requiredCapabilities: ['rendered.area-analysis'],
-  summary:
-    'Compare separately measured rendered color-role areas with the configured distribution.',
-  validateOptions,
-};
+function createUsageRule(policy: ColorRulePolicy): Rule<DesignContext> {
+  return {
+    defaultSeverity: 'warning',
+    dependencies: [],
+    evaluate: (input) => evaluateUsage(input, policy),
+    identity: { id: 'design.color.usage-distribution', version: '1.0.0' },
+    requiredCapabilities: ['rendered.area-analysis'],
+    summary:
+      'Compare separately measured rendered color-role areas with the configured distribution.',
+  };
+}
 
 /*** Keeps exact rule scope, breakpoint, theme, and coverage measurements isolated. */
-function evaluateUsage(input: RuleEvaluationInput<DesignContext>, options: Options) {
+function evaluateUsage(input: RuleEvaluationInput<DesignContext>, policy: ColorRulePolicy) {
   const facts = (input.context.facts ?? []).filter(
-    (fact) => fact.kind === usageRule.identity.id && exactScope(fact, input),
+    (fact) => fact.kind === 'design.color.usage-distribution' && exactScope(fact, input),
   );
   const observations = facts.map(parseObservation);
   if (facts.length === 0 || observations.some((value) => value === undefined))
     return incomplete(input, 'No complete normalized rendered-area fact was supplied.');
   const complete = observations as readonly Observation[];
-  const missing = missingCoverage(complete, options.requiredScopes);
+  const missing = missingCoverage(complete, policy);
   if (missing.length > 0)
     return incomplete(
       input,
@@ -77,37 +62,37 @@ function evaluateUsage(input: RuleEvaluationInput<DesignContext>, options: Optio
     );
   const page = complete.filter((observation) => observation.scope === 'page');
   const failures = page.flatMap((observation) =>
-    deviations(observation, options).map((value) => finding(value, 'warning')),
+    deviations(observation, policy).map((value) => finding(value, 'warning')),
   );
   const diagnostics = complete
     .filter((observation) => observation.scope !== 'page')
     .flatMap((observation) =>
-      deviations(observation, options).map((value) => finding(value, 'info')),
+      deviations(observation, policy).map((value) => finding(value, 'info')),
     );
   return {
     findings: [...failures, ...diagnostics],
     status: failures.length === 0 ? ('PASS' as const) : ('FAIL' as const),
   };
 }
-/*** Requires one valid observation for every configured coverage scope per theme and breakpoint. */
+/*** Requires one valid observation for every trusted breakpoint, theme, and coverage scope. */
 function missingCoverage(
   observations: readonly Observation[],
-  scopes: readonly CoverageScope[],
+  policy: ColorRulePolicy,
 ): readonly string[] {
-  const keys = new Set(
-    observations.map((observation) => `${observation.breakpointId}:${observation.themeId}`),
-  );
-  return [...keys].flatMap((key) =>
-    scopes
-      .filter(
-        (scope) =>
-          observations.filter(
-            (observation) =>
-              `${observation.breakpointId}:${observation.themeId}` === key &&
-              observation.scope === scope,
-          ).length !== 1,
-      )
-      .map((scope) => `${key}:${scope}`),
+  return policy.requiredBreakpointIds.flatMap((breakpointId) =>
+    policy.requiredThemeIds.flatMap((themeId) =>
+      policy.requiredScopes
+        .filter(
+          (scope) =>
+            observations.filter(
+              (observation) =>
+                observation.breakpointId === breakpointId &&
+                observation.themeId === themeId &&
+                observation.scope === scope,
+            ).length !== 1,
+        )
+        .map((scope) => `${breakpointId}:${themeId}:${scope}`),
+    ),
   );
 }
 /*** Validates one available pixel observation including exact total and unknown coverage. */
@@ -179,28 +164,28 @@ function parsePixels(
     : undefined;
 }
 /*** Produces deviations only when the provider-owned tolerance is exceeded. */
-function deviations(observation: Observation, options: Options) {
+function deviations(observation: Observation, policy: ColorRulePolicy) {
   return [
     deviation(
       'base',
       observation.rolePixels.base,
       observation,
-      options.roleTargets.base,
-      options.roleTolerances.base,
+      policy.roleTargets.base,
+      policy.roleTolerances.base,
     ),
     deviation(
       'secondary',
       observation.rolePixels.secondary,
       observation,
-      options.roleTargets.secondary,
-      options.roleTolerances.secondary,
+      policy.roleTargets.secondary,
+      policy.roleTolerances.secondary,
     ),
     deviation(
       'accent',
       observation.rolePixels.accent,
       observation,
-      options.roleTargets.accent,
-      options.roleTolerances.accent,
+      policy.roleTargets.accent,
+      policy.roleTolerances.accent,
     ),
   ].flatMap((value) => (value === undefined ? [] : [value]));
 }
@@ -241,7 +226,7 @@ function finding(
       unknownPixels: value.observation.unknownPixels,
     },
     message: `${value.role} occupies ${value.observed} of ${value.observation.scope}, outside its configured tolerance.`,
-    ruleId: usageRule.identity.id,
+    ruleId: 'design.color.usage-distribution',
     severity,
     subjects: [{ id: value.observation.scopeId, kind: 'rendered-color-scope' }],
   };
@@ -253,7 +238,7 @@ function incomplete(input: RuleEvaluationInput<DesignContext>, message: string) 
       {
         evidence: { scopeId: input.scope.id },
         message,
-        ruleId: usageRule.identity.id,
+        ruleId: 'design.color.usage-distribution',
         severity: 'info' as const,
         subjects: [{ id: input.scope.id, kind: input.scope.kind }],
       },
@@ -264,46 +249,6 @@ function incomplete(input: RuleEvaluationInput<DesignContext>, message: string) 
 /*** Compares the complete active Rules scope rather than only its identifier. */
 function exactScope(fact: FactEnvelope, input: RuleEvaluationInput<DesignContext>): boolean {
   return fact.scope.id === input.scope.id && fact.scope.kind === input.scope.kind;
-}
-/*** Validates the serializable rule configuration before it can influence assessment. */
-function validateOptions(options: JsonValue | undefined): readonly RuleOptionDiagnostic[] {
-  return isOptions(options)
-    ? []
-    : [
-        {
-          code: 'invalid-color-usage-distribution-options',
-          message:
-            'Options must define complete 60-30-10 targets, bounded tolerances, and unique required scopes.',
-        },
-      ];
-}
-/*** Narrows a complete 60-30-10 configuration with finite bounded policy values. */
-function isOptions(value: JsonValue | undefined): value is Options {
-  return (
-    isRecord(value) &&
-    value.version === 1 &&
-    Array.isArray(value.requiredScopes) &&
-    value.requiredScopes.length > 0 &&
-    new Set(value.requiredScopes).size === value.requiredScopes.length &&
-    value.requiredScopes.every(isCoverageScope) &&
-    roleMap(value.roleTargets, true) &&
-    roleMap(value.roleTolerances, false)
-  );
-}
-/*** Checks normalized target or tolerance role maps. */
-function roleMap(value: unknown, target: boolean): value is RoleValues {
-  if (!isRecord(value)) return false;
-  const { accent, base, secondary } = value;
-  return (
-    proportion(accent) &&
-    proportion(base) &&
-    proportion(secondary) &&
-    (!target || Math.abs(base + secondary + accent - 1) < Number.EPSILON)
-  );
-}
-/*** Narrows a finite role proportion within the supported inclusive range. */
-function proportion(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1;
 }
 /*** Narrows a non-empty identifier. */
 function text(value: unknown): value is string {
