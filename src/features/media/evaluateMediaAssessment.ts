@@ -1,5 +1,6 @@
 import type { JsonValue } from '@ankhorage/rules';
 
+import { evaluateMediaApplicability } from './evaluateMediaApplicability';
 import type { MediaRuleDefinition } from './mediaRuleDefinitions';
 
 /*** Evaluates one rule-specific predicate from one normalized media assessment. */
@@ -8,6 +9,8 @@ export function evaluateMediaAssessment(
   aspectRatioTolerance: number,
   assessment: MediaAssessment,
 ): MediaCheck | null {
+  const applicability = evaluateMediaApplicability(definition.id, assessment);
+  if (applicability !== undefined) return applicability;
   switch (definition.id) {
     case 'design.media.aspect-ratio':
       return aspectRatio(assessment, aspectRatioTolerance);
@@ -51,7 +54,7 @@ export interface MediaCheck {
   readonly evidence: JsonValue;
   readonly mediaId: string;
   readonly message: string;
-  readonly passed: boolean;
+  readonly status: 'FAIL' | 'PASS' | 'SKIPPED';
 }
 
 type MediaValueSelector = (value: Readonly<Record<string, JsonValue>>) => JsonValue | undefined;
@@ -256,7 +259,7 @@ function check(
     evidence: { actual, expected, factId: assessment.id },
     mediaId: assessment.id,
     message: `${assessment.id} has ${label} ${JSON.stringify(actual)} but requires ${JSON.stringify(expected)}.`,
-    passed,
+    status: passed ? 'PASS' : 'FAIL',
   };
 }
 

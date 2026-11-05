@@ -3,6 +3,8 @@ import { evaluateRules, type JsonValue, type Rule } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
 import { createMediaRuleSet } from './createMediaRuleSet.ts';
+import { evaluateMediaAssessment } from './evaluateMediaAssessment.ts';
+import { mediaRuleDefinitions } from './mediaRuleDefinitions.ts';
 
 const scope: Scope = {
   id: 'hero',
@@ -154,9 +156,70 @@ test('owns the overlay contrast threshold instead of accepting one from factual 
   expect(result.findings[0]).toMatchObject({ evidence: { expected: 4.5 } });
 });
 
-test('does not let explicit non-applicability bypass required media measurements', () => {
+test('derives a skipped media assessment only from its validated rule-specific characteristic', () => {
   const rule = mediaRule('design.media.focal-point');
-  const nonApplicable = mediaFact({ applicable: false, mediaId: 'decorative-divider' });
+  const definition = mediaRuleDefinitions.find((candidate) => candidate.id === rule.identity.id);
+  if (definition === undefined) throw new Error('Expected focal-point definition.');
+  const nonApplicable = {
+    id: 'decorative-divider',
+    value: { hasFocalPoint: false, mediaId: 'decorative-divider' },
+  };
+  const missingMeasurement = {
+    id: 'hero-image',
+    value: { hasFocalPoint: true, mediaId: 'hero-image' },
+  };
+  const violation = {
+    id: 'hero-image',
+    value: {
+      focalPointX: 0.8,
+      focalPointY: 0.5,
+      hasFocalPoint: true,
+      mediaId: 'hero-image',
+      visibleBottom: 1,
+      visibleLeft: 0,
+      visibleRight: 0.6,
+      visibleTop: 0,
+    },
+  };
+
+  expect(evaluateMediaAssessment(definition, 0, nonApplicable)?.status).toBe('SKIPPED');
+  expect(evaluateMediaAssessment(definition, 0, missingMeasurement)).toBeNull();
+  expect(evaluateMediaAssessment(definition, 0, violation)?.status).toBe('FAIL');
+  expect(
+    evaluate(rule, mediaFact({ applicable: false, mediaId: 'decorative-divider' })).status,
+  ).toBe('INCOMPLETE');
+});
+
+test('reports a failing applicable medium when another medium is proven non-applicable', () => {
+  const rule = mediaRule('design.media.focal-point');
+  const [result] = evaluateRules(
+    {
+      facts: [
+        mediaFact({ hasFocalPoint: false, mediaId: 'decorative-divider' }),
+        mediaFact({
+          focalPointX: 0.8,
+          focalPointY: 0.5,
+          hasFocalPoint: true,
+          mediaId: 'hero-image',
+          visibleBottom: 1,
+          visibleLeft: 0,
+          visibleRight: 0.6,
+          visibleTop: 0,
+        }),
+      ],
+    },
+    [rule],
+    { capabilities: ['media.metadata'], scope: { id: scope.id, kind: scope.kind } },
+  ).results;
+
+  expect(result).toMatchObject({ status: 'FAIL' });
+  expect(result.findings).toEqual([
+    expect.objectContaining({ subjects: [{ id: 'hero-image', kind: 'media' }] }),
+  ]);
+});
+
+test('does not let an adapter supplied applicability flag bypass required media measurements', () => {
+  const rule = mediaRule('design.media.focal-point');
   const nonApplicableFailure = mediaFact({
     applicable: false,
     focalPointX: 0.8,
@@ -167,11 +230,7 @@ test('does not let explicit non-applicability bypass required media measurements
     visibleRight: 0.6,
     visibleTop: 0,
   });
-  const missingMeasurement = mediaFact({ mediaId: 'hero-image' });
-
-  expect(evaluate(rule, nonApplicable).status).toBe('INCOMPLETE');
   expect(evaluate(rule, nonApplicableFailure).status).toBe('FAIL');
-  expect(evaluate(rule, missingMeasurement).status).toBe('INCOMPLETE');
 });
 
 test('reports a failing media item when another scoped media item passes', () => {

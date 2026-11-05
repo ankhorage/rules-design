@@ -109,7 +109,7 @@ function failedOutcome(
   definition: MediaRuleDefinition,
   checks: readonly MediaCheck[],
 ): RuleEvaluationOutcome {
-  const failures = checks.filter((check) => !check.passed);
+  const failures = checks.filter((check) => check.status === 'FAIL');
   return failures.length === 0
     ? { findings: [], status: 'PASS' }
     : {
