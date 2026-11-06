@@ -6,20 +6,30 @@ import { type ColorRulePolicy, createColorRuleSet } from './createColorRuleSet';
 
 const scope = { id: 'home', kind: 'page' };
 const policy: ColorRulePolicy = {
-  acceptedValues: {
-    'design.color.active-state': true,
-    'design.color.alpha-composition': true,
-    'design.color.disabled-state': true,
-    'design.color.hover-state': true,
-    'design.color.literal-drift': true,
-    'design.color.ramp-consistency': true,
-    'design.color.semantic-role': true,
-    'design.color.surface-role': true,
-    'design.color.syntax-valid': true,
-    'design.color.theme-coverage': true,
-    'design.color.token-allowed': true,
-    'design.color.token-exists': true,
+  alphaCompositions: { 'ink/alpha': { 'surface/base': 'ink/on-base' } },
+  allowedColorSyntaxes: ['hex', 'token'],
+  allowedTokens: ['text/default', 'surface/base'],
+  canonicalLiterals: { '#ffffff': 'surface/base' },
+  knownTokens: [
+    'text/default',
+    'surface/base',
+    'text/on-surface',
+    'button/default',
+    'button/hover',
+    'button/active',
+    'button/disabled',
+    'ink/alpha',
+    'ink/on-base',
+  ],
+  rampTokens: { blue: ['blue/100', 'blue/500'] },
+  semanticRoleTokens: { foreground: ['text/default'], background: ['surface/base'] },
+  stateTokens: {
+    active: { 'button/default': 'button/active' },
+    disabled: { 'button/default': 'button/disabled' },
+    hover: { 'button/default': 'button/hover' },
   },
+  surfaceRoleTokens: { canvas: ['surface/base'] },
+  themeTokens: { 'surface/base': ['light', 'dark'] },
   requiredBreakpointIds: ['desktop'],
   requiredScopes: ['page'],
   requiredThemeIds: ['light'],
@@ -45,30 +55,71 @@ const ruleIds = [
 
 test('creates all thirteen frozen Color and Tokens rules', () =>
   expect(createColorRuleSet(policy).rules.map((rule) => rule.identity.id)).toEqual(ruleIds));
-
-test.each(ruleIds.slice(0, -1))(
-  '%s assesses normalized observations rather than adapter verdicts',
-  (ruleId) => {
+test.each([
+  [
+    'design.color.syntax-valid',
+    { color: '#ffffff', syntax: 'hex' },
+    { color: 'white', syntax: 'hex' },
+  ],
+  ['design.color.token-exists', { token: 'text/default' }, { token: 'text/missing' }],
+  ['design.color.token-allowed', { token: 'text/default' }, { token: 'button/default' }],
+  [
+    'design.color.semantic-role',
+    { role: 'foreground', token: 'text/default' },
+    { role: 'foreground', token: 'surface/base' },
+  ],
+  [
+    'design.color.literal-drift',
+    { literal: '#ffffff', token: 'surface/base' },
+    { literal: '#ffffff', token: 'text/default' },
+  ],
+  [
+    'design.color.ramp-consistency',
+    { ramp: 'blue', tokens: ['blue/100', 'blue/500'] },
+    { ramp: 'blue', tokens: ['blue/500', 'blue/100'] },
+  ],
+  [
+    'design.color.alpha-composition',
+    { foreground: 'ink/alpha', backdrop: 'surface/base', composite: 'ink/on-base' },
+    { foreground: 'ink/alpha', backdrop: 'surface/base', composite: 'text/default' },
+  ],
+  [
+    'design.color.surface-role',
+    { surface: 'canvas', token: 'surface/base' },
+    { surface: 'canvas', token: 'text/default' },
+  ],
+  [
+    'design.color.hover-state',
+    { baseToken: 'button/default', stateToken: 'button/hover' },
+    { baseToken: 'button/default', stateToken: 'button/active' },
+  ],
+  [
+    'design.color.active-state',
+    { baseToken: 'button/default', stateToken: 'button/active' },
+    { baseToken: 'button/default', stateToken: 'button/hover' },
+  ],
+  [
+    'design.color.disabled-state',
+    { baseToken: 'button/default', stateToken: 'button/disabled' },
+    { baseToken: 'button/default', stateToken: 'button/default' },
+  ],
+  [
+    'design.color.theme-coverage',
+    { token: 'surface/base', themes: ['light', 'dark'] },
+    { token: 'surface/missing', themes: ['light'] },
+  ],
+] as const)(
+  '%s assesses raw semantic observations and ignores adapter verdicts',
+  (ruleId, passing, failing) => {
     const pass = evaluate(ruleId, [
-      fact(ruleId, {
-        actual: true,
-        expected: false,
-        outcome: 'fail',
-        subject: { id: 'button', kind: 'component' },
-      }),
+      fact(ruleId, { ...passing, outcome: 'fail', subject: { id: 'button', kind: 'component' } }),
     ]);
     const fail = evaluate(ruleId, [
-      fact(ruleId, {
-        actual: false,
-        expected: true,
-        outcome: 'pass',
-        subject: { id: 'button', kind: 'component' },
-      }),
+      fact(ruleId, { ...failing, outcome: 'pass', subject: { id: 'button', kind: 'component' } }),
     ]);
     expect([pass.results[0]?.status, fail.results[0]?.status]).toEqual(['PASS', 'FAIL']);
   },
 );
-
 test('requires exact fact scope and kind for every atomic rule', () => {
   const [ruleId] = ruleIds;
   const source = fact(ruleId, {
@@ -84,22 +135,18 @@ test('requires exact fact scope and kind for every atomic rule', () => {
       ?.status,
   ).toBe('INCOMPLETE');
 });
-
-test('evaluates full-page 60-30-10 facts independently by breakpoint and theme while keeping local samples advisory', () => {
+test('requires full-page 60-30-10 coverage per breakpoint and theme while keeping multiple local samples advisory', () => {
   const facts = [
     distribution('page'),
     distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'hero'),
-    distribution('page', undefined, 'page', 'mobile', 'dark'),
-    distribution(
-      'scroll-sample',
-      { accent: 50, base: 30, secondary: 20 },
-      'footer',
-      'mobile',
-      'dark',
-    ),
+    distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'pricing'),
+    distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'footer'),
+    distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'testimonials'),
   ];
   const result = evaluate('design.color.usage-distribution', facts, {
     ...policy,
+    requiredBreakpointIds: ['desktop', 'mobile'],
+    requiredThemeIds: ['light', 'dark'],
     requiredScopes: ['page', 'viewport', 'scroll-sample'],
   });
   expect(result.results[0]?.status).toBe('INCOMPLETE');
@@ -108,13 +155,15 @@ test('evaluates full-page 60-30-10 facts independently by breakpoint and theme w
     [
       distribution('page'),
       distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'hero'),
+      distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'pricing'),
+      distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'footer'),
+      distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'testimonials'),
     ],
-    { ...policy, requiredScopes: ['page', 'viewport'] },
+    { ...policy, requiredScopes: ['page', 'viewport', 'scroll-sample'] },
   );
   expect(isolated.results[0]?.status).toBe('PASS');
   expect(isolated.findings.every((finding) => finding.severity === 'info')).toBe(true);
 });
-
 test('rejects unknown or non-total pixels, absent required coverage, and invalid targets or tolerances', () => {
   const invalidFacts = [
     envelope('design.color.usage-distribution', {
@@ -150,7 +199,6 @@ test('rejects unknown or non-total pixels, absent required coverage, and invalid
     createColorRuleSet({ ...policy, roleTolerances: { accent: 2, base: 0, secondary: 0 } }),
   ).toThrow('Color rule policy must define complete acceptance and coverage configuration.');
 });
-
 test('does not pass when trusted breakpoint and theme coverage is absent from otherwise valid facts', () => {
   const result = evaluate('design.color.usage-distribution', [distribution('page')], {
     ...policy,
@@ -160,7 +208,6 @@ test('does not pass when trusted breakpoint and theme coverage is absent from ot
 
   expect(result.results[0]?.status).toBe('INCOMPLETE');
 });
-
 test('does not pass an empty rendered-area observation', () => {
   const empty = envelope('design.color.usage-distribution', {
     breakpointId: 'desktop',
@@ -177,7 +224,6 @@ test('does not pass an empty rendered-area observation', () => {
   );
 });
 
-/*** Evaluates one Color rule with its fact-backed context. */
 function evaluate(
   ruleId: string,
   facts: readonly AvailableFactEnvelope[],
@@ -195,33 +241,16 @@ function evaluate(
   });
   return { findings: outcome.findings, results: [outcome] };
 }
-/*** Creates an exact-scope Color policy fact. */
 function fact(kind: string, value: JsonValue): AvailableFactEnvelope {
   return envelope(kind, value);
 }
-/*** Creates one rendered-area fact with exclusive, complete role pixels. */
 function distribution(
   coverageScope: string,
   roles = { accent: 10, base: 60, secondary: 30 },
   scopeId = 'page',
   breakpointId = 'desktop',
   themeId = 'light',
-): AvailableFactEnvelope & {
-  readonly value: {
-    readonly breakpointId: string;
-    readonly measuredPixels: number;
-    readonly rolePixels: {
-      readonly accent: number;
-      readonly base: number;
-      readonly secondary: number;
-      readonly unknown: number;
-    };
-    readonly scope: string;
-    readonly scopeId: string;
-    readonly themeId: string;
-    readonly unknownPixels: number;
-  };
-} {
+): AvailableFactEnvelope {
   return envelope('design.color.usage-distribution', {
     breakpointId,
     measuredPixels: 100,
@@ -230,24 +259,8 @@ function distribution(
     scopeId,
     themeId,
     unknownPixels: 0,
-  }) as AvailableFactEnvelope & {
-    readonly value: {
-      readonly breakpointId: string;
-      readonly measuredPixels: number;
-      readonly rolePixels: {
-        readonly accent: number;
-        readonly base: number;
-        readonly secondary: number;
-        readonly unknown: number;
-      };
-      readonly scope: string;
-      readonly scopeId: string;
-      readonly themeId: string;
-      readonly unknownPixels: number;
-    };
-  };
+  });
 }
-/*** Creates a canonical available envelope for a Color observation. */
 function envelope(kind: string, value: JsonValue): AvailableFactEnvelope {
   return {
     contentHash: `sha256:${kind}`,

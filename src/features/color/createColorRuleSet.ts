@@ -53,7 +53,7 @@ function evaluateUsage(input: RuleEvaluationInput<DesignContext>, policy: ColorR
   const observations = facts.map(parseObservation);
   if (facts.length === 0 || observations.some((value) => value === undefined))
     return incomplete(input, 'No complete normalized rendered-area fact was supplied.');
-  const complete = observations as readonly Observation[];
+  const complete = observations.filter(isObservation);
   const missing = missingCoverage(complete, policy);
   if (missing.length > 0)
     return incomplete(
@@ -74,26 +74,27 @@ function evaluateUsage(input: RuleEvaluationInput<DesignContext>, policy: ColorR
     status: failures.length === 0 ? ('PASS' as const) : ('FAIL' as const),
   };
 }
-/*** Requires one valid observation for every trusted breakpoint, theme, and coverage scope. */
+/*** Requires exactly one complete full-page observation for every breakpoint and theme. */
 function missingCoverage(
   observations: readonly Observation[],
   policy: ColorRulePolicy,
 ): readonly string[] {
   return policy.requiredBreakpointIds.flatMap((breakpointId) =>
     policy.requiredThemeIds.flatMap((themeId) =>
-      policy.requiredScopes
-        .filter(
-          (scope) =>
-            observations.filter(
-              (observation) =>
-                observation.breakpointId === breakpointId &&
-                observation.themeId === themeId &&
-                observation.scope === scope,
-            ).length !== 1,
-        )
-        .map((scope) => `${breakpointId}:${themeId}:${scope}`),
+      observations.filter(
+        (observation) =>
+          observation.breakpointId === breakpointId &&
+          observation.themeId === themeId &&
+          observation.scope === 'page',
+      ).length === 1
+        ? []
+        : [`${breakpointId}:${themeId}:page`],
     ),
   );
+}
+/*** Narrows a parsed observation after incomplete evidence has been rejected. */
+function isObservation(observation: Observation | undefined): observation is Observation {
+  return observation !== undefined;
 }
 /*** Validates one available pixel observation including exact total and unknown coverage. */
 function parseObservation(fact: FactEnvelope): Observation | undefined {
