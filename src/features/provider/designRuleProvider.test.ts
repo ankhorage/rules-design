@@ -1,7 +1,14 @@
-import { createRuleEvaluationPlan, createRuleRegistry, evaluateRules } from '@ankhorage/rules';
+import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
+import {
+  createRuleEvaluationPlan,
+  createRuleRegistry,
+  evaluateRules,
+  type RuleEvaluationInput,
+} from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
 import { typographyPolicy } from '../../../test/fixtures/typographyRuleFacts';
+import type { DesignContext } from '../../types/designRuleProvider';
 import { designRuleCatalog } from '../catalog/designRuleCatalog';
 import { createDesignCrapRules } from './createDesignCrapRules';
 import { createDesignRuleProvider } from './designRuleProvider';
@@ -28,6 +35,7 @@ const provider = createDesignRuleProvider({
   },
   typography: typographyPolicy,
 });
+const pageScope = { id: 'home', kind: 'page' };
 
 test('registers every frozen atomic and C.R.A.P. rule through one provider', () => {
   const registry = createRuleRegistry([provider.ruleSet]);
@@ -73,6 +81,94 @@ test('keeps 60-30-10 as a profile selecting the existing usage-distribution rule
   ]);
 });
 
+test('evaluates the 60-30-10 profile from full-page facts as pass, advisory deviation, and incomplete', () => {
+  const registry = createRuleRegistry([provider.ruleSet]);
+  const selection = selectDesignRuleProfile('design.60-30-10');
+  const evaluateProfile = (facts: readonly AvailableFactEnvelope[]) =>
+    evaluateRules({ facts }, registry.rules, {
+      capabilities: ['rendered.area-analysis'],
+      scope: pageScope,
+      selection: selection.selection,
+    });
+
+  const passing = evaluateProfile([fullPageDistribution()]);
+  const deviation = evaluateProfile([
+    fullPageDistribution({ accent: 20, base: 50, secondary: 30 }),
+  ]);
+  const incomplete = evaluateProfile([]);
+
+  expect(passing.results[0]?.status).toBe('PASS');
+  expect(deviation.results[0]?.status).toBe('FAIL');
+  expect(deviation.findings[0]).toMatchObject({
+    evidence: { observed: 0.5, role: 'base', scope: 'page' },
+    severity: 'warning',
+  });
+  expect(incomplete.results[0]?.status).toBe('INCOMPLETE');
+});
+
+test('executes the shared 60-30-10 child once when both mandatory profiles are selected', () => {
+  const registry = createRuleRegistry([provider.ruleSet]);
+  const usageRuleId = 'design.color.usage-distribution';
+  const crapProfile = selectDesignRuleProfile('design.crap');
+  const distributionProfile = selectDesignRuleProfile('design.60-30-10');
+  let usageEvaluations = 0;
+  const countingRules = registry.rules.map((rule) =>
+    rule.identity.id === usageRuleId
+      ? {
+          ...rule,
+          evaluate: (input: RuleEvaluationInput<DesignContext>) => {
+            usageEvaluations += 1;
+            return rule.evaluate(input);
+          },
+        }
+      : rule,
+  );
+
+  const result = evaluateRules({ facts: [fullPageDistribution()] }, countingRules, {
+    capabilities: ['rendered.area-analysis'],
+    scope: pageScope,
+    selection: {
+      rootRuleIds: [
+        ...crapProfile.selection.rootRuleIds,
+        ...distributionProfile.selection.rootRuleIds,
+      ],
+    },
+  });
+
+  expect(result.plan.rootRuleIds).toEqual([usageRuleId, 'design.crap']);
+  expect(result.results.filter((entry) => entry.rule.id === usageRuleId)).toHaveLength(1);
+  expect(usageEvaluations).toBe(1);
+});
+
+test('returns the four C.R.A.P. principle results through a deterministic diamond plan', () => {
+  const registry = createRuleRegistry([provider.ruleSet]);
+  const selection = selectDesignRuleProfile('design.crap');
+  const evaluateProfile = () =>
+    evaluateRules({ facts: [fullPageDistribution()] }, registry.rules, {
+      capabilities: ['rendered.area-analysis'],
+      scope: pageScope,
+      selection: selection.selection,
+    });
+
+  const first = evaluateProfile();
+  const second = evaluateProfile();
+  const principleIds = [
+    'design.crap.alignment',
+    'design.crap.contrast',
+    'design.crap.proximity',
+    'design.crap.repetition',
+  ];
+
+  const principleResults = first.results.filter((entry) => principleIds.includes(entry.rule.id));
+
+  expect(principleResults.map((entry) => entry.rule.id).sort()).toEqual(principleIds);
+  expect(principleResults.every((entry) => entry.status === 'INCOMPLETE')).toBe(true);
+  expect(first.results.find((entry) => entry.rule.id === 'design.crap')?.status).toBe('INCOMPLETE');
+  expect(first.results.map((entry) => [entry.rule.id, entry.status])).toEqual(
+    second.results.map((entry) => [entry.rule.id, entry.status]),
+  );
+});
+
 test('reports failed C.R.A.P. children and propagates incomplete children without evaluating a score', () => {
   const child = {
     defaultSeverity: 'warning' as const,
@@ -108,3 +204,33 @@ test('reports failed C.R.A.P. children and propagates incomplete children withou
 test('rejects unknown profile IDs instead of treating them as rule IDs', () => {
   expect(() => selectDesignRuleProfile('design.unknown')).toThrow('Unknown Design profile');
 });
+
+function fullPageDistribution(
+  rolePixels = { accent: 10, base: 60, secondary: 30 },
+): AvailableFactEnvelope {
+  return {
+    contentHash: 'sha256:full-page-distribution',
+    id: 'design.color.usage-distribution:home',
+    kind: 'design.color.usage-distribution',
+    provenance: {
+      collectedAt: '2026-11-06T00:00:00.000Z',
+      producer: { id: 'fixture', version: '1' },
+      source: { id: 'fixture', revision: null },
+    },
+    schemaVersion: 1,
+    scope: {
+      ...pageScope,
+      target: { kind: 'application', projectId: 'project', targetId: 'home', tenantId: 'tenant' },
+    },
+    status: 'available',
+    value: {
+      breakpointId: 'desktop',
+      measuredPixels: 100,
+      rolePixels: { ...rolePixels, unknown: 0 },
+      scope: 'page',
+      scopeId: 'page',
+      themeId: 'light',
+      unknownPixels: 0,
+    },
+  };
+}
