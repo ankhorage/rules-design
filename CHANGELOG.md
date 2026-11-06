@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- 416c5b3: Register all Design rule families and the C.R.A.P. composition graph through a configured provider factory, with executable C.R.A.P. and 60-30-10 profile selection.
+
 ## 0.3.3
 
 ### Patch Changes

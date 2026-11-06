@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.3",
+      "value": "v0.4.0",
       "color": "cb3837"
     },
     {
@@ -68,7 +68,7 @@
     {
       "area": "examples",
       "title": "Evaluate Design Evidence",
-      "description": "Register the Design provider with the generic Rules evaluator.",
+      "description": "Register the configured Design provider and evaluate a named profile.",
       "language": "ts",
       "code": "import { createRuleRegistry, evaluateRules } from '@ankhorage/rules';",
       "sourcePath": "examples/provider-evaluation/evaluate.ts",
@@ -179,6 +179,7 @@
       "path": "src/features/catalog/designRuleProviderManifest.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/catalog/designRuleCatalog.ts",
         "src/types/designRuleCatalog.ts"
       ],
       "exports": [
@@ -381,11 +382,25 @@
       ]
     },
     {
+      "path": "src/features/provider/createDesignCrapRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "createDesignCrapRules"
+      ]
+    },
+    {
       "path": "src/features/provider/designRuleProvider.test.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/index.ts",
-        "test/fixtures/designEvidencePresentRule.ts"
+        "src/features/catalog/designRuleCatalog.ts",
+        "src/features/provider/createDesignCrapRules.ts",
+        "src/features/provider/designRuleProvider.ts",
+        "src/features/provider/selectDesignRuleProfile.ts",
+        "src/types/designRuleProvider.ts",
+        "test/fixtures/typographyRuleFacts.ts"
       ],
       "exports": []
     },
@@ -393,10 +408,31 @@
       "path": "src/features/provider/designRuleProvider.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/accessibility/createAccessibilityRules.ts",
+        "src/features/alignment/createAlignmentRules.ts",
+        "src/features/color/createColorRuleSet.ts",
+        "src/features/contrast/createContrastRules.ts",
+        "src/features/media/createMediaRuleSet.ts",
+        "src/features/provider/createDesignCrapRules.ts",
+        "src/features/repetition/createRepetitionRules.ts",
+        "src/features/responsive/createResponsiveRules.ts",
+        "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "src/features/typography/createTypographyRuleSet.ts",
         "src/types/designRuleProvider.ts"
       ],
       "exports": [
-        "designRuleProvider"
+        "createDesignRuleProvider"
+      ]
+    },
+    {
+      "path": "src/features/provider/selectDesignRuleProfile.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/catalog/designRuleProfiles.ts",
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "selectDesignRuleProfile"
       ]
     },
     {
@@ -524,6 +560,7 @@
       "dependencies": [
         "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
         "src/features/spacing-proximity/parseSpacingProximityMeasurements.ts",
+        "src/types/designRuleProvider.ts",
         "src/types/spacingProximity.ts"
       ],
       "exports": [
@@ -599,9 +636,9 @@
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
+        "createDesignRuleProvider",
         "DesignAssessmentKind",
         "DesignContext",
-        "DesignEvidence",
         "designRuleCatalog",
         "DesignRuleCatalogEntry",
         "DesignRuleCatalogFilter",
@@ -609,13 +646,15 @@
         "DesignRulePlanningManifest",
         "DesignRuleProfile",
         "designRuleProfiles",
-        "designRuleProvider",
+        "DesignRuleProfileSelection",
         "DesignRuleProvider",
         "designRuleProviderManifest",
         "DesignRuleProviderManifest",
+        "DesignRuleProviderOptions",
         "DesignRuleScope",
         "DesignRuleStatus",
-        "filterDesignRuleCatalog"
+        "filterDesignRuleCatalog",
+        "selectDesignRuleProfile"
       ]
     },
     {
@@ -646,11 +685,17 @@
     {
       "path": "src/types/designRuleProvider.ts",
       "isEntrypoint": false,
-      "dependencies": [],
+      "dependencies": [
+        "src/features/alignment/createAlignmentRules.ts",
+        "src/features/color/createColorRuleSet.ts",
+        "src/features/media/createMediaRuleSet.ts",
+        "src/types/typography.ts"
+      ],
       "exports": [
         "DesignContext",
-        "DesignEvidence",
-        "DesignRuleProvider"
+        "DesignRuleProfileSelection",
+        "DesignRuleProvider",
+        "DesignRuleProviderOptions"
       ]
     },
     {
@@ -702,16 +747,6 @@
       ]
     },
     {
-      "path": "test/fixtures/designEvidencePresentRule.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/types/designRuleProvider.ts"
-      ],
-      "exports": [
-        "designEvidencePresentRule"
-      ]
-    },
-    {
       "path": "test/fixtures/repetitionRuleFacts.ts",
       "isEntrypoint": false,
       "dependencies": [],
@@ -748,6 +783,45 @@
   ],
   "exports": [
     {
+      "name": "createDesignRuleProvider",
+      "title": null,
+      "description": "Creates the complete registered Design provider from its explicit group-local policies.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/provider/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.ts",
+        "line": 20,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignRuleProvider",
+        "DesignRuleProviderOptions"
+      ],
+      "signatures": [
+        {
+          "label": "(options: DesignRuleProviderOptions) => DesignRuleProvider",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "DesignRuleProviderOptions",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "DesignRuleProvider",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "DesignAssessmentKind",
       "title": null,
       "description": null,
@@ -780,46 +854,7 @@
       "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
         "filePath": "src/types/designRuleProvider.ts",
-        "line": 11,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [
-        "DesignEvidence"
-      ],
-      "signatures": [],
-      "members": [
-        {
-          "name": "evidence",
-          "kind": "property",
-          "type": "readonly DesignEvidence[]",
-          "required": true,
-          "description": null
-        },
-        {
-          "name": "facts",
-          "kind": "property",
-          "type": "readonly FactEnvelope[] | undefined",
-          "required": false,
-          "description": null
-        }
-      ],
-      "structuredRows": []
-    },
-    {
-      "name": "DesignEvidence",
-      "title": null,
-      "description": "One provider-neutral design observation supplied by a Design context.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "type",
-      "modulePath": "src/types/designRuleProvider.ts",
-      "sourceLocation": {
-        "filePath": "src/types/designRuleProvider.ts",
-        "line": 5,
+        "line": 10,
         "column": 1
       },
       "exportPaths": [
@@ -829,16 +864,9 @@
       "signatures": [],
       "members": [
         {
-          "name": "id",
+          "name": "facts",
           "kind": "property",
-          "type": "string",
-          "required": true,
-          "description": null
-        },
-        {
-          "name": "kind",
-          "kind": "property",
-          "type": "string",
+          "type": "readonly FactEnvelope[]",
           "required": true,
           "description": null
         }
@@ -1192,25 +1220,40 @@
       ]
     },
     {
-      "name": "designRuleProvider",
+      "name": "DesignRuleProfileSelection",
       "title": null,
-      "description": "Exposes the reusable Design provider through the generic Rules RuleSet contract.",
+      "description": "Maps a named Design profile to the generic Rules engine selection contract.",
       "isReadme": false,
       "see": [],
       "security": [],
-      "kind": "value",
-      "modulePath": "src/features/provider/designRuleProvider.ts",
+      "kind": "type",
+      "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
-        "filePath": "src/features/provider/designRuleProvider.ts",
-        "line": 4,
-        "column": 14
+        "filePath": "src/types/designRuleProvider.ts",
+        "line": 30,
+        "column": 1
       },
       "exportPaths": [
         "src/index.ts"
       ],
       "relatedSymbols": [],
       "signatures": [],
-      "members": [],
+      "members": [
+        {
+          "name": "profileId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "selection",
+          "kind": "property",
+          "type": "RuleSelection",
+          "required": true,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -1224,7 +1267,7 @@
       "modulePath": "src/types/designRuleProvider.ts",
       "sourceLocation": {
         "filePath": "src/types/designRuleProvider.ts",
-        "line": 17,
+        "line": 23,
         "column": 1
       },
       "exportPaths": [
@@ -1262,7 +1305,7 @@
     {
       "name": "designRuleProviderManifest",
       "title": null,
-      "description": "Declares the released MIT provider surface without exposing unclassified planned rules.",
+      "description": "Declares every central-provider rule identity published through the released package surface.",
       "isReadme": false,
       "see": [],
       "security": [],
@@ -1270,7 +1313,7 @@
       "modulePath": "src/features/catalog/designRuleProviderManifest.ts",
       "sourceLocation": {
         "filePath": "src/features/catalog/designRuleProviderManifest.ts",
-        "line": 4,
+        "line": 5,
         "column": 14
       },
       "exportPaths": [
@@ -1326,6 +1369,57 @@
           "name": "schemaVersion",
           "kind": "property",
           "type": "\"1\"",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "DesignRuleProviderOptions",
+      "title": null,
+      "description": "Configures the group-local policy needed to create one complete Design provider.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/designRuleProvider.ts",
+      "sourceLocation": {
+        "filePath": "src/types/designRuleProvider.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "alignment",
+          "kind": "property",
+          "type": "AlignmentRuleOptions | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "color",
+          "kind": "property",
+          "type": "ColorRulePolicy",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "media",
+          "kind": "property",
+          "type": "MediaRuleOptions | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "typography",
+          "kind": "property",
+          "type": "TypographyRulePolicy",
           "required": true,
           "description": null
         }
@@ -1415,6 +1509,44 @@
             }
           ],
           "returnType": "readonly DesignRuleCatalogEntry[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "selectDesignRuleProfile",
+      "title": null,
+      "description": "Resolves one named profile independently from the Rule IDs it selects.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/provider/selectDesignRuleProfile.ts",
+      "sourceLocation": {
+        "filePath": "src/features/provider/selectDesignRuleProfile.ts",
+        "line": 7,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "DesignRuleProfileSelection"
+      ],
+      "signatures": [
+        {
+          "label": "(profileId: string) => DesignRuleProfileSelection",
+          "parameters": [
+            {
+              "name": "profileId",
+              "type": "string",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "DesignRuleProfileSelection",
           "returnDescription": null
         }
       ],
@@ -3372,6 +3504,149 @@
       }
     },
     {
+      "name": "createDesignCrapRules",
+      "description": "Creates the five C.R.A.P. composition nodes from the registered atomic Design rules.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "crapDefinitions",
+      "description": "Declares C.R.A.P. dependencies from canonical atomic IDs without reimplementing group rules.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "children",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 21,
+        "column": 9
+      }
+    },
+    {
+      "name": "definition",
+      "description": "Defines one stable composite identity and its evaluator-owned dependency edges.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 58,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDesignCrapRule",
+      "description": "Adapts one declared C.R.A.P. node to the generic dependency-result contract.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateDesignCrapRule",
+      "description": "Reports failed child principles as advisory findings while the engine propagates incomplete ones.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/createDesignCrapRules.ts",
+        "line": 74,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateProfile",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.test.ts",
+        "line": 87,
+        "column": 9
+      }
+    },
+    {
+      "name": "evaluateProfile",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.test.ts",
+        "line": 146,
+        "column": 9
+      }
+    },
+    {
+      "name": "fullPageDistribution",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.test.ts",
+        "line": 208,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDesignRuleProvider",
+      "description": "Creates the complete registered Design provider from its explicit group-local policies.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAtomicRules",
+      "description": "Collects each independently owned atomic contribution at the central registration boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/designRuleProvider.ts",
+        "line": 33,
+        "column": 1
+      }
+    },
+    {
+      "name": "selectDesignRuleProfile",
+      "description": "Resolves one named profile independently from the Rule IDs it selects.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/selectDesignRuleProfile.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "selection",
+      "description": "Creates a fresh generic selection so callers cannot mutate catalog-owned profile declarations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/provider/selectDesignRuleProfile.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
       "name": "evaluate",
       "description": null,
       "see": [],
@@ -4379,7 +4654,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 9,
+        "line": 10,
         "column": 1
       }
     },
@@ -4390,7 +4665,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 52,
+        "line": 53,
         "column": 1
       }
     },
@@ -4401,7 +4676,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 65,
+        "line": 66,
         "column": 1
       }
     },
@@ -4412,7 +4687,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 88,
+        "line": 89,
         "column": 1
       }
     },
@@ -4423,7 +4698,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 97,
+        "line": 98,
         "column": 1
       }
     },
@@ -4434,7 +4709,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 116,
+        "line": 117,
         "column": 1
       }
     },
@@ -4445,7 +4720,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
-        "line": 121,
+        "line": 122,
         "column": 1
       }
     },
@@ -4882,10 +5157,26 @@
   "sequenceScenarios": [
     {
       "kind": "export",
+      "name": "createDesignRuleProvider",
+      "sourcePath": "src/features/provider/designRuleProvider.ts",
+      "symbolName": "createDesignRuleProvider",
+      "description": "Creates the complete registered Design provider from its explicit group-local policies.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "filterDesignRuleCatalog",
       "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts",
       "symbolName": "filterDesignRuleCatalog",
       "description": "Selects planned catalog entries matching every supplied controlled facet.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "selectDesignRuleProfile",
+      "sourcePath": "src/features/provider/selectDesignRuleProfile.ts",
+      "symbolName": "selectDesignRuleProfile",
+      "description": "Resolves one named profile independently from the Rule IDs it selects.",
       "isReadme": false
     }
   ],
@@ -4918,6 +5209,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/provider/selectDesignRuleProfile.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/types/designRuleCatalog.ts",
         "sourcePath": "src/index.ts"
       },
@@ -4927,14 +5223,29 @@
         "sourcePath": "src/index.ts"
       },
       {
-        "fromPath": "test/fixtures/designEvidencePresentRule.ts",
-        "toPath": "src/types/designRuleProvider.ts",
-        "sourcePath": "test/fixtures/designEvidencePresentRule.ts"
-      },
-      {
         "fromPath": "test/fixtures/typographyRuleFacts.ts",
         "toPath": "src/types/typography.ts",
         "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromPath": "src/types/designRuleProvider.ts",
+        "toPath": "src/features/alignment/createAlignmentRules.ts",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/types/designRuleProvider.ts",
+        "toPath": "src/features/color/createColorRuleSet.ts",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/types/designRuleProvider.ts",
+        "toPath": "src/features/media/createMediaRuleSet.ts",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/types/designRuleProvider.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "src/types/designRuleProvider.ts"
       },
       {
         "fromPath": "src/features/accessibility/createAccessibilityRules.test.ts",
@@ -5019,6 +5330,11 @@
       {
         "fromPath": "src/features/catalog/designRuleProviderManifest.ts",
         "toPath": "src/types/designRuleCatalog.ts",
+        "sourcePath": "src/features/catalog/designRuleProviderManifest.ts"
+      },
+      {
+        "fromPath": "src/features/catalog/designRuleProviderManifest.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
         "sourcePath": "src/features/catalog/designRuleProviderManifest.ts"
       },
       {
@@ -5152,19 +5468,104 @@
         "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
       },
       {
+        "fromPath": "src/features/provider/createDesignCrapRules.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/provider/createDesignCrapRules.ts"
+      },
+      {
         "fromPath": "src/features/provider/designRuleProvider.test.ts",
-        "toPath": "test/fixtures/designEvidencePresentRule.ts",
+        "toPath": "test/fixtures/typographyRuleFacts.ts",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
       },
       {
         "fromPath": "src/features/provider/designRuleProvider.test.ts",
-        "toPath": "src/index.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "src/features/catalog/designRuleCatalog.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "src/features/provider/createDesignCrapRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "src/features/provider/designRuleProvider.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.test.ts",
+        "toPath": "src/features/provider/selectDesignRuleProfile.ts",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
       },
       {
         "fromPath": "src/features/provider/designRuleProvider.ts",
         "toPath": "src/types/designRuleProvider.ts",
         "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/accessibility/createAccessibilityRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/alignment/createAlignmentRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/color/createColorRuleSet.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/contrast/createContrastRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/media/createMediaRuleSet.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/repetition/createRepetitionRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/responsive/createResponsiveRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/typography/createTypographyRuleSet.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/designRuleProvider.ts",
+        "toPath": "src/features/provider/createDesignCrapRules.ts",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "src/features/provider/selectDesignRuleProfile.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
+      },
+      {
+        "fromPath": "src/features/provider/selectDesignRuleProfile.ts",
+        "toPath": "src/features/catalog/designRuleProfiles.ts",
+        "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
       },
       {
         "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
@@ -5265,6 +5666,11 @@
         "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts",
         "toPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
         "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts"
       },
       {
         "fromPath": "src/features/spacing-proximity/createSpacingProximityRuleSet.ts",
@@ -7046,6 +7452,36 @@
         "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
       },
       {
+        "fromSymbol": "createDesignCrapRules",
+        "toSymbol": "crapDefinitions",
+        "callExpression": "crapDefinitions",
+        "sourcePath": "src/features/provider/createDesignCrapRules.ts"
+      },
+      {
+        "fromSymbol": "crapDefinitions",
+        "toSymbol": "definition",
+        "callExpression": "definition",
+        "sourcePath": "src/features/provider/createDesignCrapRules.ts"
+      },
+      {
+        "fromSymbol": "crapDefinitions",
+        "toSymbol": "children",
+        "callExpression": "children",
+        "sourcePath": "src/features/provider/createDesignCrapRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateDesignCrapRule",
+        "callExpression": "evaluateDesignCrapRule",
+        "sourcePath": "src/features/provider/createDesignCrapRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "createDesignRuleProvider",
+        "callExpression": "createDesignRuleProvider",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
         "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
         "toSymbol": "test",
         "callExpression": "test",
@@ -7059,15 +7495,129 @@
       },
       {
         "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "selectDesignRuleProfile",
+        "callExpression": "selectDesignRuleProfile",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "createRuleEvaluationPlan",
+        "callExpression": "createRuleEvaluationPlan",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateProfile",
         "toSymbol": "evaluateRules",
         "callExpression": "evaluateRules",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
       },
       {
         "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
-        "toSymbol": "expect",
-        "callExpression": "expect",
+        "toSymbol": "evaluateProfile",
+        "callExpression": "evaluateProfile",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "fullPageDistribution",
+        "callExpression": "fullPageDistribution",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateProfile",
+        "toSymbol": "fullPageDistribution",
+        "callExpression": "fullPageDistribution",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
+        "toSymbol": "createDesignCrapRules",
+        "callExpression": "createDesignCrapRules",
+        "sourcePath": "src/features/provider/designRuleProvider.test.ts"
+      },
+      {
+        "fromSymbol": "createDesignRuleProvider",
+        "toSymbol": "createAtomicRules",
+        "callExpression": "createAtomicRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createDesignRuleProvider",
+        "toSymbol": "createDesignCrapRules",
+        "callExpression": "createDesignCrapRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createColorRuleSet",
+        "callExpression": "createColorRuleSet",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createContrastRules",
+        "callExpression": "createContrastRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createTypographyRuleSet",
+        "callExpression": "createTypographyRuleSet",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createSpacingProximityRuleSet",
+        "callExpression": "createSpacingProximityRuleSet",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createAlignmentRules",
+        "callExpression": "createAlignmentRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createRepetitionRules",
+        "callExpression": "createRepetitionRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createResponsiveRules",
+        "callExpression": "createResponsiveRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createAccessibilityRules",
+        "callExpression": "createAccessibilityRules",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createAtomicRules",
+        "toSymbol": "createMediaRuleSet",
+        "callExpression": "createMediaRuleSet",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "selectDesignRuleProfile",
+        "toSymbol": "selection",
+        "callExpression": "selection",
+        "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
       },
       {
         "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
@@ -8352,6 +8902,21 @@
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
       },
       {
+        "fromSymbol": "createDesignRuleProvider",
+        "toType": "DesignRuleProvider",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "createDesignRuleProvider",
+        "toType": "DesignRuleProviderOptions",
+        "sourcePath": "src/features/provider/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "selectDesignRuleProfile",
+        "toType": "DesignRuleProfileSelection",
+        "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
+      },
+      {
         "fromSymbol": "DesignRuleCatalogEntry",
         "toType": "DesignAssessmentKind",
         "sourcePath": "src/types/designRuleCatalog.ts"
@@ -8378,12 +8943,12 @@
       },
       {
         "fromSymbol": "DesignContext",
-        "toType": "DesignEvidence",
+        "toType": "FactEnvelope",
         "sourcePath": "src/types/designRuleProvider.ts"
       },
       {
-        "fromSymbol": "DesignContext",
-        "toType": "FactEnvelope",
+        "fromSymbol": "DesignRuleProfileSelection",
+        "toType": "RuleSelection",
         "sourcePath": "src/types/designRuleProvider.ts"
       },
       {
@@ -8394,6 +8959,26 @@
       {
         "fromSymbol": "DesignRuleProvider",
         "toType": "RuleSet",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProviderOptions",
+        "toType": "AlignmentRuleOptions",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProviderOptions",
+        "toType": "ColorRulePolicy",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProviderOptions",
+        "toType": "MediaRuleOptions",
+        "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "DesignRuleProviderOptions",
+        "toType": "TypographyRulePolicy",
         "sourcePath": "src/types/designRuleProvider.ts"
       }
     ],

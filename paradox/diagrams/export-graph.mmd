@@ -28,8 +28,10 @@ graph LR
   module_src_features_media_evaluateMediaApplicability_ts["src/features/media/evaluateMediaApplicability.ts"]
   module_src_features_media_evaluateMediaAssessment_ts["src/features/media/evaluateMediaAssessment.ts"]
   module_src_features_media_mediaRuleDefinitions_ts["src/features/media/mediaRuleDefinitions.ts"]
+  module_src_features_provider_createDesignCrapRules_ts["src/features/provider/createDesignCrapRules.ts"]
   module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
   module_src_features_provider_designRuleProvider_ts["src/features/provider/designRuleProvider.ts"]
+  module_src_features_provider_selectDesignRuleProfile_ts["src/features/provider/selectDesignRuleProfile.ts"]
   module_src_features_repetition_createRepetitionRules_test_ts["src/features/repetition/createRepetitionRules.test.ts"]
   module_src_features_repetition_createRepetitionRules_ts["src/features/repetition/createRepetitionRules.ts"]
   module_src_features_responsive_createResponsiveRules_test_ts["src/features/responsive/createResponsiveRules.test.ts"]
@@ -58,17 +60,17 @@ graph LR
   module_src_types_typography_ts["src/types/typography.ts"]
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
   module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
-  module_test_fixtures_designEvidencePresentRule_ts["test/fixtures/designEvidencePresentRule.ts"]
   module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
   module_test_fixtures_responsiveFact_ts["test/fixtures/responsiveFact.ts"]
   module_test_fixtures_typographyRuleFacts_ts["test/fixtures/typographyRuleFacts.ts"]
+  export_createDesignRuleProvider["createDesignRuleProvider"]
+  module_src_features_provider_designRuleProvider_ts --> export_createDesignRuleProvider
+  export_createDesignRuleProvider -.-> export_DesignRuleProvider
+  export_createDesignRuleProvider -.-> export_DesignRuleProviderOptions
   export_DesignAssessmentKind["DesignAssessmentKind"]
   module_src_types_designRuleCatalog_ts --> export_DesignAssessmentKind
   export_DesignContext["DesignContext"]
   module_src_types_designRuleProvider_ts --> export_DesignContext
-  export_DesignContext -.-> export_DesignEvidence
-  export_DesignEvidence["DesignEvidence"]
-  module_src_types_designRuleProvider_ts --> export_DesignEvidence
   export_designRuleCatalog["designRuleCatalog"]
   module_src_features_catalog_designRuleCatalog_ts --> export_designRuleCatalog
   export_DesignRuleCatalogEntry["DesignRuleCatalogEntry"]
@@ -88,8 +90,8 @@ graph LR
   module_src_types_designRuleCatalog_ts --> export_DesignRuleProfile
   export_designRuleProfiles["designRuleProfiles"]
   module_src_features_catalog_designRuleProfiles_ts --> export_designRuleProfiles
-  export_designRuleProvider["designRuleProvider"]
-  module_src_features_provider_designRuleProvider_ts --> export_designRuleProvider
+  export_DesignRuleProfileSelection["DesignRuleProfileSelection"]
+  module_src_types_designRuleProvider_ts --> export_DesignRuleProfileSelection
   export_DesignRuleProvider["DesignRuleProvider"]
   module_src_types_designRuleProvider_ts --> export_DesignRuleProvider
   export_DesignRuleProvider -.-> export_DesignContext
@@ -97,6 +99,8 @@ graph LR
   module_src_features_catalog_designRuleProviderManifest_ts --> export_designRuleProviderManifest
   export_DesignRuleProviderManifest["DesignRuleProviderManifest"]
   module_src_types_designRuleCatalog_ts --> export_DesignRuleProviderManifest
+  export_DesignRuleProviderOptions["DesignRuleProviderOptions"]
+  module_src_types_designRuleProvider_ts --> export_DesignRuleProviderOptions
   export_DesignRuleScope["DesignRuleScope"]
   module_src_types_designRuleCatalog_ts --> export_DesignRuleScope
   export_DesignRuleStatus["DesignRuleStatus"]
@@ -105,3 +109,6 @@ graph LR
   module_src_features_catalog_filterDesignRuleCatalog_ts --> export_filterDesignRuleCatalog
   export_filterDesignRuleCatalog -.-> export_DesignRuleCatalogEntry
   export_filterDesignRuleCatalog -.-> export_DesignRuleScope
+  export_selectDesignRuleProfile["selectDesignRuleProfile"]
+  module_src_features_provider_selectDesignRuleProfile_ts --> export_selectDesignRuleProfile
+  export_selectDesignRuleProfile -.-> export_DesignRuleProfileSelection

@@ -1,5 +1,19 @@
 # Public API
 
+## createDesignRuleProvider
+
+Kind: `function`
+Module: `src/features/provider/designRuleProvider.ts`
+Source: `src/features/provider/designRuleProvider.ts:20:1`
+
+Creates the complete registered Design provider from its explicit group-local policies.
+
+### Signatures
+
+- `(options: DesignRuleProviderOptions) => DesignRuleProvider`
+  - options: `DesignRuleProviderOptions`
+  - returns: `DesignRuleProvider`
+
 ## DesignAssessmentKind
 
 Kind: `unknown`
@@ -10,7 +24,7 @@ Source: `src/types/designRuleCatalog.ts:1:1`
 
 Kind: `type`
 Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:11:1`
+Source: `src/types/designRuleProvider.ts:10:1`
 
 The minimal context shared by Design rules without prescribing its source.
 
@@ -18,23 +32,7 @@ The minimal context shared by Design rules without prescribing its source.
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| evidence | property | `readonly DesignEvidence[]` | yes |  |
-| facts | property | `readonly FactEnvelope[] \| undefined` | no |  |
-
-## DesignEvidence
-
-Kind: `type`
-Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:5:1`
-
-One provider-neutral design observation supplied by a Design context.
-
-### Members
-
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| id | property | `string` | yes |  |
-| kind | property | `string` | yes |  |
+| facts | property | `readonly FactEnvelope[]` | yes |  |
 
 ## designRuleCatalog
 
@@ -131,19 +129,26 @@ Declares selectable profiles without adding another executable or composite rule
 | C.R.A.P. composition profile. | design.crap | design.crap |
 | Advisory 60-30-10 visible color-area distribution profile. | design.60-30-10 | design.color.usage-distribution |
 
-## designRuleProvider
+## DesignRuleProfileSelection
 
-Kind: `value`
-Module: `src/features/provider/designRuleProvider.ts`
-Source: `src/features/provider/designRuleProvider.ts:4:14`
+Kind: `type`
+Module: `src/types/designRuleProvider.ts`
+Source: `src/types/designRuleProvider.ts:30:1`
 
-Exposes the reusable Design provider through the generic Rules RuleSet contract.
+Maps a named Design profile to the generic Rules engine selection contract.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| profileId | property | `string` | yes |  |
+| selection | property | `RuleSelection` | yes |  |
 
 ## DesignRuleProvider
 
 Kind: `type`
 Module: `src/types/designRuleProvider.ts`
-Source: `src/types/designRuleProvider.ts:17:1`
+Source: `src/types/designRuleProvider.ts:23:1`
 
 The public identity and generic Rules contribution for the Design provider.
 
@@ -159,9 +164,9 @@ The public identity and generic Rules contribution for the Design provider.
 
 Kind: `value`
 Module: `src/features/catalog/designRuleProviderManifest.ts`
-Source: `src/features/catalog/designRuleProviderManifest.ts:4:14`
+Source: `src/features/catalog/designRuleProviderManifest.ts:5:14`
 
-Declares the released MIT provider surface without exposing unclassified planned rules.
+Declares every central-provider rule identity published through the released package surface.
 
 ## DesignRuleProviderManifest
 
@@ -177,6 +182,23 @@ Source: `src/types/designRuleCatalog.ts:48:1`
 | providerId | property | `"ankhorage.rules-design"` | yes |  |
 | publishedRuleIds | property | `readonly string[]` | yes |  |
 | schemaVersion | property | `"1"` | yes |  |
+
+## DesignRuleProviderOptions
+
+Kind: `type`
+Module: `src/types/designRuleProvider.ts`
+Source: `src/types/designRuleProvider.ts:15:1`
+
+Configures the group-local policy needed to create one complete Design provider.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| alignment | property | `AlignmentRuleOptions \| undefined` | no |  |
+| color | property | `ColorRulePolicy` | yes |  |
+| media | property | `MediaRuleOptions \| undefined` | no |  |
+| typography | property | `TypographyRulePolicy` | yes |  |
 
 ## DesignRuleScope
 
@@ -204,3 +226,17 @@ Selects planned catalog entries matching every supplied controlled facet.
   - entries: `readonly DesignRuleCatalogEntry[]`
   - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
   - returns: `readonly DesignRuleCatalogEntry[]`
+
+## selectDesignRuleProfile
+
+Kind: `function`
+Module: `src/features/provider/selectDesignRuleProfile.ts`
+Source: `src/features/provider/selectDesignRuleProfile.ts:7:1`
+
+Resolves one named profile independently from the Rule IDs it selects.
+
+### Signatures
+
+- `(profileId: string) => DesignRuleProfileSelection`
+  - profileId: `string`
+  - returns: `DesignRuleProfileSelection`

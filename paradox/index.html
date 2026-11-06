@@ -242,6 +242,26 @@
       <small>16 functions</small>
     </button>
   </li><li>
+    <button class="nav-button" type="button" data-target="src/features/provider/createDesignCrapRules.ts">
+      src/features/provider/createDesignCrapRules.ts
+      <small>6 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/provider/designRuleProvider.test.ts">
+      src/features/provider/designRuleProvider.test.ts
+      <small>3 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/provider/designRuleProvider.ts">
+      src/features/provider/designRuleProvider.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/provider/selectDesignRuleProfile.ts">
+      src/features/provider/selectDesignRuleProfile.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/repetition/createRepetitionRules.test.ts">
       src/features/repetition/createRepetitionRules.test.ts
       <small>1 function</small>
@@ -336,9 +356,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>17</strong><span class="muted">public exports</span></div>
+        <div><strong>19</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>63</strong><span class="muted">modules</span></div>
+        <div><strong>64</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -346,16 +366,16 @@
         <li><code>src/index.ts</code></li>
       </ul>
     </section>
-    <section class="panel" data-search="usage ankh rules-design --help Evaluate Design Evidence Register the Design provider with the generic Rules evaluator. examples/provider-evaluation/evaluate.ts">
+    <section class="panel" data-search="usage ankh rules-design --help Evaluate Design Evidence Register the configured Design provider and evaluate a named profile. examples/provider-evaluation/evaluate.ts">
     <h2>Usage</h2>
     <article class="item">
       <h3>CLI</h3>
       <pre>ankh rules-design --help</pre>
     </article>
-    <article class="item" data-search="Evaluate Design Evidence Register the Design provider with the generic Rules evaluator. examples/provider-evaluation/evaluate.ts">
+    <article class="item" data-search="Evaluate Design Evidence Register the configured Design provider and evaluate a named profile. examples/provider-evaluation/evaluate.ts">
     <h3>Evaluate Design Evidence</h3>
     <p class="muted"><code>examples/provider-evaluation/evaluate.ts</code></p>
-    <p>Register the Design provider with the generic Rules evaluator.</p>
+    <p>Register the configured Design provider and evaluate a named profile.</p>
     
     <pre>import { createRuleRegistry, evaluateRules } from &#39;@ankhorage/rules&#39;;</pre>
   </article>
@@ -408,10 +428,10 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/types/designRuleCatalog.ts</code></p>
     <p><strong>Exports:</strong> <code>designRuleProfiles</code></p>
-  </article><article class="item" data-search="src/features/catalog/designRuleProviderManifest.ts src/types/designRuleCatalog.ts designRuleProviderManifest">
+  </article><article class="item" data-search="src/features/catalog/designRuleProviderManifest.ts src/features/catalog/designRuleCatalog.ts src/types/designRuleCatalog.ts designRuleProviderManifest">
     <h3>src/features/catalog/designRuleProviderManifest.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/designRuleCatalog.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/types/designRuleCatalog.ts</code></p>
     <p><strong>Exports:</strong> <code>designRuleProviderManifest</code></p>
   </article><article class="item" data-search="src/features/catalog/designRuleSemantics.ts src/types/designRuleCatalog.ts designRuleSemantics">
     <h3>src/features/catalog/designRuleSemantics.ts</h3>
@@ -508,16 +528,26 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>MediaRuleDefinition</code>, <code>mediaRuleDefinitions</code></p>
-  </article><article class="item" data-search="src/features/provider/designRuleProvider.test.ts src/index.ts test/fixtures/designEvidencePresentRule.ts">
-    <h3>src/features/provider/designRuleProvider.test.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/index.ts</code>, <code>test/fixtures/designEvidencePresentRule.ts</code></p>
-    <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/features/provider/designRuleProvider.ts src/types/designRuleProvider.ts designRuleProvider">
-    <h3>src/features/provider/designRuleProvider.ts</h3>
+  </article><article class="item" data-search="src/features/provider/createDesignCrapRules.ts src/types/designRuleProvider.ts createDesignCrapRules">
+    <h3>src/features/provider/createDesignCrapRules.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/designRuleProvider.ts</code></p>
-    <p><strong>Exports:</strong> <code>designRuleProvider</code></p>
+    <p><strong>Exports:</strong> <code>createDesignCrapRules</code></p>
+  </article><article class="item" data-search="src/features/provider/designRuleProvider.test.ts src/features/catalog/designRuleCatalog.ts src/features/provider/createDesignCrapRules.ts src/features/provider/designRuleProvider.ts src/features/provider/selectDesignRuleProfile.ts src/types/designRuleProvider.ts test/fixtures/typographyRuleFacts.ts">
+    <h3>src/features/provider/designRuleProvider.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleCatalog.ts</code>, <code>src/features/provider/createDesignCrapRules.ts</code>, <code>src/features/provider/designRuleProvider.ts</code>, <code>src/features/provider/selectDesignRuleProfile.ts</code>, <code>src/types/designRuleProvider.ts</code>, <code>test/fixtures/typographyRuleFacts.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/features/provider/designRuleProvider.ts src/features/accessibility/createAccessibilityRules.ts src/features/alignment/createAlignmentRules.ts src/features/color/createColorRuleSet.ts src/features/contrast/createContrastRules.ts src/features/media/createMediaRuleSet.ts src/features/provider/createDesignCrapRules.ts src/features/repetition/createRepetitionRules.ts src/features/responsive/createResponsiveRules.ts src/features/spacing-proximity/createSpacingProximityRuleSet.ts src/features/typography/createTypographyRuleSet.ts src/types/designRuleProvider.ts createDesignRuleProvider">
+    <h3>src/features/provider/designRuleProvider.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/accessibility/createAccessibilityRules.ts</code>, <code>src/features/alignment/createAlignmentRules.ts</code>, <code>src/features/color/createColorRuleSet.ts</code>, <code>src/features/contrast/createContrastRules.ts</code>, <code>src/features/media/createMediaRuleSet.ts</code>, <code>src/features/provider/createDesignCrapRules.ts</code>, <code>src/features/repetition/createRepetitionRules.ts</code>, <code>src/features/responsive/createResponsiveRules.ts</code>, <code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts</code>, <code>src/features/typography/createTypographyRuleSet.ts</code>, <code>src/types/designRuleProvider.ts</code></p>
+    <p><strong>Exports:</strong> <code>createDesignRuleProvider</code></p>
+  </article><article class="item" data-search="src/features/provider/selectDesignRuleProfile.ts src/features/catalog/designRuleProfiles.ts src/types/designRuleProvider.ts selectDesignRuleProfile">
+    <h3>src/features/provider/selectDesignRuleProfile.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/catalog/designRuleProfiles.ts</code>, <code>src/types/designRuleProvider.ts</code></p>
+    <p><strong>Exports:</strong> <code>selectDesignRuleProfile</code></p>
   </article><article class="item" data-search="src/features/repetition/createRepetitionRules.test.ts src/features/catalog/designRuleCatalog.ts src/features/repetition/createRepetitionRules.ts test/fixtures/repetitionRuleFacts.ts">
     <h3>src/features/repetition/createRepetitionRules.test.ts</h3>
     <p class="muted">Referenced module</p>
@@ -578,10 +608,10 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts</code></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/features/spacing-proximity/createSpacingProximityRuleSet.ts src/features/spacing-proximity/assessSpacingProximityObservation.ts src/features/spacing-proximity/parseSpacingProximityMeasurements.ts src/types/spacingProximity.ts createSpacingProximityRuleSet">
+  </article><article class="item" data-search="src/features/spacing-proximity/createSpacingProximityRuleSet.ts src/features/spacing-proximity/assessSpacingProximityObservation.ts src/features/spacing-proximity/parseSpacingProximityMeasurements.ts src/types/designRuleProvider.ts src/types/spacingProximity.ts createSpacingProximityRuleSet">
     <h3>src/features/spacing-proximity/createSpacingProximityRuleSet.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/features/spacing-proximity/assessSpacingProximityObservation.ts</code>, <code>src/features/spacing-proximity/parseSpacingProximityMeasurements.ts</code>, <code>src/types/spacingProximity.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/spacing-proximity/assessSpacingProximityObservation.ts</code>, <code>src/features/spacing-proximity/parseSpacingProximityMeasurements.ts</code>, <code>src/types/designRuleProvider.ts</code>, <code>src/types/spacingProximity.ts</code></p>
     <p><strong>Exports:</strong> <code>createSpacingProximityRuleSet</code></p>
   </article><article class="item" data-search="src/features/spacing-proximity/parseSpacingProximityMeasurements.ts src/types/spacingProximity.ts parseSpacingProximityMeasurements">
     <h3>src/features/spacing-proximity/parseSpacingProximityMeasurements.ts</h3>
@@ -613,11 +643,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/typography.ts</code></p>
     <p><strong>Exports:</strong> <code>validateTypographyRulePolicy</code></p>
-  </article><article class="item" data-search="src/index.ts DesignAssessmentKind DesignContext DesignEvidence designRuleCatalog DesignRuleCatalogEntry DesignRuleCatalogFilter DesignRuleEvidence DesignRulePlanningManifest DesignRuleProfile designRuleProfiles designRuleProvider DesignRuleProvider designRuleProviderManifest DesignRuleProviderManifest DesignRuleScope DesignRuleStatus filterDesignRuleCatalog">
+  </article><article class="item" data-search="src/index.ts createDesignRuleProvider DesignAssessmentKind DesignContext designRuleCatalog DesignRuleCatalogEntry DesignRuleCatalogFilter DesignRuleEvidence DesignRulePlanningManifest DesignRuleProfile designRuleProfiles DesignRuleProfileSelection DesignRuleProvider designRuleProviderManifest DesignRuleProviderManifest DesignRuleProviderOptions DesignRuleScope DesignRuleStatus filterDesignRuleCatalog selectDesignRuleProfile">
     <h3>src/index.ts</h3>
     <p class="muted">Configured entrypoint</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>DesignAssessmentKind</code>, <code>DesignContext</code>, <code>DesignEvidence</code>, <code>designRuleCatalog</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>designRuleProfiles</code>, <code>designRuleProvider</code>, <code>DesignRuleProvider</code>, <code>designRuleProviderManifest</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code>, <code>filterDesignRuleCatalog</code></p>
+    <p><strong>Exports:</strong> <code>createDesignRuleProvider</code>, <code>DesignAssessmentKind</code>, <code>DesignContext</code>, <code>designRuleCatalog</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>designRuleProfiles</code>, <code>DesignRuleProfileSelection</code>, <code>DesignRuleProvider</code>, <code>designRuleProviderManifest</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleProviderOptions</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code>, <code>filterDesignRuleCatalog</code>, <code>selectDesignRuleProfile</code></p>
   </article><article class="item" data-search="src/types/color.ts ColorPolicyRuleId ColorRulePolicy">
     <h3>src/types/color.ts</h3>
     <p class="muted">Referenced module</p>
@@ -628,11 +658,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>DesignAssessmentKind</code>, <code>DesignRuleCatalogEntry</code>, <code>DesignRuleCatalogFilter</code>, <code>DesignRuleEvidence</code>, <code>DesignRulePlanningManifest</code>, <code>DesignRuleProfile</code>, <code>DesignRuleProviderManifest</code>, <code>DesignRuleScope</code>, <code>DesignRuleStatus</code></p>
-  </article><article class="item" data-search="src/types/designRuleProvider.ts DesignContext DesignEvidence DesignRuleProvider">
+  </article><article class="item" data-search="src/types/designRuleProvider.ts src/features/alignment/createAlignmentRules.ts src/features/color/createColorRuleSet.ts src/features/media/createMediaRuleSet.ts src/types/typography.ts DesignContext DesignRuleProfileSelection DesignRuleProvider DesignRuleProviderOptions">
     <h3>src/types/designRuleProvider.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>DesignContext</code>, <code>DesignEvidence</code>, <code>DesignRuleProvider</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/alignment/createAlignmentRules.ts</code>, <code>src/features/color/createColorRuleSet.ts</code>, <code>src/features/media/createMediaRuleSet.ts</code>, <code>src/types/typography.ts</code></p>
+    <p><strong>Exports:</strong> <code>DesignContext</code>, <code>DesignRuleProfileSelection</code>, <code>DesignRuleProvider</code>, <code>DesignRuleProviderOptions</code></p>
   </article><article class="item" data-search="src/types/responsive.ts ResponsiveBounds ResponsiveDesignContext ResponsiveDimensions ResponsiveElement ResponsiveEvaluation ResponsiveMatrix ResponsiveViewport">
     <h3>src/types/responsive.ts</h3>
     <p class="muted">Referenced module</p>
@@ -658,11 +688,6 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>alignmentMetricFact</code></p>
-  </article><article class="item" data-search="test/fixtures/designEvidencePresentRule.ts src/types/designRuleProvider.ts designEvidencePresentRule">
-    <h3>test/fixtures/designEvidencePresentRule.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/designRuleProvider.ts</code></p>
-    <p><strong>Exports:</strong> <code>designEvidencePresentRule</code></p>
   </article><article class="item" data-search="test/fixtures/repetitionRuleFacts.ts createMissingRepetitionFact createRepetitionFact repetitionScope">
     <h3>test/fixtures/repetitionRuleFacts.ts</h3>
     <p class="muted">Referenced module</p>
@@ -713,11 +738,11 @@
             </section>
             <section>
               <h3>src/features/catalog/designRuleProviderManifest.ts</h3>
-              <article class="item" id="symbol-designruleprovidermanifest" data-search="designRuleProviderManifest  value src/features/catalog/designRuleProviderManifest.ts Declares the released MIT provider surface without exposing unclassified planned rules.">
+              <article class="item" id="symbol-designruleprovidermanifest" data-search="designRuleProviderManifest  value src/features/catalog/designRuleProviderManifest.ts Declares every central-provider rule identity published through the released package surface.">
     <h4>designRuleProviderManifest</h4>
     
-    <p class="muted">value • <code>src/features/catalog/designRuleProviderManifest.ts:4:14</code></p>
-    <p>Declares the released MIT provider surface without exposing unclassified planned rules.</p>
+    <p class="muted">value • <code>src/features/catalog/designRuleProviderManifest.ts:5:14</code></p>
+    <p>Declares every central-provider rule identity published through the released package surface.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
@@ -761,15 +786,59 @@
             </section>
             <section>
               <h3>src/features/provider/designRuleProvider.ts</h3>
-              <article class="item" id="symbol-designruleprovider" data-search="designRuleProvider  value src/features/provider/designRuleProvider.ts Exposes the reusable Design provider through the generic Rules RuleSet contract.">
-    <h4>designRuleProvider</h4>
+              <article class="item" id="symbol-createdesignruleprovider" data-search="createDesignRuleProvider  function src/features/provider/designRuleProvider.ts Creates the complete registered Design provider from its explicit group-local policies. DesignRuleProvider DesignRuleProviderOptions (options: DesignRuleProviderOptions) =&gt; DesignRuleProvider">
+    <h4>createDesignRuleProvider</h4>
     
-    <p class="muted">value • <code>src/features/provider/designRuleProvider.ts:4:14</code></p>
-    <p>Exposes the reusable Design provider through the generic Rules RuleSet contract.</p>
+    <p class="muted">function • <code>src/features/provider/designRuleProvider.ts:20:1</code></p>
+    <p>Creates the complete registered Design provider from its explicit group-local policies.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">DesignRuleProvider</li><li class="chip">DesignRuleProviderOptions</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(options: DesignRuleProviderOptions) =&gt; DesignRuleProvider</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>options</code></td>
+                        <td><code>DesignRuleProviderOptions</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>DesignRuleProvider</code></p>
+      </div>
     
+  </article>
+            </section>
+            <section>
+              <h3>src/features/provider/selectDesignRuleProfile.ts</h3>
+              <article class="item" id="symbol-selectdesignruleprofile" data-search="selectDesignRuleProfile  function src/features/provider/selectDesignRuleProfile.ts Resolves one named profile independently from the Rule IDs it selects. DesignRuleProfileSelection (profileId: string) =&gt; DesignRuleProfileSelection">
+    <h4>selectDesignRuleProfile</h4>
+    
+    <p class="muted">function • <code>src/features/provider/selectDesignRuleProfile.ts:7:1</code></p>
+    <p>Resolves one named profile independently from the Rule IDs it selects.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">DesignRuleProfileSelection</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(profileId: string) =&gt; DesignRuleProfileSelection</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>profileId</code></td>
+                        <td><code>string</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>DesignRuleProfileSelection</code></p>
+      </div>
     
   </article>
             </section>
@@ -1050,38 +1119,11 @@
             </section>
             <section>
               <h3>src/types/designRuleProvider.ts</h3>
-              <article class="item" id="symbol-designcontext" data-search="DesignContext  type src/types/designRuleProvider.ts The minimal context shared by Design rules without prescribing its source. DesignEvidence">
+              <article class="item" id="symbol-designcontext" data-search="DesignContext  type src/types/designRuleProvider.ts The minimal context shared by Design rules without prescribing its source.">
     <h4>DesignContext</h4>
     
-    <p class="muted">type • <code>src/types/designRuleProvider.ts:11:1</code></p>
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:10:1</code></p>
     <p>The minimal context shared by Design rules without prescribing its source.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">DesignEvidence</li></ul></div>
-    
-    <table>
-    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr>
-            <td><code>evidence</code></td>
-            <td>property</td>
-            <td><code>readonly DesignEvidence[]</code></td>
-            <td>yes</td>
-            <td></td>
-          </tr><tr>
-            <td><code>facts</code></td>
-            <td>property</td>
-            <td><code>readonly FactEnvelope[] | undefined</code></td>
-            <td>no</td>
-            <td></td>
-          </tr>
-    </tbody>
-  </table>
-  </article><article class="item" id="symbol-designevidence" data-search="DesignEvidence  type src/types/designRuleProvider.ts One provider-neutral design observation supplied by a Design context.">
-    <h4>DesignEvidence</h4>
-    
-    <p class="muted">type • <code>src/types/designRuleProvider.ts:5:1</code></p>
-    <p>One provider-neutral design observation supplied by a Design context.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
@@ -1090,15 +1132,36 @@
     <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
     <tbody>
       <tr>
-            <td><code>id</code></td>
+            <td><code>facts</code></td>
+            <td>property</td>
+            <td><code>readonly FactEnvelope[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-designruleprofileselection" data-search="DesignRuleProfileSelection  type src/types/designRuleProvider.ts Maps a named Design profile to the generic Rules engine selection contract.">
+    <h4>DesignRuleProfileSelection</h4>
+    
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:30:1</code></p>
+    <p>Maps a named Design profile to the generic Rules engine selection contract.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>profileId</code></td>
             <td>property</td>
             <td><code>string</code></td>
             <td>yes</td>
             <td></td>
           </tr><tr>
-            <td><code>kind</code></td>
+            <td><code>selection</code></td>
             <td>property</td>
-            <td><code>string</code></td>
+            <td><code>RuleSelection</code></td>
             <td>yes</td>
             <td></td>
           </tr>
@@ -1107,7 +1170,7 @@
   </article><article class="item" id="symbol-designruleprovider" data-search="DesignRuleProvider  type src/types/designRuleProvider.ts The public identity and generic Rules contribution for the Design provider. DesignContext">
     <h4>DesignRuleProvider</h4>
     
-    <p class="muted">type • <code>src/types/designRuleProvider.ts:17:1</code></p>
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:23:1</code></p>
     <p>The public identity and generic Rules contribution for the Design provider.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1132,6 +1195,45 @@
             <td><code>ruleSet</code></td>
             <td>property</td>
             <td><code>RuleSet&lt;DesignContext&gt;</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-designruleprovideroptions" data-search="DesignRuleProviderOptions  type src/types/designRuleProvider.ts Configures the group-local policy needed to create one complete Design provider.">
+    <h4>DesignRuleProviderOptions</h4>
+    
+    <p class="muted">type • <code>src/types/designRuleProvider.ts:15:1</code></p>
+    <p>Configures the group-local policy needed to create one complete Design provider.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>alignment</code></td>
+            <td>property</td>
+            <td><code>AlignmentRuleOptions | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>color</code></td>
+            <td>property</td>
+            <td><code>ColorRulePolicy</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>media</code></td>
+            <td>property</td>
+            <td><code>MediaRuleOptions | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>typography</code></td>
+            <td>property</td>
+            <td><code>TypographyRulePolicy</code></td>
             <td>yes</td>
             <td></td>
           </tr>
@@ -1189,6 +1291,7 @@
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts[&quot;src/features/catalog/designRuleProviderManifest.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleProviderManifest_ts
+  module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleSemantics_ts
@@ -1257,13 +1360,34 @@
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_mediaRuleDefinitions_ts
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_createDesignCrapRules_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_typographyRuleFacts_ts
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_typography_createTypographyRuleSet_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -1312,6 +1436,7 @@
   package__ankhorage_rules_design -.-&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts[&quot;src/features/spacing-proximity/parseSpacingProximityMeasurements.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
@@ -1343,6 +1468,10 @@
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_types_typography_ts
   module_src_types_responsive_ts[&quot;src/types/responsive.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_responsive_ts
   module_src_types_spacingProximity_ts[&quot;src/types/spacingProximity.ts&quot;]
@@ -1353,9 +1482,6 @@
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_alignmentMetricFact_ts
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
-  package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
-  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_repetitionRuleFacts_ts
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
@@ -1406,6 +1532,7 @@
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts[&quot;src/features/catalog/designRuleProviderManifest.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleProviderManifest_ts
+  module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleSemantics_ts[&quot;src/features/catalog/designRuleSemantics.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_catalog_designRuleSemantics_ts
@@ -1474,13 +1601,34 @@
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_mediaRuleDefinitions_ts
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_createDesignCrapRules_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_test_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_typographyRuleFacts_ts
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_typography_createTypographyRuleSet_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -1529,6 +1677,7 @@
   package__ankhorage_rules_design -.-&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts[&quot;src/features/spacing-proximity/parseSpacingProximityMeasurements.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
@@ -1560,6 +1709,10 @@
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts[&quot;src/types/designRuleProvider.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_designRuleProvider_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_types_typography_ts
   module_src_types_responsive_ts[&quot;src/types/responsive.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_types_responsive_ts
   module_src_types_spacingProximity_ts[&quot;src/types/spacingProximity.ts&quot;]
@@ -1570,9 +1723,6 @@
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_alignmentMetricFact_ts
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
-  package__ankhorage_rules_design -.-&gt; module_test_fixtures_designEvidencePresentRule_ts
-  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_test_fixtures_repetitionRuleFacts_ts
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
@@ -1615,8 +1765,10 @@
   module_src_features_media_evaluateMediaApplicability_ts[&quot;src/features/media/evaluateMediaApplicability.ts&quot;]
   module_src_features_media_evaluateMediaAssessment_ts[&quot;src/features/media/evaluateMediaAssessment.ts&quot;]
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -1645,7 +1797,6 @@
   module_src_types_typography_ts[&quot;src/types/typography.ts&quot;]
   module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
   module_test_fixtures_typographyRuleFacts_ts[&quot;test/fixtures/typographyRuleFacts.ts&quot;]
@@ -1665,6 +1816,7 @@
   module_src_features_catalog_designRuleComposites_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleSemantics_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_filterDesignRuleCatalog_ts --&gt; module_src_types_designRuleCatalog_ts
@@ -1695,9 +1847,26 @@
   module_src_features_media_evaluateMediaApplicability_ts --&gt; module_src_features_media_evaluateMediaAssessment_ts
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_evaluateMediaApplicability_ts
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_mediaRuleDefinitions_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_createDesignCrapRules_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_typographyRuleFacts_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_typography_createTypographyRuleSet_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_test_fixtures_repetitionRuleFacts_ts
@@ -1720,6 +1889,7 @@
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_typography_createTypographyObservationTools_ts --&gt; module_src_types_typography_ts
@@ -1732,7 +1902,10 @@
   module_src_features_typography_createTypographyRuleSet_ts --&gt; module_src_types_typography_ts
   module_src_features_typography_parseTypographyObservation_ts --&gt; module_src_types_typography_ts
   module_src_features_typography_validateTypographyRulePolicy_ts --&gt; module_src_types_typography_ts
-  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_types_typography_ts
   module_test_fixtures_typographyRuleFacts_ts --&gt; module_src_types_typography_ts
 </div>
     <details>
@@ -1767,8 +1940,10 @@
   module_src_features_media_evaluateMediaApplicability_ts[&quot;src/features/media/evaluateMediaApplicability.ts&quot;]
   module_src_features_media_evaluateMediaAssessment_ts[&quot;src/features/media/evaluateMediaAssessment.ts&quot;]
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -1797,7 +1972,6 @@
   module_src_types_typography_ts[&quot;src/types/typography.ts&quot;]
   module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
   module_test_fixtures_typographyRuleFacts_ts[&quot;test/fixtures/typographyRuleFacts.ts&quot;]
@@ -1817,6 +1991,7 @@
   module_src_features_catalog_designRuleComposites_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProfiles_ts --&gt; module_src_types_designRuleCatalog_ts
+  module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_designRuleSemantics_ts --&gt; module_src_types_designRuleCatalog_ts
   module_src_features_catalog_filterDesignRuleCatalog_ts --&gt; module_src_types_designRuleCatalog_ts
@@ -1847,9 +2022,26 @@
   module_src_features_media_evaluateMediaApplicability_ts --&gt; module_src_features_media_evaluateMediaAssessment_ts
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_evaluateMediaApplicability_ts
   module_src_features_media_evaluateMediaAssessment_ts --&gt; module_src_features_media_mediaRuleDefinitions_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_index_ts
-  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_designEvidencePresentRule_ts
+  module_src_features_provider_createDesignCrapRules_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_features_provider_selectDesignRuleProfile_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_designRuleProvider_test_ts --&gt; module_test_fixtures_typographyRuleFacts_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_contrast_createContrastRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_provider_createDesignCrapRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
+  module_src_features_provider_designRuleProvider_ts --&gt; module_src_features_typography_createTypographyRuleSet_ts
   module_src_features_provider_designRuleProvider_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_features_catalog_designRuleProfiles_ts
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_repetition_createRepetitionRules_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_test_fixtures_repetitionRuleFacts_ts
@@ -1872,6 +2064,7 @@
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_test_ts --&gt; module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts
+  module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_designRuleProvider_ts
   module_src_features_spacing_proximity_createSpacingProximityRuleSet_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_spacing_proximity_parseSpacingProximityMeasurements_ts --&gt; module_src_types_spacingProximity_ts
   module_src_features_typography_createTypographyObservationTools_ts --&gt; module_src_types_typography_ts
@@ -1884,7 +2077,10 @@
   module_src_features_typography_createTypographyRuleSet_ts --&gt; module_src_types_typography_ts
   module_src_features_typography_parseTypographyObservation_ts --&gt; module_src_types_typography_ts
   module_src_features_typography_validateTypographyRulePolicy_ts --&gt; module_src_types_typography_ts
-  module_test_fixtures_designEvidencePresentRule_ts --&gt; module_src_types_designRuleProvider_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_alignment_createAlignmentRules_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_color_createColorRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_features_media_createMediaRuleSet_ts
+  module_src_types_designRuleProvider_ts --&gt; module_src_types_typography_ts
   module_test_fixtures_typographyRuleFacts_ts --&gt; module_src_types_typography_ts
 </pre>
     </details>
@@ -1921,8 +2117,10 @@
   module_src_features_media_evaluateMediaApplicability_ts[&quot;src/features/media/evaluateMediaApplicability.ts&quot;]
   module_src_features_media_evaluateMediaAssessment_ts[&quot;src/features/media/evaluateMediaAssessment.ts&quot;]
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -1951,17 +2149,17 @@
   module_src_types_typography_ts[&quot;src/types/typography.ts&quot;]
   module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
   module_test_fixtures_typographyRuleFacts_ts[&quot;test/fixtures/typographyRuleFacts.ts&quot;]
+  export_createDesignRuleProvider[&quot;createDesignRuleProvider&quot;]
+  module_src_features_provider_designRuleProvider_ts --&gt; export_createDesignRuleProvider
+  export_createDesignRuleProvider -.-&gt; export_DesignRuleProvider
+  export_createDesignRuleProvider -.-&gt; export_DesignRuleProviderOptions
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
   export_DesignContext[&quot;DesignContext&quot;]
   module_src_types_designRuleProvider_ts --&gt; export_DesignContext
-  export_DesignContext -.-&gt; export_DesignEvidence
-  export_DesignEvidence[&quot;DesignEvidence&quot;]
-  module_src_types_designRuleProvider_ts --&gt; export_DesignEvidence
   export_designRuleCatalog[&quot;designRuleCatalog&quot;]
   module_src_features_catalog_designRuleCatalog_ts --&gt; export_designRuleCatalog
   export_DesignRuleCatalogEntry[&quot;DesignRuleCatalogEntry&quot;]
@@ -1981,8 +2179,8 @@
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProfile
   export_designRuleProfiles[&quot;designRuleProfiles&quot;]
   module_src_features_catalog_designRuleProfiles_ts --&gt; export_designRuleProfiles
-  export_designRuleProvider[&quot;designRuleProvider&quot;]
-  module_src_features_provider_designRuleProvider_ts --&gt; export_designRuleProvider
+  export_DesignRuleProfileSelection[&quot;DesignRuleProfileSelection&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProfileSelection
   export_DesignRuleProvider[&quot;DesignRuleProvider&quot;]
   module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProvider
   export_DesignRuleProvider -.-&gt; export_DesignContext
@@ -1990,6 +2188,8 @@
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; export_designRuleProviderManifest
   export_DesignRuleProviderManifest[&quot;DesignRuleProviderManifest&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProviderManifest
+  export_DesignRuleProviderOptions[&quot;DesignRuleProviderOptions&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProviderOptions
   export_DesignRuleScope[&quot;DesignRuleScope&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleScope
   export_DesignRuleStatus[&quot;DesignRuleStatus&quot;]
@@ -1998,6 +2198,9 @@
   module_src_features_catalog_filterDesignRuleCatalog_ts --&gt; export_filterDesignRuleCatalog
   export_filterDesignRuleCatalog -.-&gt; export_DesignRuleCatalogEntry
   export_filterDesignRuleCatalog -.-&gt; export_DesignRuleScope
+  export_selectDesignRuleProfile[&quot;selectDesignRuleProfile&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; export_selectDesignRuleProfile
+  export_selectDesignRuleProfile -.-&gt; export_DesignRuleProfileSelection
 </div>
     <details>
       <summary>View Mermaid source</summary>
@@ -2031,8 +2234,10 @@
   module_src_features_media_evaluateMediaApplicability_ts[&quot;src/features/media/evaluateMediaApplicability.ts&quot;]
   module_src_features_media_evaluateMediaAssessment_ts[&quot;src/features/media/evaluateMediaAssessment.ts&quot;]
   module_src_features_media_mediaRuleDefinitions_ts[&quot;src/features/media/mediaRuleDefinitions.ts&quot;]
+  module_src_features_provider_createDesignCrapRules_ts[&quot;src/features/provider/createDesignCrapRules.ts&quot;]
   module_src_features_provider_designRuleProvider_test_ts[&quot;src/features/provider/designRuleProvider.test.ts&quot;]
   module_src_features_provider_designRuleProvider_ts[&quot;src/features/provider/designRuleProvider.ts&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts[&quot;src/features/provider/selectDesignRuleProfile.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -2061,17 +2266,17 @@
   module_src_types_typography_ts[&quot;src/types/typography.ts&quot;]
   module_test_fixtures_accessibilityFacts_ts[&quot;test/fixtures/accessibilityFacts.ts&quot;]
   module_test_fixtures_alignmentMetricFact_ts[&quot;test/fixtures/alignmentMetricFact.ts&quot;]
-  module_test_fixtures_designEvidencePresentRule_ts[&quot;test/fixtures/designEvidencePresentRule.ts&quot;]
   module_test_fixtures_repetitionRuleFacts_ts[&quot;test/fixtures/repetitionRuleFacts.ts&quot;]
   module_test_fixtures_responsiveFact_ts[&quot;test/fixtures/responsiveFact.ts&quot;]
   module_test_fixtures_typographyRuleFacts_ts[&quot;test/fixtures/typographyRuleFacts.ts&quot;]
+  export_createDesignRuleProvider[&quot;createDesignRuleProvider&quot;]
+  module_src_features_provider_designRuleProvider_ts --&gt; export_createDesignRuleProvider
+  export_createDesignRuleProvider -.-&gt; export_DesignRuleProvider
+  export_createDesignRuleProvider -.-&gt; export_DesignRuleProviderOptions
   export_DesignAssessmentKind[&quot;DesignAssessmentKind&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignAssessmentKind
   export_DesignContext[&quot;DesignContext&quot;]
   module_src_types_designRuleProvider_ts --&gt; export_DesignContext
-  export_DesignContext -.-&gt; export_DesignEvidence
-  export_DesignEvidence[&quot;DesignEvidence&quot;]
-  module_src_types_designRuleProvider_ts --&gt; export_DesignEvidence
   export_designRuleCatalog[&quot;designRuleCatalog&quot;]
   module_src_features_catalog_designRuleCatalog_ts --&gt; export_designRuleCatalog
   export_DesignRuleCatalogEntry[&quot;DesignRuleCatalogEntry&quot;]
@@ -2091,8 +2296,8 @@
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProfile
   export_designRuleProfiles[&quot;designRuleProfiles&quot;]
   module_src_features_catalog_designRuleProfiles_ts --&gt; export_designRuleProfiles
-  export_designRuleProvider[&quot;designRuleProvider&quot;]
-  module_src_features_provider_designRuleProvider_ts --&gt; export_designRuleProvider
+  export_DesignRuleProfileSelection[&quot;DesignRuleProfileSelection&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProfileSelection
   export_DesignRuleProvider[&quot;DesignRuleProvider&quot;]
   module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProvider
   export_DesignRuleProvider -.-&gt; export_DesignContext
@@ -2100,6 +2305,8 @@
   module_src_features_catalog_designRuleProviderManifest_ts --&gt; export_designRuleProviderManifest
   export_DesignRuleProviderManifest[&quot;DesignRuleProviderManifest&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleProviderManifest
+  export_DesignRuleProviderOptions[&quot;DesignRuleProviderOptions&quot;]
+  module_src_types_designRuleProvider_ts --&gt; export_DesignRuleProviderOptions
   export_DesignRuleScope[&quot;DesignRuleScope&quot;]
   module_src_types_designRuleCatalog_ts --&gt; export_DesignRuleScope
   export_DesignRuleStatus[&quot;DesignRuleStatus&quot;]
@@ -2108,6 +2315,27 @@
   module_src_features_catalog_filterDesignRuleCatalog_ts --&gt; export_filterDesignRuleCatalog
   export_filterDesignRuleCatalog -.-&gt; export_DesignRuleCatalogEntry
   export_filterDesignRuleCatalog -.-&gt; export_DesignRuleScope
+  export_selectDesignRuleProfile[&quot;selectDesignRuleProfile&quot;]
+  module_src_features_provider_selectDesignRuleProfile_ts --&gt; export_selectDesignRuleProfile
+  export_selectDesignRuleProfile -.-&gt; export_DesignRuleProfileSelection
+</pre>
+    </details>
+  </article><article class="item" data-search="selectDesignRuleProfile sequence diagrams/sequences/select-design-rule-profile.mmd">
+    <h3>selectDesignRuleProfile sequence</h3>
+    <p class="muted"><code>diagrams/sequences/select-design-rule-profile.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_selectDesignRuleProfile as selectDesignRuleProfile
+  participant participant_selection as selection
+  participant_selectDesignRuleProfile-&gt;&gt;participant_selection: selection()
+  participant_selection--&gt;&gt;participant_selectDesignRuleProfile: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
+  participant participant_selectDesignRuleProfile as selectDesignRuleProfile
+  participant participant_selection as selection
+  participant_selectDesignRuleProfile-&gt;&gt;participant_selection: selection()
+  participant_selection--&gt;&gt;participant_selectDesignRuleProfile: return
 </pre>
     </details>
   </article>
@@ -3113,6 +3341,91 @@
     
   </article>
     </section>
+  </section><section id="view-src-features-provider-createdesigncraprules-ts" class="view" data-view="src/features/provider/createDesignCrapRules.ts" hidden>
+    <section class="panel">
+      <h2>src/features/provider/createDesignCrapRules.ts</h2>
+      <article class="item" data-search="createDesignCrapRules src/features/provider/createDesignCrapRules.ts Creates the five C.R.A.P. composition nodes from the registered atomic Design rules.">
+    <h3>createDesignCrapRules</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:12:1</code></p>
+    <p>Creates the five C.R.A.P. composition nodes from the registered atomic Design rules.</p>
+    
+  </article><article class="item" data-search="crapDefinitions src/features/provider/createDesignCrapRules.ts Declares C.R.A.P. dependencies from canonical atomic IDs without reimplementing group rules.">
+    <h3>crapDefinitions</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:20:1</code></p>
+    <p>Declares C.R.A.P. dependencies from canonical atomic IDs without reimplementing group rules.</p>
+    
+  </article><article class="item" data-search="children src/features/provider/createDesignCrapRules.ts ">
+    <h3>children</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:21:9</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="definition src/features/provider/createDesignCrapRules.ts Defines one stable composite identity and its evaluator-owned dependency edges.">
+    <h3>definition</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:58:1</code></p>
+    <p>Defines one stable composite identity and its evaluator-owned dependency edges.</p>
+    
+  </article><article class="item" data-search="createDesignCrapRule src/features/provider/createDesignCrapRules.ts Adapts one declared C.R.A.P. node to the generic dependency-result contract.">
+    <h3>createDesignCrapRule</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:63:1</code></p>
+    <p>Adapts one declared C.R.A.P. node to the generic dependency-result contract.</p>
+    
+  </article><article class="item" data-search="evaluateDesignCrapRule src/features/provider/createDesignCrapRules.ts Reports failed child principles as advisory findings while the engine propagates incomplete ones.">
+    <h3>evaluateDesignCrapRule</h3>
+    <p class="muted"><code>src/features/provider/createDesignCrapRules.ts:74:1</code></p>
+    <p>Reports failed child principles as advisory findings while the engine propagates incomplete ones.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-provider-designruleprovider-test-ts" class="view" data-view="src/features/provider/designRuleProvider.test.ts" hidden>
+    <section class="panel">
+      <h2>src/features/provider/designRuleProvider.test.ts</h2>
+      <article class="item" data-search="evaluateProfile src/features/provider/designRuleProvider.test.ts ">
+    <h3>evaluateProfile</h3>
+    <p class="muted"><code>src/features/provider/designRuleProvider.test.ts:87:9</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="evaluateProfile src/features/provider/designRuleProvider.test.ts ">
+    <h3>evaluateProfile</h3>
+    <p class="muted"><code>src/features/provider/designRuleProvider.test.ts:146:9</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="fullPageDistribution src/features/provider/designRuleProvider.test.ts ">
+    <h3>fullPageDistribution</h3>
+    <p class="muted"><code>src/features/provider/designRuleProvider.test.ts:208:1</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-provider-designruleprovider-ts" class="view" data-view="src/features/provider/designRuleProvider.ts" hidden>
+    <section class="panel">
+      <h2>src/features/provider/designRuleProvider.ts</h2>
+      <article class="item" data-search="createDesignRuleProvider src/features/provider/designRuleProvider.ts Creates the complete registered Design provider from its explicit group-local policies.">
+    <h3>createDesignRuleProvider</h3>
+    <p class="muted"><code>src/features/provider/designRuleProvider.ts:20:1</code></p>
+    <p>Creates the complete registered Design provider from its explicit group-local policies.</p>
+    
+  </article><article class="item" data-search="createAtomicRules src/features/provider/designRuleProvider.ts Collects each independently owned atomic contribution at the central registration boundary.">
+    <h3>createAtomicRules</h3>
+    <p class="muted"><code>src/features/provider/designRuleProvider.ts:33:1</code></p>
+    <p>Collects each independently owned atomic contribution at the central registration boundary.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-provider-selectdesignruleprofile-ts" class="view" data-view="src/features/provider/selectDesignRuleProfile.ts" hidden>
+    <section class="panel">
+      <h2>src/features/provider/selectDesignRuleProfile.ts</h2>
+      <article class="item" data-search="selectDesignRuleProfile src/features/provider/selectDesignRuleProfile.ts Resolves one named profile independently from the Rule IDs it selects.">
+    <h3>selectDesignRuleProfile</h3>
+    <p class="muted"><code>src/features/provider/selectDesignRuleProfile.ts:7:1</code></p>
+    <p>Resolves one named profile independently from the Rule IDs it selects.</p>
+    
+  </article><article class="item" data-search="selection src/features/provider/selectDesignRuleProfile.ts Creates a fresh generic selection so callers cannot mutate catalog-owned profile declarations.">
+    <h3>selection</h3>
+    <p class="muted"><code>src/features/provider/selectDesignRuleProfile.ts:14:1</code></p>
+    <p>Creates a fresh generic selection so callers cannot mutate catalog-owned profile declarations.</p>
+    
+  </article>
+    </section>
   </section><section id="view-src-features-repetition-createrepetitionrules-test-ts" class="view" data-view="src/features/repetition/createRepetitionRules.test.ts" hidden>
     <section class="panel">
       <h2>src/features/repetition/createRepetitionRules.test.ts</h2>
@@ -3623,37 +3936,37 @@
       <h2>src/features/spacing-proximity/createSpacingProximityRuleSet.ts</h2>
       <article class="item" data-search="createSpacingProximityRuleSet src/features/spacing-proximity/createSpacingProximityRuleSet.ts Creates the independently owned Spacing and Proximity Rules contribution.">
     <h3>createSpacingProximityRuleSet</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:9:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:10:1</code></p>
     <p>Creates the independently owned Spacing and Proximity Rules contribution.</p>
     
   </article><article class="item" data-search="createRule src/features/spacing-proximity/createSpacingProximityRuleSet.ts Creates one deterministic rule from its frozen catalog definition.">
     <h3>createRule</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:52:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:53:1</code></p>
     <p>Creates one deterministic rule from its frozen catalog definition.</p>
     
   </article><article class="item" data-search="evaluate src/features/spacing-proximity/createSpacingProximityRuleSet.ts Evaluates one rule from normalized evidence, never from an adapter-supplied verdict.">
     <h3>evaluate</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:65:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:66:1</code></p>
     <p>Evaluates one rule from normalized evidence, never from an adapter-supplied verdict.</p>
     
   </article><article class="item" data-search="matchingFact src/features/spacing-proximity/createSpacingProximityRuleSet.ts Selects exactly one scope-local fact to prevent ambiguous evidence from passing.">
     <h3>matchingFact</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:88:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:89:1</code></p>
     <p>Selects exactly one scope-local fact to prevent ambiguous evidence from passing.</p>
     
   </article><article class="item" data-search="failed src/features/spacing-proximity/createSpacingProximityRuleSet.ts Produces an evidence-backed failure without accepting an adapter-provided pass or fail state.">
     <h3>failed</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:97:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:98:1</code></p>
     <p>Produces an evidence-backed failure without accepting an adapter-provided pass or fail state.</p>
     
   </article><article class="item" data-search="incomplete src/features/spacing-proximity/createSpacingProximityRuleSet.ts Produces an incomplete result whenever factual measurements cannot be established.">
     <h3>incomplete</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:116:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:117:1</code></p>
     <p>Produces an incomplete result whenever factual measurements cannot be established.</p>
     
   </article><article class="item" data-search="facets src/features/spacing-proximity/createSpacingProximityRuleSet.ts Creates controlled rule facets for capability consumers and catalog queries.">
     <h3>facets</h3>
-    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:121:1</code></p>
+    <p class="muted"><code>src/features/spacing-proximity/createSpacingProximityRuleSet.ts:122:1</code></p>
     <p>Creates controlled rule facets for capability consumers and catalog queries.</p>
     
   </article>

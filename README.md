@@ -3,7 +3,7 @@
 
 # @ankhorage/rules-design
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.3.3](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![paradox: canonical](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.4.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![paradox: canonical](././paradox/badges/docs.svg)
 
 Declarative catalog for reusable design rules.
 
@@ -23,7 +23,7 @@ ankh rules-design --help
 
 ### Evaluate Design Evidence
 
-Register the Design provider with the generic Rules evaluator.
+Register the configured Design provider and evaluate a named profile.
 
 ```ts
 import { createRuleRegistry, evaluateRules } from '@ankhorage/rules';
@@ -37,3 +37,4 @@ import { createRuleRegistry, evaluateRules } from '@ankhorage/rules';
 - [Architecture overview](././paradox/diagrams/architecture-overview.mmd)
 - [Module relationships](././paradox/diagrams/module-relationships.mmd)
 - [Export graph](././paradox/diagrams/export-graph.mmd)
+- [selectDesignRuleProfile sequence](././paradox/diagrams/sequences/select-design-rule-profile.mmd)

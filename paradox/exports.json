@@ -1,5 +1,44 @@
 [
   {
+    "name": "createDesignRuleProvider",
+    "title": null,
+    "description": "Creates the complete registered Design provider from its explicit group-local policies.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/provider/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/features/provider/designRuleProvider.ts",
+      "line": 20,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "DesignRuleProvider",
+      "DesignRuleProviderOptions"
+    ],
+    "signatures": [
+      {
+        "label": "(options: DesignRuleProviderOptions) => DesignRuleProvider",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "DesignRuleProviderOptions",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "DesignRuleProvider",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "DesignAssessmentKind",
     "title": null,
     "description": null,
@@ -32,46 +71,7 @@
     "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
       "filePath": "src/types/designRuleProvider.ts",
-      "line": 11,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "DesignEvidence"
-    ],
-    "signatures": [],
-    "members": [
-      {
-        "name": "evidence",
-        "kind": "property",
-        "type": "readonly DesignEvidence[]",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "facts",
-        "kind": "property",
-        "type": "readonly FactEnvelope[] | undefined",
-        "required": false,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
-    "name": "DesignEvidence",
-    "title": null,
-    "description": "One provider-neutral design observation supplied by a Design context.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "type",
-    "modulePath": "src/types/designRuleProvider.ts",
-    "sourceLocation": {
-      "filePath": "src/types/designRuleProvider.ts",
-      "line": 5,
+      "line": 10,
       "column": 1
     },
     "exportPaths": [
@@ -81,16 +81,9 @@
     "signatures": [],
     "members": [
       {
-        "name": "id",
+        "name": "facts",
         "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "kind",
-        "kind": "property",
-        "type": "string",
+        "type": "readonly FactEnvelope[]",
         "required": true,
         "description": null
       }
@@ -444,25 +437,40 @@
     ]
   },
   {
-    "name": "designRuleProvider",
+    "name": "DesignRuleProfileSelection",
     "title": null,
-    "description": "Exposes the reusable Design provider through the generic Rules RuleSet contract.",
+    "description": "Maps a named Design profile to the generic Rules engine selection contract.",
     "isReadme": false,
     "see": [],
     "security": [],
-    "kind": "value",
-    "modulePath": "src/features/provider/designRuleProvider.ts",
+    "kind": "type",
+    "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
-      "filePath": "src/features/provider/designRuleProvider.ts",
-      "line": 4,
-      "column": 14
+      "filePath": "src/types/designRuleProvider.ts",
+      "line": 30,
+      "column": 1
     },
     "exportPaths": [
       "src/index.ts"
     ],
     "relatedSymbols": [],
     "signatures": [],
-    "members": [],
+    "members": [
+      {
+        "name": "profileId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "selection",
+        "kind": "property",
+        "type": "RuleSelection",
+        "required": true,
+        "description": null
+      }
+    ],
     "structuredRows": []
   },
   {
@@ -476,7 +484,7 @@
     "modulePath": "src/types/designRuleProvider.ts",
     "sourceLocation": {
       "filePath": "src/types/designRuleProvider.ts",
-      "line": 17,
+      "line": 23,
       "column": 1
     },
     "exportPaths": [
@@ -514,7 +522,7 @@
   {
     "name": "designRuleProviderManifest",
     "title": null,
-    "description": "Declares the released MIT provider surface without exposing unclassified planned rules.",
+    "description": "Declares every central-provider rule identity published through the released package surface.",
     "isReadme": false,
     "see": [],
     "security": [],
@@ -522,7 +530,7 @@
     "modulePath": "src/features/catalog/designRuleProviderManifest.ts",
     "sourceLocation": {
       "filePath": "src/features/catalog/designRuleProviderManifest.ts",
-      "line": 4,
+      "line": 5,
       "column": 14
     },
     "exportPaths": [
@@ -578,6 +586,57 @@
         "name": "schemaVersion",
         "kind": "property",
         "type": "\"1\"",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "DesignRuleProviderOptions",
+    "title": null,
+    "description": "Configures the group-local policy needed to create one complete Design provider.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/designRuleProvider.ts",
+    "sourceLocation": {
+      "filePath": "src/types/designRuleProvider.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "alignment",
+        "kind": "property",
+        "type": "AlignmentRuleOptions | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "color",
+        "kind": "property",
+        "type": "ColorRulePolicy",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "media",
+        "kind": "property",
+        "type": "MediaRuleOptions | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "typography",
+        "kind": "property",
+        "type": "TypographyRulePolicy",
         "required": true,
         "description": null
       }
@@ -667,6 +726,44 @@
           }
         ],
         "returnType": "readonly DesignRuleCatalogEntry[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "selectDesignRuleProfile",
+    "title": null,
+    "description": "Resolves one named profile independently from the Rule IDs it selects.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/provider/selectDesignRuleProfile.ts",
+    "sourceLocation": {
+      "filePath": "src/features/provider/selectDesignRuleProfile.ts",
+      "line": 7,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "DesignRuleProfileSelection"
+    ],
+    "signatures": [
+      {
+        "label": "(profileId: string) => DesignRuleProfileSelection",
+        "parameters": [
+          {
+            "name": "profileId",
+            "type": "string",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "DesignRuleProfileSelection",
         "returnDescription": null
       }
     ],
