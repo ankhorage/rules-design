@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.2",
+      "value": "v0.3.3",
       "color": "cb3837"
     },
     {
@@ -318,6 +318,69 @@
       ]
     },
     {
+      "path": "src/features/media/createMediaRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/media/createMediaRuleSet.ts",
+        "src/features/media/evaluateMediaAssessment.ts",
+        "src/features/media/mediaRuleDefinitions.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/media/createMediaRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/media/evaluateMediaAssessment.ts",
+        "src/features/media/mediaRuleDefinitions.ts"
+      ],
+      "exports": [
+        "createMediaRuleSet",
+        "MediaRuleOptions"
+      ]
+    },
+    {
+      "path": "src/features/media/evaluateMediaApplicability.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/media/evaluateMediaAssessment.ts",
+        "src/features/media/mediaRuleDefinitions.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/media/evaluateMediaApplicability.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/media/evaluateMediaAssessment.ts"
+      ],
+      "exports": [
+        "evaluateMediaApplicability"
+      ]
+    },
+    {
+      "path": "src/features/media/evaluateMediaAssessment.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/media/evaluateMediaApplicability.ts",
+        "src/features/media/mediaRuleDefinitions.ts"
+      ],
+      "exports": [
+        "evaluateMediaAssessment",
+        "MediaAssessment",
+        "MediaCheck"
+      ]
+    },
+    {
+      "path": "src/features/media/mediaRuleDefinitions.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "MediaRuleDefinition",
+        "mediaRuleDefinitions"
+      ]
+    },
+    {
       "path": "src/features/provider/designRuleProvider.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -353,6 +416,88 @@
       "exports": [
         "createRepetitionRules",
         "RepetitionRuleContext"
+      ]
+    },
+    {
+      "path": "src/features/responsive/createResponsiveRules.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/responsive/createResponsiveRules.ts",
+        "test/fixtures/responsiveFact.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/responsive/createResponsiveRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/responsive/evaluateResponsiveOrder.ts",
+        "src/features/responsive/isContainedInResponsiveBounds.ts",
+        "src/features/responsive/parseResponsiveMatrix.ts",
+        "src/features/responsive/responsiveElementsOfKind.ts",
+        "src/features/responsive/selectResponsiveFact.ts",
+        "src/types/responsive.ts"
+      ],
+      "exports": [
+        "createResponsiveRules"
+      ]
+    },
+    {
+      "path": "src/features/responsive/evaluateResponsiveOrder.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/responsive/responsiveElementsOfKind.ts",
+        "src/types/responsive.ts"
+      ],
+      "exports": [
+        "evaluateResponsiveOrder"
+      ]
+    },
+    {
+      "path": "src/features/responsive/isContainedInResponsiveBounds.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/responsive.ts"
+      ],
+      "exports": [
+        "isContainedInResponsiveBounds"
+      ]
+    },
+    {
+      "path": "src/features/responsive/parseResponsiveMatrix.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/responsive.ts"
+      ],
+      "exports": [
+        "parseResponsiveMatrix"
+      ]
+    },
+    {
+      "path": "src/features/responsive/responsiveElementsOfKind.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/responsive.ts"
+      ],
+      "exports": [
+        "responsiveElementsOfKind"
+      ]
+    },
+    {
+      "path": "src/features/responsive/responsiveRuleOwnership.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/responsive/createResponsiveRules.ts",
+        "test/fixtures/responsiveFact.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/responsive/selectResponsiveFact.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "selectResponsiveFact"
       ]
     },
     {
@@ -509,6 +654,20 @@
       ]
     },
     {
+      "path": "src/types/responsive.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "ResponsiveBounds",
+        "ResponsiveDesignContext",
+        "ResponsiveDimensions",
+        "ResponsiveElement",
+        "ResponsiveEvaluation",
+        "ResponsiveMatrix",
+        "ResponsiveViewport"
+      ]
+    },
+    {
       "path": "src/types/spacingProximity.ts",
       "isEntrypoint": false,
       "dependencies": [],
@@ -560,6 +719,15 @@
         "createMissingRepetitionFact",
         "createRepetitionFact",
         "repetitionScope"
+      ]
+    },
+    {
+      "path": "test/fixtures/responsiveFact.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "completeResponsiveFact",
+        "failingResponsiveFact"
       ]
     },
     {
@@ -2808,6 +2976,402 @@
       }
     },
     {
+      "name": "mediaRule",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.test.ts",
+        "line": 285,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.test.ts",
+        "line": 294,
+        "column": 1
+      }
+    },
+    {
+      "name": "mediaFact",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.test.ts",
+        "line": 302,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMediaRuleSet",
+      "description": "Creates the independently composable Images and Media rule contribution from portable facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMediaRule",
+      "description": "Builds one pure generic Rule from a fixed catalog media identifier.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 32,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateMediaRule",
+      "description": "Evaluates all complete, scope-matching assessments without fabricating unavailable measurements.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 48,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveAspectRatioTolerance",
+      "description": "Resolves the trusted aspect-ratio tolerance at the factory boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 81,
+        "column": 1
+      }
+    },
+    {
+      "name": "matchesMediaScope",
+      "description": "Matches only media facts observed for the exact evaluation scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "toMediaAssessment",
+      "description": "Parses one available frozen fact into its minimal rule-owned media shape.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 99,
+        "column": 1
+      }
+    },
+    {
+      "name": "failedOutcome",
+      "description": "Converts failed media checks to rule findings from every scoped assessment.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Creates a deterministic incomplete outcome for absent or invalid factual evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 128,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSerializableRecord",
+      "description": "Identifies a serializable keyed record without accepting serializable arrays.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/createMediaRuleSet.ts",
+        "line": 144,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateMediaApplicability",
+      "description": "Evaluates policy-owned evidence that can prove a media rule does not apply.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "focalPointApplicability",
+      "description": "Resolves a declared focal-point characteristic without trusting generic adapter flags.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "responsiveSourcesApplicability",
+      "description": "Resolves a declared responsive-source characteristic without inferring it from absent widths.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 37,
+        "column": 1
+      }
+    },
+    {
+      "name": "textOverlayApplicability",
+      "description": "Resolves a declared text-overlay characteristic without trusting generic adapter flags.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "booleanCharacteristic",
+      "description": "Accepts a boolean characteristic only when the assessed media explicitly declared it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "iconApplicability",
+      "description": "Applies icon sizing only to media whose validated kind establishes it is not an icon.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasMeasuredEvidence",
+      "description": "Detects rule-specific measurement evidence that contradicts a non-applicability characteristic.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 88,
+        "column": 1
+      }
+    },
+    {
+      "name": "skippedCheck",
+      "description": "Records a rule-specific, validated reason why one media assessment has no policy obligation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaApplicability.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateMediaAssessment",
+      "description": "Evaluates one rule-specific predicate from one normalized media assessment.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "aspectRatio",
+      "description": "Compares measured and expected aspect ratios with a rule-factory-owned tolerance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "positiveDimensions",
+      "description": "Requires two positive intrinsic dimensions without inferring absent metadata.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 81,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolutionFit",
+      "description": "Verifies that intrinsic dimensions cover the observed rendered dimensions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 96,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareStrings",
+      "description": "Compares resolved and configured media string values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 116,
+        "column": 1
+      }
+    },
+    {
+      "name": "focalPointPreservation",
+      "description": "Verifies that a normalized focal point lies within the measured visible crop bounds.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 130,
+        "column": 1
+      }
+    },
+    {
+      "name": "responsiveSourceSelection",
+      "description": "Verifies a measured responsive source selection covers the rendered pixel demand.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 161,
+        "column": 1
+      }
+    },
+    {
+      "name": "contrast",
+      "description": "Uses the media-rule-owned contrast threshold instead of an adapter-supplied requirement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 200,
+        "column": 1
+      }
+    },
+    {
+      "name": "equalNumbers",
+      "description": "Compares two finite numeric media measurements that must be exactly configured.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 217,
+        "column": 1
+      }
+    },
+    {
+      "name": "decorativeClassification",
+      "description": "Requires decorative media to be unnamed and content media to expose a usable name.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 231,
+        "column": 1
+      }
+    },
+    {
+      "name": "check",
+      "description": "Creates consistent serializable failure evidence for a measured media predicate.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 251,
+        "column": 1
+      }
+    },
+    {
+      "name": "asFiniteNumber",
+      "description": "Narrows a serializable value to a finite numeric observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 267,
+        "column": 1
+      }
+    },
+    {
+      "name": "asPositiveNumber",
+      "description": "Narrows a positive finite numeric observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 272,
+        "column": 1
+      }
+    },
+    {
+      "name": "asUnitInterval",
+      "description": "Narrows a finite normalized coordinate between zero and one.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 278,
+        "column": 1
+      }
+    },
+    {
+      "name": "asDistinctPositiveNumbers",
+      "description": "Narrows a JSON numeric array to distinct positive source widths.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 284,
+        "column": 1
+      }
+    },
+    {
+      "name": "asString",
+      "description": "Narrows a serializable value to a non-empty string observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/media/evaluateMediaAssessment.ts",
+        "line": 293,
+        "column": 1
+      }
+    },
+    {
       "name": "evaluate",
       "description": null,
       "see": [],
@@ -3002,6 +3566,457 @@
       "sourceLocation": {
         "filePath": "src/features/repetition/createRepetitionRules.ts",
         "line": 226,
+        "column": 1
+      }
+    },
+    {
+      "name": "createResponsiveRules",
+      "description": "Creates the independently owned Responsive rule family from normalized viewport facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "createResponsiveRule",
+      "description": "Creates one generic Rules contract from a responsive policy definition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 178,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateResponsiveRule",
+      "description": "Evaluates one rule only from available, normalized responsive matrix facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 190,
+        "column": 1
+      }
+    },
+    {
+      "name": "requiredBreakpointIds",
+      "description": "Lists declared breakpoint IDs that lack their required viewport evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 236,
+        "column": 1
+      }
+    },
+    {
+      "name": "outcome",
+      "description": "Builds an engine finding without allowing a missing measurement to look successful.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 242,
+        "column": 1
+      }
+    },
+    {
+      "name": "pass",
+      "description": "Returns a passing responsive policy evaluation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 266,
+        "column": 1
+      }
+    },
+    {
+      "name": "fail",
+      "description": "Returns a failed responsive policy evaluation with its measured subjects.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 271,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Returns an incomplete responsive policy evaluation when measurements are absent.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 276,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateViewportBoolean",
+      "description": "Evaluates a required boolean viewport measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 281,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateElementBoolean",
+      "description": "Evaluates a required boolean element measurement for one semantic element kind.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/createResponsiveRules.ts",
+        "line": 296,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateResponsiveOrder",
+      "description": "Assesses reading and visual order only when all measured text order values are available.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasOrder",
+      "description": "Narrows a text observation to complete reading and visual order measurements.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "line": 34,
+        "column": 1
+      }
+    },
+    {
+      "name": "pass",
+      "description": "Returns a passing order assessment.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "line": 41,
+        "column": 1
+      }
+    },
+    {
+      "name": "fail",
+      "description": "Returns a failed or incomplete order assessment with affected text identities.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "line": 46,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Returns an incomplete order assessment when measurements are absent.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "isContainedInResponsiveBounds",
+      "description": "Checks whether measured focal geometry remains within the image's visible bounds.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/isContainedInResponsiveBounds.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseResponsiveMatrix",
+      "description": "Parses the serializable responsive fact payload without assuming host runtime objects.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseViewports",
+      "description": "Parses the measured viewport collection from a serializable fact payload.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 28,
+        "column": 1
+      }
+    },
+    {
+      "name": "isViewport",
+      "description": "Checks whether one parsed value is a complete responsive viewport.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 35,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseViewport",
+      "description": "Parses one measured viewport while retaining only explicit responsive facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseElements",
+      "description": "Parses the responsive element measurements from one viewport.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 64,
+        "column": 1
+      }
+    },
+    {
+      "name": "isElement",
+      "description": "Checks whether one parsed value is a complete responsive element.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseElement",
+      "description": "Parses one measured text, control, or image element.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 76,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseStrings",
+      "description": "Parses a serializable list of identifier strings.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 103,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseOrientations",
+      "description": "Parses the declared orientation coverage set from normalized facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "isOrientation",
+      "description": "Checks the two portable orientation values accepted by the responsive fact contract.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 113,
+        "column": 1
+      }
+    },
+    {
+      "name": "isElementKind",
+      "description": "Checks the semantic element kinds evaluated by this responsive family.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 118,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNullableFiniteNumber",
+      "description": "Checks an optional numeric ordering fact whose unknown state is explicit.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 123,
+        "column": 1
+      }
+    },
+    {
+      "name": "isDimensions",
+      "description": "Checks finite, positive viewport or fixed dimensions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 128,
+        "column": 1
+      }
+    },
+    {
+      "name": "isBounds",
+      "description": "Checks finite element or focal-point geometry with a positive rendered area.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 135,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNullableDimensions",
+      "description": "Checks an explicitly absent or complete fixed-size measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 142,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNullableBounds",
+      "description": "Checks an explicitly absent or complete focal-point geometry measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 147,
+        "column": 1
+      }
+    },
+    {
+      "name": "isFiniteNumber",
+      "description": "Checks a finite numeric measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 152,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNonNegativeFiniteNumber",
+      "description": "Checks a finite measurement that cannot be negative.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 157,
+        "column": 1
+      }
+    },
+    {
+      "name": "isPositiveFiniteNumber",
+      "description": "Checks a finite measurement that must describe a non-zero dimension or zoom.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 162,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNullablePositiveInteger",
+      "description": "Checks an explicitly absent or positive whole line-count measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 167,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNullablePositiveFiniteNumber",
+      "description": "Checks an explicitly absent or finite positive intrinsic inline-size measurement.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "line": 172,
+        "column": 1
+      }
+    },
+    {
+      "name": "responsiveElementsOfKind",
+      "description": "Returns all normalized measurements for one semantic element kind.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/responsiveElementsOfKind.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "allResponsiveElements",
+      "description": "Flattens measured viewport elements without mutating their fact data.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/responsiveElementsOfKind.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "selectResponsiveFact",
+      "description": "Selects exactly one available responsive matrix fact at the active Rules scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/selectResponsiveFact.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "isAvailableResponsiveFact",
+      "description": "Identifies the one scoped responsive matrix that can be evaluated.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/responsive/selectResponsiveFact.ts",
+        "line": 24,
         "column": 1
       }
     },
@@ -4087,6 +5102,56 @@
         "sourcePath": "src/features/contrast/createContrastRules.ts"
       },
       {
+        "fromPath": "src/features/media/createMediaRuleSet.test.ts",
+        "toPath": "src/features/media/createMediaRuleSet.ts",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/media/createMediaRuleSet.test.ts",
+        "toPath": "src/features/media/evaluateMediaAssessment.ts",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/media/createMediaRuleSet.test.ts",
+        "toPath": "src/features/media/mediaRuleDefinitions.ts",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/media/createMediaRuleSet.ts",
+        "toPath": "src/features/media/evaluateMediaAssessment.ts",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/media/createMediaRuleSet.ts",
+        "toPath": "src/features/media/mediaRuleDefinitions.ts",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/media/evaluateMediaApplicability.test.ts",
+        "toPath": "src/features/media/evaluateMediaAssessment.ts",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.test.ts"
+      },
+      {
+        "fromPath": "src/features/media/evaluateMediaApplicability.test.ts",
+        "toPath": "src/features/media/mediaRuleDefinitions.ts",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.test.ts"
+      },
+      {
+        "fromPath": "src/features/media/evaluateMediaApplicability.ts",
+        "toPath": "src/features/media/evaluateMediaAssessment.ts",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromPath": "src/features/media/evaluateMediaAssessment.ts",
+        "toPath": "src/features/media/evaluateMediaApplicability.ts",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromPath": "src/features/media/evaluateMediaAssessment.ts",
+        "toPath": "src/features/media/mediaRuleDefinitions.ts",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
         "fromPath": "src/features/provider/designRuleProvider.test.ts",
         "toPath": "test/fixtures/designEvidencePresentRule.ts",
         "sourcePath": "src/features/provider/designRuleProvider.test.ts"
@@ -4115,6 +5180,81 @@
         "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
         "toPath": "src/features/repetition/createRepetitionRules.ts",
         "sourcePath": "src/features/repetition/createRepetitionRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.test.ts",
+        "toPath": "test/fixtures/responsiveFact.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.test.ts",
+        "toPath": "src/features/responsive/createResponsiveRules.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/types/responsive.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/features/responsive/isContainedInResponsiveBounds.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/features/responsive/responsiveElementsOfKind.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/createResponsiveRules.ts",
+        "toPath": "src/features/responsive/selectResponsiveFact.ts",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "toPath": "src/types/responsive.ts",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/evaluateResponsiveOrder.ts",
+        "toPath": "src/features/responsive/responsiveElementsOfKind.ts",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/isContainedInResponsiveBounds.ts",
+        "toPath": "src/types/responsive.ts",
+        "sourcePath": "src/features/responsive/isContainedInResponsiveBounds.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/parseResponsiveMatrix.ts",
+        "toPath": "src/types/responsive.ts",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/responsiveElementsOfKind.ts",
+        "toPath": "src/types/responsive.ts",
+        "sourcePath": "src/features/responsive/responsiveElementsOfKind.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toPath": "test/fixtures/responsiveFact.ts",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromPath": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toPath": "src/features/responsive/createResponsiveRules.ts",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
       },
       {
         "fromPath": "src/features/spacing-proximity/assessSpacingProximityObservation.ts",
@@ -4213,6 +5353,60 @@
       }
     ],
     "calls": [
+      {
+        "fromSymbol": "completeResponsiveFact",
+        "toSymbol": "responsiveFact",
+        "callExpression": "responsiveFact",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "completeResponsiveFact",
+        "toSymbol": "viewport",
+        "callExpression": "viewport",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "failingResponsiveFact",
+        "toSymbol": "responsiveFact",
+        "callExpression": "responsiveFact",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "failingResponsiveFact",
+        "toSymbol": "element",
+        "callExpression": "element",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "failingResponsiveFact",
+        "toSymbol": "bounds",
+        "callExpression": "bounds",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "failingResponsiveFact",
+        "toSymbol": "dimensions",
+        "callExpression": "dimensions",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "viewport",
+        "toSymbol": "element",
+        "callExpression": "element",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "viewport",
+        "toSymbol": "dimensions",
+        "callExpression": "dimensions",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
+      {
+        "fromSymbol": "element",
+        "toSymbol": "bounds",
+        "callExpression": "bounds",
+        "sourcePath": "test/fixtures/responsiveFact.ts"
+      },
       {
         "fromSymbol": "observations",
         "toSymbol": "observation",
@@ -5438,6 +6632,420 @@
         "sourcePath": "src/features/contrast/hasValidContrastMeasurement.ts"
       },
       {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "mediaRule",
+        "callExpression": "mediaRule",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "mediaFact",
+        "callExpression": "mediaFact",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "evaluateMediaAssessment",
+        "callExpression": "evaluateMediaAssessment",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.test.ts",
+        "toSymbol": "createMediaRuleSet",
+        "callExpression": "createMediaRuleSet",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "mediaRule",
+        "toSymbol": "createMediaRuleSet",
+        "callExpression": "createMediaRuleSet",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/media/createMediaRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "createMediaRuleSet",
+        "toSymbol": "resolveAspectRatioTolerance",
+        "callExpression": "resolveAspectRatioTolerance",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.ts",
+        "toSymbol": "createMediaRule",
+        "callExpression": "createMediaRule",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateMediaRule",
+        "callExpression": "evaluateMediaRule",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.ts",
+        "toSymbol": "matchesMediaScope",
+        "callExpression": "matchesMediaScope",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaRule",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/createMediaRuleSet.ts",
+        "toSymbol": "evaluateMediaAssessment",
+        "callExpression": "evaluateMediaAssessment",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaRule",
+        "toSymbol": "failedOutcome",
+        "callExpression": "failedOutcome",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "toMediaAssessment",
+        "toSymbol": "isSerializableRecord",
+        "callExpression": "isSerializableRecord",
+        "sourcePath": "src/features/media/createMediaRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/evaluateMediaApplicability.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/evaluateMediaApplicability.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/media/evaluateMediaApplicability.test.ts",
+        "toSymbol": "evaluateMediaAssessment",
+        "callExpression": "evaluateMediaAssessment",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaApplicability",
+        "toSymbol": "focalPointApplicability",
+        "callExpression": "focalPointApplicability",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaApplicability",
+        "toSymbol": "responsiveSourcesApplicability",
+        "callExpression": "responsiveSourcesApplicability",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaApplicability",
+        "toSymbol": "textOverlayApplicability",
+        "callExpression": "textOverlayApplicability",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaApplicability",
+        "toSymbol": "iconApplicability",
+        "callExpression": "iconApplicability",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "focalPointApplicability",
+        "toSymbol": "booleanCharacteristic",
+        "callExpression": "booleanCharacteristic",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "responsiveSourcesApplicability",
+        "toSymbol": "booleanCharacteristic",
+        "callExpression": "booleanCharacteristic",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "textOverlayApplicability",
+        "toSymbol": "booleanCharacteristic",
+        "callExpression": "booleanCharacteristic",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "booleanCharacteristic",
+        "toSymbol": "hasMeasuredEvidence",
+        "callExpression": "hasMeasuredEvidence",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "booleanCharacteristic",
+        "toSymbol": "skippedCheck",
+        "callExpression": "skippedCheck",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "iconApplicability",
+        "toSymbol": "hasMeasuredEvidence",
+        "callExpression": "hasMeasuredEvidence",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "iconApplicability",
+        "toSymbol": "skippedCheck",
+        "callExpression": "skippedCheck",
+        "sourcePath": "src/features/media/evaluateMediaApplicability.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "evaluateMediaApplicability",
+        "callExpression": "evaluateMediaApplicability",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "aspectRatio",
+        "callExpression": "aspectRatio",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "positiveDimensions",
+        "callExpression": "positiveDimensions",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "resolutionFit",
+        "callExpression": "resolutionFit",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "focalPointPreservation",
+        "callExpression": "focalPointPreservation",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "responsiveSourceSelection",
+        "callExpression": "responsiveSourceSelection",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "contrast",
+        "callExpression": "contrast",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "equalNumbers",
+        "callExpression": "equalNumbers",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "evaluateMediaAssessment",
+        "toSymbol": "decorativeClassification",
+        "callExpression": "decorativeClassification",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "aspectRatio",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "aspectRatio",
+        "toSymbol": "asPositiveNumber",
+        "callExpression": "asPositiveNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "aspectRatio",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "positiveDimensions",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "positiveDimensions",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "resolutionFit",
+        "toSymbol": "asPositiveNumber",
+        "callExpression": "asPositiveNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "resolutionFit",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "asString",
+        "callExpression": "asString",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "actualSelector",
+        "callExpression": "actualSelector",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "expectedSelector",
+        "callExpression": "expectedSelector",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "focalPointPreservation",
+        "toSymbol": "asUnitInterval",
+        "callExpression": "asUnitInterval",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "focalPointPreservation",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "responsiveSourceSelection",
+        "toSymbol": "asPositiveNumber",
+        "callExpression": "asPositiveNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "responsiveSourceSelection",
+        "toSymbol": "asDistinctPositiveNumbers",
+        "callExpression": "asDistinctPositiveNumbers",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "responsiveSourceSelection",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "contrast",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "contrast",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "equalNumbers",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "equalNumbers",
+        "toSymbol": "actualSelector",
+        "callExpression": "actualSelector",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "equalNumbers",
+        "toSymbol": "asPositiveNumber",
+        "callExpression": "asPositiveNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "equalNumbers",
+        "toSymbol": "expectedSelector",
+        "callExpression": "expectedSelector",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "equalNumbers",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "decorativeClassification",
+        "toSymbol": "asString",
+        "callExpression": "asString",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "decorativeClassification",
+        "toSymbol": "check",
+        "callExpression": "check",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "asPositiveNumber",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
+        "fromSymbol": "asUnitInterval",
+        "toSymbol": "asFiniteNumber",
+        "callExpression": "asFiniteNumber",
+        "sourcePath": "src/features/media/evaluateMediaAssessment.ts"
+      },
+      {
         "fromSymbol": "src/features/provider/designRuleProvider.test.ts",
         "toSymbol": "test",
         "callExpression": "test",
@@ -5646,6 +7254,408 @@
         "toSymbol": "isSameJsonArray",
         "callExpression": "isSameJsonArray",
         "sourcePath": "src/features/repetition/createRepetitionRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "createResponsiveRules",
+        "callExpression": "createResponsiveRules",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "completeResponsiveFact",
+        "callExpression": "completeResponsiveFact",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.test.ts",
+        "toSymbol": "failingResponsiveFact",
+        "callExpression": "failingResponsiveFact",
+        "sourcePath": "src/features/responsive/createResponsiveRules.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "pass",
+        "callExpression": "pass",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateViewportBoolean",
+        "callExpression": "evaluateViewportBoolean",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateElementBoolean",
+        "callExpression": "evaluateElementBoolean",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "responsiveElementsOfKind",
+        "callExpression": "responsiveElementsOfKind",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "fail",
+        "callExpression": "fail",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.ts",
+        "toSymbol": "isContainedInResponsiveBounds",
+        "callExpression": "isContainedInResponsiveBounds",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateResponsiveRule",
+        "callExpression": "evaluateResponsiveRule",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveRule",
+        "toSymbol": "selectResponsiveFact",
+        "callExpression": "selectResponsiveFact",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveRule",
+        "toSymbol": "outcome",
+        "callExpression": "outcome",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveRule",
+        "toSymbol": "parseResponsiveMatrix",
+        "callExpression": "parseResponsiveMatrix",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveRule",
+        "toSymbol": "requiredBreakpointIds",
+        "callExpression": "requiredBreakpointIds",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveRule",
+        "toSymbol": "evaluate",
+        "callExpression": "definition.evaluate",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateViewportBoolean",
+        "toSymbol": "pass",
+        "callExpression": "pass",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateViewportBoolean",
+        "toSymbol": "fail",
+        "callExpression": "fail",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateElementBoolean",
+        "toSymbol": "responsiveElementsOfKind",
+        "callExpression": "responsiveElementsOfKind",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateElementBoolean",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/createResponsiveRules.ts",
+        "toSymbol": "observed",
+        "callExpression": "observed",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateElementBoolean",
+        "toSymbol": "pass",
+        "callExpression": "pass",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateElementBoolean",
+        "toSymbol": "fail",
+        "callExpression": "fail",
+        "sourcePath": "src/features/responsive/createResponsiveRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveOrder",
+        "toSymbol": "responsiveElementsOfKind",
+        "callExpression": "responsiveElementsOfKind",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveOrder",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveOrder",
+        "toSymbol": "pass",
+        "callExpression": "pass",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromSymbol": "evaluateResponsiveOrder",
+        "toSymbol": "fail",
+        "callExpression": "fail",
+        "sourcePath": "src/features/responsive/evaluateResponsiveOrder.ts"
+      },
+      {
+        "fromSymbol": "parseResponsiveMatrix",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseResponsiveMatrix",
+        "toSymbol": "parseStrings",
+        "callExpression": "parseStrings",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseResponsiveMatrix",
+        "toSymbol": "parseOrientations",
+        "callExpression": "parseOrientations",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseResponsiveMatrix",
+        "toSymbol": "parseViewports",
+        "callExpression": "parseViewports",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "parseElements",
+        "callExpression": "parseElements",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "isOrientation",
+        "callExpression": "isOrientation",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "isPositiveFiniteNumber",
+        "callExpression": "isPositiveFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "isDimensions",
+        "callExpression": "isDimensions",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseViewport",
+        "toSymbol": "isNonNegativeFiniteNumber",
+        "callExpression": "isNonNegativeFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isElementKind",
+        "callExpression": "isElementKind",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isBounds",
+        "callExpression": "isBounds",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isNullableDimensions",
+        "callExpression": "isNullableDimensions",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isNullableBounds",
+        "callExpression": "isNullableBounds",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isNullableFiniteNumber",
+        "callExpression": "isNullableFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isNullablePositiveInteger",
+        "callExpression": "isNullablePositiveInteger",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "parseElement",
+        "toSymbol": "isNullablePositiveFiniteNumber",
+        "callExpression": "isNullablePositiveFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNullableFiniteNumber",
+        "toSymbol": "isFiniteNumber",
+        "callExpression": "isFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isDimensions",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isDimensions",
+        "toSymbol": "isPositiveFiniteNumber",
+        "callExpression": "isPositiveFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isBounds",
+        "toSymbol": "isDimensions",
+        "callExpression": "isDimensions",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isBounds",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isBounds",
+        "toSymbol": "isFiniteNumber",
+        "callExpression": "isFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNullableDimensions",
+        "toSymbol": "isDimensions",
+        "callExpression": "isDimensions",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNullableBounds",
+        "toSymbol": "isBounds",
+        "callExpression": "isBounds",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNonNegativeFiniteNumber",
+        "toSymbol": "isFiniteNumber",
+        "callExpression": "isFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isPositiveFiniteNumber",
+        "toSymbol": "isFiniteNumber",
+        "callExpression": "isFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNullablePositiveInteger",
+        "toSymbol": "isFiniteNumber",
+        "callExpression": "isFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "isNullablePositiveFiniteNumber",
+        "toSymbol": "isPositiveFiniteNumber",
+        "callExpression": "isPositiveFiniteNumber",
+        "sourcePath": "src/features/responsive/parseResponsiveMatrix.ts"
+      },
+      {
+        "fromSymbol": "responsiveElementsOfKind",
+        "toSymbol": "allResponsiveElements",
+        "callExpression": "allResponsiveElements",
+        "sourcePath": "src/features/responsive/responsiveElementsOfKind.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toSymbol": "completeResponsiveFact",
+        "callExpression": "completeResponsiveFact",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toSymbol": "createResponsiveRules",
+        "callExpression": "createResponsiveRules",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/responsive/responsiveRuleOwnership.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/responsive/responsiveRuleOwnership.test.ts"
+      },
+      {
+        "fromSymbol": "selectResponsiveFact",
+        "toSymbol": "isAvailableResponsiveFact",
+        "callExpression": "isAvailableResponsiveFact",
+        "sourcePath": "src/features/responsive/selectResponsiveFact.ts"
       },
       {
         "fromSymbol": "assessSpacingProximityObservation",

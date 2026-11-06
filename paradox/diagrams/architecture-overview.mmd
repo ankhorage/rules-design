@@ -84,6 +84,28 @@ graph TD
   module_src_features_contrast_createContrastRules_ts --> module_src_features_contrast_hasValidContrastMeasurement_ts
   module_src_features_contrast_hasValidContrastMeasurement_ts["src/features/contrast/hasValidContrastMeasurement.ts"]
   package__ankhorage_rules_design -.-> module_src_features_contrast_hasValidContrastMeasurement_ts
+  module_src_features_media_createMediaRuleSet_test_ts["src/features/media/createMediaRuleSet.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_createMediaRuleSet_test_ts
+  module_src_features_media_createMediaRuleSet_test_ts --> module_src_features_media_createMediaRuleSet_ts
+  module_src_features_media_createMediaRuleSet_test_ts --> module_src_features_media_evaluateMediaAssessment_ts
+  module_src_features_media_createMediaRuleSet_test_ts --> module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_media_createMediaRuleSet_ts["src/features/media/createMediaRuleSet.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_createMediaRuleSet_ts
+  module_src_features_media_createMediaRuleSet_ts --> module_src_features_media_evaluateMediaAssessment_ts
+  module_src_features_media_createMediaRuleSet_ts --> module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_media_evaluateMediaApplicability_test_ts["src/features/media/evaluateMediaApplicability.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_evaluateMediaApplicability_test_ts
+  module_src_features_media_evaluateMediaApplicability_test_ts --> module_src_features_media_evaluateMediaAssessment_ts
+  module_src_features_media_evaluateMediaApplicability_test_ts --> module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_media_evaluateMediaApplicability_ts["src/features/media/evaluateMediaApplicability.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_evaluateMediaApplicability_ts
+  module_src_features_media_evaluateMediaApplicability_ts --> module_src_features_media_evaluateMediaAssessment_ts
+  module_src_features_media_evaluateMediaAssessment_ts["src/features/media/evaluateMediaAssessment.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_evaluateMediaAssessment_ts
+  module_src_features_media_evaluateMediaAssessment_ts --> module_src_features_media_evaluateMediaApplicability_ts
+  module_src_features_media_evaluateMediaAssessment_ts --> module_src_features_media_mediaRuleDefinitions_ts
+  module_src_features_media_mediaRuleDefinitions_ts["src/features/media/mediaRuleDefinitions.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_media_mediaRuleDefinitions_ts
   module_src_features_provider_designRuleProvider_test_ts["src/features/provider/designRuleProvider.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_provider_designRuleProvider_test_ts
   module_src_features_provider_designRuleProvider_test_ts --> module_src_index_ts
@@ -98,6 +120,37 @@ graph TD
   module_src_features_repetition_createRepetitionRules_test_ts --> module_test_fixtures_repetitionRuleFacts_ts
   module_src_features_repetition_createRepetitionRules_ts["src/features/repetition/createRepetitionRules.ts"]
   package__ankhorage_rules_design -.-> module_src_features_repetition_createRepetitionRules_ts
+  module_src_features_responsive_createResponsiveRules_test_ts["src/features/responsive/createResponsiveRules.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_createResponsiveRules_test_ts
+  module_src_features_responsive_createResponsiveRules_test_ts --> module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_responsive_createResponsiveRules_test_ts --> module_test_fixtures_responsiveFact_ts
+  module_src_features_responsive_createResponsiveRules_ts["src/features/responsive/createResponsiveRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_features_responsive_evaluateResponsiveOrder_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_features_responsive_isContainedInResponsiveBounds_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_features_responsive_parseResponsiveMatrix_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_features_responsive_responsiveElementsOfKind_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_features_responsive_selectResponsiveFact_ts
+  module_src_features_responsive_createResponsiveRules_ts --> module_src_types_responsive_ts
+  module_src_features_responsive_evaluateResponsiveOrder_ts["src/features/responsive/evaluateResponsiveOrder.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_evaluateResponsiveOrder_ts
+  module_src_features_responsive_evaluateResponsiveOrder_ts --> module_src_features_responsive_responsiveElementsOfKind_ts
+  module_src_features_responsive_evaluateResponsiveOrder_ts --> module_src_types_responsive_ts
+  module_src_features_responsive_isContainedInResponsiveBounds_ts["src/features/responsive/isContainedInResponsiveBounds.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_isContainedInResponsiveBounds_ts
+  module_src_features_responsive_isContainedInResponsiveBounds_ts --> module_src_types_responsive_ts
+  module_src_features_responsive_parseResponsiveMatrix_ts["src/features/responsive/parseResponsiveMatrix.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_parseResponsiveMatrix_ts
+  module_src_features_responsive_parseResponsiveMatrix_ts --> module_src_types_responsive_ts
+  module_src_features_responsive_responsiveElementsOfKind_ts["src/features/responsive/responsiveElementsOfKind.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_responsiveElementsOfKind_ts
+  module_src_features_responsive_responsiveElementsOfKind_ts --> module_src_types_responsive_ts
+  module_src_features_responsive_responsiveRuleOwnership_test_ts["src/features/responsive/responsiveRuleOwnership.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_responsiveRuleOwnership_test_ts
+  module_src_features_responsive_responsiveRuleOwnership_test_ts --> module_src_features_responsive_createResponsiveRules_ts
+  module_src_features_responsive_responsiveRuleOwnership_test_ts --> module_test_fixtures_responsiveFact_ts
+  module_src_features_responsive_selectResponsiveFact_ts["src/features/responsive/selectResponsiveFact.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_responsive_selectResponsiveFact_ts
   module_src_features_spacing_proximity_assessSpacingProximityObservation_ts["src/features/spacing-proximity/assessSpacingProximityObservation.ts"]
   package__ankhorage_rules_design -.-> module_src_features_spacing_proximity_assessSpacingProximityObservation_ts
   module_src_features_spacing_proximity_assessSpacingProximityObservation_ts --> module_src_types_spacingProximity_ts
@@ -139,6 +192,8 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleProvider_ts
+  module_src_types_responsive_ts["src/types/responsive.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_responsive_ts
   module_src_types_spacingProximity_ts["src/types/spacingProximity.ts"]
   package__ankhorage_rules_design -.-> module_src_types_spacingProximity_ts
   module_src_types_typography_ts["src/types/typography.ts"]
@@ -152,6 +207,8 @@ graph TD
   module_test_fixtures_designEvidencePresentRule_ts --> module_src_types_designRuleProvider_ts
   module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_repetitionRuleFacts_ts
+  module_test_fixtures_responsiveFact_ts["test/fixtures/responsiveFact.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_responsiveFact_ts
   module_test_fixtures_typographyRuleFacts_ts["test/fixtures/typographyRuleFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_typographyRuleFacts_ts
   module_test_fixtures_typographyRuleFacts_ts --> module_src_types_typography_ts

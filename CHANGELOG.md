@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.3
+
+### Patch Changes
+
+- 54f082b: Add the facts-backed Images and Media rule factory.
+- 7132fe6: Add deterministic responsive design rules based on versioned viewport facts.
+
 ## 0.3.2
 
 ### Patch Changes
