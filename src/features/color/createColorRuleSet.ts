@@ -74,23 +74,35 @@ function evaluateUsage(input: RuleEvaluationInput<DesignContext>, policy: ColorR
     status: failures.length === 0 ? ('PASS' as const) : ('FAIL' as const),
   };
 }
-/*** Requires exactly one complete full-page observation for every breakpoint and theme. */
+/*** Requires configured coverage for every breakpoint and theme without merging local samples. */
 function missingCoverage(
   observations: readonly Observation[],
   policy: ColorRulePolicy,
 ): readonly string[] {
   return policy.requiredBreakpointIds.flatMap((breakpointId) =>
     policy.requiredThemeIds.flatMap((themeId) =>
-      observations.filter(
-        (observation) =>
-          observation.breakpointId === breakpointId &&
-          observation.themeId === themeId &&
-          observation.scope === 'page',
-      ).length === 1
-        ? []
-        : [`${breakpointId}:${themeId}:page`],
+      policy.requiredScopes.flatMap((scope) =>
+        hasRequiredCoverage(observations, breakpointId, themeId, scope)
+          ? []
+          : [`${breakpointId}:${themeId}:${scope}`],
+      ),
     ),
   );
+}
+/*** Requires one page assessment and at least one advisory local sample for configured coverage. */
+function hasRequiredCoverage(
+  observations: readonly Observation[],
+  breakpointId: string,
+  themeId: string,
+  scope: CoverageScope,
+): boolean {
+  const matching = observations.filter(
+    (observation) =>
+      observation.breakpointId === breakpointId &&
+      observation.themeId === themeId &&
+      observation.scope === scope,
+  );
+  return scope === 'page' ? matching.length === 1 : matching.length > 0;
 }
 /*** Narrows a parsed observation after incomplete evidence has been rejected. */
 function isObservation(observation: Observation | undefined): observation is Observation {

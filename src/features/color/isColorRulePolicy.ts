@@ -8,7 +8,7 @@ export function isColorRulePolicy(value: unknown): value is ColorRulePolicy {
     isRecord(value) &&
     value.version === 1 &&
     corePolicy(value) &&
-    identifiers(value.allowedColorSyntaxes) &&
+    colorSyntaxes(value.allowedColorSyntaxes) &&
     identifiers(value.knownTokens) &&
     identifiers(value.allowedTokens) &&
     identifiers(value.requiredBreakpointIds) &&
@@ -40,6 +40,11 @@ function identifiers(value: unknown): value is readonly string[] {
     new Set(value).size === value.length &&
     value.every(text)
   );
+}
+
+/*** Requires configured Color syntax formats to use the supported closed vocabulary. */
+function colorSyntaxes(value: unknown): value is readonly string[] {
+  return identifiers(value) && value.every((syntax) => syntax === 'hex' || syntax === 'token');
 }
 
 /*** Narrows a complete map of raw literal values to canonical token names. */

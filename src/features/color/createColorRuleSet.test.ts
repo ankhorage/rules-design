@@ -120,6 +120,25 @@ test.each([
     expect([pass.results[0]?.status, fail.results[0]?.status]).toEqual(['PASS', 'FAIL']);
   },
 );
+test.each(['#12', '#12345', '#1234567', '#123456789'])(
+  'rejects unsupported hexadecimal digit lengths: %s',
+  (color) => {
+    expect(
+      evaluate('design.color.syntax-valid', [
+        fact('design.color.syntax-valid', {
+          color,
+          subject: { id: 'button', kind: 'component' },
+          syntax: 'hex',
+        }),
+      ]).results[0]?.status,
+    ).toBe('FAIL');
+  },
+);
+test('rejects unsupported configured Color syntax formats before evaluation', () => {
+  expect(() => createColorRuleSet({ ...policy, allowedColorSyntaxes: ['hex', 'rgb'] })).toThrow(
+    'Color rule policy must define complete acceptance and coverage configuration.',
+  );
+});
 test('requires exact fact scope and kind for every atomic rule', () => {
   const [ruleId] = ruleIds;
   const source = fact(ruleId, {
@@ -135,18 +154,9 @@ test('requires exact fact scope and kind for every atomic rule', () => {
       ?.status,
   ).toBe('INCOMPLETE');
 });
-test('requires full-page 60-30-10 coverage per breakpoint and theme while keeping multiple local samples advisory', () => {
-  const facts = [
-    distribution('page'),
-    distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'hero'),
-    distribution('viewport', { accent: 50, base: 30, secondary: 20 }, 'pricing'),
-    distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'footer'),
-    distribution('scroll-sample', { accent: 50, base: 30, secondary: 20 }, 'testimonials'),
-  ];
-  const result = evaluate('design.color.usage-distribution', facts, {
+test('requires every configured scope per breakpoint and theme while keeping multiple local samples advisory', () => {
+  const result = evaluate('design.color.usage-distribution', [distribution('page')], {
     ...policy,
-    requiredBreakpointIds: ['desktop', 'mobile'],
-    requiredThemeIds: ['light', 'dark'],
     requiredScopes: ['page', 'viewport', 'scroll-sample'],
   });
   expect(result.results[0]?.status).toBe('INCOMPLETE');

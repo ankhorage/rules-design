@@ -51,9 +51,9 @@ function syntaxValid(value: Readonly<Record<string, JsonValue>>, policy: ColorRu
 
 /*** Validates the supported syntax representation without deriving a policy verdict. */
 function validColorSyntax(color: string, syntax: string): boolean {
-  if (syntax === 'hex') return /^#[\da-f]{3,8}$/iu.test(color);
+  if (syntax === 'hex') return /^#(?:[\da-f]{3}|[\da-f]{4}|[\da-f]{6}|[\da-f]{8})$/iu.test(color);
   if (syntax === 'token') return /^[-\w./]+$/u.test(color);
-  return color.trim() !== '';
+  return false;
 }
 
 /*** Requires a referenced token to be present in the trusted inventory. */
