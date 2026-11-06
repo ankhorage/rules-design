@@ -50,6 +50,29 @@ graph TD
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleCatalog_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_features_catalog_designRuleProfiles_ts
   module_src_features_catalog_fixtures_designRuleCatalogManifest_ts --> module_src_types_designRuleCatalog_ts
+  module_src_features_color_colorObservationValues_ts["src/features/color/colorObservationValues.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_colorObservationValues_ts
+  module_src_features_color_createColorPolicyRules_ts["src/features/color/createColorPolicyRules.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_createColorPolicyRules_ts
+  module_src_features_color_createColorPolicyRules_ts --> module_src_features_color_colorObservationValues_ts
+  module_src_features_color_createColorPolicyRules_ts --> module_src_features_color_evaluateColorPolicyObservation_ts
+  module_src_features_color_createColorPolicyRules_ts --> module_src_features_color_isColorRulePolicy_ts
+  module_src_features_color_createColorPolicyRules_ts --> module_src_types_color_ts
+  module_src_features_color_createColorPolicyRules_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_color_createColorRuleSet_test_ts["src/features/color/createColorRuleSet.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_createColorRuleSet_test_ts
+  module_src_features_color_createColorRuleSet_test_ts --> module_src_features_color_createColorRuleSet_ts
+  module_src_features_color_createColorRuleSet_ts["src/features/color/createColorRuleSet.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_createColorRuleSet_ts
+  module_src_features_color_createColorRuleSet_ts --> module_src_features_color_createColorPolicyRules_ts
+  module_src_features_color_createColorRuleSet_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_color_evaluateColorPolicyObservation_ts["src/features/color/evaluateColorPolicyObservation.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_evaluateColorPolicyObservation_ts
+  module_src_features_color_evaluateColorPolicyObservation_ts --> module_src_features_color_colorObservationValues_ts
+  module_src_features_color_evaluateColorPolicyObservation_ts --> module_src_types_color_ts
+  module_src_features_color_isColorRulePolicy_ts["src/features/color/isColorRulePolicy.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_color_isColorRulePolicy_ts
+  module_src_features_color_isColorRulePolicy_ts --> module_src_types_color_ts
   module_src_features_contrast_contrastFacts_test_ts["src/features/contrast/contrastFacts.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_contrast_contrastFacts_test_ts
   module_src_features_contrast_createContrastRules_test_ts["src/features/contrast/createContrastRules.test.ts"]
@@ -110,6 +133,8 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_features_typography_validateTypographyRulePolicy_ts
   module_src_features_typography_validateTypographyRulePolicy_ts --> module_src_types_typography_ts
   module_src_index_ts["src/index.ts"]
+  module_src_types_color_ts["src/types/color.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_color_ts
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
   package__ankhorage_rules_design -.-> module_src_types_designRuleCatalog_ts
   module_src_types_designRuleProvider_ts["src/types/designRuleProvider.ts"]

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+### Patch Changes
+
+- 66a4de6: Implement Color and Tokens rules with rendered-area 60-30-10 evaluation.
+
 ## 0.3.1
 
 ### Patch Changes

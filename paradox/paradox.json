@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.1",
+      "value": "v0.3.2",
       "color": "cb3837"
     },
     {
@@ -218,6 +218,70 @@
       ]
     },
     {
+      "path": "src/features/color/colorObservationValues.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "colorObservationValues"
+      ]
+    },
+    {
+      "path": "src/features/color/createColorPolicyRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/color/colorObservationValues.ts",
+        "src/features/color/evaluateColorPolicyObservation.ts",
+        "src/features/color/isColorRulePolicy.ts",
+        "src/types/color.ts",
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "ColorRulePolicy",
+        "createColorPolicyRules"
+      ]
+    },
+    {
+      "path": "src/features/color/createColorRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/color/createColorRuleSet.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/color/createColorRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/color/createColorPolicyRules.ts",
+        "src/types/designRuleProvider.ts"
+      ],
+      "exports": [
+        "ColorRulePolicy",
+        "createColorRuleSet"
+      ]
+    },
+    {
+      "path": "src/features/color/evaluateColorPolicyObservation.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/color/colorObservationValues.ts",
+        "src/types/color.ts"
+      ],
+      "exports": [
+        "evaluateColorPolicyObservation"
+      ]
+    },
+    {
+      "path": "src/features/color/isColorRulePolicy.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/color.ts"
+      ],
+      "exports": [
+        "isColorRulePolicy"
+      ]
+    },
+    {
       "path": "src/features/contrast/contrastFacts.test.ts",
       "isEntrypoint": false,
       "dependencies": [],
@@ -407,6 +471,15 @@
         "DesignRuleScope",
         "DesignRuleStatus",
         "filterDesignRuleCatalog"
+      ]
+    },
+    {
+      "path": "src/types/color.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "ColorPolicyRuleId",
+        "ColorRulePolicy"
       ]
     },
     {
@@ -1752,6 +1825,655 @@
       "sourceLocation": {
         "filePath": "src/features/catalog/filterDesignRuleCatalog.ts",
         "line": 21,
+        "column": 1
+      }
+    },
+    {
+      "name": "createColorPolicyRules",
+      "description": "Creates the twelve frozen Color and Tokens policy rules from normalized raw observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 34,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateColorRulePolicy",
+      "description": "Rejects malformed trusted policy before Color rules can produce ambiguous verdicts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "createColorPolicyRule",
+      "description": "Constructs one fact-driven atomic rule without trusting adapter verdict fields.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 48,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateColorPolicyRule",
+      "description": "Assesses each normalized raw observation with the rule-specific trusted policy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "sameScope",
+      "description": "Accepts facts only from the complete active Rules scope.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseObservation",
+      "description": "Parses available raw evidence while ignoring adapter-supplied verdict fields.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 98,
+        "column": 1
+      }
+    },
+    {
+      "name": "isJsonValue",
+      "description": "Narrows a serializable raw observation field to the Rules JSON vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 106,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSubject",
+      "description": "Narrows the observation provenance required for an evidence-backed finding.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 118,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Reports unavailable or malformed evidence without creating a false pass.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 123,
+        "column": 1
+      }
+    },
+    {
+      "name": "finding",
+      "description": "Creates an evidence-backed finding from a trusted policy contradiction.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 139,
+        "column": 1
+      }
+    },
+    {
+      "name": "colorPolicySummary",
+      "description": "Supplies the frozen catalog summary for one Color and Tokens rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorPolicyRules.ts",
+        "line": 150,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluate",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.test.ts",
+        "line": 237,
+        "column": 1
+      }
+    },
+    {
+      "name": "fact",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.test.ts",
+        "line": 254,
+        "column": 1
+      }
+    },
+    {
+      "name": "distribution",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.test.ts",
+        "line": 257,
+        "column": 1
+      }
+    },
+    {
+      "name": "envelope",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.test.ts",
+        "line": 274,
+        "column": 1
+      }
+    },
+    {
+      "name": "createColorRuleSet",
+      "description": "Creates the isolated Color and Tokens contribution without central registration.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 28,
+        "column": 1
+      }
+    },
+    {
+      "name": "createUsageRule",
+      "description": "Evaluates rendered color areas against provider-owned targets and tolerances.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 36,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateUsage",
+      "description": "Keeps exact rule scope, breakpoint, theme, and coverage measurements isolated.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 49,
+        "column": 1
+      }
+    },
+    {
+      "name": "missingCoverage",
+      "description": "Requires configured coverage for every breakpoint and theme without merging local samples.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasRequiredCoverage",
+      "description": "Requires one page assessment and at least one advisory local sample for configured coverage.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "isObservation",
+      "description": "Narrows a parsed observation after incomplete evidence has been rejected.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseObservation",
+      "description": "Validates one available pixel observation including exact total and unknown coverage.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 112,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseIdentity",
+      "description": "Parses the immutable breakpoint, theme, and coverage identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "parsePixels",
+      "description": "Parses exclusive integer pixel counters without accepting partial coverage.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 155,
+        "column": 1
+      }
+    },
+    {
+      "name": "deviations",
+      "description": "Produces deviations only when the provider-owned tolerance is exceeded.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 180,
+        "column": 1
+      }
+    },
+    {
+      "name": "deviation",
+      "description": "Produces one deviation when a measured role exceeds its configured tolerance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 206,
+        "column": 1
+      }
+    },
+    {
+      "name": "finding",
+      "description": "Creates a full-evidence finding while retaining advisory viewport and scroll results.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 219,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Reports missing evidence without allowing a partial page to pass.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 248,
+        "column": 1
+      }
+    },
+    {
+      "name": "exactScope",
+      "description": "Compares the complete active Rules scope rather than only its identifier.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 263,
+        "column": 1
+      }
+    },
+    {
+      "name": "text",
+      "description": "Narrows a non-empty identifier.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 267,
+        "column": 1
+      }
+    },
+    {
+      "name": "pixel",
+      "description": "Narrows a non-negative integer pixel count.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 271,
+        "column": 1
+      }
+    },
+    {
+      "name": "isCoverageScope",
+      "description": "Narrows coverage scope vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/createColorRuleSet.ts",
+        "line": 275,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateColorPolicyObservation",
+      "description": "Evaluates one normalized raw observation using its frozen Color rule policy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "syntaxValid",
+      "description": "Confirms syntax policy and the corresponding literal form.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 43,
+        "column": 1
+      }
+    },
+    {
+      "name": "validColorSyntax",
+      "description": "Validates the supported syntax representation without deriving a policy verdict.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 53,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenExists",
+      "description": "Requires a referenced token to be present in the trusted inventory.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 60,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenAllowed",
+      "description": "Requires a referenced token to be permitted for use.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 69,
+        "column": 1
+      }
+    },
+    {
+      "name": "semanticRole",
+      "description": "Checks that a semantic role uses one of its trusted tokens.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 81,
+        "column": 1
+      }
+    },
+    {
+      "name": "literalDrift",
+      "description": "Rejects a canonical literal when it identifies a different token.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 92,
+        "column": 1
+      }
+    },
+    {
+      "name": "rampConsistency",
+      "description": "Verifies the complete ordered token sequence for a named color ramp.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 104,
+        "column": 1
+      }
+    },
+    {
+      "name": "alphaComposition",
+      "description": "Verifies a foreground and backdrop against their trusted composited result.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 118,
+        "column": 1
+      }
+    },
+    {
+      "name": "surfaceRole",
+      "description": "Checks the configured token inventory for a rendered surface role.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "state",
+      "description": "Checks the configured transition token for one interactive state.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 142,
+        "column": 1
+      }
+    },
+    {
+      "name": "statePolicy",
+      "description": "Selects a fixed interactive state map without dynamic policy object access.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 156,
+        "column": 1
+      }
+    },
+    {
+      "name": "themeCoverage",
+      "description": "Requires a token to supply every required theme in its policy inventory.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 171,
+        "column": 1
+      }
+    },
+    {
+      "name": "configuredValue",
+      "description": "Retrieves a configured string value without dynamic object indexing.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 188,
+        "column": 1
+      }
+    },
+    {
+      "name": "configuredTokens",
+      "description": "Retrieves a configured string list without dynamic object indexing.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "line": 198,
+        "column": 1
+      }
+    },
+    {
+      "name": "isColorRulePolicy",
+      "description": "Verifies trusted Color factory policy before assessment closures are created.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "corePolicy",
+      "description": "Validates the semantic policy maps independently from the coverage policy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 23,
+        "column": 1
+      }
+    },
+    {
+      "name": "identifiers",
+      "description": "Requires non-empty unique policy identifiers.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 36,
+        "column": 1
+      }
+    },
+    {
+      "name": "colorSyntaxes",
+      "description": "Requires configured Color syntax formats to use the supported closed vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 46,
+        "column": 1
+      }
+    },
+    {
+      "name": "stringMap",
+      "description": "Narrows a complete map of raw literal values to canonical token names.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenLists",
+      "description": "Narrows a semantic role map whose entries are non-empty trusted token inventories.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 56,
+        "column": 1
+      }
+    },
+    {
+      "name": "nestedTokenMap",
+      "description": "Narrows a foreground and backdrop matrix to its trusted composited token.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "stateTokenMaps",
+      "description": "Narrows the three explicit interactive state policies.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 70,
+        "column": 1
+      }
+    },
+    {
+      "name": "coverageScopes",
+      "description": "Requires page evidence while allowing any enabled local diagnostic scopes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 80,
+        "column": 1
+      }
+    },
+    {
+      "name": "roleMap",
+      "description": "Checks normalized target or tolerance role maps.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "proportion",
+      "description": "Narrows a finite role proportion within the supported inclusive range.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 106,
+        "column": 1
+      }
+    },
+    {
+      "name": "text",
+      "description": "Narrows a non-empty identifier.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/color/isColorRulePolicy.ts",
+        "line": 111,
         "column": 1
       }
     },
@@ -3295,6 +4017,61 @@
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
       },
       {
+        "fromPath": "src/features/color/createColorPolicyRules.ts",
+        "toPath": "src/types/color.ts",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorPolicyRules.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorPolicyRules.ts",
+        "toPath": "src/features/color/colorObservationValues.ts",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorPolicyRules.ts",
+        "toPath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorPolicyRules.ts",
+        "toPath": "src/features/color/isColorRulePolicy.ts",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorRuleSet.test.ts",
+        "toPath": "src/features/color/createColorRuleSet.ts",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorRuleSet.ts",
+        "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/color/createColorRuleSet.ts",
+        "toPath": "src/features/color/createColorPolicyRules.ts",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "toPath": "src/types/color.ts",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromPath": "src/features/color/evaluateColorPolicyObservation.ts",
+        "toPath": "src/features/color/colorObservationValues.ts",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromPath": "src/features/color/isColorRulePolicy.ts",
+        "toPath": "src/types/color.ts",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
         "fromPath": "src/features/contrast/createContrastRules.test.ts",
         "toPath": "src/features/contrast/contrastFacts.test.ts",
         "sourcePath": "src/features/contrast/createContrastRules.test.ts"
@@ -3825,6 +4602,576 @@
         "toSymbol": "matches",
         "callExpression": "matches",
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
+      },
+      {
+        "fromSymbol": "sequence",
+        "toSymbol": "isDeepStrictEqual",
+        "callExpression": "isDeepStrictEqual",
+        "sourcePath": "src/features/color/colorObservationValues.ts"
+      },
+      {
+        "fromSymbol": "createColorPolicyRules",
+        "toSymbol": "validateColorRulePolicy",
+        "callExpression": "validateColorRulePolicy",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorPolicyRules.ts",
+        "toSymbol": "createColorPolicyRule",
+        "callExpression": "createColorPolicyRule",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "validateColorRulePolicy",
+        "toSymbol": "isColorRulePolicy",
+        "callExpression": "isColorRulePolicy",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateColorPolicyRule",
+        "callExpression": "evaluateColorPolicyRule",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "createColorPolicyRule",
+        "toSymbol": "colorPolicySummary",
+        "callExpression": "colorPolicySummary",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorPolicyRules.ts",
+        "toSymbol": "sameScope",
+        "callExpression": "sameScope",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorPolicyRules.ts",
+        "toSymbol": "parseObservation",
+        "callExpression": "parseObservation",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyRule",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorPolicyRules.ts",
+        "toSymbol": "evaluateColorPolicyObservation",
+        "callExpression": "evaluateColorPolicyObservation",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorPolicyRules.ts",
+        "toSymbol": "finding",
+        "callExpression": "finding",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "isSubject",
+        "callExpression": "isSubject",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "isJsonValue",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "isSubject",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "isSubject",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "incomplete",
+        "toSymbol": "colorPolicySummary",
+        "callExpression": "colorPolicySummary",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "finding",
+        "toSymbol": "colorPolicySummary",
+        "callExpression": "colorPolicySummary",
+        "sourcePath": "src/features/color/createColorPolicyRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "createColorRuleSet",
+        "callExpression": "createColorRuleSet",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "evaluate",
+        "callExpression": "evaluate",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "fact",
+        "callExpression": "fact",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "distribution",
+        "callExpression": "distribution",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.test.ts",
+        "toSymbol": "envelope",
+        "callExpression": "envelope",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "createColorRuleSet",
+        "callExpression": "createColorRuleSet",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "fact",
+        "toSymbol": "envelope",
+        "callExpression": "envelope",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "distribution",
+        "toSymbol": "envelope",
+        "callExpression": "envelope",
+        "sourcePath": "src/features/color/createColorRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "createColorRuleSet",
+        "toSymbol": "createColorPolicyRules",
+        "callExpression": "createColorPolicyRules",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createColorRuleSet",
+        "toSymbol": "createUsageRule",
+        "callExpression": "createUsageRule",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateUsage",
+        "callExpression": "evaluateUsage",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.ts",
+        "toSymbol": "exactScope",
+        "callExpression": "exactScope",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateUsage",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateUsage",
+        "toSymbol": "missingCoverage",
+        "callExpression": "missingCoverage",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.ts",
+        "toSymbol": "deviations",
+        "callExpression": "deviations",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.ts",
+        "toSymbol": "finding",
+        "callExpression": "finding",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/createColorRuleSet.ts",
+        "toSymbol": "hasRequiredCoverage",
+        "callExpression": "hasRequiredCoverage",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "parseIdentity",
+        "callExpression": "parseIdentity",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseObservation",
+        "toSymbol": "parsePixels",
+        "callExpression": "parsePixels",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseIdentity",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parseIdentity",
+        "toSymbol": "isCoverageScope",
+        "callExpression": "isCoverageScope",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "parsePixels",
+        "toSymbol": "pixel",
+        "callExpression": "pixel",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "deviations",
+        "toSymbol": "deviation",
+        "callExpression": "deviation",
+        "sourcePath": "src/features/color/createColorRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "syntaxValid",
+        "callExpression": "syntaxValid",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "tokenExists",
+        "callExpression": "tokenExists",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "tokenAllowed",
+        "callExpression": "tokenAllowed",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "semanticRole",
+        "callExpression": "semanticRole",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "literalDrift",
+        "callExpression": "literalDrift",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "rampConsistency",
+        "callExpression": "rampConsistency",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "alphaComposition",
+        "callExpression": "alphaComposition",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "surfaceRole",
+        "callExpression": "surfaceRole",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "state",
+        "callExpression": "state",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "evaluateColorPolicyObservation",
+        "toSymbol": "themeCoverage",
+        "callExpression": "themeCoverage",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "syntaxValid",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "syntaxValid",
+        "toSymbol": "validColorSyntax",
+        "callExpression": "validColorSyntax",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "tokenExists",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "tokenAllowed",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "semanticRole",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "semanticRole",
+        "toSymbol": "configuredTokens",
+        "callExpression": "configuredTokens",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "literalDrift",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "literalDrift",
+        "toSymbol": "configuredValue",
+        "callExpression": "configuredValue",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "rampConsistency",
+        "toSymbol": "strings",
+        "callExpression": "colorObservationValues.strings",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "rampConsistency",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "rampConsistency",
+        "toSymbol": "configuredTokens",
+        "callExpression": "configuredTokens",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "rampConsistency",
+        "toSymbol": "sequence",
+        "callExpression": "colorObservationValues.sequence",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "alphaComposition",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "alphaComposition",
+        "toSymbol": "configuredTokens",
+        "callExpression": "configuredTokens",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "alphaComposition",
+        "toSymbol": "configuredValue",
+        "callExpression": "configuredValue",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "surfaceRole",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "surfaceRole",
+        "toSymbol": "configuredTokens",
+        "callExpression": "configuredTokens",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "state",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "state",
+        "toSymbol": "configuredValue",
+        "callExpression": "configuredValue",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "state",
+        "toSymbol": "statePolicy",
+        "callExpression": "statePolicy",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "themeCoverage",
+        "toSymbol": "strings",
+        "callExpression": "colorObservationValues.strings",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "themeCoverage",
+        "toSymbol": "text",
+        "callExpression": "colorObservationValues.text",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "themeCoverage",
+        "toSymbol": "configuredTokens",
+        "callExpression": "configuredTokens",
+        "sourcePath": "src/features/color/evaluateColorPolicyObservation.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "corePolicy",
+        "callExpression": "corePolicy",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "colorSyntaxes",
+        "callExpression": "colorSyntaxes",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "identifiers",
+        "callExpression": "identifiers",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "coverageScopes",
+        "callExpression": "coverageScopes",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "isColorRulePolicy",
+        "toSymbol": "roleMap",
+        "callExpression": "roleMap",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "corePolicy",
+        "toSymbol": "stringMap",
+        "callExpression": "stringMap",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "corePolicy",
+        "toSymbol": "tokenLists",
+        "callExpression": "tokenLists",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "corePolicy",
+        "toSymbol": "nestedTokenMap",
+        "callExpression": "nestedTokenMap",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "corePolicy",
+        "toSymbol": "stateTokenMaps",
+        "callExpression": "stateTokenMaps",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "colorSyntaxes",
+        "toSymbol": "identifiers",
+        "callExpression": "identifiers",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "stringMap",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "tokenLists",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "nestedTokenMap",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "stateTokenMaps",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "stateTokenMaps",
+        "toSymbol": "stringMap",
+        "callExpression": "stringMap",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "roleMap",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "roleMap",
+        "toSymbol": "proportion",
+        "callExpression": "proportion",
+        "sourcePath": "src/features/color/isColorRulePolicy.ts"
       },
       {
         "fromSymbol": "contrastFact",
