@@ -1,12 +1,13 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { Rule, RuleEvaluationOutcome, RuleFacet, RuleScope, RuleSet } from '@ankhorage/rules';
 
+import type { DesignContext } from '../../types/designRuleProvider';
 import type { SpacingProximityRuleId } from '../../types/spacingProximity';
 import { assessSpacingProximityObservation } from './assessSpacingProximityObservation';
 import { parseSpacingProximityMeasurements } from './parseSpacingProximityMeasurements';
 
 /*** Creates the independently owned Spacing and Proximity Rules contribution. */
-export function createSpacingProximityRuleSet(): RuleSet<readonly FactEnvelope[]> {
+export function createSpacingProximityRuleSet(): RuleSet<DesignContext> {
   return { id: 'ankhorage.rules-design.spacing-proximity', rules: definitions.map(createRule) };
 }
 
@@ -49,11 +50,11 @@ const definitions: readonly Definition[] = (
 }));
 
 /*** Creates one deterministic rule from its frozen catalog definition. */
-function createRule(definition: Definition): Rule<readonly FactEnvelope[]> {
+function createRule(definition: Definition): Rule<DesignContext> {
   return {
     defaultSeverity: definition.severity,
     dependencies: [],
-    evaluate: ({ context, scope }) => evaluate(context, definition, scope),
+    evaluate: ({ context, scope }) => evaluate(context.facts, definition, scope),
     facets: facets(definition),
     identity: { id: definition.id, version: '1.0.0' },
     requiredCapabilities: [definition.capability],

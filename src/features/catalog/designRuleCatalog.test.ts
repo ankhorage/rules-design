@@ -32,7 +32,7 @@ test('contains the frozen atomic and C.R.A.P. catalog sizes with complete planne
   expect(designRuleProviderManifest).toEqual({
     packageName: '@ankhorage/rules-design',
     providerId: 'ankhorage.rules-design',
-    publishedRuleIds: [],
+    publishedRuleIds: designRuleCatalog.map((entry) => entry.id),
     schemaVersion: '1',
   });
 });

@@ -170,7 +170,7 @@ function evaluateObservations(
   scope: RuleScope,
 ) {
   return evaluateRules(
-    [fact(ruleId, observations, scope)],
+    { facts: [fact(ruleId, observations, scope)] },
     ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
     { capabilities: ['dom.layout', 'source.style-tokens'], scope },
   );
@@ -202,7 +202,7 @@ function fact(ruleId: string, observations: readonly JsonValue[], scope: RuleSco
 
 function evaluateWithoutEvidence(ruleId: string, scope: RuleScope) {
   return evaluateRules(
-    [],
+    { facts: [] },
     ruleSet.rules.filter((rule) => rule.identity.id === ruleId),
     {
       capabilities: ['dom.layout', 'source.style-tokens'],
