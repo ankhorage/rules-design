@@ -259,7 +259,7 @@ function typographyEvidence(
   capability: RuleDefinition['capability'],
   scope: RuleScope,
 ): readonly [boolean, readonly TypographyObservation[]] {
-  const factObservations = (context.facts ?? [])
+  const factObservations = context.facts
     .filter(
       (fact) =>
         fact.kind === capability && fact.scope.id === scope.id && fact.scope.kind === scope.kind,

@@ -47,7 +47,7 @@ function createUsageRule(policy: ColorRulePolicy): Rule<DesignContext> {
 
 /*** Keeps exact rule scope, breakpoint, theme, and coverage measurements isolated. */
 function evaluateUsage(input: RuleEvaluationInput<DesignContext>, policy: ColorRulePolicy) {
-  const facts = (input.context.facts ?? []).filter(
+  const facts = input.context.facts.filter(
     (fact) => fact.kind === 'design.color.usage-distribution' && exactScope(fact, input),
   );
   const observations = facts.map(parseObservation);

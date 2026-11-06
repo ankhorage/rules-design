@@ -244,7 +244,7 @@ function evaluate(
   );
   if (!rule) throw new Error(`Missing ${ruleId}`);
   const outcome = rule.evaluate({
-    context: { evidence: [], facts },
+    context: { facts },
     dependencyResults: [],
     options: undefined,
     scope,
