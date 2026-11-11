@@ -48,7 +48,6 @@ function legalNoticeObservation(
   const subject = websiteAssessmentValues.subject(value.subject);
   return value.version === 1 &&
     isStringArray(value.labels) &&
-    value.labels.length > 0 &&
     typeof value.global === 'boolean' &&
     typeof value.reachable === 'boolean' &&
     (value.content === 'substantive' ||

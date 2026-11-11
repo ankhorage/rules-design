@@ -56,7 +56,7 @@ function contactObservation(
     return null;
   const links = value.contactLinks.map(contactLinkMatch);
   const matches = validatedWebsiteAssessmentValues(links);
-  return links.length === 0 || matches === null
+  return matches === null
     ? null
     : { context: value.addressContext, id, kind: value.addressKind, links: matches, subject };
 }

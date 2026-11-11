@@ -27,7 +27,7 @@ test('marks unknown enums and incomplete runtime coverage incomplete', () => {
   ).toBe('INCOMPLETE');
 });
 
-test('marks empty or invalid contact-link arrays incomplete', () => {
+test('permits optional contact links but rejects invalid contact-link entries', () => {
   expect(
     evaluateWebsiteAssessment('design.contact.address-markup', [
       websiteAssessmentFact('website.contact-observation', {
@@ -38,7 +38,7 @@ test('marks empty or invalid contact-link arrays incomplete', () => {
         subject: { id: 'contact', kind: 'address' },
       }),
     ]).status,
-  ).toBe('INCOMPLETE');
+  ).toBe('PASS');
   expect(
     evaluateWebsiteAssessment('design.contact.address-markup', [
       websiteAssessmentFact('website.contact-observation', {
@@ -52,7 +52,7 @@ test('marks empty or invalid contact-link arrays incomplete', () => {
   ).toBe('INCOMPLETE');
 });
 
-test('marks missing consent states and empty legal labels incomplete', () => {
+test('marks missing consent states incomplete and a complete absent legal notice failed', () => {
   expect(
     evaluateWebsiteAssessment('design.website.tracking-consent', [
       websiteAssessmentFact('website.tracking-observation', {
@@ -68,13 +68,13 @@ test('marks missing consent states and empty legal labels incomplete', () => {
       websiteAssessmentFact('website.legal-notice-observation', {
         version: 1,
         labels: [],
-        global: true,
-        reachable: true,
-        content: 'substantive',
+        global: false,
+        reachable: false,
+        content: 'empty',
         subject: { id: 'legal', kind: 'link' },
       }),
     ]).status,
-  ).toBe('INCOMPLETE');
+  ).toBe('FAIL');
 });
 
 test('marks a missing policy and unknown image identity incomplete', () => {
