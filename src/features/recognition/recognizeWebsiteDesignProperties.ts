@@ -10,20 +10,21 @@ import type {
   WebsiteDesignNodeRecognition,
   WebsiteDesignPropertyObservation,
   WebsiteDesignRecognition,
-  WebsiteDesignTokenCandidate,
   WebsiteDesignUnresolvedObservation,
 } from '../../types/websiteDesignRecognition';
+import { tokenCandidates } from './tokenCandidates';
 
 /*** Recognizes exact design properties from validated website observations without evaluating them. */
 export function recognizeWebsiteDesignProperties(
   document: WebsiteObservationDocument,
 ): WebsiteDesignRecognition {
-  const nodes = document.pages.flatMap((page) => page.nodes.map(recognizeNode));
+  const nodes = document.pages.flatMap((page) =>
+    page.nodes.map((node) => recognizeNode(page.id, node)),
+  );
   return { nodes, tokenCandidates: tokenCandidates(nodes) };
 }
 
 type CssProperty = keyof WebsiteComputedCss;
-type TokenKind = WebsiteDesignTokenCandidate['kind'];
 
 const colorProperties = ['color', 'backgroundColor', 'borderColor', 'opacity'] as const;
 const typographyProperties = [
@@ -82,34 +83,37 @@ const layoutProperties = [
 ] as const;
 
 /*** Retains every available node style and safe semantic observation at its source identity. */
-function recognizeNode(node: WebsiteObservedNode): WebsiteDesignNodeRecognition {
+function recognizeNode(pageId: string, node: WebsiteObservedNode): WebsiteDesignNodeRecognition {
   return {
     sourceRef: node.sourceRef,
-    colors: cssObservations(node, colorProperties),
-    typography: cssObservations(node, typographyProperties),
-    layout: cssObservations(node, layoutProperties),
-    responsive: responsiveObservations(node),
-    accessibility: accessibilityObservations(node),
+    pageId,
+    colors: cssObservations(pageId, node, colorProperties),
+    typography: cssObservations(pageId, node, typographyProperties),
+    layout: cssObservations(pageId, node, layoutProperties),
+    responsive: responsiveObservations(pageId, node),
+    accessibility: accessibilityObservations(pageId, node),
     media: node.media,
-    unresolved: unresolvedObservations(node),
+    unresolved: unresolvedObservations(pageId, node),
   };
 }
 
 /*** Projects exact available computed CSS values while retaining viewport, state, and provenance. */
 function cssObservations(
+  pageId: string,
   node: WebsiteObservedNode,
   properties: readonly CssProperty[],
 ): readonly WebsiteDesignPropertyObservation[] {
   return node.observations.flatMap((observation) => {
     const { css } = observation;
     return observation.availability.status === 'available' && css !== null
-      ? properties.map((name) => cssObservation(node.sourceRef, observation, css, name))
+      ? properties.map((name) => cssObservation(pageId, node.sourceRef, observation, css, name))
       : [];
   });
 }
 
 /*** Creates one source-linked computed CSS observation without normalizing its original literal. */
 function cssObservation(
+  pageId: string,
   sourceRef: string,
   observation: WebsiteNodeObservation,
   css: WebsiteComputedCss,
@@ -121,6 +125,7 @@ function cssObservation(
     viewportId: observation.viewportId,
     stateId: observation.stateId,
     sourceRef,
+    pageId,
     provenance: observation.provenance,
   };
 }
@@ -150,6 +155,7 @@ function cssValue(value: unknown) {
 
 /*** Retains responsive geometry and CSS state samples without inventing source-authored breakpoints. */
 function responsiveObservations(
+  pageId: string,
   node: WebsiteObservedNode,
 ): readonly WebsiteDesignPropertyObservation[] {
   return node.observations.map((observation) => ({
@@ -169,12 +175,14 @@ function responsiveObservations(
     viewportId: observation.viewportId,
     stateId: observation.stateId,
     sourceRef: node.sourceRef,
+    pageId,
     provenance: observation.provenance,
   }));
 }
 
 /*** Retains semantic and accessible-name evidence without producing accessibility conclusions. */
 function accessibilityObservations(
+  pageId: string,
   node: WebsiteObservedNode,
 ): readonly WebsiteDesignPropertyObservation[] {
   const { sourceRef } = node;
@@ -199,12 +207,14 @@ function accessibilityObservations(
     viewportId: observation.viewportId,
     stateId: observation.stateId,
     sourceRef,
+    pageId,
     provenance: observation.provenance,
   }));
 }
 
 /*** Records unavailable CSS or geometry samples with their producer-supplied missing reason. */
 function unresolvedObservations(
+  pageId: string,
   node: WebsiteObservedNode,
 ): readonly WebsiteDesignUnresolvedObservation[] {
   return node.observations.flatMap((observation) => {
@@ -216,6 +226,7 @@ function unresolvedObservations(
       missing,
       provenance: observation.provenance,
       sourceRef: node.sourceRef,
+      pageId,
       stateId: observation.stateId,
       viewportId: observation.viewportId,
     }));
@@ -230,62 +241,4 @@ function unresolvedObservationKinds(
     ...(observation.css === null ? (['computed-css'] as const) : []),
     ...(observation.rect === null ? (['geometry'] as const) : []),
   ];
-}
-
-/*** Finds repeated exact design literals and records them as role-free reusable token candidates. */
-function tokenCandidates(
-  nodes: readonly WebsiteDesignNodeRecognition[],
-): readonly WebsiteDesignTokenCandidate[] {
-  return tokenKinds.flatMap((kind) => candidatesForKind(nodes, kind));
-}
-
-const tokenKinds: readonly TokenKind[] = ['color', 'radius', 'shadow', 'spacing', 'typography'];
-
-/*** Extracts deterministic repeated candidates for one design-token family. */
-function candidatesForKind(
-  nodes: readonly WebsiteDesignNodeRecognition[],
-  kind: TokenKind,
-): readonly WebsiteDesignTokenCandidate[] {
-  const observations = nodes.flatMap((node) => observationsForKind(node, kind));
-  const stringObservations = observations.filter(
-    (observation): observation is WebsiteDesignPropertyObservation & { readonly value: string } =>
-      typeof observation.value === 'string',
-  );
-  return [...Map.groupBy(stringObservations, (observation) => observation.value).entries()]
-    .filter(([, values]) => sourceRefs(values).length > 1)
-    .map(([value, values]) => ({
-      kind,
-      value,
-      originalValues: [...new Set(values.map((item) => item.value))],
-      sourceRefs: sourceRefs(values),
-      confidence: sourceRefs(values).length / sourceRefs(observations).length,
-      inferredRole: null,
-    }))
-    .toSorted((left, right) => left.value.localeCompare(right.value));
-}
-
-/*** Extracts deterministic unique source identities so viewport samples do not fabricate repetition. */
-function sourceRefs(observations: readonly WebsiteDesignPropertyObservation[]): readonly string[] {
-  return [...new Set(observations.map((observation) => observation.sourceRef))].toSorted();
-}
-
-/*** Selects only the observations that belong to one factual token family. */
-function observationsForKind(
-  node: WebsiteDesignNodeRecognition,
-  kind: TokenKind,
-): readonly WebsiteDesignPropertyObservation[] {
-  switch (kind) {
-    case 'color':
-      return node.colors.filter((observation) => observation.name !== 'opacity');
-    case 'radius':
-      return node.layout.filter((observation) => observation.name === 'borderRadius');
-    case 'shadow':
-      return node.layout.filter((observation) => observation.name === 'boxShadow');
-    case 'spacing':
-      return node.layout.filter((observation) =>
-        ['gap', 'margin', 'padding'].includes(observation.name),
-      );
-    case 'typography':
-      return node.typography;
-  }
 }

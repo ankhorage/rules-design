@@ -5,6 +5,12 @@ import type {
   WebsiteObservationProvenance,
 } from '@ankhorage/contracts/website';
 
+/*** Identifies one observed DOM node within the page that owns its local source reference. */
+export interface WebsiteDesignSourceReference {
+  readonly pageId: string;
+  readonly sourceRef: string;
+}
+
 /*** Describes one exact observed design value without assigning a quality verdict. */
 export interface WebsiteDesignPropertyObservation {
   readonly name: string;
@@ -12,6 +18,7 @@ export interface WebsiteDesignPropertyObservation {
   readonly viewportId: string;
   readonly stateId: string;
   readonly sourceRef: string;
+  readonly pageId: string;
   readonly provenance: WebsiteObservationProvenance;
 }
 
@@ -21,6 +28,7 @@ export interface WebsiteDesignUnresolvedObservation {
   readonly viewportId: string;
   readonly stateId: string;
   readonly sourceRef: string;
+  readonly pageId: string;
   readonly provenance: WebsiteObservationProvenance;
   readonly missing: WebsiteMissingValue;
 }
@@ -28,6 +36,7 @@ export interface WebsiteDesignUnresolvedObservation {
 /*** Groups all factual design observations for one stable observed DOM node. */
 export interface WebsiteDesignNodeRecognition {
   readonly sourceRef: string;
+  readonly pageId: string;
   readonly colors: readonly WebsiteDesignPropertyObservation[];
   readonly typography: readonly WebsiteDesignPropertyObservation[];
   readonly layout: readonly WebsiteDesignPropertyObservation[];
@@ -40,9 +49,10 @@ export interface WebsiteDesignNodeRecognition {
 /*** Records a repeated observed value as a reusable token candidate without inventing a role. */
 export interface WebsiteDesignTokenCandidate {
   readonly kind: 'color' | 'radius' | 'shadow' | 'spacing' | 'typography';
+  readonly property: string;
   readonly value: string;
   readonly originalValues: readonly string[];
-  readonly sourceRefs: readonly string[];
+  readonly sourceRefs: readonly WebsiteDesignSourceReference[];
   readonly confidence: number;
   readonly inferredRole: null;
 }

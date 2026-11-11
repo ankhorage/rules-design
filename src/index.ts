@@ -28,6 +28,7 @@ export type {
   WebsiteDesignNodeRecognition,
   WebsiteDesignPropertyObservation,
   WebsiteDesignRecognition,
+  WebsiteDesignSourceReference,
   WebsiteDesignTokenCandidate,
   WebsiteDesignUnresolvedObservation,
 } from './types/websiteDesignRecognition';

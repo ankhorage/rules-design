@@ -14,6 +14,7 @@ test('retains computed inline and inherited colors without interpreting declarat
   expect(value(inherited.colors, 'color', 'desktop')).toBe('rgb(17, 17, 17)');
   expect(value(conflicting.colors, 'color', 'desktop')).toBe('rgb(255, 0, 0)');
   expect(inlineRed.colors.find((observation) => observation.name === 'color')).toMatchObject({
+    pageId: 'home',
     provenance: { method: 'browser', sourceUrl: 'https://example.test/' },
     sourceRef: '#parent > span.inline-red',
   });
@@ -60,14 +61,63 @@ test('creates role-free candidates only when values repeat across distinct sourc
   const mobileOnlyGrid = recognition.tokenCandidates.find((candidate) => candidate.value === '1fr');
 
   expect(red).toEqual({
-    confidence: 2 / 7,
+    confidence: 2 / 8,
     inferredRole: null,
     kind: 'color',
+    property: 'color',
     originalValues: ['rgb(255, 0, 0)'],
-    sourceRefs: ['#conflicting-declarations', '#parent > span.inline-red'],
+    sourceRefs: [
+      { pageId: 'home', sourceRef: '#conflicting-declarations' },
+      { pageId: 'home', sourceRef: '#parent > span.inline-red' },
+    ],
     value: 'rgb(255, 0, 0)',
   });
   expect(mobileOnlyGrid).toBeUndefined();
+});
+
+test('qualifies duplicated DOM paths by page and derives referenced spacing edges without mutation', () => {
+  const homeLayout = node('#layout', 'home');
+  const pricingLayout = node('#layout', 'pricing');
+  const padding = recognition.tokenCandidates.find(
+    (candidate) =>
+      candidate.kind === 'spacing' &&
+      candidate.property === 'padding.top' &&
+      candidate.value === '24px',
+  );
+
+  expect(homeLayout).toMatchObject({ pageId: 'home', sourceRef: '#layout' });
+  expect(pricingLayout).toMatchObject({ pageId: 'pricing', sourceRef: '#layout' });
+  expect(value(homeLayout.layout, 'padding', 'desktop')).toEqual({
+    bottom: '24px',
+    left: '24px',
+    right: '24px',
+    top: '24px',
+  });
+  expect(padding).toMatchObject({
+    sourceRefs: [
+      { pageId: 'home', sourceRef: '#layout' },
+      { pageId: 'pricing', sourceRef: '#layout' },
+    ],
+  });
+});
+
+test('keeps equal CSS literals from distinct properties as distinct token candidates', () => {
+  const fontStyle = recognition.tokenCandidates.find(
+    (candidate) =>
+      candidate.kind === 'typography' &&
+      candidate.property === 'fontStyle' &&
+      candidate.value === 'normal',
+  );
+  const lineHeight = recognition.tokenCandidates.find(
+    (candidate) =>
+      candidate.kind === 'typography' &&
+      candidate.property === 'lineHeight' &&
+      candidate.value === 'normal',
+  );
+
+  expect(fontStyle).toBeDefined();
+  expect(lineHeight).toBeDefined();
+  expect(fontStyle).not.toEqual(lineHeight);
 });
 
 test('retains explicit missing evidence as unresolved and survives JSON roundtrip', () => {
@@ -85,8 +135,10 @@ test('retains explicit missing evidence as unresolved and survives JSON roundtri
 });
 
 /*** Finds one source node in the recognition fixture. */
-function node(sourceRef: string) {
-  const result = recognition.nodes.find((candidate) => candidate.sourceRef === sourceRef);
+function node(sourceRef: string, pageId = 'home') {
+  const result = recognition.nodes.find(
+    (candidate) => candidate.pageId === pageId && candidate.sourceRef === sourceRef,
+  );
   if (result === undefined) throw new Error(`Missing fixture node: ${sourceRef}`);
   return result;
 }
