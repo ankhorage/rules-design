@@ -46,38 +46,10 @@ function createWebsiteStructureUiNode(
   };
 }
 
-/*** Creates an explicit unresolved mapping for malformed cyclic source hierarchy. */
-export function createWebsiteStructureUnresolvedTreeNode(
-  node: WebsiteObservedNode,
-  sourceRefs: readonly string[],
-  reason: string,
-): RecognizedTreeNode {
-  const unresolvedNode = {
-    componentType: 'Unknown',
-    confidence: 0,
-    id: node.sourceRef,
-    props: [],
-    responsive: [],
-    sourceRefs: uniqueSourceRefs([...sourceRefs, node.sourceRef]),
-    status: 'unresolved',
-    unresolved: { reason, sourceRefs: uniqueSourceRefs([...sourceRefs, node.sourceRef]) },
-  } as const;
-  return {
-    node: unresolvedNode,
-    nodes: [unresolvedNode],
-    uiNode: { id: node.sourceRef, type: 'Unknown' },
-  };
-}
-
 /*** Assigns bounded confidence from the evidence class rather than an aesthetic assessment. */
 function confidenceFor(componentType: string): number {
   if (componentType === 'Grid' || componentType === 'Flex') return 0.98;
   if (componentType === 'Card') return 0.9;
   if (componentType === 'Container') return 0.8;
   return 1;
-}
-
-/*** Retains source-reference order while removing duplicate provenance from folded wrappers. */
-function uniqueSourceRefs(sourceRefs: readonly string[]): readonly string[] {
-  return [...new Set(sourceRefs)];
 }
