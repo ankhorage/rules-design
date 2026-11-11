@@ -6,6 +6,7 @@ export { createDesignRuleProvider } from './features/provider/designRuleProvider
 export { selectDesignRuleProfile } from './features/provider/selectDesignRuleProfile';
 export { recognizeWebsiteDesignProperties } from './features/recognition/recognizeWebsiteDesignProperties';
 export { createWebsiteAssessmentRuleSet } from './features/website-assessment/createWebsiteAssessmentRuleSet';
+export { recognizeWebsiteStructure } from './features/website-recognition/recognizeWebsiteStructure';
 export type {
   DesignAssessmentKind,
   DesignRuleCatalogEntry,
