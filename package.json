@@ -40,6 +40,7 @@
     "check-types": "bun x tsc --noEmit -p tsconfig.json",
     "typecheck": "bun run check-types",
     "test": "bun test",
+    "test:packed-node-consumer": "bun test/packedNodeConsumer.ts",
     "lint": "ankhorage-eslint . --max-warnings=0",
     "knip:check": "ankhorage-knip",
     "format": "ankhorage-prettier --write .",

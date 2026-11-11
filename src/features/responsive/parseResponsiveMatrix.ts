@@ -6,7 +6,7 @@ import type {
   ResponsiveElement,
   ResponsiveMatrix,
   ResponsiveViewport,
-} from '../../types/responsive';
+} from '../../types/responsive.js';
 
 /*** Parses the serializable responsive fact payload without assuming host runtime objects. */
 export function parseResponsiveMatrix(value: unknown): ResponsiveMatrix | null {

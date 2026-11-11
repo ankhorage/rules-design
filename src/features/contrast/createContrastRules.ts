@@ -9,7 +9,7 @@ import type {
 } from '@ankhorage/rules';
 import { isRecord } from '@ankhorage/utility/object';
 
-import { hasValidContrastMeasurement } from './hasValidContrastMeasurement';
+import { hasValidContrastMeasurement } from './hasValidContrastMeasurement.js';
 
 type RuleId =
   | 'design.contrast.text-ratio'

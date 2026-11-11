@@ -1,9 +1,9 @@
-export { designRuleCatalog } from './features/catalog/designRuleCatalog';
-export { designRuleProfiles } from './features/catalog/designRuleProfiles';
-export { designRuleProviderManifest } from './features/catalog/designRuleProviderManifest';
-export { filterDesignRuleCatalog } from './features/catalog/filterDesignRuleCatalog';
-export { createDesignRuleProvider } from './features/provider/designRuleProvider';
-export { selectDesignRuleProfile } from './features/provider/selectDesignRuleProfile';
+export { designRuleCatalog } from './features/catalog/designRuleCatalog.js';
+export { designRuleProfiles } from './features/catalog/designRuleProfiles.js';
+export { designRuleProviderManifest } from './features/catalog/designRuleProviderManifest.js';
+export { filterDesignRuleCatalog } from './features/catalog/filterDesignRuleCatalog.js';
+export { createDesignRuleProvider } from './features/provider/designRuleProvider.js';
+export { selectDesignRuleProfile } from './features/provider/selectDesignRuleProfile.js';
 export type {
   DesignAssessmentKind,
   DesignRuleCatalogEntry,
@@ -14,10 +14,10 @@ export type {
   DesignRuleProviderManifest,
   DesignRuleScope,
   DesignRuleStatus,
-} from './types/designRuleCatalog';
+} from './types/designRuleCatalog.js';
 export type {
   DesignContext,
   DesignRuleProfileSelection,
   DesignRuleProvider,
   DesignRuleProviderOptions,
-} from './types/designRuleProvider';
+} from './types/designRuleProvider.js';

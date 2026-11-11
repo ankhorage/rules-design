@@ -65,6 +65,9 @@ jobs:
             echo "No build script found; skipping."
           fi
 
+      - name: Import packed package from a cold Node consumer
+        run: bun run test:packed-node-consumer
+
       - name: Validate opted-in APM owner release
         run: |
           if node -e "const p=require('./package.json'); process.exit(p.ankh?.apm === undefined ? 1 : 0)"; then

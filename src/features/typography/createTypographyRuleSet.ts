@@ -6,13 +6,13 @@ import type {
   RuleSet,
 } from '@ankhorage/rules';
 
-import type { DesignContext } from '../../types/designRuleProvider';
-import type { TypographyObservation, TypographyRulePolicy } from '../../types/typography';
-import { createTypographyObservationTools } from './createTypographyObservationTools';
-import { parseTypographyObservation } from './parseTypographyObservation';
-import { validateTypographyRulePolicy } from './validateTypographyRulePolicy';
+import type { DesignContext } from '../../types/designRuleProvider.js';
+import type { TypographyObservation, TypographyRulePolicy } from '../../types/typography.js';
+import { createTypographyObservationTools } from './createTypographyObservationTools.js';
+import { parseTypographyObservation } from './parseTypographyObservation.js';
+import { validateTypographyRulePolicy } from './validateTypographyRulePolicy.js';
 
-export type { TypographyRulePolicy } from '../../types/typography';
+export type { TypographyRulePolicy } from '../../types/typography.js';
 
 const typographyObservationTools = createTypographyObservationTools();
 

@@ -1,7 +1,7 @@
 import type {
   DesignRuleCatalogEntry,
   DesignRuleCatalogFilter,
-} from '../../types/designRuleCatalog';
+} from '../../types/designRuleCatalog.js';
 
 /*** Selects planned catalog entries matching every supplied controlled facet. */
 export function filterDesignRuleCatalog(

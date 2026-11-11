@@ -2,10 +2,10 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { JsonValue, Rule, RuleEvaluationInput, RuleFinding, RuleSet } from '@ankhorage/rules';
 import { isRecord } from '@ankhorage/utility/object';
 
-import type { DesignContext } from '../../types/designRuleProvider';
-import { type ColorRulePolicy, createColorPolicyRules } from './createColorPolicyRules';
+import type { DesignContext } from '../../types/designRuleProvider.js';
+import { type ColorRulePolicy, createColorPolicyRules } from './createColorPolicyRules.js';
 
-export type { ColorRulePolicy } from './createColorPolicyRules';
+export type { ColorRulePolicy } from './createColorPolicyRules.js';
 
 type Role = 'accent' | 'base' | 'secondary';
 type CoverageScope = 'page' | 'scroll-sample' | 'viewport';

@@ -7,12 +7,12 @@ import type {
   ResponsiveEvaluation,
   ResponsiveMatrix,
   ResponsiveViewport,
-} from '../../types/responsive';
-import { evaluateResponsiveOrder } from './evaluateResponsiveOrder';
-import { isContainedInResponsiveBounds } from './isContainedInResponsiveBounds';
-import { parseResponsiveMatrix } from './parseResponsiveMatrix';
-import { responsiveElementsOfKind } from './responsiveElementsOfKind';
-import { selectResponsiveFact } from './selectResponsiveFact';
+} from '../../types/responsive.js';
+import { evaluateResponsiveOrder } from './evaluateResponsiveOrder.js';
+import { isContainedInResponsiveBounds } from './isContainedInResponsiveBounds.js';
+import { parseResponsiveMatrix } from './parseResponsiveMatrix.js';
+import { responsiveElementsOfKind } from './responsiveElementsOfKind.js';
+import { selectResponsiveFact } from './selectResponsiveFact.js';
 
 interface ResponsiveRuleDefinition {
   readonly evaluate: (matrix: ResponsiveMatrix) => ResponsiveEvaluation;

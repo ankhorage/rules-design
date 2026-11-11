@@ -5,8 +5,8 @@ import {
   evaluateMediaAssessment,
   type MediaAssessment,
   type MediaCheck,
-} from './evaluateMediaAssessment';
-import { type MediaRuleDefinition, mediaRuleDefinitions } from './mediaRuleDefinitions';
+} from './evaluateMediaAssessment.js';
+import { type MediaRuleDefinition, mediaRuleDefinitions } from './mediaRuleDefinitions.js';
 
 /*** Creates the independently composable Images and Media rule contribution from portable facts. */
 export function createMediaRuleSet(options: MediaRuleOptions = {}): RuleSet<MediaRuleContext> {
