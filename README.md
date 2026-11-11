@@ -3,7 +3,7 @@
 
 # @ankhorage/rules-design
 
-![license: MIT](././paradox/badges/license.svg) ![npm: v0.5.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![paradox: canonical](././paradox/badges/docs.svg)
+![license: MIT](././paradox/badges/license.svg) ![npm: v0.6.0](././paradox/badges/npm.svg) ![runtime: bun](././paradox/badges/runtime.svg) ![typescript: strict](././paradox/badges/typescript.svg) ![eslint: checked](././paradox/badges/eslint.svg) ![prettier: checked](././paradox/badges/prettier.svg) ![build: checked](././paradox/badges/build.svg) ![tests: checked](././paradox/badges/tests.svg) ![paradox: canonical](././paradox/badges/docs.svg)
 
 Declarative catalog for reusable design rules.
 
@@ -37,4 +37,5 @@ import { createRuleRegistry, evaluateRules } from '@ankhorage/rules';
 - [Architecture overview](././paradox/diagrams/architecture-overview.mmd)
 - [Module relationships](././paradox/diagrams/module-relationships.mmd)
 - [Export graph](././paradox/diagrams/export-graph.mmd)
+- [recognizeWebsiteDesignProperties sequence](././paradox/diagrams/sequences/recognize-website-design-properties.mmd)
 - [selectDesignRuleProfile sequence](././paradox/diagrams/sequences/select-design-rule-profile.mmd)

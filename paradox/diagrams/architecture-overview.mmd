@@ -135,6 +135,17 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_features_provider_selectDesignRuleProfile_ts
   module_src_features_provider_selectDesignRuleProfile_ts --> module_src_features_catalog_designRuleProfiles_ts
   module_src_features_provider_selectDesignRuleProfile_ts --> module_src_types_designRuleProvider_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_test_ts["src/features/recognition/recognizeWebsiteDesignProperties.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_recognition_recognizeWebsiteDesignProperties_test_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_test_ts --> module_src_features_recognition_recognizeWebsiteDesignProperties_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_test_ts --> module_test_fixtures_websiteObservationDocument_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_ts["src/features/recognition/recognizeWebsiteDesignProperties.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_recognition_recognizeWebsiteDesignProperties_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_ts --> module_src_features_recognition_tokenCandidates_ts
+  module_src_features_recognition_recognizeWebsiteDesignProperties_ts --> module_src_types_websiteDesignRecognition_ts
+  module_src_features_recognition_tokenCandidates_ts["src/features/recognition/tokenCandidates.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_recognition_tokenCandidates_ts
+  module_src_features_recognition_tokenCandidates_ts --> module_src_types_websiteDesignRecognition_ts
   module_src_features_repetition_createRepetitionRules_test_ts["src/features/repetition/createRepetitionRules.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_catalog_designRuleCatalog_ts
@@ -292,6 +303,8 @@ graph TD
   package__ankhorage_rules_design -.-> module_src_types_typography_ts
   module_src_types_websiteAssessment_ts["src/types/websiteAssessment.ts"]
   package__ankhorage_rules_design -.-> module_src_types_websiteAssessment_ts
+  module_src_types_websiteDesignRecognition_ts["src/types/websiteDesignRecognition.ts"]
+  package__ankhorage_rules_design -.-> module_src_types_websiteDesignRecognition_ts
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_accessibilityFacts_ts
   module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
@@ -303,3 +316,5 @@ graph TD
   module_test_fixtures_typographyRuleFacts_ts["test/fixtures/typographyRuleFacts.ts"]
   package__ankhorage_rules_design -.-> module_test_fixtures_typographyRuleFacts_ts
   module_test_fixtures_typographyRuleFacts_ts --> module_src_types_typography_ts
+  module_test_fixtures_websiteObservationDocument_ts["test/fixtures/websiteObservationDocument.ts"]
+  package__ankhorage_rules_design -.-> module_test_fixtures_websiteObservationDocument_ts

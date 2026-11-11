@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- 34695ae: Add factual website design-property recognition with retained provenance and unresolved evidence.
+
 ## 0.5.0
 
 ### Minor Changes

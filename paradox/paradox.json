@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.5.0",
+      "value": "v0.6.0",
       "color": "cb3837"
     },
     {
@@ -436,6 +436,36 @@
       ]
     },
     {
+      "path": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "test/fixtures/websiteObservationDocument.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/tokenCandidates.ts",
+        "src/types/websiteDesignRecognition.ts"
+      ],
+      "exports": [
+        "recognizeWebsiteDesignProperties"
+      ]
+    },
+    {
+      "path": "src/features/recognition/tokenCandidates.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/websiteDesignRecognition.ts"
+      ],
+      "exports": [
+        "tokenCandidates"
+      ]
+    },
+    {
       "path": "src/features/repetition/createRepetitionRules.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -813,8 +843,15 @@
         "DesignRuleScope",
         "DesignRuleStatus",
         "filterDesignRuleCatalog",
+        "recognizeWebsiteDesignProperties",
         "selectDesignRuleProfile",
-        "WebsiteAssessmentRuleOptions"
+        "WebsiteAssessmentRuleOptions",
+        "WebsiteDesignNodeRecognition",
+        "WebsiteDesignPropertyObservation",
+        "WebsiteDesignRecognition",
+        "WebsiteDesignSourceReference",
+        "WebsiteDesignTokenCandidate",
+        "WebsiteDesignUnresolvedObservation"
       ]
     },
     {
@@ -904,6 +941,19 @@
       ]
     },
     {
+      "path": "src/types/websiteDesignRecognition.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "WebsiteDesignNodeRecognition",
+        "WebsiteDesignPropertyObservation",
+        "WebsiteDesignRecognition",
+        "WebsiteDesignSourceReference",
+        "WebsiteDesignTokenCandidate",
+        "WebsiteDesignUnresolvedObservation"
+      ]
+    },
+    {
       "path": "test/fixtures/accessibilityFacts.ts",
       "isEntrypoint": false,
       "dependencies": [],
@@ -951,6 +1001,14 @@
         "observation",
         "observations",
         "typographyPolicy"
+      ]
+    },
+    {
+      "path": "test/fixtures/websiteObservationDocument.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "websiteObservationDocumentFixture"
       ]
     }
   ],
@@ -1727,6 +1785,44 @@
       "structuredRows": []
     },
     {
+      "name": "recognizeWebsiteDesignProperties",
+      "title": null,
+      "description": "Recognizes exact design properties from validated website observations without evaluating them.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 18,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteDesignRecognition"
+      ],
+      "signatures": [
+        {
+          "label": "(document: WebsiteObservationDocument) => WebsiteDesignRecognition",
+          "parameters": [
+            {
+              "name": "document",
+              "type": "WebsiteObservationDocument",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "WebsiteDesignRecognition",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
       "name": "selectDesignRuleProfile",
       "title": null,
       "description": "Resolves one named profile independently from the Rule IDs it selects.",
@@ -1810,6 +1906,390 @@
           "kind": "property",
           "type": "\"ch-information-and-objection\" | \"eu-eea-prior-consent\" | undefined",
           "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignNodeRecognition",
+      "title": null,
+      "description": "Groups all factual design observations for one stable observed DOM node.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 37,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteDesignPropertyObservation",
+        "WebsiteDesignUnresolvedObservation"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "accessibility",
+          "kind": "property",
+          "type": "readonly WebsiteDesignPropertyObservation[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "colors",
+          "kind": "property",
+          "type": "readonly WebsiteDesignPropertyObservation[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "layout",
+          "kind": "property",
+          "type": "readonly WebsiteDesignPropertyObservation[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "media",
+          "kind": "property",
+          "type": "readonly WebsiteMediaReference[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "pageId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "responsive",
+          "kind": "property",
+          "type": "readonly WebsiteDesignPropertyObservation[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "sourceRef",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "typography",
+          "kind": "property",
+          "type": "readonly WebsiteDesignPropertyObservation[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "unresolved",
+          "kind": "property",
+          "type": "readonly WebsiteDesignUnresolvedObservation[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignPropertyObservation",
+      "title": null,
+      "description": "Describes one exact observed design value without assigning a quality verdict.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 15,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "name",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "pageId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "provenance",
+          "kind": "property",
+          "type": "WebsiteObservationProvenance",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "sourceRef",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "stateId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "kind": "property",
+          "type": "SerializableValue",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "viewportId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignRecognition",
+      "title": null,
+      "description": "Provides the factual design-property contribution for later website recognition assembly.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 61,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteDesignNodeRecognition",
+        "WebsiteDesignTokenCandidate"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "nodes",
+          "kind": "property",
+          "type": "readonly WebsiteDesignNodeRecognition[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "tokenCandidates",
+          "kind": "property",
+          "type": "readonly WebsiteDesignTokenCandidate[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignSourceReference",
+      "title": null,
+      "description": "Identifies one observed DOM node within the page that owns its local source reference.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 9,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "pageId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "sourceRef",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignTokenCandidate",
+      "title": null,
+      "description": "Records a repeated observed value as a reusable token candidate without inventing a role.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 50,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteDesignSourceReference"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "confidence",
+          "kind": "property",
+          "type": "number",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "inferredRole",
+          "kind": "property",
+          "type": "null",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "\"color\" | \"radius\" | \"shadow\" | \"spacing\" | \"typography\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "originalValues",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "property",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "sourceRefs",
+          "kind": "property",
+          "type": "readonly WebsiteDesignSourceReference[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteDesignUnresolvedObservation",
+      "title": null,
+      "description": "Retains an unavailable observation instead of substituting or silently omitting design evidence.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteDesignRecognition.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteDesignRecognition.ts",
+        "line": 26,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "kind",
+          "kind": "property",
+          "type": "\"computed-css\" | \"geometry\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "missing",
+          "kind": "property",
+          "type": "WebsiteMissingValue",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "pageId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "provenance",
+          "kind": "property",
+          "type": "WebsiteObservationProvenance",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "sourceRef",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "stateId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "viewportId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
           "description": null
         }
       ],
@@ -3909,6 +4389,237 @@
       }
     },
     {
+      "name": "node",
+      "description": "Finds one source node in the recognition fixture.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "line": 138,
+        "column": 1
+      }
+    },
+    {
+      "name": "value",
+      "description": "Reads an exact property sample by property and observed viewport.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "line": 147,
+        "column": 1
+      }
+    },
+    {
+      "name": "recognizeWebsiteDesignProperties",
+      "description": "Recognizes exact design properties from validated website observations without evaluating them.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 18,
+        "column": 1
+      }
+    },
+    {
+      "name": "recognizeNode",
+      "description": "Retains every available node style and safe semantic observation at its source identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 86,
+        "column": 1
+      }
+    },
+    {
+      "name": "cssObservations",
+      "description": "Projects exact available computed CSS values while retaining viewport, state, and provenance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 101,
+        "column": 1
+      }
+    },
+    {
+      "name": "cssObservation",
+      "description": "Creates one source-linked computed CSS observation without normalizing its original literal.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "cssPropertyValue",
+      "description": "Reads a named computed CSS field without indexing an untrusted external object.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "cssValue",
+      "description": "Converts the one structured CSS box value into a portable serializable value.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 143,
+        "column": 1
+      }
+    },
+    {
+      "name": "responsiveObservations",
+      "description": "Retains responsive geometry and CSS state samples without inventing source-authored breakpoints.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 157,
+        "column": 1
+      }
+    },
+    {
+      "name": "accessibilityObservations",
+      "description": "Retains semantic and accessible-name evidence without producing accessibility conclusions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 184,
+        "column": 1
+      }
+    },
+    {
+      "name": "unresolvedObservations",
+      "description": "Records unavailable CSS or geometry samples with their producer-supplied missing reason.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 216,
+        "column": 1
+      }
+    },
+    {
+      "name": "unresolvedObservationKinds",
+      "description": "Distinguishes each unavailable evidence channel without pretending it was observed.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "line": 237,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenCandidates",
+      "description": "Finds repeated exact design literals and records them as role-free reusable token candidates.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 19,
+        "column": 1
+      }
+    },
+    {
+      "name": "candidatesForKind",
+      "description": "Extracts deterministic repeated candidates for one design-token family.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceReferences",
+      "description": "Extracts deterministic page-qualified source identities so viewport samples do not fabricate repetition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceReferenceKey",
+      "description": "Serializes the two-part observed-node identity only for deterministic deduplication and ordering.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenObservationsForKind",
+      "description": "Selects only the observations that belong to one factual token family.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 70,
+        "column": 1
+      }
+    },
+    {
+      "name": "tokenObservations",
+      "description": "Retains each exact scalar or spacing-edge literal with its CSS-property ownership.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 80,
+        "column": 1
+      }
+    },
+    {
+      "name": "spacingEdgeTokenObservations",
+      "description": "Expands a structured margin or padding value into its exact physical-edge token evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceReference",
+      "description": "Extracts the reusable page-qualified source identity from one design property observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 106,
+        "column": 1
+      }
+    },
+    {
+      "name": "observationsForKind",
+      "description": "Selects only the property observations that belong to one factual token family.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/tokenCandidates.ts",
+        "line": 113,
+        "column": 1
+      }
+    },
+    {
       "name": "evaluate",
       "description": null,
       "see": [],
@@ -5850,6 +6561,14 @@
     },
     {
       "kind": "export",
+      "name": "recognizeWebsiteDesignProperties",
+      "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+      "symbolName": "recognizeWebsiteDesignProperties",
+      "description": "Recognizes exact design properties from validated website observations without evaluating them.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "selectDesignRuleProfile",
       "sourcePath": "src/features/provider/selectDesignRuleProfile.ts",
       "symbolName": "selectDesignRuleProfile",
@@ -5891,6 +6610,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
         "sourcePath": "src/index.ts"
       },
@@ -5907,6 +6631,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/websiteDesignRecognition.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -6253,6 +6982,31 @@
         "fromPath": "src/features/provider/selectDesignRuleProfile.ts",
         "toPath": "src/features/catalog/designRuleProfiles.ts",
         "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toPath": "test/fixtures/websiteObservationDocument.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "toPath": "src/types/websiteDesignRecognition.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "toPath": "src/features/recognition/tokenCandidates.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/tokenCandidates.ts",
+        "toPath": "src/types/websiteDesignRecognition.ts",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
       },
       {
         "fromPath": "src/features/repetition/createRepetitionRules.test.ts",
@@ -6714,6 +7468,42 @@
         "toSymbol": "fact",
         "callExpression": "fact",
         "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromSymbol": "css",
+        "toSymbol": "edges",
+        "callExpression": "edges",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "websiteObservationDocumentFixture",
+        "toSymbol": "css",
+        "callExpression": "css",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "websiteObservationDocumentFixture",
+        "toSymbol": "edges",
+        "callExpression": "edges",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "websiteObservationDocumentFixture",
+        "toSymbol": "node",
+        "callExpression": "node",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "websiteObservationDocumentFixture",
+        "toSymbol": "available",
+        "callExpression": "available",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "websiteObservationDocumentFixture",
+        "toSymbol": "missing",
+        "callExpression": "missing",
+        "sourcePath": "test/fixtures/websiteObservationDocument.ts"
       },
       {
         "fromSymbol": "src/features/accessibility/createAccessibilityRules.test.ts",
@@ -8492,6 +9282,174 @@
         "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
       },
       {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "recognizeWebsiteDesignProperties",
+        "callExpression": "recognizeWebsiteDesignProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "websiteObservationDocumentFixture",
+        "callExpression": "websiteObservationDocumentFixture",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "node",
+        "callExpression": "node",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
+        "toSymbol": "value",
+        "callExpression": "value",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "toSymbol": "recognizeNode",
+        "callExpression": "recognizeNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDesignProperties",
+        "toSymbol": "tokenCandidates",
+        "callExpression": "tokenCandidates",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeNode",
+        "toSymbol": "cssObservations",
+        "callExpression": "cssObservations",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeNode",
+        "toSymbol": "responsiveObservations",
+        "callExpression": "responsiveObservations",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeNode",
+        "toSymbol": "accessibilityObservations",
+        "callExpression": "accessibilityObservations",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeNode",
+        "toSymbol": "unresolvedObservations",
+        "callExpression": "unresolvedObservations",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "toSymbol": "cssObservation",
+        "callExpression": "cssObservation",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "cssObservation",
+        "toSymbol": "cssValue",
+        "callExpression": "cssValue",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "cssObservation",
+        "toSymbol": "cssPropertyValue",
+        "callExpression": "cssPropertyValue",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "cssPropertyValue",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "cssValue",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "toSymbol": "unresolvedObservationKinds",
+        "callExpression": "unresolvedObservationKinds",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "candidatesForKind",
+        "callExpression": "candidatesForKind",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "tokenObservationsForKind",
+        "callExpression": "tokenObservationsForKind",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "sourceReferences",
+        "callExpression": "sourceReferences",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "sourceReferenceKey",
+        "callExpression": "sourceReferenceKey",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "tokenObservationsForKind",
+        "toSymbol": "observationsForKind",
+        "callExpression": "observationsForKind",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "tokenObservations",
+        "callExpression": "tokenObservations",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "tokenObservations",
+        "toSymbol": "sourceReference",
+        "callExpression": "sourceReference",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "tokenObservations",
+        "toSymbol": "spacingEdgeTokenObservations",
+        "callExpression": "spacingEdgeTokenObservations",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "spacingEdgeTokenObservations",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/tokenCandidates.ts",
+        "toSymbol": "sourceReference",
+        "callExpression": "sourceReference",
+        "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
         "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
         "toSymbol": "createRepetitionRules",
         "callExpression": "createRepetitionRules",
@@ -10185,6 +11143,16 @@
         "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
       },
       {
+        "fromSymbol": "recognizeWebsiteDesignProperties",
+        "toType": "WebsiteDesignRecognition",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDesignProperties",
+        "toType": "WebsiteObservationDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
         "fromSymbol": "createWebsiteAssessmentRuleSet",
         "toType": "RuleSet",
         "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
@@ -10263,6 +11231,56 @@
         "fromSymbol": "DesignRuleProviderOptions",
         "toType": "TypographyRulePolicy",
         "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignNodeRecognition",
+        "toType": "WebsiteDesignPropertyObservation",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignNodeRecognition",
+        "toType": "WebsiteDesignUnresolvedObservation",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignNodeRecognition",
+        "toType": "WebsiteMediaReference",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignPropertyObservation",
+        "toType": "SerializableValue",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignPropertyObservation",
+        "toType": "WebsiteObservationProvenance",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignRecognition",
+        "toType": "WebsiteDesignNodeRecognition",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignRecognition",
+        "toType": "WebsiteDesignTokenCandidate",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignTokenCandidate",
+        "toType": "WebsiteDesignSourceReference",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignUnresolvedObservation",
+        "toType": "WebsiteMissingValue",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteDesignUnresolvedObservation",
+        "toType": "WebsiteObservationProvenance",
+        "sourcePath": "src/types/websiteDesignRecognition.ts"
       }
     ],
     "componentComposition": []
