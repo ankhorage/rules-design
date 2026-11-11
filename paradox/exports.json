@@ -809,6 +809,42 @@
     "structuredRows": []
   },
   {
+    "name": "recognizeWebsiteStructure",
+    "title": null,
+    "description": "Recognizes source-linked canonical component trees from validated website observations.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "(document: WebsiteObservationDocument) => readonly WebsitePageRecognition[]",
+        "parameters": [
+          {
+            "name": "document",
+            "type": "WebsiteObservationDocument",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly WebsitePageRecognition[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "selectDesignRuleProfile",
     "title": null,
     "description": "Resolves one named profile independently from the Rule IDs it selects.",

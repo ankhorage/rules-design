@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+### Minor Changes
+
+- e6da8f0: Add a pure website structure recognizer that maps observed pages to source-linked canonical UI trees.
+
 ## 0.6.0
 
 ### Minor Changes

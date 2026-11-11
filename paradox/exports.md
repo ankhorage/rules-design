@@ -255,6 +255,20 @@ Recognizes exact design properties from validated website observations without e
   - document: `WebsiteObservationDocument`
   - returns: `WebsiteDesignRecognition`
 
+## recognizeWebsiteStructure
+
+Kind: `function`
+Module: `src/features/website-recognition/recognizeWebsiteStructure.ts`
+Source: `src/features/website-recognition/recognizeWebsiteStructure.ts:15:1`
+
+Recognizes source-linked canonical component trees from validated website observations.
+
+### Signatures
+
+- `(document: WebsiteObservationDocument) => readonly WebsitePageRecognition[]`
+  - document: `WebsiteObservationDocument`
+  - returns: `readonly WebsitePageRecognition[]`
+
 ## selectDesignRuleProfile
 
 Kind: `function`

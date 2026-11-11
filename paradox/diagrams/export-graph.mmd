@@ -68,6 +68,11 @@ graph LR
   module_src_features_website_assessment_websiteAssessmentResult_ts["src/features/website-assessment/websiteAssessmentResult.ts"]
   module_src_features_website_assessment_websiteAssessmentTestSupport_ts["src/features/website-assessment/websiteAssessmentTestSupport.ts"]
   module_src_features_website_assessment_websiteAssessmentValues_ts["src/features/website-assessment/websiteAssessmentValues.ts"]
+  module_src_features_website_recognition_recognizeWebsiteStructure_test_ts["src/features/website-recognition/recognizeWebsiteStructure.test.ts"]
+  module_src_features_website_recognition_recognizeWebsiteStructure_ts["src/features/website-recognition/recognizeWebsiteStructure.ts"]
+  module_src_features_website_recognition_recognizeWebsiteStructureProps_ts["src/features/website-recognition/recognizeWebsiteStructureProps.ts"]
+  module_src_features_website_recognition_websiteStructureSemantics_ts["src/features/website-recognition/websiteStructureSemantics.ts"]
+  module_src_features_website_recognition_websiteStructureTreeNodes_ts["src/features/website-recognition/websiteStructureTreeNodes.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_types_color_ts["src/types/color.ts"]
   module_src_types_designRuleCatalog_ts["src/types/designRuleCatalog.ts"]
@@ -83,6 +88,7 @@ graph LR
   module_test_fixtures_responsiveFact_ts["test/fixtures/responsiveFact.ts"]
   module_test_fixtures_typographyRuleFacts_ts["test/fixtures/typographyRuleFacts.ts"]
   module_test_fixtures_websiteObservationDocument_ts["test/fixtures/websiteObservationDocument.ts"]
+  module_test_fixtures_websiteRecognition_ts["test/fixtures/websiteRecognition.ts"]
   export_createDesignRuleProvider["createDesignRuleProvider"]
   module_src_features_provider_designRuleProvider_ts --> export_createDesignRuleProvider
   export_createDesignRuleProvider -.-> export_DesignRuleProvider
@@ -135,6 +141,8 @@ graph LR
   export_recognizeWebsiteDesignProperties["recognizeWebsiteDesignProperties"]
   module_src_features_recognition_recognizeWebsiteDesignProperties_ts --> export_recognizeWebsiteDesignProperties
   export_recognizeWebsiteDesignProperties -.-> export_WebsiteDesignRecognition
+  export_recognizeWebsiteStructure["recognizeWebsiteStructure"]
+  module_src_features_website_recognition_recognizeWebsiteStructure_ts --> export_recognizeWebsiteStructure
   export_selectDesignRuleProfile["selectDesignRuleProfile"]
   module_src_features_provider_selectDesignRuleProfile_ts --> export_selectDesignRuleProfile
   export_selectDesignRuleProfile -.-> export_DesignRuleProfileSelection
