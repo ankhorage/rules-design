@@ -4,6 +4,7 @@ export { designRuleProviderManifest } from './features/catalog/designRuleProvide
 export { filterDesignRuleCatalog } from './features/catalog/filterDesignRuleCatalog';
 export { createDesignRuleProvider } from './features/provider/designRuleProvider';
 export { selectDesignRuleProfile } from './features/provider/selectDesignRuleProfile';
+export { recognizeWebsiteDesignProperties } from './features/recognition/recognizeWebsiteDesignProperties';
 export { createWebsiteAssessmentRuleSet } from './features/website-assessment/createWebsiteAssessmentRuleSet';
 export type {
   DesignAssessmentKind,
@@ -23,3 +24,10 @@ export type {
   DesignRuleProviderOptions,
 } from './types/designRuleProvider';
 export type { WebsiteAssessmentRuleOptions } from './types/websiteAssessment';
+export type {
+  WebsiteDesignNodeRecognition,
+  WebsiteDesignPropertyObservation,
+  WebsiteDesignRecognition,
+  WebsiteDesignTokenCandidate,
+  WebsiteDesignUnresolvedObservation,
+} from './types/websiteDesignRecognition';
