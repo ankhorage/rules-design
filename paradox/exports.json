@@ -39,6 +39,44 @@
     "structuredRows": []
   },
   {
+    "name": "createWebsiteAssessmentRuleSet",
+    "title": null,
+    "description": "Creates the separately composable follow-on website and contact assessment rules.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+      "line": 14,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteAssessmentRuleOptions"
+    ],
+    "signatures": [
+      {
+        "label": "(options?: WebsiteAssessmentRuleOptions) => RuleSet<WebsiteAssessmentContext>",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "WebsiteAssessmentRuleOptions",
+            "required": false,
+            "description": null
+          }
+        ],
+        "returnType": "RuleSet<WebsiteAssessmentContext>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "DesignAssessmentKind",
     "title": null,
     "description": null,
@@ -768,6 +806,57 @@
       }
     ],
     "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteAssessmentRuleOptions",
+    "title": null,
+    "description": "Configures explicit policies for the independently composable website assessment RuleSet.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteAssessment.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteAssessment.ts",
+      "line": 5,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "legalNoticePolicy",
+        "kind": "property",
+        "type": "\"required\" | \"not-required\" | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "privacyNoticePolicy",
+        "kind": "property",
+        "type": "\"required\" | \"not-required\" | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "referenceYear",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "trackingConsentPolicy",
+        "kind": "property",
+        "type": "\"ch-information-and-objection\" | \"eu-eea-prior-consent\" | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
     "structuredRows": []
   }
 ]

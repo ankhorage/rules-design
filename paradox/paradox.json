@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.4.0",
+      "value": "v0.5.0",
       "color": "cb3837"
     },
     {
@@ -632,11 +632,170 @@
       ]
     },
     {
+      "path": "src/features/website-assessment/assessContactAddressMarkup.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessContactAddressMarkup"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/assessCopyrightNotice.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessCopyrightNotice"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessDuplicateMediaUse"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/assessLegalNotice.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessLegalNotice"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/assessPrivacyNotice.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessPrivacyNotice"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/assessTrackingConsent.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "src/features/website-assessment/websiteAssessmentResult.ts",
+        "src/features/website-assessment/websiteAssessmentValues.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "assessTrackingConsent"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "createWebsiteAssessmentRuleSet"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "validatedWebsiteAssessmentValues"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "src/features/website-assessment/assessCopyrightNotice.ts",
+        "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "src/features/website-assessment/assessLegalNotice.ts",
+        "src/features/website-assessment/assessPrivacyNotice.ts",
+        "src/features/website-assessment/assessTrackingConsent.ts",
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "websiteAssessmentDefinitions"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/websiteAssessmentResult.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/websiteAssessment.ts"
+      ],
+      "exports": [
+        "websiteAssessmentResult"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      ],
+      "exports": [
+        "evaluateWebsiteAssessment",
+        "websiteAssessmentFact"
+      ]
+    },
+    {
+      "path": "src/features/website-assessment/websiteAssessmentValues.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "websiteAssessmentValues"
+      ]
+    },
+    {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
         "createDesignRuleProvider",
+        "createWebsiteAssessmentRuleSet",
         "DesignAssessmentKind",
         "DesignContext",
         "designRuleCatalog",
@@ -654,7 +813,8 @@
         "DesignRuleScope",
         "DesignRuleStatus",
         "filterDesignRuleCatalog",
-        "selectDesignRuleProfile"
+        "selectDesignRuleProfile",
+        "WebsiteAssessmentRuleOptions"
       ]
     },
     {
@@ -728,6 +888,19 @@
       "exports": [
         "TypographyObservation",
         "TypographyRulePolicy"
+      ]
+    },
+    {
+      "path": "src/types/websiteAssessment.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "AssessmentDefinition",
+        "AssessmentFact",
+        "AssessmentFinding",
+        "AssessmentResult",
+        "WebsiteAssessmentContext",
+        "WebsiteAssessmentRuleOptions"
       ]
     },
     {
@@ -815,6 +988,44 @@
             }
           ],
           "returnType": "DesignRuleProvider",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "createWebsiteAssessmentRuleSet",
+      "title": null,
+      "description": "Creates the separately composable follow-on website and contact assessment rules.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 14,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteAssessmentRuleOptions"
+      ],
+      "signatures": [
+        {
+          "label": "(options?: WebsiteAssessmentRuleOptions) => RuleSet<WebsiteAssessmentContext>",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "WebsiteAssessmentRuleOptions",
+              "required": false,
+              "description": null
+            }
+          ],
+          "returnType": "RuleSet<WebsiteAssessmentContext>",
           "returnDescription": null
         }
       ],
@@ -1551,6 +1762,57 @@
         }
       ],
       "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteAssessmentRuleOptions",
+      "title": null,
+      "description": "Configures explicit policies for the independently composable website assessment RuleSet.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteAssessment.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteAssessment.ts",
+        "line": 5,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "legalNoticePolicy",
+          "kind": "property",
+          "type": "\"required\" | \"not-required\" | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "privacyNoticePolicy",
+          "kind": "property",
+          "type": "\"required\" | \"not-required\" | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "referenceYear",
+          "kind": "property",
+          "type": "number | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "trackingConsentPolicy",
+          "kind": "property",
+          "type": "\"ch-information-and-objection\" | \"eu-eea-prior-consent\" | undefined",
+          "required": false,
+          "description": null
+        }
+      ],
       "structuredRows": []
     }
   ],
@@ -5152,6 +5414,413 @@
         "line": 87,
         "column": 1
       }
+    },
+    {
+      "name": "assessContactAddressMarkup",
+      "description": "Assesses semantic contact placement and normalized contact-link matching.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "contactObservation",
+      "description": "Parses a contact observation without retaining raw address or link content.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "line": 44,
+        "column": 1
+      }
+    },
+    {
+      "name": "contactLinkMatch",
+      "description": "Validates a single normalized contact-link match without exposing its target.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "contactFinding",
+      "description": "Creates privacy-safe evidence for a contact semantic defect.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "line": 74,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessCopyrightNotice",
+      "description": "Assesses parser-normalized copyright placement and year semantics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "copyrightObservation",
+      "description": "Parses public parser output required for copyright assessment.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "line": 41,
+        "column": 1
+      }
+    },
+    {
+      "name": "copyrightFinding",
+      "description": "Creates minimal year-only evidence for a stale copyright notice.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessDuplicateMediaUse",
+      "description": "Reports repeated editorial identities while exempting system-only reuse.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "mediaUses",
+      "description": "Parses one inventory while preserving the distinction between invalid and empty input.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "line": 40,
+        "column": 1
+      }
+    },
+    {
+      "name": "mediaUse",
+      "description": "Parses a single opaque media use from an identity-bearing inventory entry.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "line": 47,
+        "column": 1
+      }
+    },
+    {
+      "name": "duplicateFinding",
+      "description": "Produces sorted opaque evidence for one repeated asset identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "line": 66,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessLegalNotice",
+      "description": "Applies configured legal-notice policy to independently observed link facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessLegalNotice.ts",
+        "line": 15,
+        "column": 1
+      }
+    },
+    {
+      "name": "legalNoticeObservation",
+      "description": "Parses legal notice facts without promoting labels to legal conclusions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessLegalNotice.ts",
+        "line": 44,
+        "column": 1
+      }
+    },
+    {
+      "name": "legalNoticeFinding",
+      "description": "Creates a normalized legal notice failure without retaining page text.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessLegalNotice.ts",
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessPrivacyNotice",
+      "description": "Compares declared privacy purposes with observed processing purposes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "privacyNoticeObservation",
+      "description": "Parses privacy facts using the fixed policy-purpose vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "line": 49,
+        "column": 1
+      }
+    },
+    {
+      "name": "privacyPurposesFrom",
+      "description": "Accepts only the policy-owned declared and observed processing vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "line": 67,
+        "column": 1
+      }
+    },
+    {
+      "name": "privacyPurpose",
+      "description": "Narrows one declared processing purpose to the policy-owned vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "line": 74,
+        "column": 1
+      }
+    },
+    {
+      "name": "privacyNoticeFinding",
+      "description": "Creates non-sensitive evidence for a missing privacy declaration.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "line": 79,
+        "column": 1
+      }
+    },
+    {
+      "name": "assessTrackingConsent",
+      "description": "Applies an explicit regional policy to complete tracking runtime observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 15,
+        "column": 1
+      }
+    },
+    {
+      "name": "trackingObservation",
+      "description": "Parses fully covered tracking state observations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 42,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasCompleteConsentCoverage",
+      "description": "Requires observations for each state that establishes an optional-tracking decision.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 58,
+        "column": 1
+      }
+    },
+    {
+      "name": "trackingState",
+      "description": "Validates one complete runtime state without retaining tracker values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "trackingFails",
+      "description": "Applies prior-consent and rejection behavior without assuming a jurisdiction.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "trackingFinding",
+      "description": "Creates a stable tracking evidence code with no cookie values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "createWebsiteAssessmentRuleSet",
+      "description": "Creates the separately composable follow-on website and contact assessment rules.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "createWebsiteAssessmentRule",
+      "description": "Builds one pure Rules adapter around a typed website assessment.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateWebsiteAssessmentRule",
+      "description": "Evaluates exact-scope observations and fails closed for missing or malformed facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 42,
+        "column": 1
+      }
+    },
+    {
+      "name": "toAssessmentFact",
+      "description": "Accepts a portable available record only after required fact identity fields are present.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
+      "name": "incomplete",
+      "description": "Produces a canonical incomplete outcome without exposing host payloads.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 81,
+        "column": 1
+      }
+    },
+    {
+      "name": "nonEmpty",
+      "description": "Narrows a stable fact identity string.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "line": 97,
+        "column": 1
+      }
+    },
+    {
+      "name": "validatedWebsiteAssessmentValues",
+      "description": "Returns normalized assessment values only when every array element has been validated.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "line": 2,
+        "column": 1
+      }
+    },
+    {
+      "name": "definition",
+      "description": "Creates one immutable definition with its capability-owned evaluator.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "line": 56,
+        "column": 1
+      }
+    },
+    {
+      "name": "websiteAssessmentResult",
+      "description": "Produces deterministic outcomes and generic incomplete evidence for website assessment rules.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateWebsiteAssessment",
+      "description": "Evaluates one website assessment rule through the public Rules engine boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "websiteAssessmentFact",
+      "description": "Builds an available opaque test fact with a real SHA-256 content hash.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "line": 34,
+        "column": 1
+      }
+    },
+    {
+      "name": "canonical",
+      "description": "Produces a stable serialization for real test content hashes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "line": 56,
+        "column": 1
+      }
     }
   ],
   "sequenceScenarios": [
@@ -5161,6 +5830,14 @@
       "sourcePath": "src/features/provider/designRuleProvider.ts",
       "symbolName": "createDesignRuleProvider",
       "description": "Creates the complete registered Design provider from its explicit group-local policies.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "createWebsiteAssessmentRuleSet",
+      "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+      "symbolName": "createWebsiteAssessmentRuleSet",
+      "description": "Creates the separately composable follow-on website and contact assessment rules.",
       "isReadme": false
     },
     {
@@ -5214,12 +5891,22 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/types/designRuleCatalog.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
         "toPath": "src/types/designRuleProvider.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/websiteAssessment.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -5741,6 +6428,191 @@
         "fromPath": "src/features/typography/validateTypographyRulePolicy.ts",
         "toPath": "src/types/typography.ts",
         "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessLegalNotice.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessLegalNotice.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessLegalNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessLegalNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toPath": "src/features/website-assessment/isWebsiteAssessmentNonNull.ts",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentValues.ts",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "toPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessLegalNotice.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toPath": "src/features/website-assessment/assessTrackingConsent.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentResult.ts",
+        "toPath": "src/types/websiteAssessment.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentResult.ts"
+      },
+      {
+        "fromPath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "toPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
       },
       {
         "fromPath": "src/features/catalog/fixtures/designRuleCatalogManifest.ts",
@@ -8878,6 +9750,402 @@
         "toSymbol": "validate",
         "callExpression": "validate",
         "sourcePath": "src/features/typography/validateTypographyRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "assessContactAddressMarkup",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toSymbol": "contactObservation",
+        "callExpression": "contactObservation",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "assessContactAddressMarkup",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessContactAddressMarkup.ts",
+        "toSymbol": "contactFinding",
+        "callExpression": "contactFinding",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "contactObservation",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "contactObservation",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "contactLinkMatch",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/website-assessment/assessContactAddressMarkup.ts"
+      },
+      {
+        "fromSymbol": "assessCopyrightNotice",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toSymbol": "copyrightObservation",
+        "callExpression": "copyrightObservation",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "assessCopyrightNotice",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessCopyrightNotice.ts",
+        "toSymbol": "copyrightFinding",
+        "callExpression": "copyrightFinding",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "copyrightObservation",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "copyrightObservation",
+        "toSymbol": "year",
+        "callExpression": "websiteAssessmentValues.year",
+        "sourcePath": "src/features/website-assessment/assessCopyrightNotice.ts"
+      },
+      {
+        "fromSymbol": "assessDuplicateMediaUse",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toSymbol": "mediaUses",
+        "callExpression": "mediaUses",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "assessDuplicateMediaUse",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessDuplicateMediaUse.ts",
+        "toSymbol": "duplicateFinding",
+        "callExpression": "duplicateFinding",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "mediaUses",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "mediaUse",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "mediaUse",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "mediaUse",
+        "toSymbol": "text",
+        "callExpression": "websiteAssessmentValues.text",
+        "sourcePath": "src/features/website-assessment/assessDuplicateMediaUse.ts"
+      },
+      {
+        "fromSymbol": "assessLegalNotice",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessLegalNotice.ts",
+        "toSymbol": "legalNoticeObservation",
+        "callExpression": "legalNoticeObservation",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "assessLegalNotice",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessLegalNotice.ts",
+        "toSymbol": "legalNoticeFinding",
+        "callExpression": "legalNoticeFinding",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "legalNoticeObservation",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "legalNoticeObservation",
+        "toSymbol": "isStringArray",
+        "callExpression": "isStringArray",
+        "sourcePath": "src/features/website-assessment/assessLegalNotice.ts"
+      },
+      {
+        "fromSymbol": "assessPrivacyNotice",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toSymbol": "privacyNoticeObservation",
+        "callExpression": "privacyNoticeObservation",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "assessPrivacyNotice",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessPrivacyNotice.ts",
+        "toSymbol": "privacyNoticeFinding",
+        "callExpression": "privacyNoticeFinding",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "privacyNoticeObservation",
+        "toSymbol": "privacyPurposesFrom",
+        "callExpression": "privacyPurposesFrom",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "privacyNoticeObservation",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "privacyPurposesFrom",
+        "toSymbol": "isStringArray",
+        "callExpression": "isStringArray",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "privacyPurposesFrom",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessPrivacyNotice.ts"
+      },
+      {
+        "fromSymbol": "assessTrackingConsent",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toSymbol": "trackingObservation",
+        "callExpression": "trackingObservation",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "assessTrackingConsent",
+        "toSymbol": "websiteAssessmentResult",
+        "callExpression": "websiteAssessmentResult",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toSymbol": "trackingFails",
+        "callExpression": "trackingFails",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/assessTrackingConsent.ts",
+        "toSymbol": "trackingFinding",
+        "callExpression": "trackingFinding",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "trackingObservation",
+        "toSymbol": "subject",
+        "callExpression": "websiteAssessmentValues.subject",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "trackingObservation",
+        "toSymbol": "validatedWebsiteAssessmentValues",
+        "callExpression": "validatedWebsiteAssessmentValues",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "trackingObservation",
+        "toSymbol": "hasCompleteConsentCoverage",
+        "callExpression": "hasCompleteConsentCoverage",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "trackingState",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/website-assessment/assessTrackingConsent.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+        "toSymbol": "evaluateWebsiteAssessment",
+        "callExpression": "evaluateWebsiteAssessment",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts",
+        "toSymbol": "websiteAssessmentFact",
+        "callExpression": "websiteAssessmentFact",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.edge.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+        "toSymbol": "evaluateWebsiteAssessment",
+        "callExpression": "evaluateWebsiteAssessment",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+        "toSymbol": "websiteAssessmentFact",
+        "callExpression": "websiteAssessmentFact",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+        "toSymbol": "createWebsiteAssessmentRule",
+        "callExpression": "createWebsiteAssessmentRule",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateWebsiteAssessmentRule",
+        "callExpression": "evaluateWebsiteAssessmentRule",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateWebsiteAssessmentRule",
+        "toSymbol": "incomplete",
+        "callExpression": "incomplete",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateWebsiteAssessmentRule",
+        "toSymbol": "evaluate",
+        "callExpression": "definition.evaluate",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "toAssessmentFact",
+        "toSymbol": "nonEmpty",
+        "callExpression": "nonEmpty",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "toAssessmentFact",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/websiteAssessmentDefinitions.ts",
+        "toSymbol": "definition",
+        "callExpression": "definition",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentDefinitions.ts"
+      },
+      {
+        "fromSymbol": "evaluateWebsiteAssessment",
+        "toSymbol": "createWebsiteAssessmentRuleSet",
+        "callExpression": "createWebsiteAssessmentRuleSet",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromSymbol": "evaluateWebsiteAssessment",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromSymbol": "websiteAssessmentFact",
+        "toSymbol": "createHash",
+        "callExpression": "createHash",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromSymbol": "websiteAssessmentFact",
+        "toSymbol": "canonical",
+        "callExpression": "canonical",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
+        "toSymbol": "canonical",
+        "callExpression": "canonical",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromSymbol": "subject",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentValues.ts"
+      },
+      {
+        "fromSymbol": "subject",
+        "toSymbol": "text",
+        "callExpression": "this.text",
+        "sourcePath": "src/features/website-assessment/websiteAssessmentValues.ts"
       }
     ],
     "typeReferences": [
@@ -8915,6 +10183,21 @@
         "fromSymbol": "selectDesignRuleProfile",
         "toType": "DesignRuleProfileSelection",
         "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteAssessmentRuleSet",
+        "toType": "RuleSet",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteAssessmentRuleSet",
+        "toType": "WebsiteAssessmentContext",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteAssessmentRuleSet",
+        "toType": "WebsiteAssessmentRuleOptions",
+        "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
       },
       {
         "fromSymbol": "DesignRuleCatalogEntry",

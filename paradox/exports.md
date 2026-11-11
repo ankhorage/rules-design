@@ -14,6 +14,20 @@ Creates the complete registered Design provider from its explicit group-local po
   - options: `DesignRuleProviderOptions`
   - returns: `DesignRuleProvider`
 
+## createWebsiteAssessmentRuleSet
+
+Kind: `function`
+Module: `src/features/website-assessment/createWebsiteAssessmentRuleSet.ts`
+Source: `src/features/website-assessment/createWebsiteAssessmentRuleSet.ts:14:1`
+
+Creates the separately composable follow-on website and contact assessment rules.
+
+### Signatures
+
+- `(options?: WebsiteAssessmentRuleOptions) => RuleSet<WebsiteAssessmentContext>`
+  - options: `WebsiteAssessmentRuleOptions` (optional)
+  - returns: `RuleSet<WebsiteAssessmentContext>`
+
 ## DesignAssessmentKind
 
 Kind: `unknown`
@@ -240,3 +254,20 @@ Resolves one named profile independently from the Rule IDs it selects.
 - `(profileId: string) => DesignRuleProfileSelection`
   - profileId: `string`
   - returns: `DesignRuleProfileSelection`
+
+## WebsiteAssessmentRuleOptions
+
+Kind: `type`
+Module: `src/types/websiteAssessment.ts`
+Source: `src/types/websiteAssessment.ts:5:1`
+
+Configures explicit policies for the independently composable website assessment RuleSet.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| legalNoticePolicy | property | `"required" \| "not-required" \| undefined` | no |  |
+| privacyNoticePolicy | property | `"required" \| "not-required" \| undefined` | no |  |
+| referenceYear | property | `number \| undefined` | no |  |
+| trackingConsentPolicy | property | `"ch-information-and-objection" \| "eu-eea-prior-consent" \| undefined` | no |  |

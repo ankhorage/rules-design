@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- 9dab376: Add composable website, contact, privacy, tracking, and media assessment rules.
+
 ## 0.4.0
 
 ### Minor Changes
