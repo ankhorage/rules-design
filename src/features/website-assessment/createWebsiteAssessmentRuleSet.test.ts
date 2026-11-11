@@ -1,134 +1,181 @@
-import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
-import { evaluateRules } from '@ankhorage/rules';
 import { expect, test } from 'bun:test';
 
-import { createWebsiteAssessmentRuleSet } from './createWebsiteAssessmentRuleSet';
+import { evaluateWebsiteAssessment, websiteAssessmentFact } from './websiteAssessmentTestSupport';
 
-const scope = { id: 'site', kind: 'website' };
-const ruleSet = createWebsiteAssessmentRuleSet({
-  legalNoticeRequired: true,
-  privacyNoticeRequired: true,
-});
-const cases = [
+test.each([
   [
     'design.contact.address-markup',
-    { classification: 'recognized', markupStatus: 'correct', contactLinksStatus: 'valid' },
-    { classification: 'recognized', markupStatus: 'incorrect', contactLinksStatus: 'valid' },
+    'website.contact-observation',
+    {
+      version: 1,
+      addressKind: 'company',
+      addressContext: 'address',
+      contactLinks: [{ kind: 'phone', match: true }],
+      subject: { id: 'contact', kind: 'address' },
+    },
+    {
+      version: 1,
+      addressKind: 'company',
+      addressContext: 'other',
+      contactLinks: [{ kind: 'phone', match: false }],
+      subject: { id: 'contact', kind: 'address' },
+    },
   ],
   [
     'design.website.copyright-notice',
-    { noticeStatus: 'present', footerStatus: 'site-wide', yearStatus: 'current' },
-    { noticeStatus: 'absent', footerStatus: 'missing', yearStatus: 'unknown' },
+    'website.copyright-observation',
+    {
+      version: 1,
+      noticeSyntax: 'recognized',
+      siteRole: 'footer',
+      endYear: 2026,
+      exception: false,
+      subject: { id: 'footer', kind: 'footer' },
+    },
+    {
+      version: 1,
+      noticeSyntax: 'recognized',
+      siteRole: 'footer',
+      endYear: 2024,
+      exception: false,
+      subject: { id: 'footer', kind: 'footer' },
+    },
   ],
   [
     'design.website.legal-notice',
+    'website.legal-notice-observation',
     {
-      policyStatus: 'required',
-      pageStatus: 'reachable',
-      navigationStatus: 'site-wide',
-      operatorStatus: 'complete',
+      version: 1,
+      labels: ['Impressum', 'Legal Notice', 'Mentions légales', 'Note legali'],
+      global: true,
+      reachable: true,
+      content: 'substantive',
+      subject: { id: 'legal', kind: 'link' },
     },
     {
-      policyStatus: 'required',
-      pageStatus: 'absent',
-      navigationStatus: 'missing',
-      operatorStatus: 'incomplete',
+      version: 1,
+      labels: ['Legal Notice'],
+      global: true,
+      reachable: false,
+      content: 'empty',
+      subject: { id: 'legal', kind: 'link' },
     },
   ],
   [
     'design.website.privacy-notice',
+    'website.privacy-notice-observation',
     {
-      policyStatus: 'required',
-      pageStatus: 'reachable',
-      navigationStatus: 'site-wide',
-      processingStatus: 'consistent',
+      version: 1,
+      global: true,
+      reachable: true,
+      declaredPurposes: ['analytics', 'contact'],
+      observedPurposes: ['analytics'],
+      subject: { id: 'privacy', kind: 'link' },
     },
     {
-      policyStatus: 'required',
-      pageStatus: 'reachable',
-      navigationStatus: 'site-wide',
-      processingStatus: 'contradicted',
+      version: 1,
+      global: true,
+      reachable: true,
+      declaredPurposes: ['contact'],
+      observedPurposes: ['analytics'],
+      subject: { id: 'privacy', kind: 'link' },
     },
   ],
   [
     'design.website.tracking-consent',
+    'website.tracking-observation',
     {
-      jurisdiction: 'eu-eea',
-      runtimeStatus: 'complete',
-      trackingStatus: 'optional',
-      beforeChoiceStatus: 'blocked',
-      rejectStatus: 'blocked',
-      choiceStatus: 'effective',
+      version: 1,
+      classification: 'optional',
+      states: [
+        { state: 'before-choice', optionalTrackingObserved: false, covered: true },
+        { state: 'rejected', optionalTrackingObserved: false, covered: true },
+        { state: 'accepted', optionalTrackingObserved: true, covered: true },
+      ],
+      subject: { id: 'consent', kind: 'dialog' },
     },
     {
-      jurisdiction: 'eu-eea',
-      runtimeStatus: 'complete',
-      trackingStatus: 'optional',
-      beforeChoiceStatus: 'observed',
-      rejectStatus: 'observed',
-      choiceStatus: 'ineffective',
+      version: 1,
+      classification: 'optional',
+      states: [
+        { state: 'before-choice', optionalTrackingObserved: true, covered: true },
+        { state: 'rejected', optionalTrackingObserved: true, covered: true },
+        { state: 'accepted', optionalTrackingObserved: true, covered: true },
+      ],
+      subject: { id: 'consent', kind: 'dialog' },
     },
   ],
   [
     'design.media.duplicate-use',
-    { identityStatus: 'verified', reuseStatus: 'intentional' },
-    { identityStatus: 'verified', reuseStatus: 'unintended' },
+    'website.media-inventory',
+    {
+      version: 1,
+      uses: [
+        {
+          pageId: 'one',
+          componentId: 'hero',
+          assetId: 'a',
+          role: 'editorial',
+          subject: { id: 'one-hero', kind: 'image' },
+        },
+        {
+          pageId: 'two',
+          componentId: 'footer',
+          assetId: 'logo',
+          role: 'system',
+          subject: { id: 'two-logo', kind: 'image' },
+        },
+      ],
+    },
+    {
+      version: 1,
+      uses: [
+        {
+          pageId: 'one',
+          componentId: 'hero',
+          contentHash: 'sha256:asset',
+          role: 'editorial',
+          subject: { id: 'one-hero', kind: 'image' },
+        },
+        {
+          pageId: 'two',
+          componentId: 'card',
+          contentHash: 'sha256:asset',
+          role: 'editorial',
+          subject: { id: 'two-card', kind: 'image' },
+        },
+      ],
+    },
   ],
-] as const;
+] as const)(
+  '%s derives pass and fail from structured observations',
+  (ruleId, kind, passing, failing) => {
+    expect(evaluateWebsiteAssessment(ruleId, [websiteAssessmentFact(kind, passing)]).status).toBe(
+      'PASS',
+    );
+    expect(evaluateWebsiteAssessment(ruleId, [websiteAssessmentFact(kind, failing)]).status).toBe(
+      'FAIL',
+    );
+  },
+);
 
-test('evaluates complete pass, fail, and incomplete observations deterministically for every follow-on rule', () => {
-  for (const [id, passing, failing] of cases) {
-    expect(evaluate(id, passing).status).toBe('PASS');
-    expect(evaluate(id, failing).status).toBe('FAIL');
-    expect(evaluate(id, { classification: 'ambiguous' }).status).toBe('INCOMPLETE');
-    expect(evaluate(id, passing)).toEqual(evaluate(id, passing));
-  }
-});
-
-test('keeps private contact text and raw cookies out of findings while retaining normalized status evidence', () => {
-  const result = evaluate('design.contact.address-markup', {
-    classification: 'recognized',
-    contactLinksStatus: 'invalid',
-    markupStatus: 'incorrect',
-    rawAddress: 'Ada Lovelace, Bahnhofstrasse 12, CH-8623 Wetzikon',
-  });
-
+test('redacts raw contact, cookie, and token data from findings', () => {
+  const result = evaluateWebsiteAssessment('design.contact.address-markup', [
+    websiteAssessmentFact('website.contact-observation', {
+      version: 1,
+      addressKind: 'company',
+      addressContext: 'other',
+      contactLinks: [{ kind: 'email', match: false }],
+      subject: { id: 'contact', kind: 'address' },
+      rawAddress: 'Bahnhofstrasse 12, CH-8623 Wetzikon',
+      rawEmail: 'private@example.test',
+      rawPhone: '+41 44 000 00 00',
+      cookie: 'secret',
+      token: 'secret',
+    }),
+  ]);
   expect(result.status).toBe('FAIL');
-  expect(result.findings[0]?.evidence).toEqual({
-    classification: 'recognized',
-    contactLinksStatus: 'invalid',
-    markupStatus: 'incorrect',
-  });
+  expect(JSON.stringify(result.findings)).not.toContain('Bahnhofstrasse');
+  expect(JSON.stringify(result.findings)).not.toContain('private@example');
+  expect(JSON.stringify(result.findings)).not.toContain('secret');
 });
-
-/*** Evaluates one normalized fact using only the rule's declared capability and active website scope. */
-function evaluate(id: string, value: Readonly<Record<string, string>>) {
-  const rule = ruleSet.rules.find((candidate) => candidate.identity.id === id);
-  if (rule === undefined) throw new Error(`Missing website assessment rule: ${id}`);
-  const [result] = evaluateRules({ facts: [fact(id, value)] }, [rule], {
-    capabilities: rule.requiredCapabilities,
-    scope,
-  }).results;
-  return result;
-}
-
-/*** Constructs a portable host-owned fact without embedding DOM, cookie, or address objects. */
-function fact(kind: string, value: Readonly<Record<string, string>>): AvailableFactEnvelope {
-  return {
-    contentHash: `sha256:${kind}`,
-    id: `${kind}:site`,
-    kind,
-    provenance: {
-      collectedAt: '2026-11-11T00:00:00.000Z',
-      producer: { id: 'fixture', version: '1' },
-      source: { id: 'fixture', revision: null },
-    },
-    schemaVersion: 1,
-    scope: {
-      ...scope,
-      target: { kind: 'application', projectId: 'project', targetId: 'site', tenantId: 'tenant' },
-    },
-    status: 'available',
-    value,
-  };
-}
