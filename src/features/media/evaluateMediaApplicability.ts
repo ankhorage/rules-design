@@ -1,6 +1,6 @@
 import type { JsonValue } from '@ankhorage/rules';
 
-import type { MediaAssessment, MediaCheck } from './evaluateMediaAssessment';
+import type { MediaAssessment, MediaCheck } from './evaluateMediaAssessment.js';
 
 /*** Evaluates policy-owned evidence that can prove a media rule does not apply. */
 export function evaluateMediaApplicability(

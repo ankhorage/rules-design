@@ -1,7 +1,7 @@
 import type { JsonValue } from '@ankhorage/rules';
 
-import { evaluateMediaApplicability } from './evaluateMediaApplicability';
-import type { MediaRuleDefinition } from './mediaRuleDefinitions';
+import { evaluateMediaApplicability } from './evaluateMediaApplicability.js';
+import type { MediaRuleDefinition } from './mediaRuleDefinitions.js';
 
 /*** Evaluates one rule-specific predicate from one normalized media assessment. */
 export function evaluateMediaAssessment(

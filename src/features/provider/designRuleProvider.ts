@@ -4,17 +4,17 @@ import type {
   DesignContext,
   DesignRuleProvider,
   DesignRuleProviderOptions,
-} from '../../types/designRuleProvider';
-import { createAccessibilityRules } from '../accessibility/createAccessibilityRules';
-import { createAlignmentRules } from '../alignment/createAlignmentRules';
-import { createColorRuleSet } from '../color/createColorRuleSet';
-import { createContrastRules } from '../contrast/createContrastRules';
-import { createMediaRuleSet } from '../media/createMediaRuleSet';
-import { createRepetitionRules } from '../repetition/createRepetitionRules';
-import { createResponsiveRules } from '../responsive/createResponsiveRules';
-import { createSpacingProximityRuleSet } from '../spacing-proximity/createSpacingProximityRuleSet';
-import { createTypographyRuleSet } from '../typography/createTypographyRuleSet';
-import { createDesignCrapRules } from './createDesignCrapRules';
+} from '../../types/designRuleProvider.js';
+import { createAccessibilityRules } from '../accessibility/createAccessibilityRules.js';
+import { createAlignmentRules } from '../alignment/createAlignmentRules.js';
+import { createColorRuleSet } from '../color/createColorRuleSet.js';
+import { createContrastRules } from '../contrast/createContrastRules.js';
+import { createMediaRuleSet } from '../media/createMediaRuleSet.js';
+import { createRepetitionRules } from '../repetition/createRepetitionRules.js';
+import { createResponsiveRules } from '../responsive/createResponsiveRules.js';
+import { createSpacingProximityRuleSet } from '../spacing-proximity/createSpacingProximityRuleSet.js';
+import { createTypographyRuleSet } from '../typography/createTypographyRuleSet.js';
+import { createDesignCrapRules } from './createDesignCrapRules.js';
 
 /*** Creates the complete registered Design provider from its explicit group-local policies. */
 export function createDesignRuleProvider(options: DesignRuleProviderOptions): DesignRuleProvider {

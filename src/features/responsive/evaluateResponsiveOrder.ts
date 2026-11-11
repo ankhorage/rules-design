@@ -2,8 +2,8 @@ import type {
   ResponsiveElement,
   ResponsiveEvaluation,
   ResponsiveMatrix,
-} from '../../types/responsive';
-import { responsiveElementsOfKind } from './responsiveElementsOfKind';
+} from '../../types/responsive.js';
+import { responsiveElementsOfKind } from './responsiveElementsOfKind.js';
 
 /*** Assesses reading and visual order only when all measured text order values are available. */
 export function evaluateResponsiveOrder(matrix: ResponsiveMatrix): ResponsiveEvaluation {

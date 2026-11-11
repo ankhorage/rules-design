@@ -1,4 +1,4 @@
-import type { TypographyRulePolicy } from '../../types/typography';
+import type { TypographyRulePolicy } from '../../types/typography.js';
 
 /*** Rejects malformed policy before rule construction can produce ambiguous verdicts. */
 export function validateTypographyRulePolicy(policy: TypographyRulePolicy): void {

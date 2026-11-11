@@ -1,7 +1,7 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { Rule, RuleEvaluationOutcome, RuleSubject } from '@ankhorage/rules';
 
-import { evaluateAccessibilityObservation } from './evaluateAccessibilityObservation';
+import { evaluateAccessibilityObservation } from './evaluateAccessibilityObservation.js';
 
 /*** Creates the independently owned Accessibility and Semantics rule family. */
 export function createAccessibilityRules(): readonly Rule<DesignAccessibilityContext>[] {

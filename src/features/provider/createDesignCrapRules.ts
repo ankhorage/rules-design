@@ -1,6 +1,6 @@
 import type { Rule, RuleEvaluationInput, RuleEvaluationOutcome } from '@ankhorage/rules';
 
-import type { DesignContext } from '../../types/designRuleProvider';
+import type { DesignContext } from '../../types/designRuleProvider.js';
 
 interface CrapDefinition {
   readonly dependencies: readonly string[];

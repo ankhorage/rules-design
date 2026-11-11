@@ -1,6 +1,6 @@
 import { isRecord } from '@ankhorage/utility/object';
 
-import type { ColorRulePolicy } from '../../types/color';
+import type { ColorRulePolicy } from '../../types/color.js';
 
 /*** Verifies trusted Color factory policy before assessment closures are created. */
 export function isColorRulePolicy(value: unknown): value is ColorRulePolicy {

@@ -1,4 +1,4 @@
-import type { SpacingProximityObservation } from '../../types/spacingProximity';
+import type { SpacingProximityObservation } from '../../types/spacingProximity.js';
 
 /*** Parses a complete versioned sequence of raw spacing and proximity observations. */
 export function parseSpacingProximityMeasurements(
