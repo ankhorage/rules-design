@@ -10,24 +10,18 @@ import type {
 
 import { recognizeWebsiteStructureProps } from './recognizeWebsiteStructureProps';
 import { recognizeWebsiteStructureSemanticComponentType } from './websiteStructureSemantics';
-import {
-  createWebsiteStructureTreeNode,
-  createWebsiteStructureUnresolvedTreeNode,
-} from './websiteStructureTreeNodes';
-
+import { createWebsiteStructureTreeNode } from './websiteStructureTreeNodes';
 /*** Recognizes source-linked canonical component trees from validated website observations. */
 export function recognizeWebsiteStructure(
   document: WebsiteObservationDocument,
 ): readonly WebsitePageRecognition[] {
   return document.pages.map(recognizePage);
 }
-
 export interface RecognizedTreeNode {
   readonly node: WebsiteRecognizedNode;
   readonly nodes: readonly WebsiteRecognizedNode[];
   readonly uiNode: UiNode;
 }
-
 /*** Recognizes one page while retaining every source node in the canonical tree or node mapping. */
 function recognizePage(page: WebsitePageObservation): WebsitePageRecognition {
   const nodesBySourceRef = new Map(page.nodes.map((node) => [node.sourceRef, node]));
@@ -38,14 +32,16 @@ function recognizePage(page: WebsitePageObservation): WebsitePageRecognition {
   const recognizedNodes = rootNodes.flatMap((node) =>
     recognizeTreeNode(node, nodesBySourceRef, childNodesByParent, node.parentSourceRef, [], []),
   );
-  const reachableSourceRefs = new Set(
-    recognizedNodes.flatMap((node) => node.nodes.flatMap((item) => item.sourceRefs)),
+  const allRecognitions = page.nodes.reduce(
+    (recognitions, node) =>
+      containsSourceRef(recognitions, node.sourceRef)
+        ? recognitions
+        : [
+            ...recognitions,
+            ...recognizeTreeNode(node, nodesBySourceRef, childNodesByParent, null, [], []),
+          ],
+    recognizedNodes,
   );
-  const orphanedNodes = page.nodes.filter((node) => !reachableSourceRefs.has(node.sourceRef));
-  const orphanedRecognitions = orphanedNodes.flatMap((node) =>
-    recognizeTreeNode(node, nodesBySourceRef, childNodesByParent, null, [], []),
-  );
-  const allRecognitions = [...recognizedNodes, ...orphanedRecognitions];
 
   return {
     id: page.id,
@@ -97,16 +93,10 @@ function recognizeTreeNode(
   ancestorSourceRefs: readonly string[],
 ): readonly RecognizedTreeNode[] {
   if (ancestorSourceRefs.includes(node.sourceRef)) {
-    return [
-      createWebsiteStructureUnresolvedTreeNode(
-        node,
-        inheritedSourceRefs,
-        'Source hierarchy contains a cycle.',
-      ),
-    ];
+    return [];
   }
   const children = childNodesByParent.get(node.sourceRef) ?? [];
-  if (isTransparentWrapper(node, children)) {
+  if (!isCyclicSourceRef(node, nodesBySourceRef) && isTransparentWrapper(node, children)) {
     return children.flatMap((child) =>
       recognizeTreeNode(
         child,
@@ -133,6 +123,7 @@ function recognizeTreeNode(
       node,
       nodesBySourceRef.get(effectiveParentSourceRef ?? '') ?? null,
       childNodesByParent,
+      nodesBySourceRef,
       inheritedSourceRefs,
       childRecognitions,
     ),
@@ -144,20 +135,51 @@ function createRecognizedTreeNode(
   node: WebsiteObservedNode,
   parent: WebsiteObservedNode | null,
   childNodesByParent: ReadonlyMap<string, readonly WebsiteObservedNode[]>,
+  nodesBySourceRef: ReadonlyMap<string, WebsiteObservedNode>,
   inheritedSourceRefs: readonly string[],
   children: readonly RecognizedTreeNode[],
 ): RecognizedTreeNode {
-  const componentType = recognizeComponentType(node, parent, childNodesByParent);
+  const cyclic = isCyclicSourceRef(node, nodesBySourceRef);
+  const componentType = cyclic
+    ? 'Unknown'
+    : recognizeComponentType(node, parent, childNodesByParent);
   const props = recognizeWebsiteStructureProps(node);
   return createWebsiteStructureTreeNode(
     node,
     componentType,
-    uniqueSourceRefs([...inheritedSourceRefs, node.sourceRef]),
+    [...inheritedSourceRefs, node.sourceRef],
     props,
     children,
-    availableObservation(node) === null
-      ? 'No available rendered observation exists for this source node.'
-      : 'Visible source node has no canonical component mapping.',
+    cyclic
+      ? 'Source hierarchy contains a cycle.'
+      : availableObservation(node) === null
+        ? 'No available rendered observation exists for this source node.'
+        : 'Visible source node has no canonical component mapping.',
+  );
+}
+
+/*** Tests whether a source reference participates in a parent-reference cycle. */
+function isCyclicSourceRef(
+  node: WebsiteObservedNode,
+  nodesBySourceRef: ReadonlyMap<string, WebsiteObservedNode>,
+): boolean {
+  const visitedSourceRefs = new Set<string>();
+  let currentSourceRef: string | null = node.sourceRef;
+  while (currentSourceRef !== null) {
+    if (visitedSourceRefs.has(currentSourceRef)) return currentSourceRef === node.sourceRef;
+    visitedSourceRefs.add(currentSourceRef);
+    currentSourceRef = nodesBySourceRef.get(currentSourceRef)?.parentSourceRef ?? null;
+  }
+  return false;
+}
+
+/*** Tests whether already emitted recognitions retain a source reference. */
+function containsSourceRef(
+  recognitions: readonly RecognizedTreeNode[],
+  sourceRef: string,
+): boolean {
+  return recognitions.some((recognition) =>
+    recognition.nodes.some((node) => node.sourceRefs.includes(sourceRef)),
   );
 }
 
@@ -315,9 +337,4 @@ function hasNonZeroCssValue(value: string): boolean {
 /*** Recognizes the transparent computed color forms without assigning a color token. */
 function isTransparentColor(value: string): boolean {
   return value === 'transparent' || value === 'rgba(0, 0, 0, 0)';
-}
-
-/*** Retains source-reference order while removing duplicate provenance from folded wrappers. */
-function uniqueSourceRefs(sourceRefs: readonly string[]): readonly string[] {
-  return [...new Set(sourceRefs)];
 }
