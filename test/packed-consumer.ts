@@ -54,7 +54,7 @@ try {
       "import { recognizeWebsiteDocument } from '@ankhorage/rules-design';",
       '',
       'const recognizer: typeof recognizeWebsiteDocument = recognizeWebsiteDocument;',
-      'if (typeof recognizer !== \'function\') throw new TypeError(\'Public runtime export is missing.\');',
+      "if (typeof recognizer !== 'function') throw new TypeError('Public runtime export is missing.');",
     ].join('\n'),
   );
 

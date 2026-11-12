@@ -126,10 +126,7 @@
       "id": "[\"color\",\"color\",\"rgb(255, 0, 0)\"]",
       "kind": "color",
       "originalValues": ["rgb(255, 0, 0)"],
-      "sourceRefs": [
-        "[\"about\",\"#richtext > span.red\"]",
-        "[\"home\",\"#richtext > span.red\"]"
-      ],
+      "sourceRefs": ["[\"about\",\"#richtext > span.red\"]", "[\"home\",\"#richtext > span.red\"]"],
       "value": "rgb(255, 0, 0)"
     },
     {
@@ -794,10 +791,7 @@
       "id": "[\"typography\",\"fontWeight\",\"700\"]",
       "kind": "typography",
       "originalValues": ["700"],
-      "sourceRefs": [
-        "[\"about\",\"#richtext > span.red\"]",
-        "[\"home\",\"#richtext > span.red\"]"
-      ],
+      "sourceRefs": ["[\"about\",\"#richtext > span.red\"]", "[\"home\",\"#richtext > span.red\"]"],
       "value": "700"
     },
     {
