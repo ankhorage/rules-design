@@ -5,6 +5,7 @@ export { filterDesignRuleCatalog } from './features/catalog/filterDesignRuleCata
 export { createDesignRuleProvider } from './features/provider/designRuleProvider';
 export { selectDesignRuleProfile } from './features/provider/selectDesignRuleProfile';
 export { recognizeWebsiteDesignProperties } from './features/recognition/recognizeWebsiteDesignProperties';
+export { recognizeWebsiteDocument } from './features/recognition/recognizeWebsiteDocument';
 export { createWebsiteAssessmentRuleSet } from './features/website-assessment/createWebsiteAssessmentRuleSet';
 export { recognizeWebsiteStructure } from './features/website-recognition/recognizeWebsiteStructure';
 export type {

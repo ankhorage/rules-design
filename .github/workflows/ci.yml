@@ -65,6 +65,12 @@ jobs:
             echo "No build script found; skipping."
           fi
 
+      - name: Run packed TypeScript consumer
+        run: bun run test:packed-consumer
+
+      - name: Run PHP recognition JSON consumer
+        run: bun run test:php-consumer
+
       - name: Validate opted-in APM owner release
         run: |
           if node -e "const p=require('./package.json'); process.exit(p.ankh?.apm === undefined ? 1 : 0)"; then
