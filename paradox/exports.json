@@ -809,6 +809,42 @@
     "structuredRows": []
   },
   {
+    "name": "recognizeWebsiteDocument",
+    "title": null,
+    "description": "Assembles the public website recognition contract from structural and factual design recognition.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+    "sourceLocation": {
+      "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+      "line": 27,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "(document: WebsiteObservationDocument) => WebsiteRecognitionDocument",
+        "parameters": [
+          {
+            "name": "document",
+            "type": "WebsiteObservationDocument",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "WebsiteRecognitionDocument",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "recognizeWebsiteStructure",
     "title": null,
     "description": "Recognizes source-linked canonical component trees from validated website observations.",

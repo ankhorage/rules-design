@@ -255,6 +255,20 @@ Recognizes exact design properties from validated website observations without e
   - document: `WebsiteObservationDocument`
   - returns: `WebsiteDesignRecognition`
 
+## recognizeWebsiteDocument
+
+Kind: `function`
+Module: `src/features/recognition/recognizeWebsiteDocument.ts`
+Source: `src/features/recognition/recognizeWebsiteDocument.ts:27:1`
+
+Assembles the public website recognition contract from structural and factual design recognition.
+
+### Signatures
+
+- `(document: WebsiteObservationDocument) => WebsiteRecognitionDocument`
+  - document: `WebsiteObservationDocument`
+  - returns: `WebsiteRecognitionDocument`
+
 ## recognizeWebsiteStructure
 
 Kind: `function`

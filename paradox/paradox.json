@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.7.0",
+      "value": "v0.8.0",
       "color": "cb3837"
     },
     {
@@ -436,6 +436,22 @@
       ]
     },
     {
+      "path": "src/features/recognition/createWebsiteAssetIndex.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "createWebsiteAssetIndex"
+      ]
+    },
+    {
+      "path": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "qualifyWebsiteRecognitionProps"
+      ]
+    },
+    {
       "path": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -456,6 +472,32 @@
       ]
     },
     {
+      "path": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/recognizeWebsiteDocument.ts",
+        "test/fixtures/website-recognition-expected.v1.json",
+        "test/fixtures/website-recognition-observation.v1.json",
+        "test/fixtures/websiteObservationDocument.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/recognition/recognizeWebsiteDocument.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/createWebsiteAssetIndex.ts",
+        "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "src/types/websiteDesignRecognition.ts"
+      ],
+      "exports": [
+        "recognizeWebsiteDocument"
+      ]
+    },
+    {
       "path": "src/features/recognition/tokenCandidates.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -463,6 +505,14 @@
       ],
       "exports": [
         "tokenCandidates"
+      ]
+    },
+    {
+      "path": "src/features/recognition/validateWebsiteObservationDocument.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "validateWebsiteObservationDocument"
       ]
     },
     {
@@ -892,6 +942,7 @@
         "DesignRuleStatus",
         "filterDesignRuleCatalog",
         "recognizeWebsiteDesignProperties",
+        "recognizeWebsiteDocument",
         "recognizeWebsiteStructure",
         "selectDesignRuleProfile",
         "WebsiteAssessmentRuleOptions",
@@ -1051,6 +1102,18 @@
         "observations",
         "typographyPolicy"
       ]
+    },
+    {
+      "path": "test/fixtures/website-recognition-expected.v1.json",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": []
+    },
+    {
+      "path": "test/fixtures/website-recognition-observation.v1.json",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": []
     },
     {
       "path": "test/fixtures/websiteObservationDocument.ts",
@@ -1876,6 +1939,42 @@
             }
           ],
           "returnType": "WebsiteDesignRecognition",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "recognizeWebsiteDocument",
+      "title": null,
+      "description": "Assembles the public website recognition contract from structural and factual design recognition.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 27,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [
+        {
+          "label": "(document: WebsiteObservationDocument) => WebsiteRecognitionDocument",
+          "parameters": [
+            {
+              "name": "document",
+              "type": "WebsiteObservationDocument",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "WebsiteRecognitionDocument",
           "returnDescription": null
         }
       ],
@@ -4485,6 +4584,61 @@
       }
     },
     {
+      "name": "createWebsiteAssetIndex",
+      "description": "Indexes globally named assets only after rejecting incompatible duplicate identities.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/createWebsiteAssetIndex.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "qualifyWebsiteRecognitionProps",
+      "description": "Qualifies nested structural source evidence so equal DOM paths remain page-unique.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "qualifySourceReferences",
+      "description": "Qualifies the source references in a structural property list without altering observed literals.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "line": 17,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSerializableArray",
+      "description": "Narrows a serializable value to its immutable list representation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSourceReference",
+      "description": "Narrows the portable source-linked records used by structural text, link, and media props.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "line": 32,
+        "column": 1
+      }
+    },
+    {
       "name": "node",
       "description": "Finds one source node in the recognition fixture.",
       "see": [],
@@ -4617,6 +4771,281 @@
       }
     },
     {
+      "name": "isQualified",
+      "description": "Confirms that serialized source identities retain both page and source components.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 110,
+        "column": 1
+      }
+    },
+    {
+      "name": "first",
+      "description": "Reads the fixture's required first element without an unsafe assertion.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 118,
+        "column": 1
+      }
+    },
+    {
+      "name": "page",
+      "description": "Reads a named recognized page from the canonical acceptance output.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 125,
+        "column": 1
+      }
+    },
+    {
+      "name": "node",
+      "description": "Reads one source-qualified node from a recognized page.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 135,
+        "column": 1
+      }
+    },
+    {
+      "name": "childrenOf",
+      "description": "Selects direct child UI nodes of one semantic type without flattening hierarchy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 142,
+        "column": 1
+      }
+    },
+    {
+      "name": "expectSourceOnlyMedia",
+      "description": "Verifies that an observed asset without an owning source stays visible in the public DTO.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 150,
+        "column": 1
+      }
+    },
+    {
+      "name": "expectTabletGrid",
+      "description": "Verifies the measured tablet grid evidence without inferring an authored breakpoint.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 160,
+        "column": 1
+      }
+    },
+    {
+      "name": "uiNode",
+      "description": "Finds a source-qualified UI node without collapsing its observed hierarchy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 173,
+        "column": 1
+      }
+    },
+    {
+      "name": "recognizeWebsiteDocument",
+      "description": "Assembles the public website recognition contract from structural and factual design recognition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "observedPageFor",
+      "description": "Finds the validated observed page required to join a structural recognition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 55,
+        "column": 1
+      }
+    },
+    {
+      "name": "assemblePage",
+      "description": "Joins factual design observations with the structural page tree by page-local source identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 65,
+        "column": 1
+      }
+    },
+    {
+      "name": "assembleNode",
+      "description": "Adds exact base, responsive, and unresolved design evidence to one structural recognition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "baseProperties",
+      "description": "Selects the first declared viewport and state as the stable non-responsive property baseline.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 127,
+        "column": 1
+      }
+    },
+    {
+      "name": "responsiveVariants",
+      "description": "Groups every non-baseline measured property by viewport without fabricating breakpoints.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 140,
+        "column": 1
+      }
+    },
+    {
+      "name": "unresolvedProperties",
+      "description": "Represents unavailable source evidence explicitly inside the DTO's extensible property channel.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 164,
+        "column": 1
+      }
+    },
+    {
+      "name": "unresolvedValue",
+      "description": "Converts the portable missing-value DTO to the serializable map shape required by property values.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 177,
+        "column": 1
+      }
+    },
+    {
+      "name": "propertyFromObservation",
+      "description": "Converts factual style samples to property names that retain state identity when it is not baseline.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 185,
+        "column": 1
+      }
+    },
+    {
+      "name": "mergeProperties",
+      "description": "Merges duplicate property samples while retaining every original value in stable JSON order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 200,
+        "column": 1
+      }
+    },
+    {
+      "name": "first",
+      "description": "Reads a non-empty collected group after the grouping operation that created it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 213,
+        "column": 1
+      }
+    },
+    {
+      "name": "uniqueSerializableValues",
+      "description": "Deduplicates serializable literals by their exact JSON representation without coercion.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 220,
+        "column": 1
+      }
+    },
+    {
+      "name": "assembleUiNode",
+      "description": "Rebuilds the canonical tree so node IDs and props agree with the assembled node mapping.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 227,
+        "column": 1
+      }
+    },
+    {
+      "name": "assembleDesignToken",
+      "description": "Converts role-free factual token candidates to the published, source-qualified token contract.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 250,
+        "column": 1
+      }
+    },
+    {
+      "name": "assembleMedia",
+      "description": "Deduplicates media by known asset identity or exact anonymous media identity while retaining sources.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 263,
+        "column": 1
+      }
+    },
+    {
+      "name": "assembleMediaGroup",
+      "description": "Assembles one deduplicated media record and rejects incompatible observations sharing an asset ID.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 288,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceIdentity",
+      "description": "Serializes a two-part source identity without delimiters that could collide with source content.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "line": 322,
+        "column": 1
+      }
+    },
+    {
       "name": "tokenCandidates",
       "description": "Finds repeated exact design literals and records them as role-free reusable token candidates.",
       "see": [],
@@ -4712,6 +5141,39 @@
       "sourceLocation": {
         "filePath": "src/features/recognition/tokenCandidates.ts",
         "line": 113,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateWebsiteObservationDocument",
+      "description": "Validates the identity and reference invariants required for deterministic recognition assembly.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "validatePage",
+      "description": "Validates page-local references without rejecting malformed hierarchy evidence that recognition must retain.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "unique",
+      "description": "Rejects ambiguous identities before a Map could silently overwrite an observation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 46,
         "column": 1
       }
     },
@@ -7017,6 +7479,14 @@
     },
     {
       "kind": "export",
+      "name": "recognizeWebsiteDocument",
+      "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+      "symbolName": "recognizeWebsiteDocument",
+      "description": "Assembles the public website recognition contract from structural and factual design recognition.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "recognizeWebsiteStructure",
       "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
       "symbolName": "recognizeWebsiteStructure",
@@ -7067,6 +7537,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDocument.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -7463,6 +7938,56 @@
         "fromPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
         "toPath": "src/features/recognition/tokenCandidates.ts",
         "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toPath": "test/fixtures/website-recognition-expected.v1.json",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toPath": "test/fixtures/website-recognition-observation.v1.json",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toPath": "test/fixtures/websiteObservationDocument.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/types/websiteDesignRecognition.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/recognition/createWebsiteAssetIndex.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
       },
       {
         "fromPath": "src/features/recognition/tokenCandidates.ts",
@@ -9929,6 +10454,30 @@
         "sourcePath": "src/features/provider/selectDesignRuleProfile.ts"
       },
       {
+        "fromSymbol": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "toSymbol": "qualifySourceReferences",
+        "callExpression": "qualifySourceReferences",
+        "sourcePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts"
+      },
+      {
+        "fromSymbol": "qualifyWebsiteRecognitionProps",
+        "toSymbol": "qualifySourceReferences",
+        "callExpression": "qualifySourceReferences",
+        "sourcePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts"
+      },
+      {
+        "fromSymbol": "qualifySourceReferences",
+        "toSymbol": "isSerializableArray",
+        "callExpression": "isSerializableArray",
+        "sourcePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
+        "toSymbol": "isSourceReference",
+        "callExpression": "isSourceReference",
+        "sourcePath": "src/features/recognition/qualifyWebsiteRecognitionProps.ts"
+      },
+      {
         "fromSymbol": "src/features/recognition/recognizeWebsiteDesignProperties.test.ts",
         "toSymbol": "recognizeWebsiteDesignProperties",
         "callExpression": "recognizeWebsiteDesignProperties",
@@ -10037,6 +10586,252 @@
         "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
       },
       {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "recognizeWebsiteDocument",
+        "callExpression": "recognizeWebsiteDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "page",
+        "callExpression": "page",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "node",
+        "callExpression": "node",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "createHash",
+        "callExpression": "createHash",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "childrenOf",
+        "callExpression": "childrenOf",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "uiNode",
+        "callExpression": "uiNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "expectSourceOnlyMedia",
+        "callExpression": "expectSourceOnlyMedia",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "expectTabletGrid",
+        "callExpression": "expectTabletGrid",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "websiteObservationDocumentFixture",
+        "callExpression": "websiteObservationDocumentFixture",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "isQualified",
+        "callExpression": "isQualified",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "first",
+        "callExpression": "first",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "expectSourceOnlyMedia",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "expectTabletGrid",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "uiNode",
+        "toSymbol": "uiNode",
+        "callExpression": "uiNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toSymbol": "validateWebsiteObservationDocument",
+        "callExpression": "validateWebsiteObservationDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toSymbol": "recognizeWebsiteDesignProperties",
+        "callExpression": "recognizeWebsiteDesignProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toSymbol": "recognizeWebsiteStructure",
+        "callExpression": "recognizeWebsiteStructure",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "assemblePage",
+        "callExpression": "assemblePage",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "observedPageFor",
+        "callExpression": "observedPageFor",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toSymbol": "assembleMedia",
+        "callExpression": "assembleMedia",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "assembleNode",
+        "callExpression": "assembleNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assemblePage",
+        "toSymbol": "assembleUiNode",
+        "callExpression": "assembleUiNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleNode",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleNode",
+        "toSymbol": "mergeProperties",
+        "callExpression": "mergeProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "qualifyWebsiteRecognitionProps",
+        "callExpression": "qualifyWebsiteRecognitionProps",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleNode",
+        "toSymbol": "baseProperties",
+        "callExpression": "baseProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleNode",
+        "toSymbol": "unresolvedProperties",
+        "callExpression": "unresolvedProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleNode",
+        "toSymbol": "responsiveVariants",
+        "callExpression": "responsiveVariants",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "propertyFromObservation",
+        "callExpression": "propertyFromObservation",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "mergeProperties",
+        "callExpression": "mergeProperties",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "unresolvedValue",
+        "callExpression": "unresolvedValue",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "uniqueSerializableValues",
+        "callExpression": "uniqueSerializableValues",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "first",
+        "callExpression": "first",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleUiNode",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "assembleUiNode",
+        "callExpression": "assembleUiNode",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleMedia",
+        "toSymbol": "createWebsiteAssetIndex",
+        "callExpression": "createWebsiteAssetIndex",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toSymbol": "assembleMediaGroup",
+        "callExpression": "assembleMediaGroup",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "assembleMediaGroup",
+        "toSymbol": "first",
+        "callExpression": "first",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
         "fromSymbol": "src/features/recognition/tokenCandidates.ts",
         "toSymbol": "candidatesForKind",
         "callExpression": "candidatesForKind",
@@ -10095,6 +10890,18 @@
         "toSymbol": "sourceReference",
         "callExpression": "sourceReference",
         "sourcePath": "src/features/recognition/tokenCandidates.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteObservationDocument",
+        "toSymbol": "unique",
+        "callExpression": "unique",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "validatePage",
+        "toSymbol": "unique",
+        "callExpression": "unique",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
       },
       {
         "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",
@@ -12086,6 +12893,16 @@
         "fromSymbol": "recognizeWebsiteDesignProperties",
         "toType": "WebsiteObservationDocument",
         "sourcePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toType": "WebsiteObservationDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toType": "WebsiteRecognitionDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
       },
       {
         "fromSymbol": "createWebsiteAssessmentRuleSet",

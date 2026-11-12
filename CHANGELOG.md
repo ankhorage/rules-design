@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+- cd12383: Add the deterministic `recognizeWebsiteDocument` public recognition assembly API.
+
 ## 0.7.0
 
 ### Minor Changes
