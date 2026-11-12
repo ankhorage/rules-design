@@ -1,0 +1,4013 @@
+{
+  "collectedAt": "2026-11-11T12:00:00.000Z",
+  "documentId": "website:recognition-acceptance:v1",
+  "pages": [
+    {
+      "assets": [
+        {
+          "contentType": "image/webp",
+          "id": "asset:hero",
+          "kind": "image",
+          "sourceRefs": [
+            "#image"
+          ],
+          "url": "https://example.test/hero.webp"
+        },
+        {
+          "contentType": "image/svg+xml",
+          "id": "asset:css-logo",
+          "kind": "image",
+          "sourceRefs": [
+            "#grid"
+          ],
+          "url": "https://example.test/logo.svg"
+        }
+      ],
+      "id": "home",
+      "navigation": [
+        {
+          "id": "nav:about",
+          "label": "About",
+          "sourceRef": "#nav > a.about",
+          "url": "https://recognition.example/about"
+        }
+      ],
+      "nodes": [
+        {
+          "ancestorSourceRefs": [],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": null,
+          "sourceRef": "#page",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "nav"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#nav",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#nav"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "a"
+          },
+          "links": [
+            {
+              "label": "About",
+              "sourceRef": "#nav > a.about",
+              "url": "https://recognition.example/about"
+            }
+          ],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#nav",
+          "sourceRef": "#nav > a.about",
+          "textRuns": [
+            {
+              "end": 5,
+              "sourceRef": "#nav > a.about:text",
+              "start": 0,
+              "text": "About"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#grid",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-1",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-1"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "h2"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-1",
+          "sourceRef": "#heading",
+          "textRuns": [
+            {
+              "end": 7,
+              "sourceRef": "#heading:text",
+              "start": 0,
+              "text": "Welcome"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-1"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "p"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-1",
+          "sourceRef": "#richtext",
+          "textRuns": [
+            {
+              "end": 8,
+              "sourceRef": "#richtext:text",
+              "start": 0,
+              "text": "Direct: "
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#richtext"
+          ],
+          "dom": {
+            "attributes": {
+              "style": "color: red"
+            },
+            "childIndex": 0,
+            "tagName": "span"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(255, 0, 0)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "700",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#richtext",
+          "sourceRef": "#richtext > span.red",
+          "textRuns": [
+            {
+              "end": 3,
+              "sourceRef": "#richtext > span.red:text",
+              "start": 0,
+              "text": "red"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-2",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-2"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "img"
+          },
+          "links": [],
+          "media": [
+            {
+              "alt": "Example hero",
+              "assetId": "asset:hero",
+              "kind": "image",
+              "sourceRef": "#hero-image",
+              "url": "https://example.test/hero.webp"
+            }
+          ],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-2",
+          "sourceRef": "#image",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 2,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-3",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-3"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "form"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-3",
+          "sourceRef": "#form",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#form"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "a"
+          },
+          "links": [
+            {
+              "label": "Contact",
+              "sourceRef": "#form > a",
+              "url": "https://recognition.example/contact"
+            }
+          ],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#form",
+          "sourceRef": "#form > a",
+          "textRuns": [
+            {
+              "end": 7,
+              "sourceRef": "#form > a:text",
+              "start": 0,
+              "text": "Contact"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 2,
+            "tagName": "x-visible"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#unknown",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 3,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": {
+                  "code": "computed-style-unavailable",
+                  "message": "The node was detached."
+                },
+                "status": "missing"
+              },
+              "css": null,
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": null,
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#missing",
+          "textRuns": []
+        }
+      ],
+      "path": "/",
+      "states": [
+        {
+          "id": "default",
+          "name": "Default"
+        }
+      ],
+      "url": "https://recognition.example/",
+      "viewports": [
+        {
+          "devicePixelRatio": 1,
+          "height": 900,
+          "id": "desktop",
+          "width": 1440
+        },
+        {
+          "devicePixelRatio": 3,
+          "height": 844,
+          "id": "mobile",
+          "width": 390
+        }
+      ]
+    },
+    {
+      "assets": [
+        {
+          "contentType": "image/webp",
+          "id": "asset:hero",
+          "kind": "image",
+          "sourceRefs": [
+            "#image"
+          ],
+          "url": "https://example.test/hero.webp"
+        },
+        {
+          "contentType": "image/jpeg",
+          "id": "asset:about",
+          "kind": "image",
+          "sourceRefs": [
+            "#grid"
+          ],
+          "url": "https://example.test/about.jpg"
+        }
+      ],
+      "id": "about",
+      "navigation": [
+        {
+          "id": "nav:home",
+          "label": "Home",
+          "sourceRef": "#nav > a.home",
+          "url": "https://recognition.example/"
+        }
+      ],
+      "nodes": [
+        {
+          "ancestorSourceRefs": [],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": null,
+          "sourceRef": "#page",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "nav"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#nav",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#nav"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "a"
+          },
+          "links": [
+            {
+              "label": "Home",
+              "sourceRef": "#nav > a.home",
+              "url": "https://recognition.example/"
+            }
+          ],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#nav",
+          "sourceRef": "#nav > a.home",
+          "textRuns": [
+            {
+              "end": 4,
+              "sourceRef": "#nav > a.home:text",
+              "start": 0,
+              "text": "Home"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#grid",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-1",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-1"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "h2"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-1",
+          "sourceRef": "#heading",
+          "textRuns": [
+            {
+              "end": 7,
+              "sourceRef": "#heading:text",
+              "start": 0,
+              "text": "Welcome"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-1"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "p"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-1",
+          "sourceRef": "#richtext",
+          "textRuns": [
+            {
+              "end": 8,
+              "sourceRef": "#richtext:text",
+              "start": 0,
+              "text": "Direct: "
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#richtext"
+          ],
+          "dom": {
+            "attributes": {
+              "style": "color: red"
+            },
+            "childIndex": 0,
+            "tagName": "span"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(255, 0, 0)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "700",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#richtext",
+          "sourceRef": "#richtext > span.red",
+          "textRuns": [
+            {
+              "end": 3,
+              "sourceRef": "#richtext > span.red:text",
+              "start": 0,
+              "text": "red"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 1,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-2",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-2"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "img"
+          },
+          "links": [],
+          "media": [
+            {
+              "alt": "Example hero",
+              "assetId": "asset:hero",
+              "kind": "image",
+              "sourceRef": "#hero-image",
+              "url": "https://example.test/hero.webp"
+            }
+          ],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-2",
+          "sourceRef": "#image",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#grid"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 2,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "repeat(3, minmax(0px, 1fr))",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            },
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgb(250, 250, 250)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(229, 231, 235)",
+                "borderRadius": "12px",
+                "borderWidth": "1px",
+                "boxShadow": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px",
+                "color": "rgb(17, 17, 17)",
+                "display": "grid",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "14px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "24px",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "1fr",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "16px",
+                  "left": "16px",
+                  "right": "16px",
+                  "top": "16px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "24px",
+                  "left": "24px",
+                  "right": "24px",
+                  "top": "24px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "mobile"
+            }
+          ],
+          "parentSourceRef": "#grid",
+          "sourceRef": "#card-3",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#card-3"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "form"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#card-3",
+          "sourceRef": "#form",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#form"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 0,
+            "tagName": "a"
+          },
+          "links": [
+            {
+              "label": "Contact",
+              "sourceRef": "#form > a",
+              "url": "https://recognition.example/contact"
+            }
+          ],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#form",
+          "sourceRef": "#form > a",
+          "textRuns": [
+            {
+              "end": 7,
+              "sourceRef": "#form > a:text",
+              "start": 0,
+              "text": "Contact"
+            }
+          ]
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 2,
+            "tagName": "x-visible"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": null,
+                "status": "available"
+              },
+              "css": {
+                "alignContent": "normal",
+                "alignItems": "normal",
+                "alignSelf": "auto",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "backgroundImage": "none",
+                "backgroundPosition": "0% 0%",
+                "backgroundRepeat": "repeat",
+                "backgroundSize": "auto",
+                "borderColor": "rgb(0, 0, 0)",
+                "borderRadius": "0px",
+                "borderWidth": "0px",
+                "boxShadow": "none",
+                "color": "rgb(17, 17, 17)",
+                "display": "block",
+                "flexBasis": "auto",
+                "flexDirection": "row",
+                "flexGrow": "0",
+                "flexShrink": "1",
+                "flexWrap": "nowrap",
+                "fontFamily": "Inter, sans-serif",
+                "fontSize": "16px",
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "gap": "normal",
+                "gridAutoColumns": "auto",
+                "gridAutoFlow": "row",
+                "gridAutoRows": "auto",
+                "gridColumn": "auto",
+                "gridColumnEnd": "auto",
+                "gridColumnStart": "auto",
+                "gridRow": "auto",
+                "gridRowEnd": "auto",
+                "gridRowStart": "auto",
+                "gridTemplateColumns": "none",
+                "gridTemplateRows": "none",
+                "justifyContent": "normal",
+                "justifyItems": "normal",
+                "justifySelf": "auto",
+                "letterSpacing": "normal",
+                "lineHeight": "normal",
+                "margin": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "opacity": "1",
+                "order": "0",
+                "overflow": "visible",
+                "overflowX": "visible",
+                "overflowY": "visible",
+                "padding": {
+                  "bottom": "0px",
+                  "left": "0px",
+                  "right": "0px",
+                  "top": "0px"
+                },
+                "placeContent": "normal",
+                "placeItems": "normal",
+                "placeSelf": "auto",
+                "position": "static",
+                "textAlign": "start",
+                "textDecoration": "none solid rgb(17, 17, 17)",
+                "visibility": "visible"
+              },
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": {
+                "height": 40,
+                "width": 200,
+                "x": 0,
+                "y": 0
+              },
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#unknown",
+          "textRuns": []
+        },
+        {
+          "ancestorSourceRefs": [
+            "#page"
+          ],
+          "dom": {
+            "attributes": {},
+            "childIndex": 3,
+            "tagName": "div"
+          },
+          "links": [],
+          "media": [],
+          "observations": [
+            {
+              "availability": {
+                "missing": {
+                  "code": "computed-style-unavailable",
+                  "message": "The node was detached."
+                },
+                "status": "missing"
+              },
+              "css": null,
+              "provenance": {
+                "capturedAt": "2026-11-11T12:00:00.000Z",
+                "method": "browser",
+                "sourceUrl": "https://example.test/"
+              },
+              "rect": null,
+              "stateId": "default",
+              "viewportId": "desktop"
+            }
+          ],
+          "parentSourceRef": "#page",
+          "sourceRef": "#missing",
+          "textRuns": []
+        }
+      ],
+      "path": "/about",
+      "states": [
+        {
+          "id": "default",
+          "name": "Default"
+        }
+      ],
+      "url": "https://recognition.example/about",
+      "viewports": [
+        {
+          "devicePixelRatio": 1,
+          "height": 900,
+          "id": "desktop",
+          "width": 1440
+        },
+        {
+          "devicePixelRatio": 3,
+          "height": 844,
+          "id": "mobile",
+          "width": 390
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "site": {
+    "id": "recognition-example",
+    "url": "https://recognition.example/"
+  },
+  "source": {
+    "crawlerId": "fixture",
+    "crawlerVersion": "1.0.0",
+    "crawlId": "crawl:fixture",
+    "revision": null
+  }
+}

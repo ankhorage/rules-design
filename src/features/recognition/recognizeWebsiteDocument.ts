@@ -18,6 +18,8 @@ import type {
   WebsiteDesignTokenCandidate,
 } from '../../types/websiteDesignRecognition';
 import { recognizeWebsiteStructure } from '../website-recognition/recognizeWebsiteStructure';
+import { createWebsiteAssetIndex } from './createWebsiteAssetIndex';
+import { qualifyWebsiteRecognitionProps } from './qualifyWebsiteRecognitionProps';
 import { recognizeWebsiteDesignProperties } from './recognizeWebsiteDesignProperties';
 import { validateWebsiteObservationDocument } from './validateWebsiteObservationDocument';
 
@@ -89,9 +91,11 @@ function assembleNode(
     const candidate = designBySourceRef.get(sourceRef);
     return candidate === undefined ? [] : [candidate];
   });
+  const ownerDesign = design.filter((candidate) => candidate.sourceRef === node.id);
+  const inheritedDesign = design.filter((candidate) => candidate.sourceRef !== node.id);
   const baseViewportId = page.viewports[0]?.id;
   const baseStateId = page.states[0]?.id;
-  const designProperties = design.flatMap((candidate) => [
+  const designProperties = [...ownerDesign, ...inheritedDesign].flatMap((candidate) => [
     ...candidate.colors,
     ...candidate.typography,
     ...candidate.layout,
@@ -101,7 +105,7 @@ function assembleNode(
     ...node,
     id: sourceIdentity(page.id, node.id),
     props: mergeProperties([
-      ...node.props,
+      ...node.props.map((property) => qualifyWebsiteRecognitionProps(property, page.id)),
       ...baseProperties(designProperties, baseViewportId, baseStateId),
       ...unresolvedProperties(design),
     ]),
@@ -257,18 +261,26 @@ function assembleDesignToken(candidate: WebsiteDesignTokenCandidate): WebsiteDes
 
 /*** Deduplicates media by known asset identity or exact anonymous media identity while retaining sources. */
 function assembleMedia(document: WebsiteObservationDocument): readonly WebsiteRecognizedMedia[] {
-  const assetsById = new Map(
-    document.pages.flatMap((page) => page.assets.map((asset) => [asset.id, asset] as const)),
-  );
-  const references = document.pages.flatMap((page) =>
-    page.nodes.flatMap((node) => node.media.map((media) => ({ media, pageId: page.id }))),
-  );
+  const assetIndex = createWebsiteAssetIndex(document);
+  const references = [
+    ...document.pages.flatMap((page) =>
+      page.nodes.flatMap((node) => node.media.map((media) => ({ media, pageId: page.id }))),
+    ),
+    ...document.pages.flatMap((page) =>
+      page.assets.flatMap((asset) =>
+        asset.sourceRefs.map((sourceRef) => ({
+          media: { assetId: asset.id, kind: asset.kind, sourceRef, url: asset.url },
+          pageId: page.id,
+        })),
+      ),
+    ),
+  ];
   return [
     ...Map.groupBy(references, ({ media }) =>
       media.assetId === null ? `${media.kind}\u0000${media.url}` : `asset\u0000${media.assetId}`,
     ),
   ]
-    .map(([identity, entries]) => assembleMediaGroup(identity, entries, assetsById))
+    .map(([identity, entries]) => assembleMediaGroup(identity, entries, assetIndex))
     .toSorted((left, right) => left.id.localeCompare(right.id));
 }
 
