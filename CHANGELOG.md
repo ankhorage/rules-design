@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- 8ed1957: Expose canonical website recognition and token inspection through the Ankh CLI provider.
+
 ## 0.8.0
 
 ### Minor Changes

@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.8.0",
+      "value": "v0.9.0",
       "color": "cb3837"
     },
     {
@@ -84,6 +84,73 @@
     "src/index.ts"
   ],
   "modules": [
+    {
+      "path": "package.json",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": []
+    },
+    {
+      "path": "src/capabilities/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "CAPABILITIES"
+      ]
+    },
+    {
+      "path": "src/cli/commands/documentValidation.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/cli/commands/inspect.ts",
+        "src/cli/commands/recognize.ts",
+        "test/fixtures/websiteObservationDocument.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/cli/commands/inspect.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      ],
+      "exports": [
+        "inspect"
+      ]
+    },
+    {
+      "path": "src/cli/commands/recognize.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "src/index.ts"
+      ],
+      "exports": [
+        "recognize"
+      ]
+    },
+    {
+      "path": "src/cli/index.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "package.json",
+        "src/capabilities/index.ts",
+        "src/cli/index.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/cli/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/capabilities/index.ts",
+        "src/cli/commands/inspect.ts",
+        "src/cli/commands/recognize.ts"
+      ],
+      "exports": [
+        "default"
+      ]
+    },
     {
       "path": "src/features/accessibility/createAccessibilityRules.test.ts",
       "isEntrypoint": false,
@@ -513,6 +580,14 @@
       "dependencies": [],
       "exports": [
         "validateWebsiteObservationDocument"
+      ]
+    },
+    {
+      "path": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "validateWebsiteRecognitionDocument"
       ]
     },
     {
@@ -2493,6 +2568,182 @@
   ],
   "components": [],
   "sourceFunctions": [
+    {
+      "name": "createContext",
+      "description": "Creates a minimal Ankh command context that retains observable CLI output for assertions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/documentValidation.test.ts",
+        "line": 94,
+        "column": 1
+      }
+    },
+    {
+      "name": "inspect",
+      "description": "Adapt `ankh rules-design inspect` to read canonical recognition data without recomputing it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseInspectInput",
+      "description": "Parse the supported inspect section and reject secondary analysis modes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 29,
+        "column": 1
+      }
+    },
+    {
+      "name": "readDesignTokens",
+      "description": "Parse only the existing token collection required by the supported inspection section.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 42,
+        "column": 1
+      }
+    },
+    {
+      "name": "isHelpToken",
+      "description": "Identify the command help tokens supported by the Ankh delivery surface.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 49,
+        "column": 1
+      }
+    },
+    {
+      "name": "renderUsage",
+      "description": "Render the canonical inspection invocation shape.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "errorMessage",
+      "description": "Convert an unknown boundary failure to a safe command diagnostic.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/inspect.ts",
+        "line": 59,
+        "column": 1
+      }
+    },
+    {
+      "name": "recognize",
+      "description": "Adapt `ankh rules-design recognize` to the public document-recognition API.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseRecognitionInput",
+      "description": "Parse one observation input and its required non-overwriting recognition output.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 39,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseWebsiteObservationDocument",
+      "description": "Parse JSON at the file boundary and apply the canonical recognition input validation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertOutputDoesNotExistAsync",
+      "description": "Refuse an existing output target before calculating a recognition document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 58,
+        "column": 1
+      }
+    },
+    {
+      "name": "isHelpToken",
+      "description": "Identify the command help tokens supported by the Ankh delivery surface.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 68,
+        "column": 1
+      }
+    },
+    {
+      "name": "renderUsage",
+      "description": "Render the canonical recognition invocation shape.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 73,
+        "column": 1
+      }
+    },
+    {
+      "name": "errorMessage",
+      "description": "Convert an unknown boundary failure to a safe command diagnostic.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/recognize.ts",
+        "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "readPackageVersion",
+      "description": "Read the package version that is published with this provider module.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/index.ts",
+        "line": 35,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": "Narrow JSON input to a non-null record without accepting arrays.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/index.ts",
+        "line": 46,
+        "column": 1
+      }
+    },
     {
       "name": "observations",
       "description": "Builds representative PASS and FAIL observations for one frozen rule invariant.",
@@ -5151,7 +5402,73 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
-        "line": 7,
+        "line": 8,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertObservationEnvelope",
+      "description": "Validates the complete observation envelope before recognition accesses nested page evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 22,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertSource",
+      "description": "Validates the immutable producer metadata required to attribute an observation document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 35,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertSite",
+      "description": "Validates the stable site metadata required to scope an observation document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 48,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertObservationPages",
+      "description": "Validates page collection boundaries before existing page-reference invariants run.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "isObservationPage",
+      "description": "Validates all page collections read by the recognition algorithm without reimplementing recognition.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNonEmptyString",
+      "description": "Checks an identity value without accepting empty string placeholders.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "line": 77,
         "column": 1
       }
     },
@@ -5162,7 +5479,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
-        "line": 20,
+        "line": 82,
         "column": 1
       }
     },
@@ -5173,7 +5490,84 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/validateWebsiteObservationDocument.ts",
-        "line": 46,
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "validateWebsiteRecognitionDocument",
+      "description": "Validates the canonical recognition envelope before a delivery adapter reads its derived data.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertSource",
+      "description": "Validates complete source metadata shared by every canonical website document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertSite",
+      "description": "Validates complete site metadata shared by every canonical website document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 38,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertRecognitionPages",
+      "description": "Validates the structural page boundary needed to recognize a document rather than an array of tokens.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 44,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertDesignTokens",
+      "description": "Validates each derived token retains its canonical identity, kind, and source evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertRecords",
+      "description": "Narrows one document collection to records before its members are inspected.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 84,
+        "column": 1
+      }
+    },
+    {
+      "name": "isNonEmptyString",
+      "description": "Checks an identity value without accepting empty string placeholders.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "line": 93,
         "column": 1
       }
     },
@@ -7575,9 +7969,34 @@
         "sourcePath": "src/index.ts"
       },
       {
-        "fromPath": "test/fixtures/typographyRuleFacts.ts",
-        "toPath": "src/types/typography.ts",
-        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+        "fromPath": "src/cli/index.test.ts",
+        "toPath": "package.json",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromPath": "src/cli/index.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromPath": "src/cli/index.test.ts",
+        "toPath": "src/cli/index.ts",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/cli/commands/inspect.ts",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/cli/commands/recognize.ts",
+        "sourcePath": "src/cli/index.ts"
       },
       {
         "fromPath": "src/types/designRuleProvider.ts",
@@ -7598,6 +8017,41 @@
         "fromPath": "src/types/designRuleProvider.ts",
         "toPath": "src/types/typography.ts",
         "sourcePath": "src/types/designRuleProvider.ts"
+      },
+      {
+        "fromPath": "test/fixtures/typographyRuleFacts.ts",
+        "toPath": "src/types/typography.ts",
+        "sourcePath": "test/fixtures/typographyRuleFacts.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/documentValidation.test.ts",
+        "toPath": "test/fixtures/websiteObservationDocument.ts",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/documentValidation.test.ts",
+        "toPath": "src/cli/commands/inspect.ts",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/documentValidation.test.ts",
+        "toPath": "src/cli/commands/recognize.ts",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/inspect.ts",
+        "toPath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/recognize.ts",
+        "toPath": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/recognize.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/cli/commands/recognize.ts"
       },
       {
         "fromPath": "src/features/accessibility/createAccessibilityRules.test.ts",
@@ -8402,6 +8856,60 @@
     ],
     "calls": [
       {
+        "fromSymbol": "src/cli/index.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/index.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/index.test.ts",
+        "toSymbol": "isCapability",
+        "callExpression": "isCapability",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/index.test.ts",
+        "toSymbol": "areCapabilitiesEqual",
+        "callExpression": "areCapabilitiesEqual",
+        "sourcePath": "src/cli/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/index.ts",
+        "toSymbol": "readPackageVersion",
+        "callExpression": "readPackageVersion",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "handler",
+        "toSymbol": "recognize",
+        "callExpression": "recognize",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "handler",
+        "toSymbol": "inspect",
+        "callExpression": "inspect",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "readPackageVersion",
+        "toSymbol": "readFileSync",
+        "callExpression": "readFileSync",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "readPackageVersion",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
         "fromSymbol": "completeResponsiveFact",
         "toSymbol": "responsiveFact",
         "callExpression": "responsiveFact",
@@ -8676,6 +9184,216 @@
         "toSymbol": "edges",
         "callExpression": "edges",
         "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "mkdtemp",
+        "callExpression": "mkdtemp",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "join",
+        "callExpression": "join",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "tmpdir",
+        "callExpression": "tmpdir",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "websiteObservationDocumentFixture",
+        "callExpression": "websiteObservationDocumentFixture",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "mutate",
+        "callExpression": "mutate",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "writeFile",
+        "callExpression": "writeFile",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "createContext",
+        "callExpression": "createContext",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "recognize",
+        "callExpression": "recognize",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "rm",
+        "callExpression": "rm",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "inspect",
+        "callExpression": "inspect",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/commands/documentValidation.test.ts",
+        "toSymbol": "readFile",
+        "callExpression": "readFile",
+        "sourcePath": "src/cli/commands/documentValidation.test.ts"
+      },
+      {
+        "fromSymbol": "inspect",
+        "toSymbol": "parseInspectInput",
+        "callExpression": "parseInspectInput",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "inspect",
+        "toSymbol": "renderUsage",
+        "callExpression": "renderUsage",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "inspect",
+        "toSymbol": "readDesignTokens",
+        "callExpression": "readDesignTokens",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "inspect",
+        "toSymbol": "readFile",
+        "callExpression": "readFile",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "inspect",
+        "toSymbol": "errorMessage",
+        "callExpression": "errorMessage",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "parseInspectInput",
+        "toSymbol": "isHelpToken",
+        "callExpression": "isHelpToken",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "parseInspectInput",
+        "toSymbol": "renderUsage",
+        "callExpression": "renderUsage",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "parseInspectInput",
+        "toSymbol": "resolve",
+        "callExpression": "resolve",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "readDesignTokens",
+        "toSymbol": "validateWebsiteRecognitionDocument",
+        "callExpression": "validateWebsiteRecognitionDocument",
+        "sourcePath": "src/cli/commands/inspect.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "parseRecognitionInput",
+        "callExpression": "parseRecognitionInput",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "renderUsage",
+        "callExpression": "renderUsage",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "assertOutputDoesNotExistAsync",
+        "callExpression": "assertOutputDoesNotExistAsync",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "parseWebsiteObservationDocument",
+        "callExpression": "parseWebsiteObservationDocument",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "readFile",
+        "callExpression": "readFile",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "recognizeWebsiteDocument",
+        "callExpression": "recognizeWebsiteDocument",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "validateWebsiteRecognitionDocument",
+        "callExpression": "validateWebsiteRecognitionDocument",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "writeFile",
+        "callExpression": "writeFile",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "recognize",
+        "toSymbol": "errorMessage",
+        "callExpression": "errorMessage",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "parseRecognitionInput",
+        "toSymbol": "isHelpToken",
+        "callExpression": "isHelpToken",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "parseRecognitionInput",
+        "toSymbol": "renderUsage",
+        "callExpression": "renderUsage",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "parseRecognitionInput",
+        "toSymbol": "resolve",
+        "callExpression": "resolve",
+        "sourcePath": "src/cli/commands/recognize.ts"
+      },
+      {
+        "fromSymbol": "assertOutputDoesNotExistAsync",
+        "toSymbol": "access",
+        "callExpression": "access",
+        "sourcePath": "src/cli/commands/recognize.ts"
       },
       {
         "fromSymbol": "src/features/accessibility/createAccessibilityRules.test.ts",
@@ -10893,8 +11611,80 @@
       },
       {
         "fromSymbol": "validateWebsiteObservationDocument",
+        "toSymbol": "assertObservationEnvelope",
+        "callExpression": "assertObservationEnvelope",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteObservationDocument",
         "toSymbol": "unique",
         "callExpression": "unique",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertObservationEnvelope",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertObservationEnvelope",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertObservationEnvelope",
+        "toSymbol": "assertSource",
+        "callExpression": "assertSource",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertObservationEnvelope",
+        "toSymbol": "assertSite",
+        "callExpression": "assertSite",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertObservationEnvelope",
+        "toSymbol": "assertObservationPages",
+        "callExpression": "assertObservationPages",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSource",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSource",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSite",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSite",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "isObservationPage",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "isObservationPage",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
         "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
       },
       {
@@ -10902,6 +11692,96 @@
         "toSymbol": "unique",
         "callExpression": "unique",
         "sourcePath": "src/features/recognition/validateWebsiteObservationDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "assertSource",
+        "callExpression": "assertSource",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "assertSite",
+        "callExpression": "assertSite",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "assertRecognitionPages",
+        "callExpression": "assertRecognitionPages",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "assertDesignTokens",
+        "callExpression": "assertDesignTokens",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "validateWebsiteRecognitionDocument",
+        "toSymbol": "assertRecords",
+        "callExpression": "assertRecords",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSource",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSource",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSite",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertSite",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertRecognitionPages",
+        "toSymbol": "assertRecords",
+        "callExpression": "assertRecords",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/validateWebsiteRecognitionDocument.ts",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
+      },
+      {
+        "fromSymbol": "assertDesignTokens",
+        "toSymbol": "assertRecords",
+        "callExpression": "assertRecords",
+        "sourcePath": "src/features/recognition/validateWebsiteRecognitionDocument.ts"
       },
       {
         "fromSymbol": "src/features/repetition/createRepetitionRules.test.ts",

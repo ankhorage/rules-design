@@ -2,6 +2,32 @@ graph TD
   package__ankhorage_rules_design["@ankhorage/rules-design"]
   entrypoint_src_index_ts["src/index.ts"]
   package__ankhorage_rules_design --> entrypoint_src_index_ts
+  module_package_json["package.json"]
+  package__ankhorage_rules_design -.-> module_package_json
+  module_src_capabilities_index_ts["src/capabilities/index.ts"]
+  package__ankhorage_rules_design -.-> module_src_capabilities_index_ts
+  module_src_cli_commands_documentValidation_test_ts["src/cli/commands/documentValidation.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_cli_commands_documentValidation_test_ts
+  module_src_cli_commands_documentValidation_test_ts --> module_src_cli_commands_inspect_ts
+  module_src_cli_commands_documentValidation_test_ts --> module_src_cli_commands_recognize_ts
+  module_src_cli_commands_documentValidation_test_ts --> module_test_fixtures_websiteObservationDocument_ts
+  module_src_cli_commands_inspect_ts["src/cli/commands/inspect.ts"]
+  package__ankhorage_rules_design -.-> module_src_cli_commands_inspect_ts
+  module_src_cli_commands_inspect_ts --> module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts["src/cli/commands/recognize.ts"]
+  package__ankhorage_rules_design -.-> module_src_cli_commands_recognize_ts
+  module_src_cli_commands_recognize_ts --> module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --> module_src_index_ts
+  module_src_cli_index_test_ts["src/cli/index.test.ts"]
+  package__ankhorage_rules_design -.-> module_src_cli_index_test_ts
+  module_src_cli_index_test_ts --> module_package_json
+  module_src_cli_index_test_ts --> module_src_capabilities_index_ts
+  module_src_cli_index_test_ts --> module_src_cli_index_ts
+  module_src_cli_index_ts["src/cli/index.ts"]
+  package__ankhorage_rules_design -.-> module_src_cli_index_ts
+  module_src_cli_index_ts --> module_src_capabilities_index_ts
+  module_src_cli_index_ts --> module_src_cli_commands_inspect_ts
+  module_src_cli_index_ts --> module_src_cli_commands_recognize_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts["src/features/accessibility/createAccessibilityRules.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_accessibility_createAccessibilityRules_test_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --> module_src_features_accessibility_createAccessibilityRules_ts
@@ -166,6 +192,8 @@ graph TD
   module_src_features_recognition_tokenCandidates_ts --> module_src_types_websiteDesignRecognition_ts
   module_src_features_recognition_validateWebsiteObservationDocument_ts["src/features/recognition/validateWebsiteObservationDocument.ts"]
   package__ankhorage_rules_design -.-> module_src_features_recognition_validateWebsiteObservationDocument_ts
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts["src/features/recognition/validateWebsiteRecognitionDocument.ts"]
+  package__ankhorage_rules_design -.-> module_src_features_recognition_validateWebsiteRecognitionDocument_ts
   module_src_features_repetition_createRepetitionRules_test_ts["src/features/repetition/createRepetitionRules.test.ts"]
   package__ankhorage_rules_design -.-> module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --> module_src_features_catalog_designRuleCatalog_ts

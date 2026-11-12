@@ -127,6 +127,26 @@
               </button>
             </li>
             <li>
+    <button class="nav-button" type="button" data-target="src/cli/commands/documentValidation.test.ts">
+      src/cli/commands/documentValidation.test.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/cli/commands/inspect.ts">
+      src/cli/commands/inspect.ts
+      <small>6 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/cli/commands/recognize.ts">
+      src/cli/commands/recognize.ts
+      <small>7 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/cli/index.ts">
+      src/cli/index.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/accessibility/createAccessibilityRules.test.ts">
       src/features/accessibility/createAccessibilityRules.test.ts
       <small>5 functions</small>
@@ -299,7 +319,12 @@
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/recognition/validateWebsiteObservationDocument.ts">
       src/features/recognition/validateWebsiteObservationDocument.ts
-      <small>3 functions</small>
+      <small>9 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/recognition/validateWebsiteRecognitionDocument.ts">
+      src/features/recognition/validateWebsiteRecognitionDocument.ts
+      <small>7 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/repetition/createRepetitionRules.test.ts">
@@ -478,7 +503,7 @@
       <div class="summary">
         <div><strong>30</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>97</strong><span class="muted">modules</span></div>
+        <div><strong>105</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -503,7 +528,42 @@
     <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
     <section class="panel">
       <h2>Modules</h2>
-      <article class="item" data-search="src/features/accessibility/createAccessibilityRules.test.ts src/features/accessibility/createAccessibilityRules.ts test/fixtures/accessibilityFacts.ts">
+      <article class="item" data-search="package.json">
+    <h3>package.json</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/capabilities/index.ts CAPABILITIES">
+    <h3>src/capabilities/index.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>CAPABILITIES</code></p>
+  </article><article class="item" data-search="src/cli/commands/documentValidation.test.ts src/cli/commands/inspect.ts src/cli/commands/recognize.ts test/fixtures/websiteObservationDocument.ts">
+    <h3>src/cli/commands/documentValidation.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/cli/commands/inspect.ts</code>, <code>src/cli/commands/recognize.ts</code>, <code>test/fixtures/websiteObservationDocument.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/cli/commands/inspect.ts src/features/recognition/validateWebsiteRecognitionDocument.ts inspect">
+    <h3>src/cli/commands/inspect.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/recognition/validateWebsiteRecognitionDocument.ts</code></p>
+    <p><strong>Exports:</strong> <code>inspect</code></p>
+  </article><article class="item" data-search="src/cli/commands/recognize.ts src/features/recognition/validateWebsiteRecognitionDocument.ts src/index.ts recognize">
+    <h3>src/cli/commands/recognize.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/recognition/validateWebsiteRecognitionDocument.ts</code>, <code>src/index.ts</code></p>
+    <p><strong>Exports:</strong> <code>recognize</code></p>
+  </article><article class="item" data-search="src/cli/index.test.ts package.json src/capabilities/index.ts src/cli/index.ts">
+    <h3>src/cli/index.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/capabilities/index.ts</code>, <code>src/cli/index.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/cli/index.ts src/capabilities/index.ts src/cli/commands/inspect.ts src/cli/commands/recognize.ts default">
+    <h3>src/cli/index.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/capabilities/index.ts</code>, <code>src/cli/commands/inspect.ts</code>, <code>src/cli/commands/recognize.ts</code></p>
+    <p><strong>Exports:</strong> <code>default</code></p>
+  </article><article class="item" data-search="src/features/accessibility/createAccessibilityRules.test.ts src/features/accessibility/createAccessibilityRules.ts test/fixtures/accessibilityFacts.ts">
     <h3>src/features/accessibility/createAccessibilityRules.test.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/accessibility/createAccessibilityRules.ts</code>, <code>test/fixtures/accessibilityFacts.ts</code></p>
@@ -708,6 +768,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>validateWebsiteObservationDocument</code></p>
+  </article><article class="item" data-search="src/features/recognition/validateWebsiteRecognitionDocument.ts validateWebsiteRecognitionDocument">
+    <h3>src/features/recognition/validateWebsiteRecognitionDocument.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>validateWebsiteRecognitionDocument</code></p>
   </article><article class="item" data-search="src/features/repetition/createRepetitionRules.test.ts src/features/catalog/designRuleCatalog.ts src/features/repetition/createRepetitionRules.ts test/fixtures/repetitionRuleFacts.ts">
     <h3>src/features/repetition/createRepetitionRules.test.ts</h3>
     <p class="muted">Referenced module</p>
@@ -1997,6 +2062,32 @@
   package__ankhorage_rules_design[&quot;@ankhorage/rules-design&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_rules_design --&gt; entrypoint_src_index_ts
+  module_package_json[&quot;package.json&quot;]
+  package__ankhorage_rules_design -.-&gt; module_package_json
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_capabilities_index_ts
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_documentValidation_test_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_inspect_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_index_ts
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_index_test_ts
+  module_src_cli_index_test_ts --&gt; module_package_json
+  module_src_cli_index_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_recognize_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_test_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
@@ -2161,6 +2252,8 @@
   module_src_features_recognition_tokenCandidates_ts --&gt; module_src_types_websiteDesignRecognition_ts
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_recognition_validateWebsiteObservationDocument_ts
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -2362,6 +2455,32 @@
   package__ankhorage_rules_design[&quot;@ankhorage/rules-design&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_rules_design --&gt; entrypoint_src_index_ts
+  module_package_json[&quot;package.json&quot;]
+  package__ankhorage_rules_design -.-&gt; module_package_json
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_capabilities_index_ts
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_documentValidation_test_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_inspect_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_index_ts
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_index_test_ts
+  module_src_cli_index_test_ts --&gt; module_package_json
+  module_src_cli_index_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_recognize_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_accessibility_createAccessibilityRules_test_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
@@ -2526,6 +2645,8 @@
   module_src_features_recognition_tokenCandidates_ts --&gt; module_src_types_websiteDesignRecognition_ts
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_recognition_validateWebsiteObservationDocument_ts
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
+  package__ankhorage_rules_design -.-&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_repetition_createRepetitionRules_test_ts
   module_src_features_repetition_createRepetitionRules_test_ts --&gt; module_src_features_catalog_designRuleCatalog_ts
@@ -2726,6 +2847,13 @@
     <h3>Module relationships</h3>
     <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
     <div class="mermaid">graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
   module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
@@ -2767,6 +2895,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   module_src_features_recognition_tokenCandidates_ts[&quot;src/features/recognition/tokenCandidates.ts&quot;]
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -2823,6 +2952,18 @@
   module_test_fixtures_website_recognition_observation_v1_json[&quot;test/fixtures/website-recognition-observation.v1.json&quot;]
   module_test_fixtures_websiteObservationDocument_ts[&quot;test/fixtures/websiteObservationDocument.ts&quot;]
   module_test_fixtures_websiteRecognition_ts[&quot;test/fixtures/websiteRecognition.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_cli_commands_inspect_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_index_ts
+  module_src_cli_index_test_ts --&gt; module_package_json
+  module_src_cli_index_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_recognize_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
   module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
@@ -2992,6 +3133,13 @@
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
   module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
@@ -3033,6 +3181,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   module_src_features_recognition_tokenCandidates_ts[&quot;src/features/recognition/tokenCandidates.ts&quot;]
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -3089,6 +3238,18 @@
   module_test_fixtures_website_recognition_observation_v1_json[&quot;test/fixtures/website-recognition-observation.v1.json&quot;]
   module_test_fixtures_websiteObservationDocument_ts[&quot;test/fixtures/websiteObservationDocument.ts&quot;]
   module_test_fixtures_websiteRecognition_ts[&quot;test/fixtures/websiteRecognition.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_src_cli_commands_recognize_ts
+  module_src_cli_commands_documentValidation_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_cli_commands_inspect_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_features_recognition_validateWebsiteRecognitionDocument_ts
+  module_src_cli_commands_recognize_ts --&gt; module_src_index_ts
+  module_src_cli_index_test_ts --&gt; module_package_json
+  module_src_cli_index_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_inspect_ts
+  module_src_cli_index_ts --&gt; module_src_cli_commands_recognize_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_src_features_accessibility_createAccessibilityRules_ts
   module_src_features_accessibility_createAccessibilityRules_test_ts --&gt; module_test_fixtures_accessibilityFacts_ts
   module_src_features_accessibility_createAccessibilityRules_ts --&gt; module_src_features_accessibility_evaluateAccessibilityObservation_ts
@@ -3260,6 +3421,13 @@
     <h3>Export graph</h3>
     <p class="muted"><code>diagrams/export-graph.mmd</code></p>
     <div class="mermaid">graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
   module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
@@ -3301,6 +3469,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   module_src_features_recognition_tokenCandidates_ts[&quot;src/features/recognition/tokenCandidates.ts&quot;]
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -3439,6 +3608,13 @@
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  module_src_cli_commands_documentValidation_test_ts[&quot;src/cli/commands/documentValidation.test.ts&quot;]
+  module_src_cli_commands_inspect_ts[&quot;src/cli/commands/inspect.ts&quot;]
+  module_src_cli_commands_recognize_ts[&quot;src/cli/commands/recognize.ts&quot;]
+  module_src_cli_index_test_ts[&quot;src/cli/index.test.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_test_ts[&quot;src/features/accessibility/createAccessibilityRules.test.ts&quot;]
   module_src_features_accessibility_createAccessibilityRules_ts[&quot;src/features/accessibility/createAccessibilityRules.ts&quot;]
   module_src_features_accessibility_evaluateAccessibilityObservation_ts[&quot;src/features/accessibility/evaluateAccessibilityObservation.ts&quot;]
@@ -3480,6 +3656,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   module_src_features_recognition_tokenCandidates_ts[&quot;src/features/recognition/tokenCandidates.ts&quot;]
   module_src_features_recognition_validateWebsiteObservationDocument_ts[&quot;src/features/recognition/validateWebsiteObservationDocument.ts&quot;]
+  module_src_features_recognition_validateWebsiteRecognitionDocument_ts[&quot;src/features/recognition/validateWebsiteRecognitionDocument.ts&quot;]
   module_src_features_repetition_createRepetitionRules_test_ts[&quot;src/features/repetition/createRepetitionRules.test.ts&quot;]
   module_src_features_repetition_createRepetitionRules_ts[&quot;src/features/repetition/createRepetitionRules.ts&quot;]
   module_src_features_responsive_createResponsiveRules_test_ts[&quot;src/features/responsive/createResponsiveRules.test.ts&quot;]
@@ -3634,60 +3811,6 @@
   participant_tokenCandidates--&gt;&gt;participant_recognizeWebsiteDesignProperties: return
 </pre>
     </details>
-  </article><article class="item" data-search="recognizeWebsiteDocument sequence diagrams/sequences/recognize-website-document.mmd">
-    <h3>recognizeWebsiteDocument sequence</h3>
-    <p class="muted"><code>diagrams/sequences/recognize-website-document.mmd</code></p>
-    <div class="mermaid">sequenceDiagram
-  participant participant_assembleMedia as assembleMedia
-  participant participant_createWebsiteAssetIndex as createWebsiteAssetIndex
-  participant participant_recognizeWebsiteDesignProperties as recognizeWebsiteDesignProperties
-  participant participant_recognizeWebsiteDocument as recognizeWebsiteDocument
-  participant participant_recognizeWebsiteStructure as recognizeWebsiteStructure
-  participant participant_tokenCandidates as tokenCandidates
-  participant participant_unique as unique
-  participant participant_validateWebsiteObservationDocument as validateWebsiteObservationDocument
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_validateWebsiteObservationDocument: validateWebsiteObservationDocument()
-  participant_validateWebsiteObservationDocument-&gt;&gt;participant_unique: unique()
-  participant_unique--&gt;&gt;participant_validateWebsiteObservationDocument: return
-  participant_validateWebsiteObservationDocument--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_recognizeWebsiteDesignProperties: recognizeWebsiteDesignProperties()
-  participant_recognizeWebsiteDesignProperties-&gt;&gt;participant_tokenCandidates: tokenCandidates()
-  participant_tokenCandidates--&gt;&gt;participant_recognizeWebsiteDesignProperties: return
-  participant_recognizeWebsiteDesignProperties--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_recognizeWebsiteStructure: recognizeWebsiteStructure()
-  participant_recognizeWebsiteStructure--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_assembleMedia: assembleMedia()
-  participant_assembleMedia-&gt;&gt;participant_createWebsiteAssetIndex: createWebsiteAssetIndex()
-  participant_createWebsiteAssetIndex--&gt;&gt;participant_assembleMedia: return
-  participant_assembleMedia--&gt;&gt;participant_recognizeWebsiteDocument: return
-</div>
-    <details>
-      <summary>View Mermaid source</summary>
-      <pre>sequenceDiagram
-  participant participant_assembleMedia as assembleMedia
-  participant participant_createWebsiteAssetIndex as createWebsiteAssetIndex
-  participant participant_recognizeWebsiteDesignProperties as recognizeWebsiteDesignProperties
-  participant participant_recognizeWebsiteDocument as recognizeWebsiteDocument
-  participant participant_recognizeWebsiteStructure as recognizeWebsiteStructure
-  participant participant_tokenCandidates as tokenCandidates
-  participant participant_unique as unique
-  participant participant_validateWebsiteObservationDocument as validateWebsiteObservationDocument
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_validateWebsiteObservationDocument: validateWebsiteObservationDocument()
-  participant_validateWebsiteObservationDocument-&gt;&gt;participant_unique: unique()
-  participant_unique--&gt;&gt;participant_validateWebsiteObservationDocument: return
-  participant_validateWebsiteObservationDocument--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_recognizeWebsiteDesignProperties: recognizeWebsiteDesignProperties()
-  participant_recognizeWebsiteDesignProperties-&gt;&gt;participant_tokenCandidates: tokenCandidates()
-  participant_tokenCandidates--&gt;&gt;participant_recognizeWebsiteDesignProperties: return
-  participant_recognizeWebsiteDesignProperties--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_recognizeWebsiteStructure: recognizeWebsiteStructure()
-  participant_recognizeWebsiteStructure--&gt;&gt;participant_recognizeWebsiteDocument: return
-  participant_recognizeWebsiteDocument-&gt;&gt;participant_assembleMedia: assembleMedia()
-  participant_assembleMedia-&gt;&gt;participant_createWebsiteAssetIndex: createWebsiteAssetIndex()
-  participant_createWebsiteAssetIndex--&gt;&gt;participant_assembleMedia: return
-  participant_assembleMedia--&gt;&gt;participant_recognizeWebsiteDocument: return
-</pre>
-    </details>
   </article><article class="item" data-search="selectDesignRuleProfile sequence diagrams/sequences/select-design-rule-profile.mmd">
     <h3>selectDesignRuleProfile sequence</h3>
     <p class="muted"><code>diagrams/sequences/select-design-rule-profile.mmd</code></p>
@@ -3709,7 +3832,107 @@
   </article>
     </section>
         </section>
-        <section id="view-src-features-accessibility-createaccessibilityrules-test-ts" class="view" data-view="src/features/accessibility/createAccessibilityRules.test.ts" hidden>
+        <section id="view-src-cli-commands-documentvalidation-test-ts" class="view" data-view="src/cli/commands/documentValidation.test.ts" hidden>
+    <section class="panel">
+      <h2>src/cli/commands/documentValidation.test.ts</h2>
+      <article class="item" data-search="createContext src/cli/commands/documentValidation.test.ts Creates a minimal Ankh command context that retains observable CLI output for assertions.">
+    <h3>createContext</h3>
+    <p class="muted"><code>src/cli/commands/documentValidation.test.ts:94:1</code></p>
+    <p>Creates a minimal Ankh command context that retains observable CLI output for assertions.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-cli-commands-inspect-ts" class="view" data-view="src/cli/commands/inspect.ts" hidden>
+    <section class="panel">
+      <h2>src/cli/commands/inspect.ts</h2>
+      <article class="item" data-search="inspect src/cli/commands/inspect.ts Adapt `ankh rules-design inspect` to read canonical recognition data without recomputing it.">
+    <h3>inspect</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:9:1</code></p>
+    <p>Adapt `ankh rules-design inspect` to read canonical recognition data without recomputing it.</p>
+    
+  </article><article class="item" data-search="parseInspectInput src/cli/commands/inspect.ts Parse the supported inspect section and reject secondary analysis modes.">
+    <h3>parseInspectInput</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:29:1</code></p>
+    <p>Parse the supported inspect section and reject secondary analysis modes.</p>
+    
+  </article><article class="item" data-search="readDesignTokens src/cli/commands/inspect.ts Parse only the existing token collection required by the supported inspection section.">
+    <h3>readDesignTokens</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:42:1</code></p>
+    <p>Parse only the existing token collection required by the supported inspection section.</p>
+    
+  </article><article class="item" data-search="isHelpToken src/cli/commands/inspect.ts Identify the command help tokens supported by the Ankh delivery surface.">
+    <h3>isHelpToken</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:49:1</code></p>
+    <p>Identify the command help tokens supported by the Ankh delivery surface.</p>
+    
+  </article><article class="item" data-search="renderUsage src/cli/commands/inspect.ts Render the canonical inspection invocation shape.">
+    <h3>renderUsage</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:54:1</code></p>
+    <p>Render the canonical inspection invocation shape.</p>
+    
+  </article><article class="item" data-search="errorMessage src/cli/commands/inspect.ts Convert an unknown boundary failure to a safe command diagnostic.">
+    <h3>errorMessage</h3>
+    <p class="muted"><code>src/cli/commands/inspect.ts:59:1</code></p>
+    <p>Convert an unknown boundary failure to a safe command diagnostic.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-cli-commands-recognize-ts" class="view" data-view="src/cli/commands/recognize.ts" hidden>
+    <section class="panel">
+      <h2>src/cli/commands/recognize.ts</h2>
+      <article class="item" data-search="recognize src/cli/commands/recognize.ts Adapt `ankh rules-design recognize` to the public document-recognition API.">
+    <h3>recognize</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:12:1</code></p>
+    <p>Adapt `ankh rules-design recognize` to the public document-recognition API.</p>
+    
+  </article><article class="item" data-search="parseRecognitionInput src/cli/commands/recognize.ts Parse one observation input and its required non-overwriting recognition output.">
+    <h3>parseRecognitionInput</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:39:1</code></p>
+    <p>Parse one observation input and its required non-overwriting recognition output.</p>
+    
+  </article><article class="item" data-search="parseWebsiteObservationDocument src/cli/commands/recognize.ts Parse JSON at the file boundary and apply the canonical recognition input validation.">
+    <h3>parseWebsiteObservationDocument</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:52:1</code></p>
+    <p>Parse JSON at the file boundary and apply the canonical recognition input validation.</p>
+    
+  </article><article class="item" data-search="assertOutputDoesNotExistAsync src/cli/commands/recognize.ts Refuse an existing output target before calculating a recognition document.">
+    <h3>assertOutputDoesNotExistAsync</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:58:1</code></p>
+    <p>Refuse an existing output target before calculating a recognition document.</p>
+    
+  </article><article class="item" data-search="isHelpToken src/cli/commands/recognize.ts Identify the command help tokens supported by the Ankh delivery surface.">
+    <h3>isHelpToken</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:68:1</code></p>
+    <p>Identify the command help tokens supported by the Ankh delivery surface.</p>
+    
+  </article><article class="item" data-search="renderUsage src/cli/commands/recognize.ts Render the canonical recognition invocation shape.">
+    <h3>renderUsage</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:73:1</code></p>
+    <p>Render the canonical recognition invocation shape.</p>
+    
+  </article><article class="item" data-search="errorMessage src/cli/commands/recognize.ts Convert an unknown boundary failure to a safe command diagnostic.">
+    <h3>errorMessage</h3>
+    <p class="muted"><code>src/cli/commands/recognize.ts:78:1</code></p>
+    <p>Convert an unknown boundary failure to a safe command diagnostic.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-cli-index-ts" class="view" data-view="src/cli/index.ts" hidden>
+    <section class="panel">
+      <h2>src/cli/index.ts</h2>
+      <article class="item" data-search="readPackageVersion src/cli/index.ts Read the package version that is published with this provider module.">
+    <h3>readPackageVersion</h3>
+    <p class="muted"><code>src/cli/index.ts:35:1</code></p>
+    <p>Read the package version that is published with this provider module.</p>
+    
+  </article><article class="item" data-search="isRecord src/cli/index.ts Narrow JSON input to a non-null record without accepting arrays.">
+    <h3>isRecord</h3>
+    <p class="muted"><code>src/cli/index.ts:46:1</code></p>
+    <p>Narrow JSON input to a non-null record without accepting arrays.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-accessibility-createaccessibilityrules-test-ts" class="view" data-view="src/features/accessibility/createAccessibilityRules.test.ts" hidden>
     <section class="panel">
       <h2>src/features/accessibility/createAccessibilityRules.test.ts</h2>
       <article class="item" data-search="observations src/features/accessibility/createAccessibilityRules.test.ts Builds representative PASS and FAIL observations for one frozen rule invariant.">
@@ -5089,18 +5312,88 @@
       <h2>src/features/recognition/validateWebsiteObservationDocument.ts</h2>
       <article class="item" data-search="validateWebsiteObservationDocument src/features/recognition/validateWebsiteObservationDocument.ts Validates the identity and reference invariants required for deterministic recognition assembly.">
     <h3>validateWebsiteObservationDocument</h3>
-    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:7:1</code></p>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:8:1</code></p>
     <p>Validates the identity and reference invariants required for deterministic recognition assembly.</p>
+    
+  </article><article class="item" data-search="assertObservationEnvelope src/features/recognition/validateWebsiteObservationDocument.ts Validates the complete observation envelope before recognition accesses nested page evidence.">
+    <h3>assertObservationEnvelope</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:22:1</code></p>
+    <p>Validates the complete observation envelope before recognition accesses nested page evidence.</p>
+    
+  </article><article class="item" data-search="assertSource src/features/recognition/validateWebsiteObservationDocument.ts Validates the immutable producer metadata required to attribute an observation document.">
+    <h3>assertSource</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:35:1</code></p>
+    <p>Validates the immutable producer metadata required to attribute an observation document.</p>
+    
+  </article><article class="item" data-search="assertSite src/features/recognition/validateWebsiteObservationDocument.ts Validates the stable site metadata required to scope an observation document.">
+    <h3>assertSite</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:48:1</code></p>
+    <p>Validates the stable site metadata required to scope an observation document.</p>
+    
+  </article><article class="item" data-search="assertObservationPages src/features/recognition/validateWebsiteObservationDocument.ts Validates page collection boundaries before existing page-reference invariants run.">
+    <h3>assertObservationPages</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:54:1</code></p>
+    <p>Validates page collection boundaries before existing page-reference invariants run.</p>
+    
+  </article><article class="item" data-search="isObservationPage src/features/recognition/validateWebsiteObservationDocument.ts Validates all page collections read by the recognition algorithm without reimplementing recognition.">
+    <h3>isObservationPage</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:62:1</code></p>
+    <p>Validates all page collections read by the recognition algorithm without reimplementing recognition.</p>
+    
+  </article><article class="item" data-search="isNonEmptyString src/features/recognition/validateWebsiteObservationDocument.ts Checks an identity value without accepting empty string placeholders.">
+    <h3>isNonEmptyString</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:77:1</code></p>
+    <p>Checks an identity value without accepting empty string placeholders.</p>
     
   </article><article class="item" data-search="validatePage src/features/recognition/validateWebsiteObservationDocument.ts Validates page-local references without rejecting malformed hierarchy evidence that recognition must retain.">
     <h3>validatePage</h3>
-    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:20:1</code></p>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:82:1</code></p>
     <p>Validates page-local references without rejecting malformed hierarchy evidence that recognition must retain.</p>
     
   </article><article class="item" data-search="unique src/features/recognition/validateWebsiteObservationDocument.ts Rejects ambiguous identities before a Map could silently overwrite an observation.">
     <h3>unique</h3>
-    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:46:1</code></p>
+    <p class="muted"><code>src/features/recognition/validateWebsiteObservationDocument.ts:108:1</code></p>
     <p>Rejects ambiguous identities before a Map could silently overwrite an observation.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-recognition-validatewebsiterecognitiondocument-ts" class="view" data-view="src/features/recognition/validateWebsiteRecognitionDocument.ts" hidden>
+    <section class="panel">
+      <h2>src/features/recognition/validateWebsiteRecognitionDocument.ts</h2>
+      <article class="item" data-search="validateWebsiteRecognitionDocument src/features/recognition/validateWebsiteRecognitionDocument.ts Validates the canonical recognition envelope before a delivery adapter reads its derived data.">
+    <h3>validateWebsiteRecognitionDocument</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:5:1</code></p>
+    <p>Validates the canonical recognition envelope before a delivery adapter reads its derived data.</p>
+    
+  </article><article class="item" data-search="assertSource src/features/recognition/validateWebsiteRecognitionDocument.ts Validates complete source metadata shared by every canonical website document.">
+    <h3>assertSource</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:25:1</code></p>
+    <p>Validates complete source metadata shared by every canonical website document.</p>
+    
+  </article><article class="item" data-search="assertSite src/features/recognition/validateWebsiteRecognitionDocument.ts Validates complete site metadata shared by every canonical website document.">
+    <h3>assertSite</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:38:1</code></p>
+    <p>Validates complete site metadata shared by every canonical website document.</p>
+    
+  </article><article class="item" data-search="assertRecognitionPages src/features/recognition/validateWebsiteRecognitionDocument.ts Validates the structural page boundary needed to recognize a document rather than an array of tokens.">
+    <h3>assertRecognitionPages</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:44:1</code></p>
+    <p>Validates the structural page boundary needed to recognize a document rather than an array of tokens.</p>
+    
+  </article><article class="item" data-search="assertDesignTokens src/features/recognition/validateWebsiteRecognitionDocument.ts Validates each derived token retains its canonical identity, kind, and source evidence.">
+    <h3>assertDesignTokens</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:63:1</code></p>
+    <p>Validates each derived token retains its canonical identity, kind, and source evidence.</p>
+    
+  </article><article class="item" data-search="assertRecords src/features/recognition/validateWebsiteRecognitionDocument.ts Narrows one document collection to records before its members are inspected.">
+    <h3>assertRecords</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:84:1</code></p>
+    <p>Narrows one document collection to records before its members are inspected.</p>
+    
+  </article><article class="item" data-search="isNonEmptyString src/features/recognition/validateWebsiteRecognitionDocument.ts Checks an identity value without accepting empty string placeholders.">
+    <h3>isNonEmptyString</h3>
+    <p class="muted"><code>src/features/recognition/validateWebsiteRecognitionDocument.ts:93:1</code></p>
+    <p>Checks an identity value without accepting empty string placeholders.</p>
     
   </article>
     </section>
