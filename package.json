@@ -28,7 +28,51 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli/index.d.ts",
+      "import": "./dist/cli/index.js"
+    },
+    "./capabilities": {
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
     }
+  },
+  "ankh": {
+    "category": "rules-design",
+    "provider": "./dist/cli/index.js",
+    "capabilities": [
+      {
+        "id": "rules-design.recognize",
+        "owner": "@ankhorage/rules-design",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Recognize website design",
+        "description": "Assemble canonical website recognition from an observation document."
+      },
+      {
+        "id": "rules-design.inspect",
+        "owner": "@ankhorage/rules-design",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Inspect website recognition",
+        "description": "Read an existing canonical website recognition document."
+      }
+    ]
   },
   "repository": {
     "type": "git",
@@ -60,6 +104,8 @@
     "@ankhorage/paradox": "^0.3.6"
   },
   "dependencies": {
+    "@ankhorage/ankh": "^0.13.4",
+    "@ankhorage/capability": "^0.2.2",
     "@ankhorage/contracts": "^26.6.0",
     "@ankhorage/rules": "^0.4.0",
     "@ankhorage/utility": "^1.10.0"

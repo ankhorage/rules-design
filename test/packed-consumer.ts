@@ -52,9 +52,12 @@ try {
     join(consumer, 'index.ts'),
     [
       "import { recognizeWebsiteDocument } from '@ankhorage/rules-design';",
+      "import { CAPABILITIES } from '@ankhorage/rules-design/capabilities';",
+      "import provider from '@ankhorage/rules-design/cli';",
       '',
       'const recognizer: typeof recognizeWebsiteDocument = recognizeWebsiteDocument;',
       "if (typeof recognizer !== 'function') throw new TypeError('Public runtime export is missing.');",
+      "if (provider.capabilities !== CAPABILITIES) throw new TypeError('Packed provider capability catalog is not canonical.');",
     ].join('\n'),
   );
 
