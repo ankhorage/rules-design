@@ -43,7 +43,7 @@
     "lint": "ankhorage-eslint . --max-warnings=0",
     "knip:check": "ankhorage-knip",
     "test:packed-consumer": "bun test/packed-consumer.ts",
-    "test:php-consumer": "php test/website-recognition-consumer.php",
+    "test:php-consumer": "bun test/php-consumer.ts",
     "format": "ankhorage-prettier --write .",
     "format:check": "ankhorage-prettier --check .",
     "lint:fix": "ankhorage-eslint . --fix --max-warnings=0",
