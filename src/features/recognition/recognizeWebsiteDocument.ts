@@ -268,7 +268,7 @@ function assembleMedia(document: WebsiteObservationDocument): readonly WebsiteRe
     ),
     ...document.pages.flatMap((page) =>
       page.assets.flatMap((asset) =>
-        asset.sourceRefs.map((sourceRef) => ({
+        (asset.sourceRefs.length === 0 ? [undefined] : asset.sourceRefs).map((sourceRef) => ({
           media: { assetId: asset.id, kind: asset.kind, sourceRef, url: asset.url },
           pageId: page.id,
         })),
@@ -292,7 +292,7 @@ function assembleMediaGroup(
     readonly media: {
       readonly assetId: string | null;
       readonly url: string;
-      readonly sourceRef: string;
+      readonly sourceRef: string | undefined;
     };
   }[],
   assetsById: ReadonlyMap<string, WebsiteAsset>,
@@ -307,7 +307,13 @@ function assembleMediaGroup(
     id: identity,
     originalUrl: firstEntry.media.url,
     sourceRefs: [
-      ...new Set(entries.map((entry) => sourceIdentity(entry.pageId, entry.media.sourceRef))),
+      ...new Set(
+        entries.flatMap((entry) =>
+          entry.media.sourceRef === undefined
+            ? []
+            : [sourceIdentity(entry.pageId, entry.media.sourceRef)],
+        ),
+      ),
     ],
   };
 }

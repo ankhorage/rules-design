@@ -126,7 +126,10 @@
       "id": "[\"color\",\"color\",\"rgb(255, 0, 0)\"]",
       "kind": "color",
       "originalValues": ["rgb(255, 0, 0)"],
-      "sourceRefs": ["[\"about\",\"#richtext > span.red\"]", "[\"home\",\"#richtext > span.red\"]"],
+      "sourceRefs": [
+        "[\"about\",\"#richtext > span.red\"]",
+        "[\"home\",\"#richtext > span.red\"]"
+      ],
       "value": "rgb(255, 0, 0)"
     },
     {
@@ -216,6 +219,13 @@
         "[\"home\",\"#page\"]"
       ],
       "value": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px"
+    },
+    {
+      "id": "[\"spacing\",\"gap\",\"20px\"]",
+      "kind": "spacing",
+      "originalValues": ["20px"],
+      "sourceRefs": ["[\"about\",\"#page\"]", "[\"home\",\"#page\"]"],
+      "value": "20px"
     },
     {
       "id": "[\"spacing\",\"gap\",\"24px\"]",
@@ -668,6 +678,13 @@
       "value": "14px"
     },
     {
+      "id": "[\"typography\",\"fontSize\",\"15px\"]",
+      "kind": "typography",
+      "originalValues": ["15px"],
+      "sourceRefs": ["[\"about\",\"#page\"]", "[\"home\",\"#page\"]"],
+      "value": "15px"
+    },
+    {
       "id": "[\"typography\",\"fontSize\",\"16px\"]",
       "kind": "typography",
       "originalValues": ["16px"],
@@ -777,7 +794,10 @@
       "id": "[\"typography\",\"fontWeight\",\"700\"]",
       "kind": "typography",
       "originalValues": ["700"],
-      "sourceRefs": ["[\"about\",\"#richtext > span.red\"]", "[\"home\",\"#richtext > span.red\"]"],
+      "sourceRefs": [
+        "[\"about\",\"#richtext > span.red\"]",
+        "[\"home\",\"#richtext > span.red\"]"
+      ],
       "value": "700"
     },
     {
@@ -955,6 +975,14 @@
         "[\"home\",\"#image\"]",
         "[\"about\",\"#image\"]"
       ]
+    },
+    {
+      "asset": {
+        "mediaId": "asset:source-only"
+      },
+      "id": "asset\u0000asset:source-only",
+      "originalUrl": "https://example.test/source-only.svg",
+      "sourceRefs": []
     }
   ],
   "navigation": [
@@ -1621,6 +1649,328 @@
                 }
               ],
               "viewportId": "mobile"
+            },
+            {
+              "props": [
+                {
+                  "name": "alignContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "alignItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "alignSelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "backgroundColor",
+                  "originalValues": ["rgb(250, 250, 250)"],
+                  "value": "rgb(250, 250, 250)"
+                },
+                {
+                  "name": "backgroundImage",
+                  "originalValues": ["none"],
+                  "value": "none"
+                },
+                {
+                  "name": "backgroundPosition",
+                  "originalValues": ["0% 0%"],
+                  "value": "0% 0%"
+                },
+                {
+                  "name": "backgroundRepeat",
+                  "originalValues": ["repeat"],
+                  "value": "repeat"
+                },
+                {
+                  "name": "backgroundSize",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "borderColor",
+                  "originalValues": ["rgb(229, 231, 235)"],
+                  "value": "rgb(229, 231, 235)"
+                },
+                {
+                  "name": "borderRadius",
+                  "originalValues": ["12px"],
+                  "value": "12px"
+                },
+                {
+                  "name": "borderWidth",
+                  "originalValues": ["1px"],
+                  "value": "1px"
+                },
+                {
+                  "name": "boxShadow",
+                  "originalValues": ["rgba(15, 23, 42, 0.12) 0px 8px 24px 0px"],
+                  "value": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px"
+                },
+                {
+                  "name": "color",
+                  "originalValues": ["rgb(17, 17, 17)"],
+                  "value": "rgb(17, 17, 17)"
+                },
+                {
+                  "name": "display",
+                  "originalValues": ["grid"],
+                  "value": "grid"
+                },
+                {
+                  "name": "flexBasis",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "flexDirection",
+                  "originalValues": ["row"],
+                  "value": "row"
+                },
+                {
+                  "name": "flexGrow",
+                  "originalValues": ["0"],
+                  "value": "0"
+                },
+                {
+                  "name": "flexShrink",
+                  "originalValues": ["1"],
+                  "value": "1"
+                },
+                {
+                  "name": "flexWrap",
+                  "originalValues": ["nowrap"],
+                  "value": "nowrap"
+                },
+                {
+                  "name": "fontFamily",
+                  "originalValues": ["Inter, sans-serif"],
+                  "value": "Inter, sans-serif"
+                },
+                {
+                  "name": "fontSize",
+                  "originalValues": ["15px"],
+                  "value": "15px"
+                },
+                {
+                  "name": "fontStyle",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "fontWeight",
+                  "originalValues": ["400"],
+                  "value": "400"
+                },
+                {
+                  "name": "gap",
+                  "originalValues": ["20px"],
+                  "value": "20px"
+                },
+                {
+                  "name": "gridAutoColumns",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridAutoFlow",
+                  "originalValues": ["row"],
+                  "value": "row"
+                },
+                {
+                  "name": "gridAutoRows",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumn",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumnEnd",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumnStart",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRow",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRowEnd",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRowStart",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridTemplateColumns",
+                  "originalValues": ["repeat(2, minmax(0px, 1fr))"],
+                  "value": "repeat(2, minmax(0px, 1fr))"
+                },
+                {
+                  "name": "gridTemplateRows",
+                  "originalValues": ["none"],
+                  "value": "none"
+                },
+                {
+                  "name": "justifyContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "justifyItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "justifySelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "letterSpacing",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "lineHeight",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "margin",
+                  "originalValues": [
+                    {
+                      "bottom": "16px",
+                      "left": "16px",
+                      "right": "16px",
+                      "top": "16px"
+                    }
+                  ],
+                  "value": {
+                    "bottom": "16px",
+                    "left": "16px",
+                    "right": "16px",
+                    "top": "16px"
+                  }
+                },
+                {
+                  "name": "observation",
+                  "originalValues": [
+                    {
+                      "availability": "available",
+                      "rect": {
+                        "height": 96,
+                        "width": 768,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ],
+                  "value": {
+                    "availability": "available",
+                    "rect": {
+                      "height": 96,
+                      "width": 768,
+                      "x": 0,
+                      "y": 0
+                    }
+                  }
+                },
+                {
+                  "name": "opacity",
+                  "originalValues": ["1"],
+                  "value": "1"
+                },
+                {
+                  "name": "order",
+                  "originalValues": ["0"],
+                  "value": "0"
+                },
+                {
+                  "name": "overflow",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "overflowX",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "overflowY",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "padding",
+                  "originalValues": [
+                    {
+                      "bottom": "24px",
+                      "left": "24px",
+                      "right": "24px",
+                      "top": "24px"
+                    }
+                  ],
+                  "value": {
+                    "bottom": "24px",
+                    "left": "24px",
+                    "right": "24px",
+                    "top": "24px"
+                  }
+                },
+                {
+                  "name": "placeContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "placeItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "placeSelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "position",
+                  "originalValues": ["static"],
+                  "value": "static"
+                },
+                {
+                  "name": "textAlign",
+                  "originalValues": ["start"],
+                  "value": "start"
+                },
+                {
+                  "name": "textDecoration",
+                  "originalValues": ["none solid rgb(17, 17, 17)"],
+                  "value": "none solid rgb(17, 17, 17)"
+                },
+                {
+                  "name": "visibility",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                }
+              ],
+              "viewportId": "tablet"
             }
           ],
           "sourceRefs": ["[\"home\",\"#page\"]"],
@@ -9275,6 +9625,328 @@
                 }
               ],
               "viewportId": "mobile"
+            },
+            {
+              "props": [
+                {
+                  "name": "alignContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "alignItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "alignSelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "backgroundColor",
+                  "originalValues": ["rgb(250, 250, 250)"],
+                  "value": "rgb(250, 250, 250)"
+                },
+                {
+                  "name": "backgroundImage",
+                  "originalValues": ["none"],
+                  "value": "none"
+                },
+                {
+                  "name": "backgroundPosition",
+                  "originalValues": ["0% 0%"],
+                  "value": "0% 0%"
+                },
+                {
+                  "name": "backgroundRepeat",
+                  "originalValues": ["repeat"],
+                  "value": "repeat"
+                },
+                {
+                  "name": "backgroundSize",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "borderColor",
+                  "originalValues": ["rgb(229, 231, 235)"],
+                  "value": "rgb(229, 231, 235)"
+                },
+                {
+                  "name": "borderRadius",
+                  "originalValues": ["12px"],
+                  "value": "12px"
+                },
+                {
+                  "name": "borderWidth",
+                  "originalValues": ["1px"],
+                  "value": "1px"
+                },
+                {
+                  "name": "boxShadow",
+                  "originalValues": ["rgba(15, 23, 42, 0.12) 0px 8px 24px 0px"],
+                  "value": "rgba(15, 23, 42, 0.12) 0px 8px 24px 0px"
+                },
+                {
+                  "name": "color",
+                  "originalValues": ["rgb(17, 17, 17)"],
+                  "value": "rgb(17, 17, 17)"
+                },
+                {
+                  "name": "display",
+                  "originalValues": ["grid"],
+                  "value": "grid"
+                },
+                {
+                  "name": "flexBasis",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "flexDirection",
+                  "originalValues": ["row"],
+                  "value": "row"
+                },
+                {
+                  "name": "flexGrow",
+                  "originalValues": ["0"],
+                  "value": "0"
+                },
+                {
+                  "name": "flexShrink",
+                  "originalValues": ["1"],
+                  "value": "1"
+                },
+                {
+                  "name": "flexWrap",
+                  "originalValues": ["nowrap"],
+                  "value": "nowrap"
+                },
+                {
+                  "name": "fontFamily",
+                  "originalValues": ["Inter, sans-serif"],
+                  "value": "Inter, sans-serif"
+                },
+                {
+                  "name": "fontSize",
+                  "originalValues": ["15px"],
+                  "value": "15px"
+                },
+                {
+                  "name": "fontStyle",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "fontWeight",
+                  "originalValues": ["400"],
+                  "value": "400"
+                },
+                {
+                  "name": "gap",
+                  "originalValues": ["20px"],
+                  "value": "20px"
+                },
+                {
+                  "name": "gridAutoColumns",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridAutoFlow",
+                  "originalValues": ["row"],
+                  "value": "row"
+                },
+                {
+                  "name": "gridAutoRows",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumn",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumnEnd",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridColumnStart",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRow",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRowEnd",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridRowStart",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "gridTemplateColumns",
+                  "originalValues": ["repeat(2, minmax(0px, 1fr))"],
+                  "value": "repeat(2, minmax(0px, 1fr))"
+                },
+                {
+                  "name": "gridTemplateRows",
+                  "originalValues": ["none"],
+                  "value": "none"
+                },
+                {
+                  "name": "justifyContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "justifyItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "justifySelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "letterSpacing",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "lineHeight",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "margin",
+                  "originalValues": [
+                    {
+                      "bottom": "16px",
+                      "left": "16px",
+                      "right": "16px",
+                      "top": "16px"
+                    }
+                  ],
+                  "value": {
+                    "bottom": "16px",
+                    "left": "16px",
+                    "right": "16px",
+                    "top": "16px"
+                  }
+                },
+                {
+                  "name": "observation",
+                  "originalValues": [
+                    {
+                      "availability": "available",
+                      "rect": {
+                        "height": 96,
+                        "width": 768,
+                        "x": 0,
+                        "y": 0
+                      }
+                    }
+                  ],
+                  "value": {
+                    "availability": "available",
+                    "rect": {
+                      "height": 96,
+                      "width": 768,
+                      "x": 0,
+                      "y": 0
+                    }
+                  }
+                },
+                {
+                  "name": "opacity",
+                  "originalValues": ["1"],
+                  "value": "1"
+                },
+                {
+                  "name": "order",
+                  "originalValues": ["0"],
+                  "value": "0"
+                },
+                {
+                  "name": "overflow",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "overflowX",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "overflowY",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                },
+                {
+                  "name": "padding",
+                  "originalValues": [
+                    {
+                      "bottom": "24px",
+                      "left": "24px",
+                      "right": "24px",
+                      "top": "24px"
+                    }
+                  ],
+                  "value": {
+                    "bottom": "24px",
+                    "left": "24px",
+                    "right": "24px",
+                    "top": "24px"
+                  }
+                },
+                {
+                  "name": "placeContent",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "placeItems",
+                  "originalValues": ["normal"],
+                  "value": "normal"
+                },
+                {
+                  "name": "placeSelf",
+                  "originalValues": ["auto"],
+                  "value": "auto"
+                },
+                {
+                  "name": "position",
+                  "originalValues": ["static"],
+                  "value": "static"
+                },
+                {
+                  "name": "textAlign",
+                  "originalValues": ["start"],
+                  "value": "start"
+                },
+                {
+                  "name": "textDecoration",
+                  "originalValues": ["none solid rgb(17, 17, 17)"],
+                  "value": "none solid rgb(17, 17, 17)"
+                },
+                {
+                  "name": "visibility",
+                  "originalValues": ["visible"],
+                  "value": "visible"
+                }
+              ],
+              "viewportId": "tablet"
             }
           ],
           "sourceRefs": ["[\"about\",\"#page\"]"],

@@ -10,7 +10,7 @@ import { websiteObservationDocumentFixture } from '../../../test/fixtures/websit
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
-  '244645ac085312690bc8b0bfcb91ab878fe02018d15b43d0b0f5662527e01fc6';
+  '644dc230930bf0b21b50b9a3c3e6b8e4529f92716a2e179cc65fcdf83aca0128';
 const canonicalObservation = observationDocument as unknown as WebsiteObservationDocument;
 
 test('matches the immutable canonical two-page website recognition JSON acceptance fixture', async () => {
@@ -47,7 +47,10 @@ test('matches the immutable canonical two-page website recognition JSON acceptan
     'asset\u0000asset:about',
     'asset\u0000asset:css-logo',
     'asset\u0000asset:hero',
+    'asset\u0000asset:source-only',
   ]);
+  expectSourceOnlyMedia(recognition);
+  expectTabletGrid(node(home, '["home","#page"]'));
   expect(
     node(home, '["home","#missing"]').props.some((property) =>
       property.name.startsWith('unresolved:default:desktop:'),
@@ -141,6 +144,29 @@ function childrenOf(
   type: string,
 ) {
   return (node.children ?? []).filter((child) => child.type === type);
+}
+
+/*** Verifies that an observed asset without an owning source stays visible in the public DTO. */
+function expectSourceOnlyMedia(document: ReturnType<typeof recognizeWebsiteDocument>): void {
+  expect(document.media.find((media) => media.id === 'asset\u0000asset:source-only')).toEqual({
+    asset: { mediaId: 'asset:source-only' },
+    id: 'asset\u0000asset:source-only',
+    originalUrl: 'https://example.test/source-only.svg',
+    sourceRefs: [],
+  });
+}
+
+/*** Verifies the measured tablet grid evidence without inferring an authored breakpoint. */
+function expectTabletGrid(recognizedNode: ReturnType<typeof node>): void {
+  expect(
+    recognizedNode.responsive
+      .find((variant) => variant.viewportId === 'tablet')
+      ?.props.some(
+        (property) =>
+          property.name === 'gridTemplateColumns' &&
+          property.value === 'repeat(2, minmax(0px, 1fr))',
+      ),
+  ).toBe(true);
 }
 
 /*** Finds a source-qualified UI node without collapsing its observed hierarchy. */
