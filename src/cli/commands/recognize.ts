@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import type { AnkhCommandContext } from '@ankhorage/ankh';
 import type { WebsiteObservationDocument } from '@ankhorage/contracts/website';
 
+import { validateWebsiteRecognitionDocument } from '../../features/recognition/validateWebsiteRecognitionDocument.js';
 import { recognizeWebsiteDocument } from '../../index.js';
 
 /*** Adapt `ankh rules-design recognize` to the public document-recognition API. */
@@ -21,6 +22,7 @@ export async function recognize(
     await assertOutputDoesNotExistAsync(input.outputPath);
     const observed = parseWebsiteObservationDocument(await readFile(input.inputPath, 'utf8'));
     const recognition = recognizeWebsiteDocument(observed);
+    validateWebsiteRecognitionDocument(recognition);
     await writeFile(input.outputPath, `${JSON.stringify(recognition, null, 2)}\n`, {
       encoding: 'utf8',
       flag: 'wx',
@@ -46,23 +48,10 @@ function parseRecognitionInput(
   return { inputPath: resolve(cwd, input), outputPath: resolve(cwd, output) };
 }
 
-/*** Parse JSON at the file boundary and retain only a document-shaped input for recognition. */
+/*** Parse JSON at the file boundary and apply the canonical recognition input validation. */
 function parseWebsiteObservationDocument(value: string): WebsiteObservationDocument {
   const parsed: unknown = JSON.parse(value);
-  if (!isWebsiteObservationDocument(parsed)) {
-    throw new Error('Observation file must contain a website observation document.');
-  }
-  return parsed;
-}
-
-/*** Identify the document fields required before the public recognizer performs full validation. */
-function isWebsiteObservationDocument(value: unknown): value is WebsiteObservationDocument {
-  return isRecord(value) && Array.isArray(value.pages) && typeof value.documentId === 'string';
-}
-
-/*** Narrow parsed JSON to a non-null record without accepting arrays. */
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return parsed as WebsiteObservationDocument;
 }
 
 /*** Refuse an existing output target before calculating a recognition document. */

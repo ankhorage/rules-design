@@ -2,6 +2,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 import type { AnkhCommandContext } from '@ankhorage/ankh';
+import type { WebsiteRecognitionDocument } from '@ankhorage/contracts/website';
+
+import { validateWebsiteRecognitionDocument } from '../../features/recognition/validateWebsiteRecognitionDocument.js';
 /*** Adapt `ankh rules-design inspect` to read canonical recognition data without recomputing it. */
 export async function inspect(
   argv: readonly string[],
@@ -37,16 +40,9 @@ function parseInspectInput(
 
 /*** Parse only the existing token collection required by the supported inspection section. */
 function readDesignTokens(value: string): readonly unknown[] {
-  const parsed: unknown = JSON.parse(value);
-  if (!isRecord(parsed) || !Array.isArray(parsed.designTokens)) {
-    throw new Error('Recognition document must contain a designTokens array.');
-  }
-  return parsed.designTokens;
-}
-
-/*** Narrow parsed JSON to a non-null record without accepting arrays. */
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  const document = JSON.parse(value) as WebsiteRecognitionDocument;
+  validateWebsiteRecognitionDocument(document);
+  return document.designTokens;
 }
 
 /*** Identify the command help tokens supported by the Ankh delivery surface. */
