@@ -35,6 +35,10 @@ function requireQualifiedSourceRefs(array $references, string $path): void
 
 $fixture = $argv[1] ?? __DIR__ . '/fixtures/website-recognition-expected.v1.json';
 $document = requireArray(json_decode(file_get_contents($fixture), true, 512, JSON_THROW_ON_ERROR), '$');
+$roundTrip = requireArray(json_decode(json_encode($document, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR), '$');
+if ($roundTrip !== $document) {
+    throw new RuntimeException('Recognition JSON roundtrip changed the consumer document.');
+}
 $isAnimationDocument = requireMember($document, 'observedDocumentId', '$') === 'website:animation-fixture';
 
 if (requireMember($document, 'schemaVersion', '$') !== 1) {
@@ -101,6 +105,9 @@ function assertAnimationEvidence(array $document): void
     $animated = findNode($nodes, '["home","#animated"]');
     $initial = findProperty(requireArray(requireMember($animated, 'props', '$.pages[0].nodes[animated]'), '$.pages[0].nodes[animated].props'), 'animationEvidence');
     $initialValue = requireArray(requireMember($initial, 'value', '$.pages[0].nodes[animated].props.animationEvidence'), '$.pages[0].nodes[animated].props.animationEvidence.value');
+    if (requireMember($initialValue, 'sourceRef', '$.pages[0].nodes[animated].props.animationEvidence.value') !== '["home","#animated"]') {
+        throw new RuntimeException('Expected a source-qualified animation sample.');
+    }
     $initialEvidence = requireArray(requireMember($initialValue, 'animationEvidence', '$.pages[0].nodes[animated].props.animationEvidence.value'), '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence');
     $pseudoElements = requireArray(requireMember($initialEvidence, 'pseudoElements', '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence'), '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence.pseudoElements');
     $initialPseudo = requireArray($pseudoElements[0] ?? null, '$.pages[0].nodes[animated].pseudoElements[0]');
@@ -119,6 +126,16 @@ function assertAnimationEvidence(array $document): void
     $settledWidth = requireArray(requireMember($settledSize, 'width', '$.pages[0].nodes[animated].settledPseudo[0].boxSize'), '$.pages[0].nodes[animated].settledPseudo[0].boxSize.width');
     if (requireMember($settledWidth, 'value', '$.pages[0].nodes[animated].settledPseudo[0].boxSize.width') !== '75px') {
         throw new RuntimeException('Expected settled pseudo-element width evidence.');
+    }
+    $folded = findNode($nodes, '["home","#animated-parent > #animated-child"]');
+    $foldedAnimation = findProperty(requireArray(requireMember($folded, 'props', '$.pages[0].nodes[folded]'), '$.pages[0].nodes[folded].props'), 'animationEvidence');
+    $foldedSamples = requireArray(requireMember($foldedAnimation, 'originalValues', '$.pages[0].nodes[folded].props.animationEvidence'), '$.pages[0].nodes[folded].props.animationEvidence.originalValues');
+    $foldedSourceRefs = array_map(
+        static fn(mixed $sample): mixed => requireMember(requireArray($sample, '$.pages[0].nodes[folded].props.animationEvidence.originalValues[]'), 'sourceRef', '$.pages[0].nodes[folded].props.animationEvidence.originalValues[]'),
+        $foldedSamples,
+    );
+    if ($foldedSourceRefs !== ['["home","#animated-parent > #animated-child"]', '["home","#animated-parent"]']) {
+        throw new RuntimeException('Folded animation samples lost their source identities.');
     }
     foreach ($nodes as $node) {
         $candidate = requireArray($node, '$.pages[0].nodes[]');

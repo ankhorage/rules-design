@@ -341,6 +341,38 @@ function animationNodes(): readonly WebsiteObservedNode[] {
         animationEvidence('none', [], 'pulse 1s linear infinite'),
       ),
     ]),
+    node('#animated-parent', [
+      available(
+        'desktop',
+        css(),
+        'default',
+        animationEvidence('translateY(48px)', [pseudoElement('::before', '10px', '2px')]),
+      ),
+    ]),
+    node(
+      '#animated-parent > #animated-child',
+      [
+        available(
+          'desktop',
+          css(),
+          'default',
+          animationEvidence('scale(0.9)', [pseudoElement('::after', '20px', '3px')]),
+        ),
+      ],
+      {
+        ancestorSourceRefs: ['#animated-parent'],
+        dom: { attributes: {}, childIndex: 0, tagName: 'span' },
+        parentSourceRef: '#animated-parent',
+        textRuns: [
+          {
+            end: 13,
+            sourceRef: '#animated-parent > #animated-child:text',
+            start: 0,
+            text: 'Animated child',
+          },
+        ],
+      },
+    ),
     node('#missing-pseudo', [
       available('desktop', css(), 'default', {
         pseudoElements: [missingPseudoElement()],

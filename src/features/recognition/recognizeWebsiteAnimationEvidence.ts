@@ -32,19 +32,24 @@ function animationObservation(
     provenance: observation.provenance,
     sourceRef,
     stateId: observation.stateId,
-    value: serializableAnimationEvidence(observation),
+    value: serializableAnimationEvidence(pageId, sourceRef, observation),
     viewportId: observation.viewportId,
   };
 }
 
 /*** Packages observed animation evidence with its exact capture coordinates for later consumers. */
-function serializableAnimationEvidence(observation: WebsiteNodeObservation): SerializableValue {
+function serializableAnimationEvidence(
+  pageId: string,
+  sourceRef: string,
+  observation: WebsiteNodeObservation,
+): SerializableValue {
   const { animationEvidence } = observation;
   if (animationEvidence === undefined)
     throw new TypeError('Animation evidence must be serializable.');
   return {
     animationEvidence: serializableValue(animationEvidence),
     provenance: serializableValue(observation.provenance),
+    sourceRef: JSON.stringify([pageId, sourceRef]),
     stateId: observation.stateId,
     viewportId: observation.viewportId,
   };

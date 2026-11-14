@@ -1,6 +1,8 @@
 import { mkdir, mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { websiteAnimationObservationDocumentFixture } from './fixtures/websiteObservationDocument';
+
 type PackageManifest = {
   readonly devDependencies: { readonly typescript: string };
 };
@@ -18,6 +20,10 @@ try {
   ) as PackageManifest;
   const consumer = join(workspace, 'consumer');
   await mkdir(consumer);
+  await Bun.write(
+    join(consumer, 'animation-observation.json'),
+    JSON.stringify(websiteAnimationObservationDocumentFixture()),
+  );
   await Bun.write(
     join(consumer, 'package.json'),
     JSON.stringify(
@@ -41,6 +47,7 @@ try {
           module: 'Preserve',
           moduleResolution: 'bundler',
           noEmit: true,
+          resolveJsonModule: true,
           strict: true,
         },
       },
@@ -55,12 +62,18 @@ try {
       "import { recognizeWebsiteDocument } from '@ankhorage/rules-design';",
       "import { CAPABILITIES } from '@ankhorage/rules-design/capabilities';",
       "import provider from '@ankhorage/rules-design/cli';",
+      "import animationObservation from './animation-observation.json' with { type: 'json' };",
       '',
       'const recognizer: typeof recognizeWebsiteDocument = recognizeWebsiteDocument;',
       'const recognize = (observation: WebsiteObservationDocument): WebsiteRecognitionDocument => recognizer(observation);',
+      'const animationRecognition = recognize(animationObservation as unknown as WebsiteObservationDocument);',
+      'const folded = animationRecognition.pages[0]?.nodes.find((node) => node.id === \'[\\"home\\",\\"#animated-parent > #animated-child\\"]\');',
+      "const animation = folded?.props.find((property) => property.name === 'animationEvidence');",
+      "const sourceRefs = animation?.originalValues.map((value) => value !== null && typeof value === 'object' && !Array.isArray(value) && 'sourceRef' in value && typeof value.sourceRef === 'string' ? value.sourceRef : null);",
       "if (typeof recognizer !== 'function') throw new TypeError('Public runtime export is missing.');",
       "if (typeof recognize !== 'function') throw new TypeError('Recognition contract is invalid.');",
       "if (provider.capabilities !== CAPABILITIES) throw new TypeError('Packed provider capability catalog is not canonical.');",
+      'if (JSON.stringify(sourceRefs) !== JSON.stringify([\'[\\"home\\",\\"#animated-parent > #animated-child\\"]\', \'[\\"home\\",\\"#animated-parent\\"]\'])) throw new TypeError(\'Packed consumer lost animation source identities.\');',
     ].join('\n'),
   );
 
