@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "library",
+  "title": "Ankhorage Design Rules",
+  "summary": "Provides reusable design rules and evidence-backed website design recognition.",
+  "purpose": "Centralize declarative design policy and recognition logic without coupling capture, rendering, or migration tools to duplicated design rules.",
+  "domain": "design policy and website recognition",
+  "responsibilities": [
+    "Define reusable declarative design rules.",
+    "Assemble canonical website recognition from observation documents.",
+    "Inspect canonical website recognition documents through public capabilities."
+  ],
+  "boundaries": [
+    "Does not capture websites or execute browser automation.",
+    "Does not render or migrate recognized designs.",
+    "Does not own the portable observation document contracts or the generic rules engine."
+  ],
+  "audience": [
+    "Recognition, migration, and authoring tools that need canonical design facts.",
+    "Consumers evaluating evidence-backed design policy."
+  ],
+  "useCases": [
+    "Recognize website design from a canonical observation document.",
+    "Inspect an existing website recognition document.",
+    "Evaluate reusable design rules against supplied facts."
+  ],
+  "architecture": {
+    "role": "Design-specific policy and recognition provider over portable Contracts and the generic Rules engine.",
+    "invariants": [
+      "Recognition consumes portable observation documents rather than live browser state.",
+      "Rule evaluation remains evidence-backed and deterministic.",
+      "Capture and rendering stay outside this package."
+    ]
+  }
+}
