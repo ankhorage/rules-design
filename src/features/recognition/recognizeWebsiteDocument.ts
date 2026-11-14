@@ -99,6 +99,7 @@ function assembleNode(
     ...candidate.colors,
     ...candidate.typography,
     ...candidate.layout,
+    ...candidate.animation,
     ...candidate.responsive,
   ]);
   return {
@@ -166,19 +167,24 @@ function unresolvedProperties(
 ): readonly WebsiteRecognizedProp[] {
   return design.flatMap((node) =>
     node.unresolved.map((unresolved) => ({
-      name: `unresolved:${unresolved.stateId}:${unresolved.viewportId}:${unresolved.kind}`,
-      originalValues: [unresolvedValue(unresolved.missing)],
-      value: unresolvedValue(unresolved.missing),
+      name: `unresolved:${unresolved.stateId}:${unresolved.viewportId}:${unresolved.kind}${unresolved.subject === undefined ? '' : `:${unresolved.subject}`}`,
+      originalValues: [unresolvedValue(unresolved)],
+      value: unresolvedValue(unresolved),
     })),
   );
 }
 
 /*** Converts the portable missing-value DTO to the serializable map shape required by property values. */
-function unresolvedValue(missing: {
-  readonly code: string;
-  readonly message: string;
-}): SerializableValue {
-  return { code: missing.code, message: missing.message };
+function unresolvedValue(
+  unresolved: WebsiteDesignNodeRecognition['unresolved'][number],
+): SerializableValue {
+  return {
+    code: unresolved.missing.code,
+    message: unresolved.missing.message,
+    ...(unresolved.kind === 'animation-evidence'
+      ? { sourceRef: sourceIdentity(unresolved.pageId, unresolved.sourceRef) }
+      : {}),
+  };
 }
 
 /*** Converts factual style samples to property names that retain state identity when it is not baseline. */
