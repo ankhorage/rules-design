@@ -99,6 +99,7 @@ function assembleNode(
     ...candidate.colors,
     ...candidate.typography,
     ...candidate.layout,
+    ...candidate.animation,
     ...candidate.responsive,
   ]);
   return {
@@ -166,7 +167,7 @@ function unresolvedProperties(
 ): readonly WebsiteRecognizedProp[] {
   return design.flatMap((node) =>
     node.unresolved.map((unresolved) => ({
-      name: `unresolved:${unresolved.stateId}:${unresolved.viewportId}:${unresolved.kind}`,
+      name: `unresolved:${unresolved.stateId}:${unresolved.viewportId}:${unresolved.kind}${unresolved.subject === undefined ? '' : `:${unresolved.subject}`}`,
       originalValues: [unresolvedValue(unresolved.missing)],
       value: unresolvedValue(unresolved.missing),
     })),

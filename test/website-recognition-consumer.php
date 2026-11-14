@@ -33,15 +33,16 @@ function requireQualifiedSourceRefs(array $references, string $path): void
     }
 }
 
-$fixture = __DIR__ . '/fixtures/website-recognition-expected.v1.json';
+$fixture = $argv[1] ?? __DIR__ . '/fixtures/website-recognition-expected.v1.json';
 $document = requireArray(json_decode(file_get_contents($fixture), true, 512, JSON_THROW_ON_ERROR), '$');
+$isAnimationDocument = requireMember($document, 'observedDocumentId', '$') === 'website:animation-fixture';
 
 if (requireMember($document, 'schemaVersion', '$') !== 1) {
     throw new RuntimeException('Expected schemaVersion 1.');
 }
 
 $pages = requireArray(requireMember($document, 'pages', '$'), '$.pages');
-if (count($pages) !== 2) {
+if (!$isAnimationDocument && count($pages) !== 2) {
     throw new RuntimeException('Expected two recognized pages.');
 }
 
@@ -49,7 +50,7 @@ foreach ($pages as $pageIndex => $pageValue) {
     $page = requireArray($pageValue, "$.pages[{$pageIndex}]");
     $root = requireArray(requireMember($page, 'root', "$.pages[{$pageIndex}]"), "$.pages[{$pageIndex}].root");
     $nodes = requireArray(requireMember($page, 'nodes', "$.pages[{$pageIndex}]"), "$.pages[{$pageIndex}].nodes");
-    if (!is_string(requireMember($root, 'id', "$.pages[{$pageIndex}].root")) || count($nodes) < 10) {
+    if (!is_string(requireMember($root, 'id', "$.pages[{$pageIndex}].root")) || (!$isAnimationDocument && count($nodes) < 10)) {
         throw new RuntimeException("Expected hierarchy and nodes on page {$pageIndex}.");
     }
     foreach ($nodes as $nodeIndex => $nodeValue) {
@@ -64,7 +65,7 @@ foreach ($pages as $pageIndex => $pageValue) {
 
 $tokens = requireArray(requireMember($document, 'designTokens', '$'), '$.designTokens');
 $media = requireArray(requireMember($document, 'media', '$'), '$.media');
-if (count($tokens) === 0 || count($media) < 4) {
+if (!$isAnimationDocument && (count($tokens) === 0 || count($media) < 4)) {
     throw new RuntimeException('Expected design tokens and complete media inventory.');
 }
 foreach ($tokens as $index => $tokenValue) {
@@ -85,4 +86,68 @@ foreach ($media as $index => $mediaValue) {
     );
 }
 
+if ($isAnimationDocument) {
+    assertAnimationEvidence($document);
+}
+
 echo "PHP website-recognition consumer passed.\n";
+
+/** Validates state-paired portable animation evidence without treating a CSS pseudo-element as a node. */
+function assertAnimationEvidence(array $document): void
+{
+    $pages = requireArray(requireMember($document, 'pages', '$'), '$.pages');
+    $page = requireArray($pages[0] ?? null, '$.pages[0]');
+    $nodes = requireArray(requireMember($page, 'nodes', '$.pages[0]'), '$.pages[0].nodes');
+    $animated = findNode($nodes, '["home","#animated"]');
+    $initial = findProperty(requireArray(requireMember($animated, 'props', '$.pages[0].nodes[animated]'), '$.pages[0].nodes[animated].props'), 'animationEvidence');
+    $initialValue = requireArray(requireMember($initial, 'value', '$.pages[0].nodes[animated].props.animationEvidence'), '$.pages[0].nodes[animated].props.animationEvidence.value');
+    $initialEvidence = requireArray(requireMember($initialValue, 'animationEvidence', '$.pages[0].nodes[animated].props.animationEvidence.value'), '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence');
+    $pseudoElements = requireArray(requireMember($initialEvidence, 'pseudoElements', '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence'), '$.pages[0].nodes[animated].props.animationEvidence.value.animationEvidence.pseudoElements');
+    $initialPseudo = requireArray($pseudoElements[0] ?? null, '$.pages[0].nodes[animated].pseudoElements[0]');
+    $initialSize = requireArray(requireMember($initialPseudo, 'boxSize', '$.pages[0].nodes[animated].pseudoElements[0]'), '$.pages[0].nodes[animated].pseudoElements[0].boxSize');
+    $initialWidth = requireArray(requireMember($initialSize, 'width', '$.pages[0].nodes[animated].pseudoElements[0].boxSize'), '$.pages[0].nodes[animated].pseudoElements[0].boxSize.width');
+    if (requireMember($initialWidth, 'value', '$.pages[0].nodes[animated].pseudoElements[0].boxSize.width') !== '0px') {
+        throw new RuntimeException('Expected initial pseudo-element width evidence.');
+    }
+    $responsive = requireArray(requireMember($animated, 'responsive', '$.pages[0].nodes[animated]'), '$.pages[0].nodes[animated].responsive');
+    $desktop = requireArray($responsive[0] ?? null, '$.pages[0].nodes[animated].responsive[0]');
+    $settled = findProperty(requireArray(requireMember($desktop, 'props', '$.pages[0].nodes[animated].responsive[0]'), '$.pages[0].nodes[animated].responsive[0].props'), 'state:settled:animationEvidence');
+    $settledValue = requireArray(requireMember($settled, 'value', '$.pages[0].nodes[animated].responsive[0].props.settled'), '$.pages[0].nodes[animated].responsive[0].props.settled.value');
+    $settledEvidence = requireArray(requireMember($settledValue, 'animationEvidence', '$.pages[0].nodes[animated].responsive[0].props.settled.value'), '$.pages[0].nodes[animated].responsive[0].props.settled.value.animationEvidence');
+    $settledPseudos = requireArray(requireMember($settledEvidence, 'pseudoElements', '$.pages[0].nodes[animated].responsive[0].props.settled.value.animationEvidence'), '$.pages[0].nodes[animated].responsive[0].props.settled.value.animationEvidence.pseudoElements');
+    $settledSize = requireArray(requireMember(requireArray($settledPseudos[0] ?? null, '$.pages[0].nodes[animated].settledPseudo[0]'), 'boxSize', '$.pages[0].nodes[animated].settledPseudo[0]'), '$.pages[0].nodes[animated].settledPseudo[0].boxSize');
+    $settledWidth = requireArray(requireMember($settledSize, 'width', '$.pages[0].nodes[animated].settledPseudo[0].boxSize'), '$.pages[0].nodes[animated].settledPseudo[0].boxSize.width');
+    if (requireMember($settledWidth, 'value', '$.pages[0].nodes[animated].settledPseudo[0].boxSize.width') !== '75px') {
+        throw new RuntimeException('Expected settled pseudo-element width evidence.');
+    }
+    foreach ($nodes as $node) {
+        $candidate = requireArray($node, '$.pages[0].nodes[]');
+        if (str_contains((string) requireMember($candidate, 'id', '$.pages[0].nodes[]'), '::')) {
+            throw new RuntimeException('Pseudo-element evidence must not become a DOM node.');
+        }
+    }
+}
+
+/** Finds a recognition node by its page-qualified source identity. */
+function findNode(array $nodes, string $id): array
+{
+    foreach ($nodes as $node) {
+        $candidate = requireArray($node, '$.pages[0].nodes[]');
+        if (requireMember($candidate, 'id', '$.pages[0].nodes[]') === $id) {
+            return $candidate;
+        }
+    }
+    throw new RuntimeException("Missing recognition node {$id}.");
+}
+
+/** Finds one recognized property without reducing distinct observation states. */
+function findProperty(array $properties, string $name): array
+{
+    foreach ($properties as $property) {
+        $candidate = requireArray($property, '$.props[]');
+        if (requireMember($candidate, 'name', '$.props[]') === $name) {
+            return $candidate;
+        }
+    }
+    throw new RuntimeException("Missing recognition property {$name}.");
+}

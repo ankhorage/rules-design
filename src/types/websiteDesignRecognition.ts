@@ -24,13 +24,14 @@ export interface WebsiteDesignPropertyObservation {
 
 /*** Retains an unavailable observation instead of substituting or silently omitting design evidence. */
 export interface WebsiteDesignUnresolvedObservation {
-  readonly kind: 'computed-css' | 'geometry';
+  readonly kind: 'animation-evidence' | 'computed-css' | 'geometry';
   readonly viewportId: string;
   readonly stateId: string;
   readonly sourceRef: string;
   readonly pageId: string;
   readonly provenance: WebsiteObservationProvenance;
   readonly missing: WebsiteMissingValue;
+  readonly subject?: string;
 }
 
 /*** Groups all factual design observations for one stable observed DOM node. */
@@ -42,6 +43,7 @@ export interface WebsiteDesignNodeRecognition {
   readonly layout: readonly WebsiteDesignPropertyObservation[];
   readonly responsive: readonly WebsiteDesignPropertyObservation[];
   readonly accessibility: readonly WebsiteDesignPropertyObservation[];
+  readonly animation: readonly WebsiteDesignPropertyObservation[];
   readonly media: readonly WebsiteMediaReference[];
   readonly unresolved: readonly WebsiteDesignUnresolvedObservation[];
 }

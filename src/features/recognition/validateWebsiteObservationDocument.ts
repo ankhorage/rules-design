@@ -94,14 +94,20 @@ function validatePage(page: WebsitePageObservation): void {
   );
   const viewportIds = new Set(page.viewports.map((viewport) => viewport.id));
   const stateIds = new Set(page.states.map((state) => state.id));
-  page.nodes.forEach((node) =>
+  page.nodes.forEach((node) => {
+    unique(
+      node.observations.map(
+        (observation) => `${observation.viewportId}\u0000${observation.stateId}`,
+      ),
+      `observation viewport/state on page ${page.id} for ${node.sourceRef}`,
+    );
     node.observations.forEach((observation) => {
       if (!viewportIds.has(observation.viewportId))
         throw new TypeError(`Unknown viewport ${observation.viewportId} on page ${page.id}.`);
       if (!stateIds.has(observation.stateId))
         throw new TypeError(`Unknown state ${observation.stateId} on page ${page.id}.`);
-    }),
-  );
+    });
+  });
 }
 
 /*** Rejects ambiguous identities before a Map could silently overwrite an observation. */

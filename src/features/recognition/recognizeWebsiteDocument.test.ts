@@ -6,7 +6,10 @@ import { expect, test } from 'bun:test';
 
 import expectedRecognition from '../../../test/fixtures/website-recognition-expected.v1.json' with { type: 'json' };
 import observationDocument from '../../../test/fixtures/website-recognition-observation.v1.json' with { type: 'json' };
-import { websiteObservationDocumentFixture } from '../../../test/fixtures/websiteObservationDocument';
+import {
+  websiteAnimationObservationDocumentFixture,
+  websiteObservationDocumentFixture,
+} from '../../../test/fixtures/websiteObservationDocument';
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
@@ -97,13 +100,43 @@ test('assembles deterministic page-qualified structural and factual recognition 
   ).toBe(true);
 });
 
+test('assembles animation evidence per observed state without creating pseudo-element nodes', () => {
+  const recognition = recognizeWebsiteDocument(websiteAnimationObservationDocumentFixture());
+  const home = page(recognition, 'home');
+  const animated = node(home, '["home","#animated"]');
+  const missingPseudo = node(home, '["home","#missing-pseudo"]');
+
+  expect(
+    JSON.stringify(animated.props.find((property) => property.name === 'animationEvidence')?.value),
+  ).toContain('"value":"0px"');
+  expect(
+    JSON.stringify(
+      animated.responsive
+        .find((variant) => variant.viewportId === 'desktop')
+        ?.props.find((property) => property.name === 'state:settled:animationEvidence')?.value,
+    ),
+  ).toContain('"value":"75px"');
+  expect(missingPseudo.props.some((property) => property.name.includes('animation-evidence'))).toBe(
+    true,
+  );
+  expect(home.nodes.some((recognizedNode) => recognizedNode.id.includes('::after'))).toBe(false);
+});
+
 test('rejects ambiguous page-local source identities instead of silently overwriting them', () => {
-  const document = websiteObservationDocumentFixture();
+  const document = websiteAnimationObservationDocumentFixture();
   const page = first(document.pages);
   const duplicate = { ...first(page.nodes) };
   const invalid = { ...document, pages: [{ ...page, nodes: [...page.nodes, duplicate] }] };
 
   expect(() => recognizeWebsiteDocument(invalid)).toThrow('Duplicate source reference');
+});
+
+test('rejects an animation observation whose state is absent from its page', () => {
+  const document = websiteAnimationObservationDocumentFixture();
+  const page = first(document.pages);
+  const invalid = { ...document, pages: [{ ...page, states: page.states.slice(0, 2) }] };
+
+  expect(() => recognizeWebsiteDocument(invalid)).toThrow('Unknown state settled');
 });
 
 /*** Confirms that serialized source identities retain both page and source components. */

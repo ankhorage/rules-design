@@ -51,12 +51,15 @@ try {
   await Bun.write(
     join(consumer, 'index.ts'),
     [
+      "import type { WebsiteObservationDocument, WebsiteRecognitionDocument } from '@ankhorage/contracts/website';",
       "import { recognizeWebsiteDocument } from '@ankhorage/rules-design';",
       "import { CAPABILITIES } from '@ankhorage/rules-design/capabilities';",
       "import provider from '@ankhorage/rules-design/cli';",
       '',
       'const recognizer: typeof recognizeWebsiteDocument = recognizeWebsiteDocument;',
+      'const recognize = (observation: WebsiteObservationDocument): WebsiteRecognitionDocument => recognizer(observation);',
       "if (typeof recognizer !== 'function') throw new TypeError('Public runtime export is missing.');",
+      "if (typeof recognize !== 'function') throw new TypeError('Recognition contract is invalid.');",
       "if (provider.capabilities !== CAPABILITIES) throw new TypeError('Packed provider capability catalog is not canonical.');",
     ].join('\n'),
   );
