@@ -188,7 +188,6 @@ function isTransparentWrapper(
   node: WebsiteObservedNode,
   children: readonly WebsiteObservedNode[],
 ): boolean {
-  const observation = availableObservation(node);
   const tagName = node.dom.tagName.toLowerCase();
   return (
     children.length > 0 &&
@@ -196,9 +195,12 @@ function isTransparentWrapper(
     node.media.length === 0 &&
     node.textRuns.length === 0 &&
     (tagName === 'div' || tagName === 'span') &&
-    observation !== null &&
-    !hasLayoutRole(observation) &&
-    !hasSurfaceRole(observation)
+    node.observations
+      .filter(
+        (observation) =>
+          observation.availability.status === 'available' && observation.css !== null,
+      )
+      .every((observation) => !hasLayoutRole(observation) && !hasSurfaceRole(observation))
   );
 }
 
@@ -213,15 +215,15 @@ function recognizeComponentType(
   const tagName = node.dom.tagName.toLowerCase();
   const semanticType = recognizeWebsiteStructureSemanticComponentType(tagName);
   if (semanticType !== null) return semanticType;
+  const { css } = observation;
+  if (css === null) return 'Unknown';
+  if (isGroupedCard(node, parent, childNodesByParent)) return 'Card';
+  if (css.display.includes('grid')) return 'Grid';
+  if (css.display.includes('flex')) return 'Flex';
   if (node.media.length > 0)
     return node.media.every((media) => media.kind === 'image') ? 'Image' : 'Media';
   if (node.links.length > 0) return 'Link';
   if (node.textRuns.length > 0) return 'RichText';
-  if (isGroupedCard(node, parent, childNodesByParent)) return 'Card';
-  const { css } = observation;
-  if (css === null) return 'Unknown';
-  if (css.display.includes('grid')) return 'Grid';
-  if (css.display.includes('flex')) return 'Flex';
   return hasLayoutRole(observation) || hasSurfaceRole(observation) ? 'Container' : 'Unknown';
 }
 

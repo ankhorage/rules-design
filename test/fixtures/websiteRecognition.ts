@@ -77,6 +77,28 @@ export function createColoredColumnsDocument(): WebsiteObservationDocument {
   ]);
 }
 
+/*** Creates nested layout, card, semantic, transparent-wrapper, and unknown-parent evidence. */
+export function createComplexLayoutDocument(): WebsiteObservationDocument {
+  const node = nodeFactory('complex');
+  return createDocumentWithNodes([
+    node('main', null, 0, 'main', observation('block')),
+    node('nav', 'complex:main', 0, 'nav', observation('block')),
+    node('nav-list', 'complex:nav', 0, 'ul', observation('flex')),
+    node('nav-item', 'complex:nav-list', 0, 'li', observation('block')),
+    node('nav-link', 'complex:nav-item', 0, 'a', observation('inline-flex'), {
+      link: true,
+      text: 'Work',
+    }),
+    node('grid', 'complex:main', 1, 'div', observation('grid'), { text: 'Grid label' }),
+    node('card:one', 'complex:grid', 0, 'div', cardObservation(), { text: 'One' }),
+    node('card:two', 'complex:grid', 1, 'div', cardObservation(), { link: true, text: 'Two' }),
+    node('contents', 'complex:main', 2, 'div', contentsObservation()),
+    node('heading', 'complex:contents', 0, 'h2', observation('block'), { text: 'Visible child' }),
+    node('unknown', 'complex:main', 3, 'canvas', observation('block')),
+    node('unknown-child', 'complex:unknown', 0, 'h3', observation('block'), { text: 'Kept child' }),
+  ]);
+}
+
 /*** Creates invalid parent, cycle, and missing-observation evidence. */
 export function createMalformedDocument(): WebsiteObservationDocument {
   const node = nodeFactory('malformed');
@@ -195,6 +217,14 @@ function cardObservation(): WebsiteNodeObservation {
 /*** Creates colored but non-card evidence. */
 function coloredObservation(): WebsiteNodeObservation {
   return { ...observation('block'), css: { ...css, backgroundColor: 'rgb(255, 0, 0)' } };
+}
+
+/*** Creates a boxless display-contents wrapper whose children retain their own rendered evidence. */
+function contentsObservation(): WebsiteNodeObservation {
+  return {
+    ...observation('contents'),
+    rect: { height: 0, width: 0, x: 0, y: 0 },
+  };
 }
 
 /*** Creates red inline text evidence. */
