@@ -82,14 +82,78 @@ function available(
   viewportId: string,
   style: WebsiteComputedCss,
   stateId = 'default',
+  animationEvidence?: WebsiteNodeObservation['animationEvidence'],
 ): WebsiteNodeObservation {
   return {
     availability: { missing: null, status: 'available' },
+    ...(animationEvidence === undefined ? {} : { animationEvidence }),
     css: style,
     provenance,
     rect: { height: 40, width: 200, x: 0, y: 0 },
     stateId,
     viewportId,
+  };
+}
+
+/*** Captures one available CSS animation property without changing its browser literal. */
+function animationProperty(value: string) {
+  return { availability: { missing: null, status: 'available' as const }, value };
+}
+
+/*** Captures a producer-declared unavailable animation property without a substitute value. */
+function missingAnimationProperty(code: string, message: string) {
+  return {
+    availability: { missing: { code, message }, status: 'missing' as const },
+    value: null,
+  };
+}
+
+/*** Creates factual animation evidence for one observed state without estimating an endpoint. */
+function animationEvidence(
+  transform: string,
+  pseudoElements: WebsiteNodeObservation['animationEvidence'] extends infer Evidence
+    ? Evidence extends { readonly pseudoElements: infer PseudoElements }
+      ? PseudoElements
+      : never
+    : never,
+  animation = 'none',
+) {
+  return {
+    pseudoElements,
+    target: {
+      animation: animationProperty(animation),
+      transform: animationProperty(transform),
+      transition: animationProperty('transform 200ms ease'),
+    },
+    trigger: 'scroll-into-view' as const,
+    uncertainty: [],
+  };
+}
+
+/*** Creates observed pseudo-element evidence without turning generated CSS into a DOM child. */
+function pseudoElement(pseudo: '::after' | '::before', width: string, height: string) {
+  return {
+    availability: { missing: null, status: 'available' as const },
+    boxSize: { height: animationProperty(height), width: animationProperty(width) },
+    content: animationProperty('""'),
+    css: css(),
+    pseudo,
+  };
+}
+
+/*** Retains a missing generated pseudo-element as explicit animation evidence. */
+function missingPseudoElement() {
+  const unavailable = () =>
+    missingAnimationProperty('pseudo-element-unavailable', 'The generated element was absent.');
+  return {
+    availability: {
+      missing: { code: 'pseudo-element-unavailable', message: 'The generated element was absent.' },
+      status: 'missing' as const,
+    },
+    boxSize: { height: unavailable(), width: unavailable() },
+    content: unavailable(),
+    css: null,
+    pseudo: '::after' as const,
   };
 }
 
@@ -221,4 +285,110 @@ export function websiteObservationDocumentFixture(): WebsiteObservationDocument 
       revision: null,
     },
   };
+}
+
+/*** Provides isolated animation evidence while preserving the normal recognition fixture unchanged. */
+export function websiteAnimationObservationDocumentFixture(): WebsiteObservationDocument {
+  const document = websiteObservationDocumentFixture();
+  const [home, ...otherPages] = document.pages;
+  if (home === undefined) throw new Error('Expected the home page fixture.');
+  return {
+    ...document,
+    documentId: 'website:animation-fixture',
+    pages: [
+      {
+        ...home,
+        nodes: [...home.nodes, ...animationNodes()],
+        states: [
+          { id: 'default', name: 'Initial' },
+          { id: 'triggered', name: 'Triggered' },
+          { id: 'settled', name: 'Settled' },
+        ],
+      },
+      ...otherPages,
+    ],
+  };
+}
+
+/*** Creates source nodes for paired, static, and unresolved portable animation evidence. */
+function animationNodes(): readonly WebsiteObservedNode[] {
+  return [
+    node('#animated', [
+      available(
+        'desktop',
+        css(),
+        'default',
+        animationEvidence('translateY(20px)', [pseudoElement('::before', '0px', '2px')]),
+      ),
+      available(
+        'desktop',
+        css(),
+        'triggered',
+        animationEvidence('translateY(10px)', [pseudoElement('::before', '32px', '2px')]),
+      ),
+      available(
+        'desktop',
+        css(),
+        'settled',
+        animationEvidence('none', [pseudoElement('::before', '75px', '2px')]),
+      ),
+    ]),
+    node('#declared-animation', [
+      available(
+        'desktop',
+        css(),
+        'default',
+        animationEvidence('none', [], 'pulse 1s linear infinite'),
+      ),
+    ]),
+    node('#animated-parent', [
+      available(
+        'desktop',
+        css(),
+        'default',
+        animationEvidence('translateY(48px)', [pseudoElement('::before', '10px', '2px')]),
+      ),
+    ]),
+    node(
+      '#animated-parent > #animated-child',
+      [
+        available(
+          'desktop',
+          css(),
+          'default',
+          animationEvidence('scale(0.9)', [pseudoElement('::after', '20px', '3px')]),
+        ),
+      ],
+      {
+        ancestorSourceRefs: ['#animated-parent'],
+        dom: { attributes: {}, childIndex: 0, tagName: 'span' },
+        parentSourceRef: '#animated-parent',
+        textRuns: [
+          {
+            end: 13,
+            sourceRef: '#animated-parent > #animated-child:text',
+            start: 0,
+            text: 'Animated child',
+          },
+        ],
+      },
+    ),
+    node('#missing-pseudo', [
+      available('desktop', css(), 'default', {
+        pseudoElements: [missingPseudoElement()],
+        target: {
+          animation: animationProperty('none'),
+          transform: animationProperty('none'),
+          transition: animationProperty('none'),
+        },
+        trigger: 'unknown',
+        uncertainty: [
+          {
+            code: 'animation-timing-unavailable',
+            message: 'No timeline progress sample was available.',
+          },
+        ],
+      }),
+    ]),
+  ];
 }

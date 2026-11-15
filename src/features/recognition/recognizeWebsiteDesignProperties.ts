@@ -12,6 +12,7 @@ import type {
   WebsiteDesignRecognition,
   WebsiteDesignUnresolvedObservation,
 } from '../../types/websiteDesignRecognition';
+import { recognizeWebsiteAnimationEvidence } from './recognizeWebsiteAnimationEvidence';
 import { tokenCandidates } from './tokenCandidates';
 
 /*** Recognizes exact design properties from validated website observations without evaluating them. */
@@ -84,6 +85,7 @@ const layoutProperties = [
 
 /*** Retains every available node style and safe semantic observation at its source identity. */
 function recognizeNode(pageId: string, node: WebsiteObservedNode): WebsiteDesignNodeRecognition {
+  const animation = recognizeWebsiteAnimationEvidence(pageId, node);
   return {
     sourceRef: node.sourceRef,
     pageId,
@@ -92,8 +94,9 @@ function recognizeNode(pageId: string, node: WebsiteObservedNode): WebsiteDesign
     layout: cssObservations(pageId, node, layoutProperties),
     responsive: responsiveObservations(pageId, node),
     accessibility: accessibilityObservations(pageId, node),
+    animation: animation.observations,
     media: node.media,
-    unresolved: unresolvedObservations(pageId, node),
+    unresolved: [...unresolvedObservations(pageId, node), ...animation.unresolved],
   };
 }
 
@@ -218,19 +221,28 @@ function unresolvedObservations(
   node: WebsiteObservedNode,
 ): readonly WebsiteDesignUnresolvedObservation[] {
   return node.observations.flatMap((observation) => {
-    const { availability } = observation;
-    if (availability.status !== 'missing' || availability.missing === null) return [];
-    const { missing } = availability;
-    return unresolvedObservationKinds(observation).map((kind) => ({
-      kind,
-      missing,
-      provenance: observation.provenance,
-      sourceRef: node.sourceRef,
-      pageId,
-      stateId: observation.stateId,
-      viewportId: observation.viewportId,
-    }));
+    return [...unavailableObservationKinds(pageId, node.sourceRef, observation)];
   });
+}
+
+/*** Maps a missing top-level observation to its unavailable channels while retaining the reason. */
+function unavailableObservationKinds(
+  pageId: string,
+  sourceRef: string,
+  observation: WebsiteNodeObservation,
+): readonly WebsiteDesignUnresolvedObservation[] {
+  const { availability } = observation;
+  const { missing } = availability;
+  if (availability.status !== 'missing' || missing === null) return [];
+  return unresolvedObservationKinds(observation).map((kind) => ({
+    kind,
+    missing,
+    pageId,
+    provenance: observation.provenance,
+    sourceRef,
+    stateId: observation.stateId,
+    viewportId: observation.viewportId,
+  }));
 }
 
 /*** Distinguishes each unavailable evidence channel without pretending it was observed. */

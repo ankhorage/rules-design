@@ -1,6 +1,9 @@
 import { expect, test } from 'bun:test';
 
-import { websiteObservationDocumentFixture } from '../../../test/fixtures/websiteObservationDocument';
+import {
+  websiteAnimationObservationDocumentFixture,
+  websiteObservationDocumentFixture,
+} from '../../../test/fixtures/websiteObservationDocument';
 import { recognizeWebsiteDesignProperties } from './recognizeWebsiteDesignProperties';
 
 const recognition = recognizeWebsiteDesignProperties(websiteObservationDocumentFixture());
@@ -134,12 +137,63 @@ test('retains explicit missing evidence as unresolved and survives JSON roundtri
   expect(roundTripped).toEqual(recognition);
 });
 
+test('retains state-paired animation target and pseudo-element evidence without inferring progress', () => {
+  const animationRecognition = recognizeWebsiteDesignProperties(
+    websiteAnimationObservationDocumentFixture(),
+  );
+  const animated = animationNode(animationRecognition, '#animated');
+  const declared = animationNode(animationRecognition, '#declared-animation');
+
+  expect(JSON.stringify(value(animated.animation, 'animationEvidence', 'desktop'))).toContain(
+    '"value":"0px"',
+  );
+  expect(
+    JSON.stringify(
+      animated.animation.find((observation) => observation.stateId === 'settled')?.value,
+    ),
+  ).toContain('"value":"75px"');
+  expect(
+    JSON.stringify(
+      animated.animation.find((observation) => observation.stateId === 'settled')?.value,
+    ),
+  ).toContain('"value":"none"');
+  expect(JSON.stringify(declared.animation)).toContain('"value":"pulse 1s linear infinite"');
+});
+
+test('makes missing and uncertain animation evidence unresolved without creating pseudo-element nodes', () => {
+  const missingPseudo = animationNode(
+    recognizeWebsiteDesignProperties(websiteAnimationObservationDocumentFixture()),
+    '#missing-pseudo',
+  );
+
+  const subjects = missingPseudo.unresolved
+    .filter((observation) => observation.kind === 'animation-evidence')
+    .map((observation) => observation.subject);
+
+  expect(subjects).toContain('uncertainty');
+  expect(subjects).toContain('::after');
+  expect(subjects).toContain('::after.boxSize.width');
+  expect(missingPseudo.animation).toHaveLength(1);
+});
+
 /*** Finds one source node in the recognition fixture. */
 function node(sourceRef: string, pageId = 'home') {
   const result = recognition.nodes.find(
     (candidate) => candidate.pageId === pageId && candidate.sourceRef === sourceRef,
   );
   if (result === undefined) throw new Error(`Missing fixture node: ${sourceRef}`);
+  return result;
+}
+
+/*** Finds one source node in an isolated animation recognition fixture. */
+function animationNode(
+  animationRecognition: ReturnType<typeof recognizeWebsiteDesignProperties>,
+  sourceRef: string,
+) {
+  const result = animationRecognition.nodes.find(
+    (candidate) => candidate.pageId === 'home' && candidate.sourceRef === sourceRef,
+  );
+  if (result === undefined) throw new Error(`Missing animation fixture node: ${sourceRef}`);
   return result;
 }
 
