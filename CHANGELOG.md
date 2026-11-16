@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+### Patch Changes
+
+- 3346adc: Recognize semantic HTML landmarks and content alongside evidence-backed layout, card, and transparent-wrapper structures without losing child provenance.
+
 ## 0.9.0
 
 ### Minor Changes
