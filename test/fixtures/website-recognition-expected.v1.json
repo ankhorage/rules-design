@@ -1972,8 +1972,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Unknown",
-          "confidence": 0,
+          "componentType": "Container",
+          "confidence": 0.8,
           "id": "[\"home\",\"#nav\"]",
           "props": [
             {
@@ -2296,11 +2296,8 @@
           ],
           "responsive": [],
           "sourceRefs": ["[\"home\",\"#nav\"]"],
-          "status": "unresolved",
-          "unresolved": {
-            "reason": "Visible source node has no canonical component mapping.",
-            "sourceRefs": ["[\"home\",\"#nav\"]"]
-          }
+          "status": "recognized",
+          "unresolved": null
         },
         {
           "componentType": "Link",
@@ -7936,7 +7933,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Unknown"
+                "type": "Container"
               },
               {
                 "children": [
@@ -9948,8 +9945,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Unknown",
-          "confidence": 0,
+          "componentType": "Container",
+          "confidence": 0.8,
           "id": "[\"about\",\"#nav\"]",
           "props": [
             {
@@ -10272,11 +10269,8 @@
           ],
           "responsive": [],
           "sourceRefs": ["[\"about\",\"#nav\"]"],
-          "status": "unresolved",
-          "unresolved": {
-            "reason": "Visible source node has no canonical component mapping.",
-            "sourceRefs": ["[\"about\",\"#nav\"]"]
-          }
+          "status": "recognized",
+          "unresolved": null
         },
         {
           "componentType": "Link",
@@ -15912,7 +15906,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Unknown"
+                "type": "Container"
               },
               {
                 "children": [

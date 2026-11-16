@@ -4,7 +4,9 @@ import { expect, test } from 'bun:test';
 
 import {
   createColoredColumnsDocument,
+  createComplexLayoutDocument,
   createDocument,
+  createIncompleteWrapperEvidenceDocument,
   createMalformedDocument,
   sourceRefsFor,
 } from '../../../test/fixtures/websiteRecognition';
@@ -65,6 +67,42 @@ test('does not invent cards and preserves malformed source evidence', () => {
   );
 });
 
+test('prioritizes measured layout, cards, and HTML semantics while folding boxless wrappers', () => {
+  const page = recognizedPage(createComplexLayoutDocument());
+  const grid = recognizedNode(page, 'complex:grid');
+  const firstCard = recognizedNode(page, 'complex:card:one');
+  const secondCard = recognizedNode(page, 'complex:card:two');
+  const heading = recognizedNode(page, 'complex:heading');
+  const unknown = recognizedNode(page, 'complex:unknown');
+
+  expect(recognizedNode(page, 'complex:nav').componentType).toBe('Container');
+  expect(recognizedNode(page, 'complex:nav-list').componentType).toBe('List');
+  expect(recognizedNode(page, 'complex:nav-link').componentType).toBe('Link');
+  expect(grid.componentType).toBe('Grid');
+  expect(firstCard.componentType).toBe('Card');
+  expect(secondCard.componentType).toBe('Card');
+  expect(heading.sourceRefs).toEqual(['complex:contents', 'complex:heading']);
+  expect(page.nodes.some((node) => node.id === 'complex:contents')).toBe(false);
+  expect(unknown.status).toBe('unresolved');
+  expect(recognizedNode(page, 'complex:unknown-child').componentType).toBe('Heading');
+  expect(
+    page.root.children?.some((node) => containsUiNode(node, 'complex:unknown-child', 'Heading')),
+  ).toBe(true);
+});
+
+test('retains wrappers and recognized children when CSS or layout evidence is unknown', () => {
+  const page = recognizedPage(createIncompleteWrapperEvidenceDocument());
+  const wrapper = recognizedNode(page, 'incomplete-wrapper:wrapper');
+
+  expect(wrapper.status).toBe('unresolved');
+  expect(wrapper.sourceRefs).toEqual(['incomplete-wrapper:wrapper']);
+  expect(recognizedNode(page, 'incomplete-wrapper:heading').componentType).toBe('Heading');
+  expect(
+    containsUiNode(page.root, 'incomplete-wrapper:wrapper', 'Unknown') &&
+      containsUiNode(page.root, 'incomplete-wrapper:heading', 'Heading'),
+  ).toBe(true);
+});
+
 /*** Returns the single recognition page produced by a complete fixture document. */
 function recognizedPage(
   document: Parameters<typeof recognizeWebsiteStructure>[0],
@@ -87,6 +125,14 @@ function recognizedSourceRefs(page: WebsitePageRecognition): ReadonlySet<string>
 /*** Removes source-only identity while retaining full semantic tree structure and props. */
 function normalizeTree(node: UiNode): unknown {
   return JSON.parse(JSON.stringify(node, removeSourceIdentity));
+}
+
+/*** Finds a source-derived UI node without dropping descendants of an unresolved parent. */
+function containsUiNode(node: UiNode, id: string, type: string): boolean {
+  return (
+    (node.id === id && node.type === type) ||
+    (node.children ?? []).some((child) => containsUiNode(child, id, type))
+  );
 }
 
 /*** Removes source-derived node and property references from semantic comparisons. */
