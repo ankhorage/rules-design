@@ -99,6 +99,21 @@ export function createComplexLayoutDocument(): WebsiteObservationDocument {
   ]);
 }
 
+/*** Creates a wrapper with one transparent observation and one missing observation. */
+export function createIncompleteWrapperEvidenceDocument(): WebsiteObservationDocument {
+  const node = nodeFactory('incomplete-wrapper');
+  return createDocumentWithNodes([
+    node('main', null, 0, 'main', observation('block')),
+    {
+      ...node('wrapper', 'incomplete-wrapper:main', 0, 'div', contentsObservation()),
+      observations: [contentsObservation(), missingObservation()],
+    },
+    node('heading', 'incomplete-wrapper:wrapper', 0, 'h2', observation('block'), {
+      text: 'Kept child',
+    }),
+  ]);
+}
+
 /*** Creates invalid parent, cycle, and missing-observation evidence. */
 export function createMalformedDocument(): WebsiteObservationDocument {
   const node = nodeFactory('malformed');

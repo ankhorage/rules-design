@@ -6,6 +6,7 @@ import {
   createColoredColumnsDocument,
   createComplexLayoutDocument,
   createDocument,
+  createIncompleteWrapperEvidenceDocument,
   createMalformedDocument,
   sourceRefsFor,
 } from '../../../test/fixtures/websiteRecognition';
@@ -86,6 +87,19 @@ test('prioritizes measured layout, cards, and HTML semantics while folding boxle
   expect(recognizedNode(page, 'complex:unknown-child').componentType).toBe('Heading');
   expect(
     page.root.children?.some((node) => containsUiNode(node, 'complex:unknown-child', 'Heading')),
+  ).toBe(true);
+});
+
+test('retains wrappers and recognized children when CSS or layout evidence is unknown', () => {
+  const page = recognizedPage(createIncompleteWrapperEvidenceDocument());
+  const wrapper = recognizedNode(page, 'incomplete-wrapper:wrapper');
+
+  expect(wrapper.status).toBe('unresolved');
+  expect(wrapper.sourceRefs).toEqual(['incomplete-wrapper:wrapper']);
+  expect(recognizedNode(page, 'incomplete-wrapper:heading').componentType).toBe('Heading');
+  expect(
+    containsUiNode(page.root, 'incomplete-wrapper:wrapper', 'Unknown') &&
+      containsUiNode(page.root, 'incomplete-wrapper:heading', 'Heading'),
   ).toBe(true);
 });
 
