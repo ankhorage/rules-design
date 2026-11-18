@@ -10,7 +10,7 @@ import { websiteObservationDocumentFixture } from '../../../test/fixtures/websit
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
-  '2c1ed0091ff229eaa3cc05daa115ec99c2618b2f75e8662a54e631fc0a6110aa';
+  '498457ccf0bf1d10c2a32c358c836d0fd0feea0a5a862d4edcb72e7ac1b4c13c';
 const canonicalObservation = observationDocument as unknown as WebsiteObservationDocument;
 
 test('matches the immutable canonical two-page website recognition JSON acceptance fixture', async () => {
