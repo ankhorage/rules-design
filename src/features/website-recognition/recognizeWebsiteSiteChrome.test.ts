@@ -12,7 +12,7 @@ test('keeps site-chrome evidence page-grounded while retaining complete recursiv
   const recognition = recognizeWebsiteDocument(siteChromeDocument());
   const candidates = recognition.siteChrome?.candidates ?? [];
   const siteHeader = candidate(candidates, 'header', 'home', '#layout');
-  const localHeader = candidate(candidates, 'header', 'home', '#flex');
+  const localHeader = candidate(candidates, 'header', 'home', '#article-header');
   const siteFooter = candidate(candidates, 'footer', 'pricing', '#layout');
   const headerMembership = membership(siteHeader);
   const footerMembership = membership(siteFooter);
@@ -22,6 +22,7 @@ test('keeps site-chrome evidence page-grounded while retaining complete recursiv
   expect(headerMembership.source.semantics).toEqual({ ariaLabel: null, role: null });
   expect(headerMembership.subtree.root.children?.map((child) => child.id)).toEqual([
     '["home","#detached"]',
+    '["home","#nested-banner"]',
     '["home","#parent"]',
   ]);
   expect(headerMembership.subtree.nodes.map((node) => node.id)).toContain('["home","#detached"]');
@@ -37,6 +38,43 @@ test('keeps site-chrome evidence page-grounded while retaining complete recursiv
   expect(candidates.every((candidate) => candidate.memberships.length === 1)).toBe(true);
 });
 
+test('uses one owning landmark per role while respecting role overrides and local content', () => {
+  const candidates = recognizeWebsiteDocument(siteChromeDocument()).siteChrome?.candidates ?? [];
+
+  expect(candidate(candidates, 'header', 'home', '#layout').classification).toBe('site-candidate');
+  expect(candidate(candidates, 'footer', 'pricing', '#layout').classification).toBe(
+    'site-candidate',
+  );
+  expect(candidates.map((item) => item.id)).not.toContain(
+    JSON.stringify(['header', 'home', '#nested-banner']),
+  );
+  expect(candidates.map((item) => item.id)).not.toContain(
+    JSON.stringify(['footer', 'pricing', '#nested-footer']),
+  );
+  expect(candidates.map((item) => item.id)).not.toContain(
+    JSON.stringify(['header', 'home', '#navigation']),
+  );
+  expect(candidates.map((item) => item.id)).not.toContain(
+    JSON.stringify(['footer', 'pricing', '#presentation']),
+  );
+  expect(candidate(candidates, 'header', 'home', '#article-header').classification).toBe(
+    'page-local',
+  );
+  expect(candidate(candidates, 'header', 'home', '#card-header').classification).toBe('page-local');
+});
+
+test('retains page-scoped uncertainty for missing and alternative chrome variants', () => {
+  const document = siteChromeDocument();
+  const onePage = { ...document, pages: document.pages.filter((page) => page.id === 'home') };
+  const candidates = recognizeWebsiteDocument(onePage).siteChrome?.candidates ?? [];
+  const sectionBanner = candidate(candidates, 'header', 'home', '#section-banner');
+
+  expect(candidates.filter((item) => item.role === 'footer')).toEqual([]);
+  expect(sectionBanner.classification).toBe('site-candidate');
+  expect(sectionBanner.memberships).toHaveLength(1);
+  expect(sectionBanner.memberships[0]?.pageId).toBe('home');
+});
+
 /*** Creates HTML, ARIA, local-content, responsive, and unresolved-child source evidence. */
 function siteChromeDocument(): WebsiteObservationDocument {
   const document = websiteObservationDocumentFixture();
@@ -44,7 +82,10 @@ function siteChromeDocument(): WebsiteObservationDocument {
     ...document,
     pages: document.pages.map((page) => ({
       ...page,
-      nodes: page.nodes.map((node) => changedNode(page.id, node)),
+      nodes: [
+        ...page.nodes.map((node) => changedNode(page.id, node)),
+        ...addedNodes(page.id, page.nodes),
+      ],
     })),
   };
 }
@@ -77,6 +118,71 @@ function changedNode(pageId: string, node: WebsiteObservedNode): WebsiteObserved
       })),
     };
   return node;
+}
+
+/*** Adds observed nesting, override, wrapper, and card cases without weakening the canonical fixture. */
+function addedNodes(
+  pageId: string,
+  nodes: readonly WebsiteObservedNode[],
+): readonly WebsiteObservedNode[] {
+  const layout = observedNode(nodes, '#layout');
+  if (pageId === 'home')
+    return [
+      withNode(layout, '#nested-banner', '#layout', 'div', { role: 'banner' }),
+      withNode(layout, '#navigation', null, 'header', { role: 'navigation' }),
+      withNode(layout, '#section-layout', null, 'section'),
+      withNode(layout, '#section-banner', '#section-layout', 'div', { role: 'banner' }),
+      withNode(layout, '#article', null, 'article'),
+      withNode(layout, '#article-header', '#article', 'header'),
+      withNode(layout, '#cards', null, 'div', {}, gridCss),
+      withNode(layout, '#card-one', '#cards', 'div', {}, cardCss),
+      withNode(layout, '#card-two', '#cards', 'div', {}, cardCss),
+      withNode(layout, '#card-header', '#card-one', 'header'),
+    ];
+  return [
+    withNode(layout, '#nested-footer', '#layout', 'div', { role: 'contentinfo' }),
+    withNode(layout, '#presentation', null, 'footer', { role: 'presentation' }),
+  ];
+}
+
+/*** Finds a fixture node whose complete observation shape is reused for focused mutations. */
+function observedNode(
+  nodes: readonly WebsiteObservedNode[],
+  sourceRef: string,
+): WebsiteObservedNode {
+  const found = nodes.find((node) => node.sourceRef === sourceRef);
+  if (found === undefined) throw new Error(`Missing observed node ${sourceRef}.`);
+  return found;
+}
+
+const cardCss = {
+  borderRadius: '12px',
+  borderWidth: '1px',
+  padding: { bottom: '24px', left: '24px', right: '24px', top: '24px' },
+};
+
+const gridCss = { display: 'grid' };
+
+/*** Derives one valid fixture node while changing only ownership-relevant DOM or surface evidence. */
+function withNode(
+  source: WebsiteObservedNode,
+  sourceRef: string,
+  parentSourceRef: string | null,
+  tagName: string,
+  attributes: Record<string, string> = {},
+  css: Partial<NonNullable<WebsiteObservedNode['observations'][number]['css']>> = {},
+): WebsiteObservedNode {
+  return {
+    ...source,
+    dom: { attributes, childIndex: 0, tagName },
+    observations: source.observations.map((observation) =>
+      observation.css === null
+        ? observation
+        : { ...observation, css: { ...observation.css, ...css } },
+    ),
+    parentSourceRef,
+    sourceRef,
+  };
 }
 
 /*** Finds one page-specific candidate by its source identity. */

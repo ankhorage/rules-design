@@ -22,7 +22,7 @@ export function recognizeWebsiteSiteChrome(
       const nodesBySourceRef = new Map(page.nodes.map((node) => [node.sourceRef, node]));
       return page.nodes.flatMap((node) => {
         const role = siteChromeRole(node);
-        return role === null
+        return role === null || hasSameRoleLandmarkAncestor(node, role, nodesBySourceRef)
           ? []
           : [createCandidate(page.id, node, role, nodesBySourceRef, recognition)];
       });
@@ -42,16 +42,21 @@ function createCandidate(
 ): WebsiteSiteChromeCandidate {
   const source = sourceEvidence(pageId, node, nodesBySourceRef);
   const subtree = subtreeFor(page, pageId, node.sourceRef);
-  const local = hasLocalContentAncestor(node, nodesBySourceRef, page, pageId);
-  const conflictingRole = landmarkRole(node) !== null && landmarkRole(node) !== role;
+  const local = hasLocalContentAncestor(
+    node,
+    nodesBySourceRef,
+    page,
+    pageId,
+    hasExplicitLandmarkRole(node),
+  );
   const uncertainty = node.observations.flatMap((observation) =>
     observation.availability.status === 'missing' && observation.availability.missing !== null
       ? [observation.availability.missing]
       : [],
   );
   return {
-    classification: local ? 'page-local' : conflictingRole ? 'ambiguous' : 'site-candidate',
-    confidence: local || conflictingRole ? 0.5 : 0.9,
+    classification: local ? 'page-local' : 'site-candidate',
+    confidence: local ? 0.5 : 0.9,
     id: JSON.stringify([role, pageId, node.sourceRef]),
     memberships: [
       {
@@ -66,22 +71,44 @@ function createCandidate(
   };
 }
 
-/*** Identifies only explicit HTML or ARIA header/footer landmarks. */
+/*** Identifies HTML landmarks unless an explicit ARIA role overrides their ownership. */
 function siteChromeRole(node: WebsiteObservedNode): SiteChromeRole | null {
+  if (Object.hasOwn(node.dom.attributes, 'role')) return landmarkRoleFor(node.dom.attributes.role);
+  const observedRole = node.observations
+    .map((observation) => observation.semanticAttributes?.role)
+    .find((role): role is string => typeof role === 'string');
+  if (observedRole !== undefined) return landmarkRoleFor(observedRole);
   const tagName = node.dom.tagName.toLowerCase();
   if (tagName === 'header' || tagName === 'footer') return tagName;
-  return landmarkRole(node);
+  return null;
 }
 
-/*** Reads an observed banner or contentinfo role without inferring semantics from labels or position. */
-function landmarkRole(node: WebsiteObservedNode): SiteChromeRole | null {
-  const roles = [
-    node.dom.attributes.role,
-    ...node.observations.map((observation) => observation.semanticAttributes?.role),
-  ];
-  if (roles.includes('banner')) return 'header';
-  if (roles.includes('contentinfo')) return 'footer';
+/*** Maps only ARIA landmark roles that own site chrome. */
+function landmarkRoleFor(role: unknown): SiteChromeRole | null {
+  if (role === 'banner') return 'header';
+  if (role === 'contentinfo') return 'footer';
   return null;
+}
+
+/*** Distinguishes explicit ARIA landmark evidence from implicit HTML landmark semantics. */
+function hasExplicitLandmarkRole(node: WebsiteObservedNode): boolean {
+  return (
+    landmarkRoleFor(node.dom.attributes.role) !== null ||
+    node.observations.some(
+      (observation) => landmarkRoleFor(observation.semanticAttributes?.role) !== null,
+    )
+  );
+}
+
+/*** Suppresses nested duplicates while retaining their UI descendants in the owning landmark subtree. */
+function hasSameRoleLandmarkAncestor(
+  node: WebsiteObservedNode,
+  role: SiteChromeRole,
+  nodesBySourceRef: ReadonlyMap<string, WebsiteObservedNode>,
+): boolean {
+  return ancestorNodes(node, nodesBySourceRef).some(
+    (ancestor) => siteChromeRole(ancestor) === role,
+  );
 }
 
 /*** Preserves raw DOM, landmark, and viewport evidence with page-qualified source identity. */
@@ -158,6 +185,7 @@ function hasLocalContentAncestor(
   nodesBySourceRef: ReadonlyMap<string, WebsiteObservedNode>,
   page: WebsitePageRecognition,
   pageId: string,
+  hasExplicitLandmark: boolean,
 ): boolean {
   return ancestorNodes(node, nodesBySourceRef).some((ancestor) => {
     const tagName = ancestor.dom.tagName.toLowerCase();
@@ -165,7 +193,8 @@ function hasLocalContentAncestor(
       (candidate) => candidate.id === sourceIdentity(pageId, ancestor.sourceRef),
     );
     return (
-      ['article', 'aside', 'main', 'section'].includes(tagName) ||
+      ['article', 'aside', 'main'].includes(tagName) ||
+      (!hasExplicitLandmark && tagName === 'section') ||
       recognized?.componentType === 'Card'
     );
   });
