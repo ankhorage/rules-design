@@ -16948,6 +16948,9 @@
     "id": "recognition-example",
     "url": "https://recognition.example/"
   },
+  "siteChrome": {
+    "candidates": []
+  },
   "source": {
     "crawlerId": "fixture",
     "crawlerVersion": "1.0.0",

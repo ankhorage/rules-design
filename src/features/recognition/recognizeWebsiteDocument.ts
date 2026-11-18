@@ -17,6 +17,7 @@ import type {
   WebsiteDesignPropertyObservation,
   WebsiteDesignTokenCandidate,
 } from '../../types/websiteDesignRecognition';
+import { recognizeWebsiteSiteChrome } from '../website-recognition/recognizeWebsiteSiteChrome';
 import { recognizeWebsiteStructure } from '../website-recognition/recognizeWebsiteStructure';
 import { createWebsiteAssetIndex } from './createWebsiteAssetIndex';
 import { qualifyWebsiteRecognitionProps } from './qualifyWebsiteRecognitionProps';
@@ -47,6 +48,7 @@ export function recognizeWebsiteDocument(
     recognizedAt: document.collectedAt,
     schemaVersion: 1,
     site: document.site,
+    siteChrome: recognizeWebsiteSiteChrome(document, pages),
     source: document.source,
   };
 }
