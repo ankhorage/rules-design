@@ -819,7 +819,7 @@
     "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
     "sourceLocation": {
       "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-      "line": 27,
+      "line": 28,
       "column": 1
     },
     "exportPaths": [

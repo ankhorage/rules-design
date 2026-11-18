@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.9.1",
+      "value": "v0.9.2",
       "color": "cb3837"
     },
     {
@@ -557,6 +557,7 @@
         "src/features/recognition/qualifyWebsiteRecognitionProps.ts",
         "src/features/recognition/recognizeWebsiteDesignProperties.ts",
         "src/features/recognition/validateWebsiteObservationDocument.ts",
+        "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
         "src/features/website-recognition/recognizeWebsiteStructure.ts",
         "src/types/websiteDesignRecognition.ts"
       ],
@@ -942,6 +943,23 @@
       "dependencies": [],
       "exports": [
         "websiteAssessmentValues"
+      ]
+    },
+    {
+      "path": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/recognition/recognizeWebsiteDocument.ts",
+        "test/fixtures/websiteObservationDocument.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "recognizeWebsiteSiteChrome"
       ]
     },
     {
@@ -2042,7 +2060,7 @@
       "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 27,
+        "line": 28,
         "column": 1
       },
       "exportPaths": [
@@ -5127,7 +5145,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 27,
+        "line": 28,
         "column": 1
       }
     },
@@ -5138,7 +5156,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 55,
+        "line": 57,
         "column": 1
       }
     },
@@ -5149,7 +5167,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 65,
+        "line": 67,
         "column": 1
       }
     },
@@ -5160,7 +5178,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 85,
+        "line": 87,
         "column": 1
       }
     },
@@ -5171,7 +5189,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 127,
+        "line": 129,
         "column": 1
       }
     },
@@ -5182,7 +5200,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 140,
+        "line": 142,
         "column": 1
       }
     },
@@ -5193,7 +5211,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 164,
+        "line": 166,
         "column": 1
       }
     },
@@ -5204,7 +5222,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 177,
+        "line": 179,
         "column": 1
       }
     },
@@ -5215,7 +5233,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 185,
+        "line": 187,
         "column": 1
       }
     },
@@ -5226,7 +5244,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 200,
+        "line": 202,
         "column": 1
       }
     },
@@ -5237,7 +5255,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 213,
+        "line": 215,
         "column": 1
       }
     },
@@ -5248,7 +5266,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 220,
+        "line": 222,
         "column": 1
       }
     },
@@ -5259,7 +5277,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 227,
+        "line": 229,
         "column": 1
       }
     },
@@ -5270,7 +5288,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 250,
+        "line": 252,
         "column": 1
       }
     },
@@ -5281,7 +5299,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 263,
+        "line": 265,
         "column": 1
       }
     },
@@ -5292,7 +5310,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 288,
+        "line": 290,
         "column": 1
       }
     },
@@ -5303,7 +5321,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-        "line": 322,
+        "line": 324,
         "column": 1
       }
     },
@@ -7497,6 +7515,281 @@
       }
     },
     {
+      "name": "siteChromeDocument",
+      "description": "Creates HTML, ARIA, local-content, responsive, and unresolved-child source evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 79,
+        "column": 1
+      }
+    },
+    {
+      "name": "changedNode",
+      "description": "Alters only the fixture nodes needed to exercise source-grounded chrome classification.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 94,
+        "column": 1
+      }
+    },
+    {
+      "name": "addedNodes",
+      "description": "Adds observed nesting, override, wrapper, and card cases without weakening the canonical fixture.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 124,
+        "column": 1
+      }
+    },
+    {
+      "name": "observedNode",
+      "description": "Finds a fixture node whose complete observation shape is reused for focused mutations.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 149,
+        "column": 1
+      }
+    },
+    {
+      "name": "withNode",
+      "description": "Derives one valid fixture node while changing only ownership-relevant DOM or surface evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 167,
+        "column": 1
+      }
+    },
+    {
+      "name": "candidate",
+      "description": "Finds one page-specific candidate by its source identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 189,
+        "column": 1
+      }
+    },
+    {
+      "name": "membership",
+      "description": "Reads the complete emitted membership rather than weakening the contract's nullable boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "line": 203,
+        "column": 1
+      }
+    },
+    {
+      "name": "recognizeWebsiteSiteChrome",
+      "description": "Recognizes page-grounded header and footer candidates without asserting cross-page identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 13,
+        "column": 1
+      }
+    },
+    {
+      "name": "createCandidate",
+      "description": "Creates one source-specific candidate so later consumers, not this recognizer, compare pages.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 36,
+        "column": 1
+      }
+    },
+    {
+      "name": "siteChromeRole",
+      "description": "Identifies HTML landmarks unless an explicit ARIA role overrides their ownership.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
+      "name": "landmarkRoleFor",
+      "description": "Maps only ARIA landmark roles that own site chrome.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 87,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasExplicitLandmarkRole",
+      "description": "Distinguishes explicit ARIA landmark evidence from implicit HTML landmark semantics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 94,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasSameRoleLandmarkAncestor",
+      "description": "Suppresses nested duplicates while retaining their UI descendants in the owning landmark subtree.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 104,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceEvidence",
+      "description": "Preserves raw DOM, landmark, and viewport evidence with page-qualified source identity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "semanticRole",
+      "description": "Retains the first explicit DOM or viewport ARIA role without normalizing its literal.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 144,
+        "column": 1
+      }
+    },
+    {
+      "name": "ariaLabel",
+      "description": "Reads an accessible label from DOM or viewport-specific semantic evidence without fabrication.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 153,
+        "column": 1
+      }
+    },
+    {
+      "name": "visibilityOf",
+      "description": "Converts measured CSS visibility to the bounded portable visibility vocabulary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 162,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasConditionalObservation",
+      "description": "Classifies differing measured visibility or availability as a real responsive/state variant.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 175,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasLocalContentAncestor",
+      "description": "Finds content-owned ancestors from DOM lineage and canonical recognized card mappings.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 183,
+        "column": 1
+      }
+    },
+    {
+      "name": "ancestorNodes",
+      "description": "Traverses actual parent references with cycle protection instead of trusting optional ancestry hints.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 204,
+        "column": 1
+      }
+    },
+    {
+      "name": "ancestorSourceRefs",
+      "description": "Qualifies ancestor references consistently with the public recognition document.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 223,
+        "column": 1
+      }
+    },
+    {
+      "name": "subtreeFor",
+      "description": "Retains the complete recursive UI subtree and its ordered recognized-node traversal.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 234,
+        "column": 1
+      }
+    },
+    {
+      "name": "findUiNode",
+      "description": "Locates a source-qualified UI node without flattening or recreating its child tree.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 251,
+        "column": 1
+      }
+    },
+    {
+      "name": "uiNodeIds",
+      "description": "Enumerates a UI subtree in deterministic pre-order so node evidence matches tree order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 261,
+        "column": 1
+      }
+    },
+    {
+      "name": "sourceIdentity",
+      "description": "Uses the established page-qualified source identity format for public provenance.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "line": 266,
+        "column": 1
+      }
+    },
+    {
       "name": "recognizedPage",
       "description": "Returns the single recognition page produced by a complete fixture document.",
       "see": [],
@@ -8486,6 +8779,11 @@
       },
       {
         "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "toPath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
+        "fromPath": "src/features/recognition/recognizeWebsiteDocument.ts",
         "toPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
         "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
       },
@@ -8873,6 +9171,16 @@
         "fromPath": "src/features/website-assessment/websiteAssessmentTestSupport.ts",
         "toPath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
         "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toPath": "test/fixtures/websiteObservationDocument.ts",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toPath": "src/features/recognition/recognizeWebsiteDocument.ts",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
       },
       {
         "fromPath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
@@ -11591,6 +11899,12 @@
         "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
       },
       {
+        "fromSymbol": "recognizeWebsiteDocument",
+        "toSymbol": "recognizeWebsiteSiteChrome",
+        "callExpression": "recognizeWebsiteSiteChrome",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.ts"
+      },
+      {
         "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.ts",
         "toSymbol": "assembleNode",
         "callExpression": "assembleNode",
@@ -13587,6 +13901,216 @@
         "toSymbol": "text",
         "callExpression": "this.text",
         "sourcePath": "src/features/website-assessment/websiteAssessmentValues.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "recognizeWebsiteDocument",
+        "callExpression": "recognizeWebsiteDocument",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "siteChromeDocument",
+        "callExpression": "siteChromeDocument",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "candidate",
+        "callExpression": "candidate",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "membership",
+        "callExpression": "membership",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "siteChromeDocument",
+        "toSymbol": "websiteObservationDocumentFixture",
+        "callExpression": "websiteObservationDocumentFixture",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "changedNode",
+        "callExpression": "changedNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
+        "toSymbol": "addedNodes",
+        "callExpression": "addedNodes",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "addedNodes",
+        "toSymbol": "observedNode",
+        "callExpression": "observedNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "addedNodes",
+        "toSymbol": "withNode",
+        "callExpression": "withNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "siteChromeRole",
+        "callExpression": "siteChromeRole",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "hasSameRoleLandmarkAncestor",
+        "callExpression": "hasSameRoleLandmarkAncestor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "createCandidate",
+        "callExpression": "createCandidate",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "createCandidate",
+        "toSymbol": "sourceEvidence",
+        "callExpression": "sourceEvidence",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "createCandidate",
+        "toSymbol": "subtreeFor",
+        "callExpression": "subtreeFor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "createCandidate",
+        "toSymbol": "hasLocalContentAncestor",
+        "callExpression": "hasLocalContentAncestor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "createCandidate",
+        "toSymbol": "hasExplicitLandmarkRole",
+        "callExpression": "hasExplicitLandmarkRole",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "createCandidate",
+        "toSymbol": "hasConditionalObservation",
+        "callExpression": "hasConditionalObservation",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "siteChromeRole",
+        "toSymbol": "landmarkRoleFor",
+        "callExpression": "landmarkRoleFor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "hasExplicitLandmarkRole",
+        "toSymbol": "landmarkRoleFor",
+        "callExpression": "landmarkRoleFor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "landmarkRoleFor",
+        "callExpression": "landmarkRoleFor",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "hasSameRoleLandmarkAncestor",
+        "toSymbol": "ancestorNodes",
+        "callExpression": "ancestorNodes",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "sourceEvidence",
+        "toSymbol": "ancestorSourceRefs",
+        "callExpression": "ancestorSourceRefs",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "visibilityOf",
+        "callExpression": "visibilityOf",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "sourceEvidence",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "sourceEvidence",
+        "toSymbol": "ariaLabel",
+        "callExpression": "ariaLabel",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "sourceEvidence",
+        "toSymbol": "semanticRole",
+        "callExpression": "semanticRole",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "hasLocalContentAncestor",
+        "toSymbol": "ancestorNodes",
+        "callExpression": "ancestorNodes",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "ancestorSourceRefs",
+        "toSymbol": "ancestorNodes",
+        "callExpression": "ancestorNodes",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "subtreeFor",
+        "toSymbol": "findUiNode",
+        "callExpression": "findUiNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "subtreeFor",
+        "toSymbol": "sourceIdentity",
+        "callExpression": "sourceIdentity",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "subtreeFor",
+        "toSymbol": "uiNodeIds",
+        "callExpression": "uiNodeIds",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
+      },
+      {
+        "fromSymbol": "findUiNode",
+        "toSymbol": "findUiNode",
+        "callExpression": "findUiNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.ts"
       },
       {
         "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",

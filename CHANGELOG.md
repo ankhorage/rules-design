@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.2
+
+### Patch Changes
+
+- b614a47: Recognize source-grounded site header and footer evidence without asserting cross-page identity.
+
 ## 0.9.1
 
 ### Patch Changes
