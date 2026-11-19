@@ -199,8 +199,8 @@ function recognizeComponentType(
   if (semanticType !== null) return semanticType;
   const { css } = observation;
   if (css === null) return 'Unknown';
-  if (isCard(node, parent, childNodesByParent)) return 'Card';
   if (websiteStructureEvidence(node).hasDividerEvidence) return 'Divider';
+  if (isCard(node, parent, childNodesByParent)) return 'Card';
   if (css.display.includes('grid')) return 'Grid';
   if (css.display.includes('flex')) return 'Flex';
   if (node.media.length > 0)
