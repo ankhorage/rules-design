@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.4
+
+### Patch Changes
+
+- c0b4205: Recognize HTML and ARIA navigation and main landmarks as canonical website regions while retaining source-linked responsive evidence.
+
 ## 0.9.3
 
 ### Patch Changes

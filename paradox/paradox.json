@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.9.3",
+      "value": "v0.9.4",
       "color": "cb3837"
     },
     {
@@ -1238,6 +1238,8 @@
         "createIncompleteWrapperEvidenceDocument",
         "createMalformedDocument",
         "createVisibleCardAndDividerDocument",
+        "createWebsiteRegionDocument",
+        "createWebsiteRegionFallbackDocument",
         "sourceRefsFor"
       ]
     }
@@ -5060,7 +5062,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 130,
+        "line": 181,
         "column": 1
       }
     },
@@ -5071,7 +5073,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 138,
+        "line": 189,
         "column": 1
       }
     },
@@ -5082,7 +5084,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 145,
+        "line": 196,
         "column": 1
       }
     },
@@ -5093,7 +5095,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 155,
+        "line": 206,
         "column": 1
       }
     },
@@ -5104,7 +5106,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 165,
+        "line": 216,
         "column": 1
       }
     },
@@ -5115,7 +5117,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 172,
+        "line": 223,
         "column": 1
       }
     },
@@ -5126,7 +5128,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 180,
+        "line": 231,
         "column": 1
       }
     },
@@ -5137,7 +5139,18 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 190,
+        "line": 241,
+        "column": 1
+      }
+    },
+    {
+      "name": "displayAt",
+      "description": "Reads one viewport-specific display sample without pretending responsive alternatives are absent.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "line": 254,
         "column": 1
       }
     },
@@ -5148,7 +5161,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/recognition/recognizeWebsiteDocument.test.ts",
-        "line": 203,
+        "line": 261,
         "column": 1
       }
     },
@@ -7810,7 +7823,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 155,
+        "line": 193,
         "column": 1
       }
     },
@@ -7821,7 +7834,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 162,
+        "line": 200,
         "column": 1
       }
     },
@@ -7832,7 +7845,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 169,
+        "line": 207,
         "column": 1
       }
     },
@@ -7843,7 +7856,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 174,
+        "line": 212,
         "column": 1
       }
     },
@@ -7854,7 +7867,29 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 179,
+        "line": 217,
+        "column": 1
+      }
+    },
+    {
+      "name": "uiNode",
+      "description": "Finds a preserved source node in the canonical UI tree.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "line": 225,
+        "column": 1
+      }
+    },
+    {
+      "name": "cardsInUiNode",
+      "description": "Collects Cards from one Main subtree without counting independent footer surfaces.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "line": 238,
         "column": 1
       }
     },
@@ -7865,7 +7900,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 187,
+        "line": 246,
         "column": 1
       }
     },
@@ -7892,13 +7927,57 @@
       }
     },
     {
+      "name": "pageRootChildren",
+      "description": "Adds one analysis-only Main grouping when no observed main landmark owns page content.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "line": 60,
+        "column": 1
+      }
+    },
+    {
+      "name": "groupPageContentAsMain",
+      "description": "Preserves DOM order while grouping non-chrome root content without introducing layout semantics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "line": 67,
+        "column": 1
+      }
+    },
+    {
+      "name": "isPageChrome",
+      "description": "Limits synthetic page grouping to site-chrome siblings so local regions stay in their parents.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "line": 87,
+        "column": 1
+      }
+    },
+    {
+      "name": "containsComponentType",
+      "description": "Detects an observed main landmark anywhere in the preserved recursive source tree.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "line": 92,
+        "column": 1
+      }
+    },
+    {
       "name": "createChildNodesByParent",
       "description": "Indexes observed children in DOM order for deterministic parent traversal.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 60,
+        "line": 100,
         "column": 1
       }
     },
@@ -7909,7 +7988,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 80,
+        "line": 120,
         "column": 1
       }
     },
@@ -7920,7 +7999,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 87,
+        "line": 127,
         "column": 1
       }
     },
@@ -7931,7 +8010,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 137,
+        "line": 177,
         "column": 1
       }
     },
@@ -7942,7 +8021,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 165,
+        "line": 205,
         "column": 1
       }
     },
@@ -7953,7 +8032,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 180,
+        "line": 220,
         "column": 1
       }
     },
@@ -7964,7 +8043,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 190,
+        "line": 230,
         "column": 1
       }
     },
@@ -7975,7 +8054,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 214,
+        "line": 253,
         "column": 1
       }
     },
@@ -7986,7 +8065,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 228,
+        "line": 267,
         "column": 1
       }
     },
@@ -7997,7 +8076,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 240,
+        "line": 279,
         "column": 1
       }
     },
@@ -8008,7 +8087,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 244,
+        "line": 283,
         "column": 1
       }
     },
@@ -8289,12 +8368,23 @@
     },
     {
       "name": "recognizeWebsiteStructureSemanticComponentType",
-      "description": "Maps explicit HTML semantics without relying on framework or page-builder selectors.",
+      "description": "Maps explicit HTML and observed ARIA semantics without relying on framework selectors.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureSemantics.ts",
-        "line": 2,
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "semanticRole",
+      "description": "Retains the first explicit DOM or rendered ARIA role without inventing semantics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/websiteStructureSemantics.ts",
+        "line": 15,
         "column": 1
       }
     },
@@ -9742,6 +9832,84 @@
       },
       {
         "fromSymbol": "createVisibleCardAndDividerDocument",
+        "toSymbol": "node",
+        "callExpression": "node",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "createDocument",
+        "callExpression": "createDocument",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "cardFixtureNodeFactory",
+        "callExpression": "cardFixtureNodeFactory",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "withResponsiveViewports",
+        "callExpression": "withResponsiveViewports",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "createDocumentWithNodes",
+        "callExpression": "createDocumentWithNodes",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "node",
+        "callExpression": "node",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "desktopNavigationNode",
+        "callExpression": "desktopNavigationNode",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "navigationNode",
+        "callExpression": "navigationNode",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "responsiveNavigationNode",
+        "callExpression": "responsiveNavigationNode",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "productCard",
+        "callExpression": "productCard",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionDocument",
+        "toSymbol": "mediaNode",
+        "callExpression": "mediaNode",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionFallbackDocument",
+        "toSymbol": "createWebsiteRegionDocument",
+        "callExpression": "createWebsiteRegionDocument",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRegionFallbackDocument",
+        "toSymbol": "nodeWithParent",
+        "callExpression": "nodeWithParent",
+        "sourcePath": "test/fixtures/websiteRecognition.ts"
+      },
+      {
+        "fromSymbol": "productCard",
         "toSymbol": "node",
         "callExpression": "node",
         "sourcePath": "test/fixtures/websiteRecognition.ts"
@@ -12054,6 +12222,18 @@
         "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
         "toSymbol": "pageFor",
         "callExpression": "pageFor",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "createWebsiteRegionDocument",
+        "callExpression": "createWebsiteRegionDocument",
+        "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/recognition/recognizeWebsiteDocument.test.ts",
+        "toSymbol": "displayAt",
+        "callExpression": "displayAt",
         "sourcePath": "src/features/recognition/recognizeWebsiteDocument.test.ts"
       },
       {
@@ -14427,9 +14607,39 @@
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
       },
       {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "toSymbol": "createWebsiteRegionDocument",
+        "callExpression": "createWebsiteRegionDocument",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "toSymbol": "cardsInUiNode",
+        "callExpression": "cardsInUiNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "toSymbol": "uiNode",
+        "callExpression": "uiNode",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
+        "toSymbol": "createWebsiteRegionFallbackDocument",
+        "callExpression": "createWebsiteRegionFallbackDocument",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
         "fromSymbol": "recognizedPage",
         "toSymbol": "recognizeWebsiteStructure",
         "callExpression": "recognizeWebsiteStructure",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
+        "fromSymbol": "uiNode",
+        "toSymbol": "uiNode",
+        "callExpression": "uiNode",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
       },
       {
@@ -14448,6 +14658,30 @@
         "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.ts",
         "toSymbol": "containsSourceRef",
         "callExpression": "containsSourceRef",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
+      },
+      {
+        "fromSymbol": "recognizePage",
+        "toSymbol": "pageRootChildren",
+        "callExpression": "pageRootChildren",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "toSymbol": "containsComponentType",
+        "callExpression": "containsComponentType",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
+      },
+      {
+        "fromSymbol": "pageRootChildren",
+        "toSymbol": "groupPageContentAsMain",
+        "callExpression": "groupPageContentAsMain",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "toSymbol": "isPageChrome",
+        "callExpression": "isPageChrome",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
       },
       {
@@ -14737,6 +14971,12 @@
         "toSymbol": "parseCssColor",
         "callExpression": "parseCssColor",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
+      },
+      {
+        "fromSymbol": "recognizeWebsiteStructureSemanticComponentType",
+        "toSymbol": "semanticRole",
+        "callExpression": "semanticRole",
+        "sourcePath": "src/features/website-recognition/websiteStructureSemantics.ts"
       },
       {
         "fromSymbol": "createWebsiteStructureTreeNode",
