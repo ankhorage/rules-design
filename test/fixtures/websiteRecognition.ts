@@ -180,7 +180,8 @@ export function createCardAndDividerEvidenceDocument(): WebsiteObservationDocume
         rect: { height: 2, width: 240, x: 0, y: 520 },
         role: 'separator',
       }),
-      node('css-line', 'surface:main', 3, 'span', {
+      node('divider-flex', 'surface:main', 3, 'div', { display: 'flex' }),
+      node('css-line', 'surface:divider-flex', 0, 'span', {
         backgroundColor: 'rgb(0, 0, 0)',
         rect: { height: 2, width: 240, x: 0, y: 540 },
       }),
