@@ -81,6 +81,8 @@ graph LR
   module_src_features_website_assessment_websiteAssessmentResult_ts["src/features/website-assessment/websiteAssessmentResult.ts"]
   module_src_features_website_assessment_websiteAssessmentTestSupport_ts["src/features/website-assessment/websiteAssessmentTestSupport.ts"]
   module_src_features_website_assessment_websiteAssessmentValues_ts["src/features/website-assessment/websiteAssessmentValues.ts"]
+  module_src_features_website_recognition_createWebsiteRecognitionRuleSet_test_ts["src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"]
+  module_src_features_website_recognition_createWebsiteRecognitionRuleSet_ts["src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"]
   module_src_features_website_recognition_recognizeWebsiteSiteChrome_test_ts["src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"]
   module_src_features_website_recognition_recognizeWebsiteSiteChrome_ts["src/features/website-recognition/recognizeWebsiteSiteChrome.ts"]
   module_src_features_website_recognition_recognizeWebsiteStructure_test_ts["src/features/website-recognition/recognizeWebsiteStructure.test.ts"]
@@ -98,6 +100,7 @@ graph LR
   module_src_types_typography_ts["src/types/typography.ts"]
   module_src_types_websiteAssessment_ts["src/types/websiteAssessment.ts"]
   module_src_types_websiteDesignRecognition_ts["src/types/websiteDesignRecognition.ts"]
+  module_src_types_websiteRecognitionRules_ts["src/types/websiteRecognitionRules.ts"]
   module_test_fixtures_accessibilityFacts_ts["test/fixtures/accessibilityFacts.ts"]
   module_test_fixtures_alignmentMetricFact_ts["test/fixtures/alignmentMetricFact.ts"]
   module_test_fixtures_repetitionRuleFacts_ts["test/fixtures/repetitionRuleFacts.ts"]
@@ -114,6 +117,9 @@ graph LR
   export_createWebsiteAssessmentRuleSet["createWebsiteAssessmentRuleSet"]
   module_src_features_website_assessment_createWebsiteAssessmentRuleSet_ts --> export_createWebsiteAssessmentRuleSet
   export_createWebsiteAssessmentRuleSet -.-> export_WebsiteAssessmentRuleOptions
+  export_createWebsiteRecognitionRuleSet["createWebsiteRecognitionRuleSet"]
+  module_src_features_website_recognition_createWebsiteRecognitionRuleSet_ts --> export_createWebsiteRecognitionRuleSet
+  export_createWebsiteRecognitionRuleSet -.-> export_WebsiteRecognitionRuleContext
   export_DesignAssessmentKind["DesignAssessmentKind"]
   module_src_types_designRuleCatalog_ts --> export_DesignAssessmentKind
   export_DesignContext["DesignContext"]
@@ -185,3 +191,5 @@ graph LR
   export_WebsiteDesignTokenCandidate -.-> export_WebsiteDesignSourceReference
   export_WebsiteDesignUnresolvedObservation["WebsiteDesignUnresolvedObservation"]
   module_src_types_websiteDesignRecognition_ts --> export_WebsiteDesignUnresolvedObservation
+  export_WebsiteRecognitionRuleContext["WebsiteRecognitionRuleContext"]
+  module_src_types_websiteRecognitionRules_ts --> export_WebsiteRecognitionRuleContext

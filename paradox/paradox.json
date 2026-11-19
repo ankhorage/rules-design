@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.9.4",
+      "value": "v0.10.0",
       "color": "cb3837"
     },
     {
@@ -947,6 +947,26 @@
       ]
     },
     {
+      "path": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts",
+        "test/fixtures/websiteRecognition.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/website-recognition/websiteStructureEvidence.ts",
+        "src/types/websiteRecognitionRules.ts"
+      ],
+      "exports": [
+        "createWebsiteRecognitionRuleSet"
+      ]
+    },
+    {
       "path": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -976,6 +996,7 @@
       "path": "src/features/website-recognition/recognizeWebsiteStructure.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
         "src/features/website-recognition/recognizeWebsiteStructureProps.ts",
         "src/features/website-recognition/websiteStructureEvidence.ts",
         "src/features/website-recognition/websiteStructureSemantics.ts",
@@ -1027,6 +1048,7 @@
       "exports": [
         "createDesignRuleProvider",
         "createWebsiteAssessmentRuleSet",
+        "createWebsiteRecognitionRuleSet",
         "DesignAssessmentKind",
         "DesignContext",
         "designRuleCatalog",
@@ -1054,7 +1076,8 @@
         "WebsiteDesignRecognition",
         "WebsiteDesignSourceReference",
         "WebsiteDesignTokenCandidate",
-        "WebsiteDesignUnresolvedObservation"
+        "WebsiteDesignUnresolvedObservation",
+        "WebsiteRecognitionRuleContext"
       ]
     },
     {
@@ -1154,6 +1177,14 @@
         "WebsiteDesignSourceReference",
         "WebsiteDesignTokenCandidate",
         "WebsiteDesignUnresolvedObservation"
+      ]
+    },
+    {
+      "path": "src/types/websiteRecognitionRules.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "WebsiteRecognitionRuleContext"
       ]
     },
     {
@@ -1316,6 +1347,37 @@
             }
           ],
           "returnType": "RuleSet<WebsiteAssessmentContext>",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "createWebsiteRecognitionRuleSet",
+      "title": null,
+      "description": "Declares the versioned, provider-neutral Card predicate in the canonical Rules format.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 8,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "WebsiteRecognitionRuleContext"
+      ],
+      "signatures": [
+        {
+          "label": "() => RuleSet<WebsiteRecognitionRuleContext>",
+          "parameters": [],
+          "returnType": "RuleSet<WebsiteRecognitionRuleContext>",
           "returnDescription": null
         }
       ],
@@ -2101,7 +2163,7 @@
       "modulePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 15,
+        "line": 17,
         "column": 1
       },
       "exportPaths": [
@@ -2593,6 +2655,50 @@
           "name": "viewportId",
           "kind": "property",
           "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "WebsiteRecognitionRuleContext",
+      "title": null,
+      "description": "Source-linked facts used by the canonical Rules evaluation for website modules.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/websiteRecognitionRules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/websiteRecognitionRules.ts",
+        "line": 4,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "childNodesByParent",
+          "kind": "property",
+          "type": "ReadonlyMap<string, readonly WebsiteObservedNode[]>",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "node",
+          "kind": "property",
+          "type": "WebsiteObservedNode",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "parent",
+          "kind": "property",
+          "type": "WebsiteObservedNode | null",
           "required": true,
           "description": null
         }
@@ -7542,6 +7648,72 @@
       }
     },
     {
+      "name": "evaluateFixtureRule",
+      "description": "Evaluates one real fixture node through the public RuleSet and generic Rules engine.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "line": 53,
+        "column": 1
+      }
+    },
+    {
+      "name": "createWebsiteRecognitionRuleSet",
+      "description": "Declares the versioned, provider-neutral Card predicate in the canonical Rules format.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 8,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateCardRecognition",
+      "description": "PASS means Card match; FAIL means no match, not a quality or policy violation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 24,
+        "column": 1
+      }
+    },
+    {
+      "name": "ownsNestedSurfaceLayout",
+      "description": "Prevents a layout owning separately bounded children from being their Card wrapper.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 52,
+        "column": 1
+      }
+    },
+    {
+      "name": "isLayoutGroup",
+      "description": "Checks measured Flex/Grid layout semantics without creating synthetic layout nodes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 64,
+        "column": 1
+      }
+    },
+    {
+      "name": "isGenericSurfaceNode",
+      "description": "Generic wrappers may own nested surfaces; semantic descendants retain their own type.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
       "name": "siteChromeDocument",
       "description": "Creates HTML, ARIA, local-content, responsive, and unresolved-child source evidence.",
       "see": [],
@@ -7823,7 +7995,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 193,
+        "line": 196,
         "column": 1
       }
     },
@@ -7834,7 +8006,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 200,
+        "line": 203,
         "column": 1
       }
     },
@@ -7845,7 +8017,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 207,
+        "line": 210,
         "column": 1
       }
     },
@@ -7856,7 +8028,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 212,
+        "line": 215,
         "column": 1
       }
     },
@@ -7867,7 +8039,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 217,
+        "line": 220,
         "column": 1
       }
     },
@@ -7878,7 +8050,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 225,
+        "line": 228,
         "column": 1
       }
     },
@@ -7889,7 +8061,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 238,
+        "line": 241,
         "column": 1
       }
     },
@@ -7900,7 +8072,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
-        "line": 246,
+        "line": 249,
         "column": 1
       }
     },
@@ -7911,7 +8083,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 15,
+        "line": 17,
         "column": 1
       }
     },
@@ -7922,7 +8094,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 26,
+        "line": 28,
         "column": 1
       }
     },
@@ -7933,7 +8105,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 60,
+        "line": 62,
         "column": 1
       }
     },
@@ -7944,7 +8116,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 67,
+        "line": 69,
         "column": 1
       }
     },
@@ -7955,7 +8127,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 87,
+        "line": 89,
         "column": 1
       }
     },
@@ -7966,7 +8138,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 92,
+        "line": 94,
         "column": 1
       }
     },
@@ -7977,7 +8149,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 100,
+        "line": 102,
         "column": 1
       }
     },
@@ -7988,7 +8160,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 120,
+        "line": 122,
         "column": 1
       }
     },
@@ -7999,7 +8171,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 127,
+        "line": 129,
         "column": 1
       }
     },
@@ -8010,7 +8182,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 177,
+        "line": 179,
         "column": 1
       }
     },
@@ -8021,7 +8193,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 205,
+        "line": 207,
         "column": 1
       }
     },
@@ -8032,7 +8204,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 220,
+        "line": 222,
         "column": 1
       }
     },
@@ -8043,51 +8215,18 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 230,
+        "line": 232,
         "column": 1
       }
     },
     {
       "name": "isCard",
-      "description": "Recognizes one rendered layout child with an independently visible surface boundary as a card.",
+      "description": "Evaluates the versioned canonical Card rule before committing a primary module type.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 253,
-        "column": 1
-      }
-    },
-    {
-      "name": "ownsNestedSurfaceLayout",
-      "description": "Keeps a layout container distinct when it owns independently bounded layout children.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 267,
-        "column": 1
-      }
-    },
-    {
-      "name": "isGenericSurfaceNode",
-      "description": "Limits nested layout ownership to generic wrappers so semantic content never hides its card root.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 279,
-        "column": 1
-      }
-    },
-    {
-      "name": "isLayoutGroup",
-      "description": "Tests whether a parent has measured Grid or Flex grouping semantics.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "line": 283,
+        "line": 255,
         "column": 1
       }
     },
@@ -8142,7 +8281,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 27,
+        "line": 30,
         "column": 1
       }
     },
@@ -8153,18 +8292,18 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 51,
+        "line": 54,
         "column": 1
       }
     },
     {
-      "name": "hasCardSurface",
-      "description": "Finds a visible node-owned surface boundary without inferring one from padding or radius.",
+      "name": "cardSurfaceReasonsForNode",
+      "description": "Finds all independently owned Card-surface signals across visible viewport observations.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 66,
+        "line": 69,
         "column": 1
       }
     },
@@ -8175,7 +8314,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 76,
+        "line": 88,
         "column": 1
       }
     },
@@ -8186,7 +8325,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 91,
+        "line": 103,
         "column": 1
       }
     },
@@ -8197,18 +8336,40 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 105,
+        "line": 117,
+        "column": 1
+      }
+    },
+    {
+      "name": "cardSurfaceReasonsForObservation",
+      "description": "Lists reusable visual-surface predicates; borders, radius and padding cannot match.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
+        "line": 124,
+        "column": 1
+      }
+    },
+    {
+      "name": "hasOwnedCardSurface",
+      "description": "Shares the same owned-surface predicates with independent divider evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
+        "line": 140,
         "column": 1
       }
     },
     {
       "name": "hasVisibleSurfaceBoundary",
-      "description": "Requires one directly visible boundary feature owned by the node.",
+      "description": "Retains visible border evidence for actual dividers, not card classification.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 112,
+        "line": 148,
         "column": 1
       }
     },
@@ -8219,7 +8380,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 127,
+        "line": 161,
         "column": 1
       }
     },
@@ -8230,7 +8391,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 142,
+        "line": 176,
         "column": 1
       }
     },
@@ -8241,7 +8402,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 166,
+        "line": 200,
         "column": 1
       }
     },
@@ -8252,7 +8413,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 169,
+        "line": 203,
         "column": 9
       }
     },
@@ -8263,7 +8424,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 182,
+        "line": 216,
         "column": 1
       }
     },
@@ -8274,7 +8435,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 192,
+        "line": 226,
         "column": 1
       }
     },
@@ -8285,7 +8446,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 197,
+        "line": 231,
         "column": 1
       }
     },
@@ -8296,7 +8457,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 203,
+        "line": 237,
         "column": 1
       }
     },
@@ -8307,7 +8468,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 220,
+        "line": 254,
         "column": 1
       }
     },
@@ -8318,7 +8479,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 230,
+        "line": 264,
         "column": 1
       }
     },
@@ -8329,7 +8490,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 243,
+        "line": 277,
         "column": 1
       }
     },
@@ -8340,7 +8501,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 255,
+        "line": 289,
         "column": 1
       }
     },
@@ -8351,7 +8512,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 265,
+        "line": 299,
         "column": 1
       }
     },
@@ -8362,7 +8523,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "line": 270,
+        "line": 304,
         "column": 1
       }
     },
@@ -8437,6 +8598,14 @@
       "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
       "symbolName": "createWebsiteAssessmentRuleSet",
       "description": "Creates the separately composable follow-on website and contact assessment rules.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "createWebsiteRecognitionRuleSet",
+      "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+      "symbolName": "createWebsiteRecognitionRuleSet",
+      "description": "Declares the versioned, provider-neutral Card predicate in the canonical Rules format.",
       "isReadme": false
     },
     {
@@ -8529,6 +8698,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
         "sourcePath": "src/index.ts"
       },
@@ -8550,6 +8724,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/types/websiteDesignRecognition.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/types/websiteRecognitionRules.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -9403,6 +9582,26 @@
         "sourcePath": "src/features/website-assessment/websiteAssessmentTestSupport.ts"
       },
       {
+        "fromPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toPath": "test/fixtures/websiteRecognition.ts",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "toPath": "src/types/websiteRecognitionRules.ts",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "toPath": "src/features/website-recognition/websiteStructureEvidence.ts",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
         "fromPath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
         "toPath": "test/fixtures/websiteObservationDocument.ts",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts"
@@ -9421,6 +9620,11 @@
         "fromPath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts",
         "toPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.test.ts"
+      },
+      {
+        "fromPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+        "toPath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
       },
       {
         "fromPath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
@@ -14301,6 +14505,96 @@
         "sourcePath": "src/features/website-assessment/websiteAssessmentValues.ts"
       },
       {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toSymbol": "createWebsiteRecognitionRuleSet",
+        "callExpression": "createWebsiteRecognitionRuleSet",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts",
+        "toSymbol": "evaluateFixtureRule",
+        "callExpression": "evaluateFixtureRule",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateFixtureRule",
+        "toSymbol": "createCardAndDividerEvidenceDocument",
+        "callExpression": "createCardAndDividerEvidenceDocument",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateFixtureRule",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateFixtureRule",
+        "toSymbol": "createWebsiteRecognitionRuleSet",
+        "callExpression": "createWebsiteRecognitionRuleSet",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.test.ts"
+      },
+      {
+        "fromSymbol": "evaluate",
+        "toSymbol": "evaluateCardRecognition",
+        "callExpression": "evaluateCardRecognition",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateCardRecognition",
+        "toSymbol": "websiteStructureEvidence",
+        "callExpression": "websiteStructureEvidence",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateCardRecognition",
+        "toSymbol": "isLayoutGroup",
+        "callExpression": "isLayoutGroup",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "evaluateCardRecognition",
+        "toSymbol": "ownsNestedSurfaceLayout",
+        "callExpression": "ownsNestedSurfaceLayout",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "ownsNestedSurfaceLayout",
+        "toSymbol": "isLayoutGroup",
+        "callExpression": "isLayoutGroup",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "toSymbol": "isGenericSurfaceNode",
+        "callExpression": "isGenericSurfaceNode",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+        "toSymbol": "websiteStructureEvidence",
+        "callExpression": "websiteStructureEvidence",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "isLayoutGroup",
+        "toSymbol": "websiteStructureEvidence",
+        "callExpression": "websiteStructureEvidence",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
         "fromSymbol": "src/features/website-recognition/recognizeWebsiteSiteChrome.test.ts",
         "toSymbol": "test",
         "callExpression": "test",
@@ -14752,44 +15046,14 @@
       },
       {
         "fromSymbol": "isCard",
-        "toSymbol": "isLayoutGroup",
-        "callExpression": "isLayoutGroup",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
       },
       {
         "fromSymbol": "isCard",
-        "toSymbol": "websiteStructureEvidence",
-        "callExpression": "websiteStructureEvidence",
-        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
-      },
-      {
-        "fromSymbol": "isCard",
-        "toSymbol": "ownsNestedSurfaceLayout",
-        "callExpression": "ownsNestedSurfaceLayout",
-        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
-      },
-      {
-        "fromSymbol": "ownsNestedSurfaceLayout",
-        "toSymbol": "isLayoutGroup",
-        "callExpression": "isLayoutGroup",
-        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
-      },
-      {
-        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "toSymbol": "isGenericSurfaceNode",
-        "callExpression": "isGenericSurfaceNode",
-        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
-      },
-      {
-        "fromSymbol": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-        "toSymbol": "websiteStructureEvidence",
-        "callExpression": "websiteStructureEvidence",
-        "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
-      },
-      {
-        "fromSymbol": "isLayoutGroup",
-        "toSymbol": "websiteStructureEvidence",
-        "callExpression": "websiteStructureEvidence",
+        "toSymbol": "createWebsiteRecognitionRuleSet",
+        "callExpression": "createWebsiteRecognitionRuleSet",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
       },
       {
@@ -14806,14 +15070,14 @@
       },
       {
         "fromSymbol": "websiteStructureEvidence",
-        "toSymbol": "availableObservation",
-        "callExpression": "availableObservation",
+        "toSymbol": "cardSurfaceReasonsForNode",
+        "callExpression": "cardSurfaceReasonsForNode",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
         "fromSymbol": "websiteStructureEvidence",
-        "toSymbol": "hasCardSurface",
-        "callExpression": "hasCardSurface",
+        "toSymbol": "availableObservation",
+        "callExpression": "availableObservation",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
@@ -14836,14 +15100,20 @@
       },
       {
         "fromSymbol": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "toSymbol": "observationFor",
-        "callExpression": "observationFor",
+        "toSymbol": "isVisibleObservation",
+        "callExpression": "isVisibleObservation",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
         "fromSymbol": "src/features/website-recognition/websiteStructureEvidence.ts",
-        "toSymbol": "isVisibleObservation",
-        "callExpression": "isVisibleObservation",
+        "toSymbol": "cardSurfaceReasonsForObservation",
+        "callExpression": "cardSurfaceReasonsForObservation",
+        "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
+      },
+      {
+        "fromSymbol": "src/features/website-recognition/websiteStructureEvidence.ts",
+        "toSymbol": "observationFor",
+        "callExpression": "observationFor",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
@@ -14859,9 +15129,27 @@
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
-        "fromSymbol": "hasVisibleSurfaceBoundary",
+        "fromSymbol": "cardSurfaceReasonsForObservation",
         "toSymbol": "hasVisibleBackground",
         "callExpression": "hasVisibleBackground",
+        "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
+      },
+      {
+        "fromSymbol": "cardSurfaceReasonsForObservation",
+        "toSymbol": "hasVisibleBoxShadow",
+        "callExpression": "hasVisibleBoxShadow",
+        "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
+      },
+      {
+        "fromSymbol": "hasOwnedCardSurface",
+        "toSymbol": "cardSurfaceReasonsForObservation",
+        "callExpression": "cardSurfaceReasonsForObservation",
+        "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
+      },
+      {
+        "fromSymbol": "hasVisibleSurfaceBoundary",
+        "toSymbol": "hasOwnedCardSurface",
+        "callExpression": "hasOwnedCardSurface",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
@@ -14874,12 +15162,6 @@
         "fromSymbol": "hasVisibleSurfaceBoundary",
         "toSymbol": "isTransparentColor",
         "callExpression": "isTransparentColor",
-        "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
-      },
-      {
-        "fromSymbol": "hasVisibleSurfaceBoundary",
-        "toSymbol": "hasVisibleBoxShadow",
-        "callExpression": "hasVisibleBoxShadow",
         "sourcePath": "src/features/website-recognition/websiteStructureEvidence.ts"
       },
       {
@@ -15063,6 +15345,16 @@
         "sourcePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts"
       },
       {
+        "fromSymbol": "createWebsiteRecognitionRuleSet",
+        "toType": "RuleSet",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
+        "fromSymbol": "createWebsiteRecognitionRuleSet",
+        "toType": "WebsiteRecognitionRuleContext",
+        "sourcePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts"
+      },
+      {
         "fromSymbol": "recognizeWebsiteStructure",
         "toType": "WebsiteObservationDocument",
         "sourcePath": "src/features/website-recognition/recognizeWebsiteStructure.ts"
@@ -15186,6 +15478,16 @@
         "fromSymbol": "WebsiteDesignUnresolvedObservation",
         "toType": "WebsiteObservationProvenance",
         "sourcePath": "src/types/websiteDesignRecognition.ts"
+      },
+      {
+        "fromSymbol": "WebsiteRecognitionRuleContext",
+        "toType": "ReadonlyMap",
+        "sourcePath": "src/types/websiteRecognitionRules.ts"
+      },
+      {
+        "fromSymbol": "WebsiteRecognitionRuleContext",
+        "toType": "WebsiteObservedNode",
+        "sourcePath": "src/types/websiteRecognitionRules.ts"
       }
     ],
     "componentComposition": []

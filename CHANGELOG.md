@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0
+
+### Minor Changes
+
+- d6ba244: Define versioned website Card recognition through the canonical Rules evaluator with reusable, inspectable owned-background and shadow signals. Decorative borders and radius no longer imply Cards.
+
 ## 0.9.4
 
 ### Patch Changes
