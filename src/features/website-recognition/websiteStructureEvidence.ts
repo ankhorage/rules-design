@@ -67,7 +67,7 @@ function hasCardSurface(node: WebsiteObservedNode, parent: WebsiteObservedNode |
   return node.observations.some((observation) => {
     const parentObservation = parent === null ? null : observationFor(parent, observation);
     return (
-      isVisibleObservation(observation) && hasVisibleSurfaceBoundary(observation, parentObservation)
+      isVisibleObservation(observation) && hasOwnedCardSurface(observation, parentObservation)
     );
   });
 }
@@ -108,8 +108,8 @@ function hasDividerGeometry(width: number, height: number): boolean {
   return shorterSide <= 4 && longerSide >= 16 && longerSide / Math.max(shorterSide, 1) >= 8;
 }
 
-/*** Requires one directly visible boundary feature owned by the node. */
-function hasVisibleSurfaceBoundary(
+/*** Recognizes a node-owned visible card surface without promoting borders or radius. */
+function hasOwnedCardSurface(
   observation: WebsiteNodeObservation,
   parentObservation: WebsiteNodeObservation | null,
 ): boolean {
@@ -118,8 +118,20 @@ function hasVisibleSurfaceBoundary(
   return (
     hasVisibleBackground(css.backgroundColor, parentObservation?.css?.backgroundColor ?? null) ||
     css.backgroundImage !== 'none' ||
-    (hasNonZeroCssValue(css.borderWidth) && !isTransparentColor(css.borderColor)) ||
     hasVisibleBoxShadow(css.boxShadow)
+  );
+}
+
+/*** Retains visible border evidence for actual dividers, not card classification. */
+function hasVisibleSurfaceBoundary(
+  observation: WebsiteNodeObservation,
+  parentObservation: WebsiteNodeObservation | null,
+): boolean {
+  const { css } = observation;
+  return (
+    css !== null &&
+    (hasOwnedCardSurface(observation, parentObservation) ||
+      (hasNonZeroCssValue(css.borderWidth) && !isTransparentColor(css.borderColor)))
   );
 }
 
