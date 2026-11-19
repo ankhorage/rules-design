@@ -21,13 +21,10 @@ const cardRecognitionRule: Rule<WebsiteRecognitionRuleContext> = {
 };
 
 /*** PASS means Card match; FAIL means no match, not a quality or policy violation. */
-function evaluateCardRecognition(
-  context: WebsiteRecognitionRuleContext,
-): RuleEvaluationOutcome {
+function evaluateCardRecognition(context: WebsiteRecognitionRuleContext): RuleEvaluationOutcome {
   const { node, parent, childNodesByParent } = context;
   const evidence = websiteStructureEvidence(node, [], parent);
-  if (evidence.availableObservation === null)
-    return { findings: [], status: 'INCOMPLETE' };
+  if (evidence.availableObservation === null) return { findings: [], status: 'INCOMPLETE' };
   if (
     !isLayoutGroup(parent) ||
     ownsNestedSurfaceLayout(node, childNodesByParent) ||
@@ -58,9 +55,7 @@ function ownsNestedSurfaceLayout(
 ): boolean {
   if (!isLayoutGroup(node)) return false;
   return (childNodesByParent.get(node.sourceRef) ?? []).some(
-    (child) =>
-      isGenericSurfaceNode(child) &&
-      websiteStructureEvidence(child, [], node).hasCardSurface,
+    (child) => isGenericSurfaceNode(child) && websiteStructureEvidence(child, [], node).hasCardSurface,
   );
 }
 
