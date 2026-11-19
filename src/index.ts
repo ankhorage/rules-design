@@ -7,6 +7,7 @@ export { selectDesignRuleProfile } from './features/provider/selectDesignRulePro
 export { recognizeWebsiteDesignProperties } from './features/recognition/recognizeWebsiteDesignProperties';
 export { recognizeWebsiteDocument } from './features/recognition/recognizeWebsiteDocument';
 export { createWebsiteAssessmentRuleSet } from './features/website-assessment/createWebsiteAssessmentRuleSet';
+export { createWebsiteRecognitionRuleSet } from './features/website-recognition/createWebsiteRecognitionRuleSet';
 export { recognizeWebsiteStructure } from './features/website-recognition/recognizeWebsiteStructure';
 export type {
   DesignAssessmentKind,
@@ -34,3 +35,4 @@ export type {
   WebsiteDesignTokenCandidate,
   WebsiteDesignUnresolvedObservation,
 } from './types/websiteDesignRecognition';
+export type { WebsiteRecognitionRuleContext } from './types/websiteRecognitionRules';
