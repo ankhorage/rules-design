@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.3
+
+### Patch Changes
+
+- 94478d7: Recognize independently visible website cards and provider-neutral CSS dividers.
+
 ## 0.9.2
 
 ### Patch Changes

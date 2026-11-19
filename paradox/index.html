@@ -304,7 +304,7 @@
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/recognition/recognizeWebsiteDocument.test.ts">
       src/features/recognition/recognizeWebsiteDocument.test.ts
-      <small>8 functions</small>
+      <small>9 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/recognition/recognizeWebsiteDocument.ts">
@@ -494,7 +494,7 @@
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/website-recognition/websiteStructureEvidence.ts">
       src/features/website-recognition/websiteStructureEvidence.ts
-      <small>11 functions</small>
+      <small>22 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/website-recognition/websiteStructureSemantics.ts">
@@ -763,10 +763,10 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/recognition/tokenCandidates.ts</code>, <code>src/types/websiteDesignRecognition.ts</code></p>
     <p><strong>Exports:</strong> <code>recognizeWebsiteDesignProperties</code></p>
-  </article><article class="item" data-search="src/features/recognition/recognizeWebsiteDocument.test.ts src/features/recognition/recognizeWebsiteDocument.ts test/fixtures/website-recognition-expected.v1.json test/fixtures/website-recognition-observation.v1.json test/fixtures/websiteObservationDocument.ts">
+  </article><article class="item" data-search="src/features/recognition/recognizeWebsiteDocument.test.ts src/features/recognition/recognizeWebsiteDocument.ts test/fixtures/website-recognition-expected.v1.json test/fixtures/website-recognition-observation.v1.json test/fixtures/websiteObservationDocument.ts test/fixtures/websiteRecognition.ts">
     <h3>src/features/recognition/recognizeWebsiteDocument.test.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/features/recognition/recognizeWebsiteDocument.ts</code>, <code>test/fixtures/website-recognition-expected.v1.json</code>, <code>test/fixtures/website-recognition-observation.v1.json</code>, <code>test/fixtures/websiteObservationDocument.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/recognition/recognizeWebsiteDocument.ts</code>, <code>test/fixtures/website-recognition-expected.v1.json</code>, <code>test/fixtures/website-recognition-observation.v1.json</code>, <code>test/fixtures/websiteObservationDocument.ts</code>, <code>test/fixtures/websiteRecognition.ts</code></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
   </article><article class="item" data-search="src/features/recognition/recognizeWebsiteDocument.ts src/features/recognition/createWebsiteAssetIndex.ts src/features/recognition/qualifyWebsiteRecognitionProps.ts src/features/recognition/recognizeWebsiteDesignProperties.ts src/features/recognition/validateWebsiteObservationDocument.ts src/features/website-recognition/recognizeWebsiteSiteChrome.ts src/features/website-recognition/recognizeWebsiteStructure.ts src/types/websiteDesignRecognition.ts recognizeWebsiteDocument">
     <h3>src/features/recognition/recognizeWebsiteDocument.ts</h3>
@@ -1078,11 +1078,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>websiteObservationDocumentFixture</code></p>
-  </article><article class="item" data-search="test/fixtures/websiteRecognition.ts createColoredColumnsDocument createComplexLayoutDocument createDocument createIncompleteWrapperEvidenceDocument createMalformedDocument sourceRefsFor">
+  </article><article class="item" data-search="test/fixtures/websiteRecognition.ts createCardAndDividerEvidenceDocument createColoredColumnsDocument createComplexLayoutDocument createDocument createIncompleteWrapperEvidenceDocument createMalformedDocument createVisibleCardAndDividerDocument sourceRefsFor">
     <h3>test/fixtures/websiteRecognition.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>createColoredColumnsDocument</code>, <code>createComplexLayoutDocument</code>, <code>createDocument</code>, <code>createIncompleteWrapperEvidenceDocument</code>, <code>createMalformedDocument</code>, <code>sourceRefsFor</code></p>
+    <p><strong>Exports:</strong> <code>createCardAndDividerEvidenceDocument</code>, <code>createColoredColumnsDocument</code>, <code>createComplexLayoutDocument</code>, <code>createDocument</code>, <code>createIncompleteWrapperEvidenceDocument</code>, <code>createMalformedDocument</code>, <code>createVisibleCardAndDividerDocument</code>, <code>sourceRefsFor</code></p>
   </article>
     </section>
     <section class="panel">
@@ -2269,6 +2269,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_expected_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_observation_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteRecognition_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_recognition_recognizeWebsiteDocument_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_createWebsiteAssetIndex_ts
@@ -2672,6 +2673,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_expected_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_observation_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteRecognition_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts[&quot;src/features/recognition/recognizeWebsiteDocument.ts&quot;]
   package__ankhorage_rules_design -.-&gt; module_src_features_recognition_recognizeWebsiteDocument_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_createWebsiteAssetIndex_ts
@@ -3092,6 +3094,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_expected_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_observation_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteRecognition_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_createWebsiteAssetIndex_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_qualifyWebsiteRecognitionProps_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_recognizeWebsiteDesignProperties_ts
@@ -3385,6 +3388,7 @@
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_expected_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_website_recognition_observation_v1_json
   module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteObservationDocument_ts
+  module_src_features_recognition_recognizeWebsiteDocument_test_ts --&gt; module_test_fixtures_websiteRecognition_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_createWebsiteAssetIndex_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_qualifyWebsiteRecognitionProps_ts
   module_src_features_recognition_recognizeWebsiteDocument_ts --&gt; module_src_features_recognition_recognizeWebsiteDesignProperties_ts
@@ -5197,42 +5201,47 @@
       <h2>src/features/recognition/recognizeWebsiteDocument.test.ts</h2>
       <article class="item" data-search="isQualified src/features/recognition/recognizeWebsiteDocument.test.ts Confirms that serialized source identities retain both page and source components.">
     <h3>isQualified</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:110:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:130:1</code></p>
     <p>Confirms that serialized source identities retain both page and source components.</p>
     
   </article><article class="item" data-search="first src/features/recognition/recognizeWebsiteDocument.test.ts Reads the fixture&#39;s required first element without an unsafe assertion.">
     <h3>first</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:118:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:138:1</code></p>
     <p>Reads the fixture&#39;s required first element without an unsafe assertion.</p>
     
   </article><article class="item" data-search="page src/features/recognition/recognizeWebsiteDocument.test.ts Reads a named recognized page from the canonical acceptance output.">
     <h3>page</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:125:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:145:1</code></p>
     <p>Reads a named recognized page from the canonical acceptance output.</p>
+    
+  </article><article class="item" data-search="pageFor src/features/recognition/recognizeWebsiteDocument.test.ts Reads one public recognition page by its stable observed identity.">
+    <h3>pageFor</h3>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:155:1</code></p>
+    <p>Reads one public recognition page by its stable observed identity.</p>
     
   </article><article class="item" data-search="node src/features/recognition/recognizeWebsiteDocument.test.ts Reads one source-qualified node from a recognized page.">
     <h3>node</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:135:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:165:1</code></p>
     <p>Reads one source-qualified node from a recognized page.</p>
     
   </article><article class="item" data-search="childrenOf src/features/recognition/recognizeWebsiteDocument.test.ts Selects direct child UI nodes of one semantic type without flattening hierarchy.">
     <h3>childrenOf</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:142:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:172:1</code></p>
     <p>Selects direct child UI nodes of one semantic type without flattening hierarchy.</p>
     
   </article><article class="item" data-search="expectSourceOnlyMedia src/features/recognition/recognizeWebsiteDocument.test.ts Verifies that an observed asset without an owning source stays visible in the public DTO.">
     <h3>expectSourceOnlyMedia</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:150:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:180:1</code></p>
     <p>Verifies that an observed asset without an owning source stays visible in the public DTO.</p>
     
   </article><article class="item" data-search="expectTabletGrid src/features/recognition/recognizeWebsiteDocument.test.ts Verifies the measured tablet grid evidence without inferring an authored breakpoint.">
     <h3>expectTabletGrid</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:160:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:190:1</code></p>
     <p>Verifies the measured tablet grid evidence without inferring an authored breakpoint.</p>
     
   </article><article class="item" data-search="uiNode src/features/recognition/recognizeWebsiteDocument.test.ts Finds a source-qualified UI node without collapsing its observed hierarchy.">
     <h3>uiNode</h3>
-    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:173:1</code></p>
+    <p class="muted"><code>src/features/recognition/recognizeWebsiteDocument.test.ts:203:1</code></p>
     <p>Finds a source-qualified UI node without collapsing its observed hierarchy.</p>
     
   </article>
@@ -6617,32 +6626,32 @@
       <h2>src/features/website-recognition/recognizeWebsiteStructure.test.ts</h2>
       <article class="item" data-search="recognizedPage src/features/website-recognition/recognizeWebsiteStructure.test.ts Returns the single recognition page produced by a complete fixture document.">
     <h3>recognizedPage</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:107:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:155:1</code></p>
     <p>Returns the single recognition page produced by a complete fixture document.</p>
     
   </article><article class="item" data-search="recognizedNode src/features/website-recognition/recognizeWebsiteStructure.test.ts Gets a source-derived recognition node or fails with its missing source identity.">
     <h3>recognizedNode</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:114:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:162:1</code></p>
     <p>Gets a source-derived recognition node or fails with its missing source identity.</p>
     
   </article><article class="item" data-search="recognizedSourceRefs src/features/website-recognition/recognizeWebsiteStructure.test.ts Collects every source reference retained by recognized nodes.">
     <h3>recognizedSourceRefs</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:121:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:169:1</code></p>
     <p>Collects every source reference retained by recognized nodes.</p>
     
   </article><article class="item" data-search="normalizeTree src/features/website-recognition/recognizeWebsiteStructure.test.ts Removes source-only identity while retaining full semantic tree structure and props.">
     <h3>normalizeTree</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:126:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:174:1</code></p>
     <p>Removes source-only identity while retaining full semantic tree structure and props.</p>
     
   </article><article class="item" data-search="containsUiNode src/features/website-recognition/recognizeWebsiteStructure.test.ts Finds a source-derived UI node without dropping descendants of an unresolved parent.">
     <h3>containsUiNode</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:131:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:179:1</code></p>
     <p>Finds a source-derived UI node without dropping descendants of an unresolved parent.</p>
     
   </article><article class="item" data-search="removeSourceIdentity src/features/website-recognition/recognizeWebsiteStructure.test.ts Removes source-derived node and property references from semantic comparisons.">
     <h3>removeSourceIdentity</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:139:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.test.ts:187:1</code></p>
     <p>Removes source-derived node and property references from semantic comparisons.</p>
     
   </article>
@@ -6695,25 +6704,25 @@
     <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:190:1</code></p>
     <p>Maps observed DOM semantics and measured layout traits to already representable UI components.</p>
     
-  </article><article class="item" data-search="isGroupedCard src/features/website-recognition/recognizeWebsiteStructure.ts Recognizes a card only when a measured sibling group shares explicit surface traits.">
-    <h3>isGroupedCard</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:213:1</code></p>
-    <p>Recognizes a card only when a measured sibling group shares explicit surface traits.</p>
+  </article><article class="item" data-search="isCard src/features/website-recognition/recognizeWebsiteStructure.ts Recognizes one rendered layout child with an independently visible surface boundary as a card.">
+    <h3>isCard</h3>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:214:1</code></p>
+    <p>Recognizes one rendered layout child with an independently visible surface boundary as a card.</p>
     
-  </article><article class="item" data-search="meaningfulChildren src/features/website-recognition/recognizeWebsiteStructure.ts Flattens transparent DOM wrappers before measuring the source siblings in a layout group.">
-    <h3>meaningfulChildren</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:224:1</code></p>
-    <p>Flattens transparent DOM wrappers before measuring the source siblings in a layout group.</p>
+  </article><article class="item" data-search="ownsNestedSurfaceLayout src/features/website-recognition/recognizeWebsiteStructure.ts Keeps a layout container distinct when it owns independently bounded layout children.">
+    <h3>ownsNestedSurfaceLayout</h3>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:228:1</code></p>
+    <p>Keeps a layout container distinct when it owns independently bounded layout children.</p>
+    
+  </article><article class="item" data-search="isGenericSurfaceNode src/features/website-recognition/recognizeWebsiteStructure.ts Limits nested layout ownership to generic wrappers so semantic content never hides its card root.">
+    <h3>isGenericSurfaceNode</h3>
+    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:240:1</code></p>
+    <p>Limits nested layout ownership to generic wrappers so semantic content never hides its card root.</p>
     
   </article><article class="item" data-search="isLayoutGroup src/features/website-recognition/recognizeWebsiteStructure.ts Tests whether a parent has measured Grid or Flex grouping semantics.">
     <h3>isLayoutGroup</h3>
-    <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:238:1</code></p>
-    <p>Tests whether a parent has measured Grid or Flex grouping semantics.</p>
-    
-  </article><article class="item" data-search="isCardSurface src/features/website-recognition/recognizeWebsiteStructure.ts Requires padding plus radius, border, or shadow so colored columns are not invented as cards.">
-    <h3>isCardSurface</h3>
     <p class="muted"><code>src/features/website-recognition/recognizeWebsiteStructure.ts:244:1</code></p>
-    <p>Requires padding plus radius, border, or shadow so colored columns are not invented as cards.</p>
+    <p>Tests whether a parent has measured Grid or Flex grouping semantics.</p>
     
   </article>
     </section>
@@ -6747,52 +6756,107 @@
     
   </article><article class="item" data-search="availableObservation src/features/website-recognition/websiteStructureEvidence.ts Selects a visible available observation deterministically without inventing a missing style.">
     <h3>availableObservation</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:24:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:27:1</code></p>
     <p>Selects a visible available observation deterministically without inventing a missing style.</p>
     
-  </article><article class="item" data-search="hasCardSurface src/features/website-recognition/websiteStructureEvidence.ts Requires padding plus radius, border, or shadow so colored columns are not invented as cards.">
+  </article><article class="item" data-search="isVisibleObservation src/features/website-recognition/websiteStructureEvidence.ts Tests whether one observation proves a rendered, visible CSS box.">
+    <h3>isVisibleObservation</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:51:1</code></p>
+    <p>Tests whether one observation proves a rendered, visible CSS box.</p>
+    
+  </article><article class="item" data-search="hasCardSurface src/features/website-recognition/websiteStructureEvidence.ts Finds a visible node-owned surface boundary without inferring one from padding or radius.">
     <h3>hasCardSurface</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:48:1</code></p>
-    <p>Requires padding plus radius, border, or shadow so colored columns are not invented as cards.</p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:66:1</code></p>
+    <p>Finds a visible node-owned surface boundary without inferring one from padding or radius.</p>
+    
+  </article><article class="item" data-search="hasDividerEvidence src/features/website-recognition/websiteStructureEvidence.ts Identifies a visible horizontal or vertical line with independent divider semantics or geometry.">
+    <h3>hasDividerEvidence</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:76:1</code></p>
+    <p>Identifies a visible horizontal or vertical line with independent divider semantics or geometry.</p>
+    
+  </article><article class="item" data-search="observationFor src/features/website-recognition/websiteStructureEvidence.ts Finds the observation for the same viewport and rendered state without mixing responsive evidence.">
+    <h3>observationFor</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:91:1</code></p>
+    <p>Finds the observation for the same viewport and rendered state without mixing responsive evidence.</p>
+    
+  </article><article class="item" data-search="hasDividerGeometry src/features/website-recognition/websiteStructureEvidence.ts Tests whether a measured rectangle has the proportions of a rendered separator line.">
+    <h3>hasDividerGeometry</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:105:1</code></p>
+    <p>Tests whether a measured rectangle has the proportions of a rendered separator line.</p>
+    
+  </article><article class="item" data-search="hasVisibleSurfaceBoundary src/features/website-recognition/websiteStructureEvidence.ts Requires one directly visible boundary feature owned by the node.">
+    <h3>hasVisibleSurfaceBoundary</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:112:1</code></p>
+    <p>Requires one directly visible boundary feature owned by the node.</p>
+    
+  </article><article class="item" data-search="hasVisibleBackground src/features/website-recognition/websiteStructureEvidence.ts Compares composited CSS colors so transparent backgrounds remain surface evidence when visible.">
+    <h3>hasVisibleBackground</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:127:1</code></p>
+    <p>Compares composited CSS colors so transparent backgrounds remain surface evidence when visible.</p>
+    
+  </article><article class="item" data-search="parseCssColor src/features/website-recognition/websiteStructureEvidence.ts Parses browser-computed rgb and rgba color values without fabricating color tokens.">
+    <h3>parseCssColor</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:142:1</code></p>
+    <p>Parses browser-computed rgb and rgba color values without fabricating color tokens.</p>
+    
+  </article><article class="item" data-search="compositeColor src/features/website-recognition/websiteStructureEvidence.ts Composites a foreground color over its observed parent background.">
+    <h3>compositeColor</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:166:1</code></p>
+    <p>Composites a foreground color over its observed parent background.</p>
+    
+  </article><article class="item" data-search="compositeChannel src/features/website-recognition/websiteStructureEvidence.ts ">
+    <h3>compositeChannel</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:169:9</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="sameColor src/features/website-recognition/websiteStructureEvidence.ts Compares parsed colors with a small tolerance for browser-computed floating point values.">
+    <h3>sameColor</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:182:1</code></p>
+    <p>Compares parsed colors with a small tolerance for browser-computed floating point values.</p>
+    
+  </article><article class="item" data-search="hasVisibleBoxShadow src/features/website-recognition/websiteStructureEvidence.ts Excludes shadows whose entire computed color is transparent.">
+    <h3>hasVisibleBoxShadow</h3>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:192:1</code></p>
+    <p>Excludes shadows whose entire computed color is transparent.</p>
     
   </article><article class="item" data-search="hasVisualRole src/features/website-recognition/websiteStructureEvidence.ts Tests whether a visible observation gives a generic node a layout or surface role.">
     <h3>hasVisualRole</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:61:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:197:1</code></p>
     <p>Tests whether a visible observation gives a generic node a layout or surface role.</p>
     
   </article><article class="item" data-search="isTransparentWrapper src/features/website-recognition/websiteStructureEvidence.ts Identifies wrappers only when complete observations prove no independent role.">
     <h3>isTransparentWrapper</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:67:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:203:1</code></p>
     <p>Identifies wrappers only when complete observations prove no independent role.</p>
     
   </article><article class="item" data-search="isTransparentObservation src/features/website-recognition/websiteStructureEvidence.ts Requires usable CSS evidence and excludes every measured layout or surface role.">
     <h3>isTransparentObservation</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:84:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:220:1</code></p>
     <p>Requires usable CSS evidence and excludes every measured layout or surface role.</p>
     
   </article><article class="item" data-search="hasLayoutRole src/features/website-recognition/websiteStructureEvidence.ts Identifies layout evidence that gives an otherwise generic container a real component role.">
     <h3>hasLayoutRole</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:94:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:230:1</code></p>
     <p>Identifies layout evidence that gives an otherwise generic container a real component role.</p>
     
   </article><article class="item" data-search="hasSurfaceRole src/features/website-recognition/websiteStructureEvidence.ts Identifies measured border, radius, background, or shadow evidence for a visual container.">
     <h3>hasSurfaceRole</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:107:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:243:1</code></p>
     <p>Identifies measured border, radius, background, or shadow evidence for a visual container.</p>
     
   </article><article class="item" data-search="hasNonZeroEdge src/features/website-recognition/websiteStructureEvidence.ts Tests CSS box edges without parsing or normalizing their original literals.">
     <h3>hasNonZeroEdge</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:119:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:255:1</code></p>
     <p>Tests CSS box edges without parsing or normalizing their original literals.</p>
     
   </article><article class="item" data-search="hasNonZeroCssValue src/features/website-recognition/websiteStructureEvidence.ts Detects non-zero CSS literals while preserving their exact source value elsewhere.">
     <h3>hasNonZeroCssValue</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:129:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:265:1</code></p>
     <p>Detects non-zero CSS literals while preserving their exact source value elsewhere.</p>
     
   </article><article class="item" data-search="isTransparentColor src/features/website-recognition/websiteStructureEvidence.ts Recognizes transparent computed-color forms without assigning a color token.">
     <h3>isTransparentColor</h3>
-    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:134:1</code></p>
+    <p class="muted"><code>src/features/website-recognition/websiteStructureEvidence.ts:270:1</code></p>
     <p>Recognizes transparent computed-color forms without assigning a color token.</p>
     
   </article>
