@@ -127,7 +127,7 @@ export function createVisibleCardAndDividerDocument(): WebsiteObservationDocumen
         rect: { height: 400, width: 1200, x: 0, y: 0 },
       }),
       node('marketing', 'surface:layout', 0, 'div', { backgroundColor: 'rgb(255, 221, 0)' }),
-      node('design', 'surface:layout', 1, 'div', { borderWidth: '1px' }),
+      node('design', 'surface:layout', 1, 'div', { backgroundColor: 'rgb(243, 245, 250)' }),
       node('wrapper', 'surface:layout', 2, 'div', {}),
       node('realization', 'surface:wrapper', 0, 'div', { boxShadow: '0 4px 12px rgb(0, 0, 0)' }),
       node('websites', 'surface:layout', 3, 'div', {
@@ -342,6 +342,19 @@ export function createCardAndDividerEvidenceDocument(): WebsiteObservationDocume
         borderColor: 'rgba(0, 0, 0, 0)',
         borderWidth: '1px',
       }),
+      node('four-sided-border', 'surface:layout', 5, 'div', { borderWidth: '1px' }),
+      node(
+        'copyright-border',
+        'surface:layout',
+        6,
+        'div',
+        {
+          borderWidth: '1px 0px 0px',
+          padding: { bottom: '10px', left: '10px', right: '10px', top: '10px' },
+        },
+        '© 2026 All rights reserved.',
+      ),
+      node('plain-cell', 'surface:layout', 7, 'div', {}),
       node('hr', 'surface:main', 1, 'hr', {
         borderWidth: '1px',
         rect: { height: 1, width: 240, x: 0, y: 500 },

@@ -6,7 +6,9 @@ import type {
   WebsitePageRecognition,
   WebsiteRecognizedNode,
 } from '@ankhorage/contracts/website';
+import { evaluateRules } from '@ankhorage/rules';
 
+import { createWebsiteRecognitionRuleSet } from './createWebsiteRecognitionRuleSet';
 import { recognizeWebsiteStructureProps } from './recognizeWebsiteStructureProps';
 import { websiteStructureEvidence } from './websiteStructureEvidence';
 import { recognizeWebsiteStructureSemanticComponentType } from './websiteStructureSemantics';
@@ -249,38 +251,16 @@ function recognizeComponentType(
   return websiteStructureEvidence(node).hasVisualRole ? 'Container' : 'Unknown';
 }
 
-/*** Recognizes one rendered layout child with an independently visible surface boundary as a card. */
+/*** Evaluates the versioned canonical Card rule before committing a primary module type. */
 function isCard(
   node: WebsiteObservedNode,
   parent: WebsiteObservedNode | null,
   childNodesByParent: ReadonlyMap<string, readonly WebsiteObservedNode[]>,
 ): boolean {
-  return (
-    parent !== null &&
-    isLayoutGroup(parent) &&
-    websiteStructureEvidence(node, [], parent).hasCardSurface &&
-    !ownsNestedSurfaceLayout(node, childNodesByParent)
+  const evaluation = evaluateRules(
+    { childNodesByParent, node, parent },
+    createWebsiteRecognitionRuleSet().rules,
+    { scope: { id: node.sourceRef, kind: 'website-node' } },
   );
-}
-
-/*** Keeps a layout container distinct when it owns independently bounded layout children. */
-function ownsNestedSurfaceLayout(
-  node: WebsiteObservedNode,
-  childNodesByParent: ReadonlyMap<string, readonly WebsiteObservedNode[]>,
-): boolean {
-  if (!isLayoutGroup(node)) return false;
-  return (childNodesByParent.get(node.sourceRef) ?? []).some(
-    (child) =>
-      isGenericSurfaceNode(child) && websiteStructureEvidence(child, [], node).hasCardSurface,
-  );
-}
-
-/*** Limits nested layout ownership to generic wrappers so semantic content never hides its card root. */
-function isGenericSurfaceNode(node: WebsiteObservedNode): boolean {
-  return ['div', 'span'].includes(node.dom.tagName.toLowerCase());
-}
-/*** Tests whether a parent has measured Grid or Flex grouping semantics. */
-function isLayoutGroup(node: WebsiteObservedNode): boolean {
-  const css = websiteStructureEvidence(node).availableObservation?.css;
-  return css === null || css === undefined ? false : /grid|flex/.test(css.display);
+  return evaluation.results.some((result) => result.status === 'PASS');
 }
