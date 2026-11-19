@@ -6,9 +6,11 @@ export function websiteStructureEvidence(
   children: readonly WebsiteObservedNode[] = [],
   parent: WebsiteObservedNode | null = null,
 ): WebsiteStructureEvidence {
+  const cardSurfaceReasons = cardSurfaceReasonsForNode(node, parent);
   return {
     availableObservation: availableObservation(node),
-    hasCardSurface: hasCardSurface(node, parent),
+    cardSurfaceReasons,
+    hasCardSurface: cardSurfaceReasons.length > 0,
     hasDividerEvidence: hasDividerEvidence(node),
     hasVisualRole: hasVisualRole(node),
     isTransparentWrapper: isTransparentWrapper(node, children),
@@ -17,6 +19,7 @@ export function websiteStructureEvidence(
 
 interface WebsiteStructureEvidence {
   readonly availableObservation: WebsiteNodeObservation | null;
+  readonly cardSurfaceReasons: readonly string[];
   readonly hasCardSurface: boolean;
   readonly hasDividerEvidence: boolean;
   readonly hasVisualRole: boolean;
@@ -62,14 +65,23 @@ function isVisibleObservation(observation: WebsiteNodeObservation): boolean {
   );
 }
 
-/*** Finds a visible node-owned surface boundary without inferring one from padding or radius. */
-function hasCardSurface(node: WebsiteObservedNode, parent: WebsiteObservedNode | null): boolean {
-  return node.observations.some((observation) => {
-    const parentObservation = parent === null ? null : observationFor(parent, observation);
-    return (
-      isVisibleObservation(observation) && hasOwnedCardSurface(observation, parentObservation)
-    );
-  });
+/*** Finds all independently owned Card-surface signals across visible viewport observations. */
+function cardSurfaceReasonsForNode(
+  node: WebsiteObservedNode,
+  parent: WebsiteObservedNode | null,
+): readonly string[] {
+  return [
+    ...new Set(
+      node.observations.flatMap((observation) =>
+        isVisibleObservation(observation)
+          ? cardSurfaceReasonsForObservation(
+              observation,
+              parent === null ? null : observationFor(parent, observation),
+            )
+          : [],
+      ),
+    ),
+  ];
 }
 
 /*** Identifies a visible horizontal or vertical line with independent divider semantics or geometry. */
@@ -108,18 +120,28 @@ function hasDividerGeometry(width: number, height: number): boolean {
   return shorterSide <= 4 && longerSide >= 16 && longerSide / Math.max(shorterSide, 1) >= 8;
 }
 
-/*** Recognizes a node-owned visible card surface without promoting borders or radius. */
+/*** Lists reusable visual-surface predicates; borders, radius and padding cannot match. */
+function cardSurfaceReasonsForObservation(
+  observation: WebsiteNodeObservation,
+  parentObservation: WebsiteNodeObservation | null,
+): readonly string[] {
+  const { css } = observation;
+  if (css === null) return [];
+  return [
+    ...(hasVisibleBackground(css.backgroundColor, parentObservation?.css?.backgroundColor ?? null)
+      ? ['background-color']
+      : []),
+    ...(css.backgroundImage !== 'none' ? ['background-image'] : []),
+    ...(hasVisibleBoxShadow(css.boxShadow) ? ['box-shadow'] : []),
+  ];
+}
+
+/*** Shares the same owned-surface predicates with independent divider evidence. */
 function hasOwnedCardSurface(
   observation: WebsiteNodeObservation,
   parentObservation: WebsiteNodeObservation | null,
 ): boolean {
-  const { css } = observation;
-  if (css === null) return false;
-  return (
-    hasVisibleBackground(css.backgroundColor, parentObservation?.css?.backgroundColor ?? null) ||
-    css.backgroundImage !== 'none' ||
-    hasVisibleBoxShadow(css.boxShadow)
-  );
+  return cardSurfaceReasonsForObservation(observation, parentObservation).length > 0;
 }
 
 /*** Retains visible border evidence for actual dividers, not card classification. */
