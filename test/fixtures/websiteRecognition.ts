@@ -70,7 +70,7 @@ export function createColoredColumnsDocument(): WebsiteObservationDocument {
   const node = nodeFactory('colored');
   return createDocumentWithNodes([
     node('main', null, 0, 'main', observation('block')),
-    node('grid', 'colored:main', 0, 'div', observation('grid')),
+    node('grid', 'colored:main', 0, 'div', coloredObservation()),
     node('one', 'colored:grid', 0, 'div', coloredObservation()),
     node('two', 'colored:grid', 1, 'div', coloredObservation()),
     node('three', 'colored:grid', 2, 'div', coloredObservation()),
@@ -112,6 +112,170 @@ export function createIncompleteWrapperEvidenceDocument(): WebsiteObservationDoc
       text: 'Kept child',
     }),
   ]);
+}
+
+/*** Creates the three-viewport card and divider evidence used by the website recognition boundary. */
+export function createVisibleCardAndDividerDocument(): WebsiteObservationDocument {
+  const base = createDocument('static').pages[0]!.nodes[0]!;
+  const node = cardFixtureNodeFactory(base);
+  return withResponsiveViewports(
+    createDocumentWithNodes([
+      node('main', null, 0, 'main', { display: 'block' }),
+      node('layout', 'surface:main', 0, 'div', {
+        backgroundColor: 'rgb(255, 255, 255)',
+        display: 'grid',
+        rect: { height: 400, width: 1200, x: 0, y: 0 },
+      }),
+      node('marketing', 'surface:layout', 0, 'div', { backgroundColor: 'rgb(255, 221, 0)' }),
+      node('design', 'surface:layout', 1, 'div', { borderWidth: '1px' }),
+      node('wrapper', 'surface:layout', 2, 'div', {}),
+      node('realization', 'surface:wrapper', 0, 'div', { boxShadow: '0 4px 12px rgb(0, 0, 0)' }),
+      node('websites', 'surface:layout', 3, 'div', {
+        backgroundColor: 'rgba(0, 90, 255, 0.8)',
+        display: 'flex',
+      }),
+      node('marketing-heading', 'surface:marketing', 0, 'h3', {}, 'Marketing'),
+      node('marketing-subtitle', 'surface:marketing', 1, 'span', {}, 'Strategy'),
+      node('design-heading', 'surface:design', 0, 'h3', {}, 'Entwurf und Layout'),
+      node('design-copy', 'surface:design', 1, 'p', {}, 'Design that lasts'),
+      node('realization-heading', 'surface:realization', 0, 'h3', {}, 'Realisierung'),
+      node('websites-heading', 'surface:websites', 0, 'h3', {}, 'Websites'),
+      node('websites-copy', 'surface:websites', 1, 'span', {}, 'Responsive experiences'),
+      node('divider', 'surface:main', 1, 'span', {
+        backgroundColor: 'rgb(0, 0, 0)',
+        rect: { height: 2, width: 96, x: 0, y: 620 },
+      }),
+    ]),
+  );
+}
+
+/*** Creates positive and negative isolated surface cases without relying on sibling repetition. */
+export function createCardAndDividerEvidenceDocument(): WebsiteObservationDocument {
+  const base = createDocument('static').pages[0]!.nodes[0]!;
+  const node = cardFixtureNodeFactory(base);
+  return withResponsiveViewports(
+    createDocumentWithNodes([
+      node('main', null, 0, 'main', {}),
+      node('layout', 'surface:main', 0, 'div', {
+        backgroundColor: 'rgb(255, 255, 255)',
+        display: 'grid',
+        rect: { height: 400, width: 1200, x: 0, y: 0 },
+      }),
+      node('empty', 'surface:layout', 0, 'div', { backgroundColor: 'rgb(255, 221, 0)' }),
+      node('image', 'surface:layout', 1, 'div', { backgroundImage: 'url("card.png")' }),
+      node('radius-only', 'surface:layout', 2, 'div', { borderRadius: '12px' }),
+      node('same-background', 'surface:layout', 3, 'div', {
+        backgroundColor: 'rgb(255, 255, 255)',
+      }),
+      node('invisible-border', 'surface:layout', 4, 'div', {
+        borderColor: 'rgba(0, 0, 0, 0)',
+        borderWidth: '1px',
+      }),
+      node('hr', 'surface:main', 1, 'hr', {
+        borderWidth: '1px',
+        rect: { height: 1, width: 240, x: 0, y: 500 },
+      }),
+      node('aria', 'surface:main', 2, 'div', {
+        backgroundColor: 'rgb(0, 0, 0)',
+        rect: { height: 2, width: 240, x: 0, y: 520 },
+        role: 'separator',
+      }),
+      node('css-line', 'surface:main', 3, 'span', {
+        backgroundColor: 'rgb(0, 0, 0)',
+        rect: { height: 2, width: 240, x: 0, y: 540 },
+      }),
+      node('section-border', 'surface:main', 4, 'div', { borderWidth: '1px' }),
+      node('hidden-line', 'surface:main', 5, 'span', {
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        rect: { height: 2, width: 240, x: 0, y: 560 },
+      }),
+    ]),
+  );
+}
+
+/*** Declares the observed desktop, tablet, and mobile viewports retained by the card fixture. */
+function withResponsiveViewports(document: WebsiteObservationDocument): WebsiteObservationDocument {
+  const [page] = document.pages;
+  if (page === undefined) throw new Error('Expected one fixture page.');
+  return {
+    ...document,
+    pages: [
+      {
+        ...page,
+        viewports: [
+          { devicePixelRatio: 1, height: 900, id: 'desktop', width: 1440 },
+          { devicePixelRatio: 1, height: 1024, id: 'tablet', width: 768 },
+          { devicePixelRatio: 1, height: 844, id: 'mobile', width: 390 },
+        ],
+      },
+    ],
+  };
+}
+
+/*** Builds source-linked fixture nodes with desktop, tablet, and mobile evidence. */
+function cardFixtureNodeFactory(base: WebsiteObservedNode) {
+  return (
+    name: string,
+    parent: string | null,
+    childIndex: number,
+    tagName: string,
+    overrides: Partial<WebsiteComputedCss> & {
+      readonly rect?: WebsiteNodeObservation['rect'];
+      readonly role?: string;
+    },
+    text?: string,
+  ): WebsiteObservedNode => {
+    const sourceRef = `surface:${name}`;
+    const rect = overrides.rect ?? { height: 160, width: 280, x: childIndex * 300, y: 0 };
+    const { rect: _rect, role, ...cssOverrides } = overrides;
+    return {
+      ...base,
+      dom: { attributes: role === undefined ? {} : { role }, childIndex, tagName },
+      links: [],
+      media: [],
+      observations: cardFixtureObservations(base, cssOverrides, rect, role),
+      parentSourceRef: parent,
+      sourceRef,
+      textRuns:
+        text === undefined
+          ? []
+          : [{ end: text.length, sourceRef: `${sourceRef}:text`, start: 0, text }],
+    };
+  };
+}
+
+/*** Retains responsive observations, including a mobile layout shift, for every fixture node. */
+function cardFixtureObservations(
+  base: WebsiteObservedNode,
+  overrides: Partial<WebsiteComputedCss>,
+  rect: WebsiteNodeObservation['rect'],
+  role: string | undefined,
+): readonly WebsiteNodeObservation[] {
+  const observation = base.observations[0]!;
+  const css = observation.css!;
+  return [
+    {
+      ...observation,
+      css: { ...css, ...overrides },
+      rect,
+      semanticAttributes: role === undefined ? undefined : { role },
+      viewportId: 'desktop',
+    },
+    {
+      ...observation,
+      css: { ...css, ...overrides },
+      rect,
+      semanticAttributes: role === undefined ? undefined : { role },
+      viewportId: 'tablet',
+    },
+    {
+      ...observation,
+      css: { ...css, ...overrides, ...(overrides.display === 'grid' ? { display: 'flex' } : {}) },
+      rect,
+      semanticAttributes: role === undefined ? undefined : { role },
+      viewportId: 'mobile',
+    },
+  ];
 }
 
 /*** Creates invalid parent, cycle, and missing-observation evidence. */
@@ -226,7 +390,15 @@ function observation(display: string): WebsiteNodeObservation {
 
 /*** Creates card-surface evidence. */
 function cardObservation(): WebsiteNodeObservation {
-  return { ...observation('block'), css: { ...css, borderRadius: '12px', padding: edges('24px') } };
+  return {
+    ...observation('block'),
+    css: {
+      ...css,
+      backgroundColor: 'rgb(250, 250, 250)',
+      borderRadius: '12px',
+      padding: edges('24px'),
+    },
+  };
 }
 
 /*** Creates colored but non-card evidence. */
