@@ -1,5 +1,5 @@
 ---
-'@ankhorage/rules-design': patch
+'@ankhorage/rules-design': minor
 ---
 
-Classify cards by their own visible background or shadow, not decorative borders or corner radius.
+Define versioned website Card recognition through the canonical Rules evaluator with reusable, inspectable owned-background and shadow signals. Decorative borders and radius no longer imply Cards.
