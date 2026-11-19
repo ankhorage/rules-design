@@ -145,6 +145,9 @@ test('recognizes empty and image surfaces but excludes radius, equal backgrounds
   expect(recognizedNode(page, 'surface:radius-only').componentType).not.toBe('Card');
   expect(recognizedNode(page, 'surface:same-background').componentType).not.toBe('Card');
   expect(recognizedNode(page, 'surface:invisible-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:four-sided-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:copyright-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:plain-cell').componentType).not.toBe('Card');
   expect(
     ['surface:hr', 'surface:aria', 'surface:css-line'].map(
       (sourceRef) => recognizedNode(page, sourceRef).componentType,
