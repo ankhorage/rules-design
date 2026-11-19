@@ -7,11 +7,14 @@ import { expect, test } from 'bun:test';
 import expectedRecognition from '../../../test/fixtures/website-recognition-expected.v1.json' with { type: 'json' };
 import observationDocument from '../../../test/fixtures/website-recognition-observation.v1.json' with { type: 'json' };
 import { websiteObservationDocumentFixture } from '../../../test/fixtures/websiteObservationDocument';
-import { createVisibleCardAndDividerDocument } from '../../../test/fixtures/websiteRecognition';
+import {
+  createVisibleCardAndDividerDocument,
+  createWebsiteRegionDocument,
+} from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
-  '498457ccf0bf1d10c2a32c358c836d0fd0feea0a5a862d4edcb72e7ac1b4c13c';
+  '2bf47aca86764d0927e4cee4854f1599f8ff0589fc2c16f120a5c20fc806e5b9';
 const canonicalObservation = observationDocument as unknown as WebsiteObservationDocument;
 
 test('matches the immutable canonical two-page website recognition JSON acceptance fixture', async () => {
@@ -126,6 +129,54 @@ test('retains source and responsive evidence for visible cards and CSS dividers 
   ).toBe(true);
 });
 
+test('retains region source refs and responsive navigation evidence through the public recognizer', () => {
+  const recognition = recognizeWebsiteDocument(createWebsiteRegionDocument());
+  const page = pageFor(recognition, 'home');
+  const primaryNavigation = node(page, '["home","surface:primary-nav"]');
+  const mobileNavigation = node(page, '["home","surface:mobile-nav"]');
+  const footerCard = node(page, '["home","surface:footer-cta"]');
+
+  expect(
+    ['surface:header', 'surface:main', 'surface:footer'].map(
+      (sourceRef) => node(page, JSON.stringify(['home', sourceRef])).componentType,
+    ),
+  ).toEqual(['Header', 'Main', 'Footer']);
+  expect(primaryNavigation.componentType).toBe('Nav');
+  expect(primaryNavigation.sourceRefs).toEqual(['["home","surface:primary-nav"]']);
+  expect(primaryNavigation.props.find((property) => property.name === 'links')?.value).toEqual([
+    {
+      label: 'Startseite',
+      sourceRef: '["home","surface:primary-nav:link:0"]',
+      url: 'https://stage.pixelbrandworks.ch/',
+    },
+    {
+      label: 'Produkte',
+      sourceRef: '["home","surface:primary-nav:link:1"]',
+      url: 'https://stage.pixelbrandworks.ch/produkte/',
+    },
+    {
+      label: 'Über mich',
+      sourceRef: '["home","surface:primary-nav:link:2"]',
+      url: 'https://stage.pixelbrandworks.ch/ueber-mich/',
+    },
+    {
+      label: 'Kontakt',
+      sourceRef: '["home","surface:primary-nav:link:3"]',
+      url: 'https://stage.pixelbrandworks.ch/kontakt/',
+    },
+  ]);
+  expect(displayAt(primaryNavigation, 'mobile')).toBe('none');
+  expect(displayAt(mobileNavigation, 'mobile')).toBe('flex');
+  expect(mobileNavigation.props.find((property) => property.name === 'display')?.value).toBe(
+    'none',
+  );
+  expect(footerCard.componentType).toBe('Card');
+  expect(footerCard.sourceRefs).toEqual(['["home","surface:footer-cta"]']);
+  expect(footerCard.props.find((property) => property.name === 'backgroundColor')?.value).toBe(
+    'rgb(25, 25, 25)',
+  );
+});
+
 /*** Confirms that serialized source identities retain both page and source components. */
 function isQualified(value: string): boolean {
   const parsed: unknown = JSON.parse(value);
@@ -197,6 +248,13 @@ function expectTabletGrid(recognizedNode: ReturnType<typeof node>): void {
           property.value === 'repeat(2, minmax(0px, 1fr))',
       ),
   ).toBe(true);
+}
+
+/*** Reads one viewport-specific display sample without pretending responsive alternatives are absent. */
+function displayAt(recognizedNode: ReturnType<typeof node>, viewportId: string): unknown {
+  return recognizedNode.responsive
+    .find((variant) => variant.viewportId === viewportId)
+    ?.props.find((property) => property.name === 'display')?.value;
 }
 
 /*** Finds a source-qualified UI node without collapsing its observed hierarchy. */

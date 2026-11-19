@@ -999,8 +999,8 @@
       "id": "home",
       "nodes": [
         {
-          "componentType": "Grid",
-          "confidence": 0.98,
+          "componentType": "Main",
+          "confidence": 1,
           "id": "[\"home\",\"#page\"]",
           "props": [
             {
@@ -1972,8 +1972,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Container",
-          "confidence": 0.8,
+          "componentType": "Nav",
+          "confidence": 1,
           "id": "[\"home\",\"#nav\"]",
           "props": [
             {
@@ -7933,7 +7933,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Container"
+                "type": "Nav"
               },
               {
                 "children": [
@@ -8960,7 +8960,7 @@
               "textDecoration": "none solid rgb(17, 17, 17)",
               "visibility": "visible"
             },
-            "type": "Grid"
+            "type": "Main"
           }
         ],
         "id": "[\"home\",\"home:root\"]",
@@ -8972,8 +8972,8 @@
       "id": "about",
       "nodes": [
         {
-          "componentType": "Grid",
-          "confidence": 0.98,
+          "componentType": "Main",
+          "confidence": 1,
           "id": "[\"about\",\"#page\"]",
           "props": [
             {
@@ -9945,8 +9945,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Container",
-          "confidence": 0.8,
+          "componentType": "Nav",
+          "confidence": 1,
           "id": "[\"about\",\"#nav\"]",
           "props": [
             {
@@ -15906,7 +15906,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Container"
+                "type": "Nav"
               },
               {
                 "children": [
@@ -16933,7 +16933,7 @@
               "textDecoration": "none solid rgb(17, 17, 17)",
               "visibility": "visible"
             },
-            "type": "Grid"
+            "type": "Main"
           }
         ],
         "id": "[\"about\",\"about:root\"]",
