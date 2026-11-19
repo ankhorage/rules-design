@@ -1,5 +1,4 @@
 import type { UiNode } from '@ankhorage/contracts';
-import { evaluateRules } from '@ankhorage/rules';
 import type {
   WebsiteObservationDocument,
   WebsiteObservedNode,
@@ -7,6 +6,7 @@ import type {
   WebsitePageRecognition,
   WebsiteRecognizedNode,
 } from '@ankhorage/contracts/website';
+import { evaluateRules } from '@ankhorage/rules';
 
 import { createWebsiteRecognitionRuleSet } from './createWebsiteRecognitionRuleSet';
 import { recognizeWebsiteStructureProps } from './recognizeWebsiteStructureProps';
