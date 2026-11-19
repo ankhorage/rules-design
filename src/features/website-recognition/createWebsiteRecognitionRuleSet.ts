@@ -55,7 +55,8 @@ function ownsNestedSurfaceLayout(
 ): boolean {
   if (!isLayoutGroup(node)) return false;
   return (childNodesByParent.get(node.sourceRef) ?? []).some(
-    (child) => isGenericSurfaceNode(child) && websiteStructureEvidence(child, [], node).hasCardSurface,
+    (child) =>
+      isGenericSurfaceNode(child) && websiteStructureEvidence(child, [], node).hasCardSurface,
   );
 }
 
