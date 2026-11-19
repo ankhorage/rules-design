@@ -343,10 +343,17 @@ export function createCardAndDividerEvidenceDocument(): WebsiteObservationDocume
         borderWidth: '1px',
       }),
       node('four-sided-border', 'surface:layout', 5, 'div', { borderWidth: '1px' }),
-      node('copyright-border', 'surface:layout', 6, 'div', {
-        borderWidth: '1px 0px 0px',
-        padding: { bottom: '10px', left: '10px', right: '10px', top: '10px' },
-      }, '© 2026 All rights reserved.'),
+      node(
+        'copyright-border',
+        'surface:layout',
+        6,
+        'div',
+        {
+          borderWidth: '1px 0px 0px',
+          padding: { bottom: '10px', left: '10px', right: '10px', top: '10px' },
+        },
+        '© 2026 All rights reserved.',
+      ),
       node('plain-cell', 'surface:layout', 7, 'div', {}),
       node('hr', 'surface:main', 1, 'hr', {
         borderWidth: '1px',
