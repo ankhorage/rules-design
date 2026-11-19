@@ -3,11 +3,13 @@ import type { WebsitePageRecognition } from '@ankhorage/contracts/website';
 import { expect, test } from 'bun:test';
 
 import {
+  createCardAndDividerEvidenceDocument,
   createColoredColumnsDocument,
   createComplexLayoutDocument,
   createDocument,
   createIncompleteWrapperEvidenceDocument,
   createMalformedDocument,
+  createVisibleCardAndDividerDocument,
   sourceRefsFor,
 } from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteStructure } from './recognizeWebsiteStructure.ts';
@@ -101,6 +103,52 @@ test('retains wrappers and recognized children when CSS or layout evidence is un
     containsUiNode(page.root, 'incomplete-wrapper:wrapper', 'Unknown') &&
       containsUiNode(page.root, 'incomplete-wrapper:heading', 'Heading'),
   ).toBe(true);
+});
+
+test('recognizes four independently bounded responsive cards and a provider-neutral CSS divider', () => {
+  const document = createVisibleCardAndDividerDocument();
+  const page = recognizedPage(document);
+  const cards = page.nodes.filter((node) => node.componentType === 'Card');
+
+  expect(cards.map((node) => node.id)).toEqual([
+    'surface:marketing',
+    'surface:design',
+    'surface:realization',
+    'surface:websites',
+  ]);
+  expect(recognizedNode(page, 'surface:divider').componentType).toBe('Divider');
+  expect(recognizedNode(page, 'surface:realization').sourceRefs).toEqual([
+    'surface:wrapper',
+    'surface:realization',
+  ]);
+  expect(recognizedNode(page, 'surface:websites').componentType).toBe('Card');
+  expect(page.nodes.some((node) => node.id === 'surface:wrapper')).toBe(false);
+  expect(
+    page.nodes.filter((node) => node.componentType === 'Heading').map((node) => node.id),
+  ).toEqual([
+    'surface:marketing-heading',
+    'surface:design-heading',
+    'surface:realization-heading',
+    'surface:websites-heading',
+  ]);
+  expect(document.pages[0]?.viewports.map((viewport) => viewport.width)).toEqual([1440, 768, 390]);
+});
+
+test('recognizes empty and image surfaces but excludes radius, equal backgrounds, invisible borders, and non-line borders', () => {
+  const page = recognizedPage(createCardAndDividerEvidenceDocument());
+
+  expect(recognizedNode(page, 'surface:empty').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:image').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:radius-only').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:same-background').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:invisible-border').componentType).not.toBe('Card');
+  expect(
+    ['surface:hr', 'surface:aria', 'surface:css-line'].map(
+      (sourceRef) => recognizedNode(page, sourceRef).componentType,
+    ),
+  ).toEqual(['Divider', 'Divider', 'Divider']);
+  expect(recognizedNode(page, 'surface:section-border').componentType).not.toBe('Divider');
+  expect(recognizedNode(page, 'surface:hidden-line').componentType).not.toBe('Divider');
 });
 
 /*** Returns the single recognition page produced by a complete fixture document. */

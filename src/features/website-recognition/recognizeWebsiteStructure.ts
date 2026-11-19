@@ -199,7 +199,8 @@ function recognizeComponentType(
   if (semanticType !== null) return semanticType;
   const { css } = observation;
   if (css === null) return 'Unknown';
-  if (isGroupedCard(node, parent, childNodesByParent)) return 'Card';
+  if (websiteStructureEvidence(node).hasDividerEvidence) return 'Divider';
+  if (isCard(node, parent, childNodesByParent)) return 'Card';
   if (css.display.includes('grid')) return 'Grid';
   if (css.display.includes('flex')) return 'Flex';
   if (node.media.length > 0)
@@ -209,38 +210,38 @@ function recognizeComponentType(
   return websiteStructureEvidence(node).hasVisualRole ? 'Container' : 'Unknown';
 }
 
-/*** Recognizes a card only when a measured sibling group shares explicit surface traits. */
-function isGroupedCard(
+/*** Recognizes one rendered layout child with an independently visible surface boundary as a card. */
+function isCard(
   node: WebsiteObservedNode,
   parent: WebsiteObservedNode | null,
   childNodesByParent: ReadonlyMap<string, readonly WebsiteObservedNode[]>,
 ): boolean {
-  if (parent === null || !isLayoutGroup(parent)) return false;
-  const siblings = meaningfulChildren(parent.sourceRef, childNodesByParent);
-  return siblings.length >= 2 && siblings.every(isCardSurface) && isCardSurface(node);
+  return (
+    parent !== null &&
+    isLayoutGroup(parent) &&
+    websiteStructureEvidence(node, [], parent).hasCardSurface &&
+    !ownsNestedSurfaceLayout(node, childNodesByParent)
+  );
 }
 
-/*** Flattens transparent DOM wrappers before measuring the source siblings in a layout group. */
-function meaningfulChildren(
-  parentSourceRef: string,
+/*** Keeps a layout container distinct when it owns independently bounded layout children. */
+function ownsNestedSurfaceLayout(
+  node: WebsiteObservedNode,
   childNodesByParent: ReadonlyMap<string, readonly WebsiteObservedNode[]>,
-): readonly WebsiteObservedNode[] {
-  const children = childNodesByParent.get(parentSourceRef) ?? [];
-  return children.flatMap((child) => {
-    const nestedChildren = childNodesByParent.get(child.sourceRef) ?? [];
-    return websiteStructureEvidence(child, nestedChildren).isTransparentWrapper
-      ? meaningfulChildren(child.sourceRef, childNodesByParent)
-      : [child];
-  });
+): boolean {
+  if (!isLayoutGroup(node)) return false;
+  return (childNodesByParent.get(node.sourceRef) ?? []).some(
+    (child) =>
+      isGenericSurfaceNode(child) && websiteStructureEvidence(child, [], node).hasCardSurface,
+  );
 }
 
+/*** Limits nested layout ownership to generic wrappers so semantic content never hides its card root. */
+function isGenericSurfaceNode(node: WebsiteObservedNode): boolean {
+  return ['div', 'span'].includes(node.dom.tagName.toLowerCase());
+}
 /*** Tests whether a parent has measured Grid or Flex grouping semantics. */
 function isLayoutGroup(node: WebsiteObservedNode): boolean {
   const css = websiteStructureEvidence(node).availableObservation?.css;
   return css === null || css === undefined ? false : /grid|flex/.test(css.display);
-}
-
-/*** Requires padding plus radius, border, or shadow so colored columns are not invented as cards. */
-function isCardSurface(node: WebsiteObservedNode): boolean {
-  return websiteStructureEvidence(node).hasCardSurface;
 }

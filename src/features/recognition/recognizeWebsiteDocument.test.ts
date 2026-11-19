@@ -7,6 +7,7 @@ import { expect, test } from 'bun:test';
 import expectedRecognition from '../../../test/fixtures/website-recognition-expected.v1.json' with { type: 'json' };
 import observationDocument from '../../../test/fixtures/website-recognition-observation.v1.json' with { type: 'json' };
 import { websiteObservationDocumentFixture } from '../../../test/fixtures/websiteObservationDocument';
+import { createVisibleCardAndDividerDocument } from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
@@ -106,6 +107,25 @@ test('rejects ambiguous page-local source identities instead of silently overwri
   expect(() => recognizeWebsiteDocument(invalid)).toThrow('Duplicate source reference');
 });
 
+test('retains source and responsive evidence for visible cards and CSS dividers through the public recognizer', () => {
+  const recognition = recognizeWebsiteDocument(createVisibleCardAndDividerDocument());
+  const page = pageFor(recognition, 'home');
+  const cards = page.nodes.filter((node) => node.componentType === 'Card');
+  const realization = node(page, '["home","surface:realization"]');
+
+  expect(cards).toHaveLength(4);
+  expect(page.nodes.filter((node) => node.componentType === 'Divider')).toHaveLength(1);
+  expect(realization.sourceRefs).toEqual([
+    '["home","surface:wrapper"]',
+    '["home","surface:realization"]',
+  ]);
+  expect(
+    node(page, '["home","surface:layout"]').responsive.some(
+      (variant) => variant.viewportId === 'mobile' && variant.props.length > 0,
+    ),
+  ).toBe(true);
+});
+
 /*** Confirms that serialized source identities retain both page and source components. */
 function isQualified(value: string): boolean {
   const parsed: unknown = JSON.parse(value);
@@ -128,6 +148,16 @@ function page(
 ): (typeof document.pages)[number] {
   const recognizedPage = document.pages.find((candidate) => candidate.id === pageId);
   if (recognizedPage === undefined) throw new Error(`Missing page ${pageId}.`);
+  return recognizedPage;
+}
+
+/*** Reads one public recognition page by its stable observed identity. */
+function pageFor(
+  document: ReturnType<typeof recognizeWebsiteDocument>,
+  pageId: string,
+): (typeof document.pages)[number] {
+  const recognizedPage = document.pages.find((candidate) => candidate.id === pageId);
+  if (recognizedPage === undefined) throw new Error(`Missing recognition page ${pageId}.`);
   return recognizedPage;
 }
 

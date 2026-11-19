@@ -4,10 +4,12 @@ import type { WebsiteNodeObservation, WebsiteObservedNode } from '@ankhorage/con
 export function websiteStructureEvidence(
   node: WebsiteObservedNode,
   children: readonly WebsiteObservedNode[] = [],
+  parent: WebsiteObservedNode | null = null,
 ): WebsiteStructureEvidence {
   return {
     availableObservation: availableObservation(node),
-    hasCardSurface: hasCardSurface(node),
+    hasCardSurface: hasCardSurface(node, parent),
+    hasDividerEvidence: hasDividerEvidence(node),
     hasVisualRole: hasVisualRole(node),
     isTransparentWrapper: isTransparentWrapper(node, children),
   };
@@ -16,6 +18,7 @@ export function websiteStructureEvidence(
 interface WebsiteStructureEvidence {
   readonly availableObservation: WebsiteNodeObservation | null;
   readonly hasCardSurface: boolean;
+  readonly hasDividerEvidence: boolean;
   readonly hasVisualRole: boolean;
   readonly isTransparentWrapper: boolean;
 }
@@ -44,17 +47,150 @@ function availableObservation(node: WebsiteObservedNode): WebsiteNodeObservation
   );
 }
 
-/*** Requires padding plus radius, border, or shadow so colored columns are not invented as cards. */
-function hasCardSurface(node: WebsiteObservedNode): boolean {
-  const css = availableObservation(node)?.css;
+/*** Tests whether one observation proves a rendered, visible CSS box. */
+function isVisibleObservation(observation: WebsiteNodeObservation): boolean {
   return (
-    css !== null &&
-    css !== undefined &&
-    hasNonZeroEdge(css.padding) &&
-    (hasNonZeroCssValue(css.borderRadius) ||
-      hasNonZeroCssValue(css.borderWidth) ||
-      css.boxShadow !== 'none')
+    observation.availability.status === 'available' &&
+    observation.css !== null &&
+    observation.rect !== null &&
+    observation.rect.width > 0 &&
+    observation.rect.height > 0 &&
+    observation.css.display !== 'none' &&
+    observation.css.visibility !== 'hidden' &&
+    observation.css.visibility !== 'collapse' &&
+    observation.css.opacity !== '0'
   );
+}
+
+/*** Finds a visible node-owned surface boundary without inferring one from padding or radius. */
+function hasCardSurface(node: WebsiteObservedNode, parent: WebsiteObservedNode | null): boolean {
+  return node.observations.some((observation) => {
+    const parentObservation = parent === null ? null : observationFor(parent, observation);
+    return (
+      isVisibleObservation(observation) && hasVisibleSurfaceBoundary(observation, parentObservation)
+    );
+  });
+}
+
+/*** Identifies a visible horizontal or vertical line with independent divider semantics or geometry. */
+function hasDividerEvidence(node: WebsiteObservedNode): boolean {
+  const tagName = node.dom.tagName.toLowerCase();
+  return node.observations.some(
+    (observation) =>
+      isVisibleObservation(observation) &&
+      observation.css !== null &&
+      observation.rect !== null &&
+      hasVisibleSurfaceBoundary(observation, null) &&
+      (tagName === 'hr' ||
+        observation.semanticAttributes?.role === 'separator' ||
+        hasDividerGeometry(observation.rect.width, observation.rect.height)),
+  );
+}
+
+/*** Finds the observation for the same viewport and rendered state without mixing responsive evidence. */
+function observationFor(
+  node: WebsiteObservedNode,
+  observation: WebsiteNodeObservation,
+): WebsiteNodeObservation | null {
+  return (
+    node.observations.find(
+      (candidate) =>
+        candidate.viewportId === observation.viewportId &&
+        candidate.stateId === observation.stateId,
+    ) ?? null
+  );
+}
+
+/*** Tests whether a measured rectangle has the proportions of a rendered separator line. */
+function hasDividerGeometry(width: number, height: number): boolean {
+  const shorterSide = Math.min(width, height);
+  const longerSide = Math.max(width, height);
+  return shorterSide <= 4 && longerSide >= 16 && longerSide / Math.max(shorterSide, 1) >= 8;
+}
+
+/*** Requires one directly visible boundary feature owned by the node. */
+function hasVisibleSurfaceBoundary(
+  observation: WebsiteNodeObservation,
+  parentObservation: WebsiteNodeObservation | null,
+): boolean {
+  const { css } = observation;
+  if (css === null) return false;
+  return (
+    hasVisibleBackground(css.backgroundColor, parentObservation?.css?.backgroundColor ?? null) ||
+    css.backgroundImage !== 'none' ||
+    (hasNonZeroCssValue(css.borderWidth) && !isTransparentColor(css.borderColor)) ||
+    hasVisibleBoxShadow(css.boxShadow)
+  );
+}
+
+/*** Compares composited CSS colors so transparent backgrounds remain surface evidence when visible. */
+function hasVisibleBackground(
+  backgroundColor: string,
+  parentBackgroundColor: string | null,
+): boolean {
+  const color = parseCssColor(backgroundColor);
+  if (color === null)
+    return !isTransparentColor(backgroundColor) && backgroundColor !== parentBackgroundColor;
+  if (color.alpha === 0) return false;
+  if (parentBackgroundColor === null) return true;
+  const parentColor = parseCssColor(parentBackgroundColor);
+  if (parentColor === null) return backgroundColor !== parentBackgroundColor;
+  return !sameColor(compositeColor(color, parentColor), parentColor);
+}
+
+/*** Parses browser-computed rgb and rgba color values without fabricating color tokens. */
+function parseCssColor(value: string): RgbaColor | null {
+  if (value === 'transparent') return { alpha: 0, blue: 0, green: 0, red: 0 };
+  const match =
+    /^rgba?\(\s*([\d.]+)[,\s]+\s*([\d.]+)[,\s]+\s*([\d.]+)(?:\s*[,/]\s*([\d.]+))?\s*\)$/.exec(
+      value,
+    );
+  if (match === null) return null;
+  const alpha = match.at(-1);
+  return {
+    alpha: alpha === undefined ? 1 : Number(alpha),
+    blue: Number(match[3]),
+    green: Number(match[2]),
+    red: Number(match[1]),
+  };
+}
+
+interface RgbaColor {
+  readonly alpha: number;
+  readonly blue: number;
+  readonly green: number;
+  readonly red: number;
+}
+
+/*** Composites a foreground color over its observed parent background. */
+function compositeColor(foreground: RgbaColor, background: RgbaColor): RgbaColor {
+  const alpha = foreground.alpha + background.alpha * (1 - foreground.alpha);
+  if (alpha === 0) return { alpha: 0, blue: 0, green: 0, red: 0 };
+  const compositeChannel = (foregroundChannel: number, backgroundChannel: number) =>
+    (foregroundChannel * foreground.alpha +
+      backgroundChannel * background.alpha * (1 - foreground.alpha)) /
+    alpha;
+  return {
+    alpha,
+    blue: compositeChannel(foreground.blue, background.blue),
+    green: compositeChannel(foreground.green, background.green),
+    red: compositeChannel(foreground.red, background.red),
+  };
+}
+
+/*** Compares parsed colors with a small tolerance for browser-computed floating point values. */
+function sameColor(left: RgbaColor, right: RgbaColor): boolean {
+  return [
+    left.red - right.red,
+    left.green - right.green,
+    left.blue - right.blue,
+    left.alpha - right.alpha,
+  ].every((difference) => Math.abs(difference) < 0.001);
+}
+
+/*** Excludes shadows whose entire computed color is transparent. */
+function hasVisibleBoxShadow(value: string): boolean {
+  return value !== 'none' && !/rgba\([^)]*,\s*0\s*\)/.test(value);
 }
 
 /*** Tests whether a visible observation gives a generic node a layout or surface role. */
@@ -132,5 +268,5 @@ function hasNonZeroCssValue(value: string): boolean {
 
 /*** Recognizes transparent computed-color forms without assigning a color token. */
 function isTransparentColor(value: string): boolean {
-  return value === 'transparent' || value === 'rgba(0, 0, 0, 0)';
+  return value === 'transparent' || parseCssColor(value)?.alpha === 0;
 }
