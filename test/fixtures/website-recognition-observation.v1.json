@@ -41,7 +41,7 @@
           "dom": {
             "attributes": {},
             "childIndex": 0,
-            "tagName": "div"
+            "tagName": "main"
           },
           "links": [],
           "media": [],
@@ -2098,7 +2098,7 @@
           "dom": {
             "attributes": {},
             "childIndex": 0,
-            "tagName": "div"
+            "tagName": "main"
           },
           "links": [],
           "media": [],

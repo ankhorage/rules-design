@@ -149,6 +149,177 @@ export function createVisibleCardAndDividerDocument(): WebsiteObservationDocumen
   );
 }
 
+/*** Captures the region, navigation, product-card, and footer evidence from the products acceptance shape. */
+export function createWebsiteRegionDocument(): WebsiteObservationDocument {
+  const base = createDocument('static').pages[0]!.nodes[0]!;
+  const node = cardFixtureNodeFactory(base);
+  return withResponsiveViewports(
+    createDocumentWithNodes([
+      node('header', null, 0, 'header', { display: 'flex' }),
+      desktopNavigationNode(
+        navigationNode(node('primary-nav', 'surface:header', 0, 'nav', { display: 'flex' })),
+      ),
+      responsiveNavigationNode(
+        navigationNode(
+          node('mobile-nav', 'surface:header', 1, 'div', { display: 'none', role: 'navigation' }),
+        ),
+      ),
+      node('main', null, 1, 'main', { display: 'block' }),
+      node('heading', 'surface:main', 0, 'h1', {}, 'Produkte'),
+      node('copy', 'surface:main', 1, 'p', {}, 'Gestaltung und digitale Umsetzung.'),
+      node('products', 'surface:main', 2, 'div', { display: 'grid' }),
+      productCard(node, 'marketing', 'Marketing', 0),
+      productCard(node, 'design', 'Entwurf und Layout', 1),
+      productCard(node, 'realization', 'Realisierung', 2),
+      productCard(node, 'websites', 'Websites', 3),
+      node('divider', 'surface:main', 3, 'hr', {
+        borderWidth: '1px',
+        rect: { height: 1, width: 280, x: 0, y: 680 },
+      }),
+      node('footer', null, 2, 'footer', { display: 'block' }),
+      node('footer-layout', 'surface:footer', 0, 'div', { display: 'flex' }),
+      // This independently bounded CTA is footer evidence, not a reason to alter card classification.
+      node('footer-cta', 'surface:footer-layout', 0, 'div', {
+        backgroundColor: 'rgb(25, 25, 25)',
+        borderRadius: '12px',
+        padding: { bottom: '24px', left: '24px', right: '24px', top: '24px' },
+      }),
+      node('footer-copy', 'surface:footer-cta', 0, 'p', {}, 'Projekt anfragen'),
+      mediaNode(node('footer-image', 'surface:footer', 1, 'img', {})),
+    ]),
+  );
+}
+
+/*** Exercises role navigation and a Main fallback without site chrome or duplicate region content. */
+export function createWebsiteRegionFallbackDocument(): WebsiteObservationDocument {
+  const document = createWebsiteRegionDocument();
+  const [page] = document.pages;
+  if (page === undefined) throw new Error('Expected one region fixture page.');
+  const source = page.nodes[0];
+  if (source === undefined) throw new Error('Expected region fixture source evidence.');
+  return {
+    ...document,
+    pages: [
+      {
+        ...page,
+        nodes: [
+          ...page.nodes
+            .filter((node) => !['surface:header', 'surface:footer'].includes(node.sourceRef))
+            .map((node) => {
+              if (node.sourceRef === 'surface:main')
+                return { ...node, dom: { ...node.dom, tagName: 'article' } };
+              if (node.sourceRef === 'surface:primary-nav')
+                return {
+                  ...node,
+                  dom: { ...node.dom, attributes: { role: 'navigation' }, tagName: 'div' },
+                };
+              return node;
+            }),
+          nodeWithParent(source, 'article-header', 'surface:main', 0, 'header'),
+          nodeWithParent(source, 'article-footer', 'surface:main', 4, 'footer'),
+        ],
+      },
+    ],
+  };
+}
+
+/*** Derives local article landmarks without creating an additional site-level fixture path. */
+function nodeWithParent(
+  source: WebsiteObservedNode,
+  name: string,
+  parentSourceRef: string,
+  childIndex: number,
+  tagName: string,
+): WebsiteObservedNode {
+  return {
+    ...source,
+    dom: { attributes: {}, childIndex, tagName },
+    links: [],
+    media: [],
+    parentSourceRef,
+    sourceRef: `surface:${name}`,
+    textRuns: [],
+  };
+}
+
+/*** Gives every product surface an independent visual boundary without changing the card recognizer. */
+function productCard(
+  node: ReturnType<typeof cardFixtureNodeFactory>,
+  name: string,
+  title: string,
+  childIndex: number,
+): WebsiteObservedNode {
+  return node(
+    name,
+    'surface:products',
+    childIndex,
+    'div',
+    {
+      backgroundColor: 'rgb(245, 245, 245)',
+      borderRadius: '12px',
+      padding: { bottom: '24px', left: '24px', right: '24px', top: '24px' },
+    },
+    title,
+  );
+}
+
+/*** Adds the four source-ordered navigation links to an observed navigation landmark. */
+function navigationNode(node: WebsiteObservedNode): WebsiteObservedNode {
+  return {
+    ...node,
+    links: [
+      ['Startseite', '/'],
+      ['Produkte', '/produkte/'],
+      ['Über mich', '/ueber-mich/'],
+      ['Kontakt', '/kontakt/'],
+    ].map(([label, url], index) => ({
+      label,
+      sourceRef: `${node.sourceRef}:link:${index}`,
+      url: `https://stage.pixelbrandworks.ch${url}`,
+    })),
+  };
+}
+
+/*** Keeps the mobile navigation as source evidence while making only its mobile observation visible. */
+function responsiveNavigationNode(node: WebsiteObservedNode): WebsiteObservedNode {
+  return {
+    ...node,
+    observations: node.observations.map((observation) =>
+      observation.viewportId === 'mobile' && observation.css !== null
+        ? { ...observation, css: { ...observation.css, display: 'flex' } }
+        : observation,
+    ),
+  };
+}
+
+/*** Keeps the desktop navigation as source evidence while hiding it only at the mobile viewport. */
+function desktopNavigationNode(node: WebsiteObservedNode): WebsiteObservedNode {
+  return {
+    ...node,
+    observations: node.observations.map((observation) =>
+      observation.viewportId === 'mobile' && observation.css !== null
+        ? { ...observation, css: { ...observation.css, display: 'none' } }
+        : observation,
+    ),
+  };
+}
+
+/*** Retains footer-image source evidence independently from the footer CTA surface. */
+function mediaNode(node: WebsiteObservedNode): WebsiteObservedNode {
+  return {
+    ...node,
+    media: [
+      {
+        alt: 'Pixelbrandworks footer visual',
+        assetId: 'asset:footer',
+        kind: 'image',
+        sourceRef: `${node.sourceRef}:media`,
+        url: 'https://stage.pixelbrandworks.ch/footer.jpg',
+      },
+    ],
+  };
+}
+
 /*** Creates positive and negative isolated surface cases without relying on sibling repetition. */
 export function createCardAndDividerEvidenceDocument(): WebsiteObservationDocument {
   const base = createDocument('static').pages[0]!.nodes[0]!;

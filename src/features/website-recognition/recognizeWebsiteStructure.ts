@@ -48,12 +48,52 @@ function recognizePage(page: WebsitePageObservation): WebsitePageRecognition {
     nodes: allRecognitions.flatMap((recognition) => recognition.nodes),
     path: page.path,
     root: {
-      children: allRecognitions.map((recognition) => recognition.uiNode),
+      children: pageRootChildren(allRecognitions),
       id: `${page.id}:root`,
       type: 'Container',
     },
     url: page.url,
   };
+}
+
+/*** Adds one analysis-only Main grouping when no observed main landmark owns page content. */
+function pageRootChildren(recognitions: readonly RecognizedTreeNode[]): UiNode[] {
+  if (recognitions.some((recognition) => containsComponentType(recognition.uiNode, 'Main')))
+    return recognitions.map((recognition) => recognition.uiNode);
+  return groupPageContentAsMain(recognitions.map((recognition) => recognition.uiNode));
+}
+
+/*** Preserves DOM order while grouping non-chrome root content without introducing layout semantics. */
+function groupPageContentAsMain(nodes: readonly UiNode[]): UiNode[] {
+  return nodes.flatMap((node, index) => {
+    if (isPageChrome(node)) return [node];
+    if (index > 0 && !isPageChrome(nodes[index - 1])) return [];
+    const nextChromeOffset = nodes.slice(index).findIndex(isPageChrome);
+    const content = nodes.slice(
+      index,
+      nextChromeOffset === -1 ? undefined : index + nextChromeOffset,
+    );
+    return [
+      {
+        children: content,
+        id: 'page:main',
+        type: 'Main',
+      },
+    ];
+  });
+}
+
+/*** Limits synthetic page grouping to site-chrome siblings so local regions stay in their parents. */
+function isPageChrome(node: UiNode): boolean {
+  return node.type === 'Footer' || node.type === 'Header';
+}
+
+/*** Detects an observed main landmark anywhere in the preserved recursive source tree. */
+function containsComponentType(node: UiNode, componentType: string): boolean {
+  return (
+    node.type === componentType ||
+    (node.children ?? []).some((child) => containsComponentType(child, componentType))
+  );
 }
 
 /*** Indexes observed children in DOM order for deterministic parent traversal. */
@@ -194,8 +234,7 @@ function recognizeComponentType(
 ): string {
   const observation = websiteStructureEvidence(node).availableObservation;
   if (observation === null) return 'Unknown';
-  const tagName = node.dom.tagName.toLowerCase();
-  const semanticType = recognizeWebsiteStructureSemanticComponentType(tagName);
+  const semanticType = recognizeWebsiteStructureSemanticComponentType(node);
   if (semanticType !== null) return semanticType;
   const { css } = observation;
   if (css === null) return 'Unknown';

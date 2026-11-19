@@ -10,6 +10,8 @@ import {
   createIncompleteWrapperEvidenceDocument,
   createMalformedDocument,
   createVisibleCardAndDividerDocument,
+  createWebsiteRegionDocument,
+  createWebsiteRegionFallbackDocument,
   sourceRefsFor,
 } from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteStructure } from './recognizeWebsiteStructure.ts';
@@ -77,7 +79,8 @@ test('prioritizes measured layout, cards, and HTML semantics while folding boxle
   const heading = recognizedNode(page, 'complex:heading');
   const unknown = recognizedNode(page, 'complex:unknown');
 
-  expect(recognizedNode(page, 'complex:nav').componentType).toBe('Container');
+  expect(recognizedNode(page, 'complex:main').componentType).toBe('Main');
+  expect(recognizedNode(page, 'complex:nav').componentType).toBe('Nav');
   expect(recognizedNode(page, 'complex:nav-list').componentType).toBe('List');
   expect(recognizedNode(page, 'complex:nav-link').componentType).toBe('Link');
   expect(grid.componentType).toBe('Grid');
@@ -151,6 +154,41 @@ test('recognizes empty and image surfaces but excludes radius, equal backgrounds
   expect(recognizedNode(page, 'surface:hidden-line').componentType).not.toBe('Divider');
 });
 
+test('recognizes ordered website regions and keeps four product cards inside Main', () => {
+  const page = recognizedPage(createWebsiteRegionDocument());
+  const main = recognizedNode(page, 'surface:main');
+  const nav = recognizedNode(page, 'surface:primary-nav');
+
+  expect(
+    ['surface:header', 'surface:main', 'surface:footer'].map(
+      (sourceRef) => recognizedNode(page, sourceRef).componentType,
+    ),
+  ).toEqual(['Header', 'Main', 'Footer']);
+  expect(nav.componentType).toBe('Nav');
+  expect(recognizedNode(page, 'surface:mobile-nav').componentType).toBe('Nav');
+  expect(main.sourceRefs).toEqual(['surface:main']);
+  expect(cardsInUiNode(uiNode(page.root, 'surface:main'))).toEqual([
+    'surface:marketing',
+    'surface:design',
+    'surface:realization',
+    'surface:websites',
+  ]);
+  expect(recognizedNode(page, 'surface:footer-cta').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:divider').componentType).toBe('Divider');
+});
+
+test('groups pages without main as analysis-only Main while retaining local article landmarks', () => {
+  const page = recognizedPage(createWebsiteRegionFallbackDocument());
+  const fallbackMain = uiNode(page.root, 'page:main');
+
+  expect(page.nodes.some((node) => node.componentType === 'Main')).toBe(false);
+  expect(fallbackMain.type).toBe('Main');
+  expect(fallbackMain.children?.map((node) => node.id)).toContain('surface:main');
+  expect(recognizedNode(page, 'surface:primary-nav').componentType).toBe('Nav');
+  expect(recognizedNode(page, 'surface:article-header').componentType).toBe('Header');
+  expect(recognizedNode(page, 'surface:article-footer').componentType).toBe('Footer');
+});
+
 /*** Returns the single recognition page produced by a complete fixture document. */
 function recognizedPage(
   document: Parameters<typeof recognizeWebsiteStructure>[0],
@@ -181,6 +219,27 @@ function containsUiNode(node: UiNode, id: string, type: string): boolean {
     (node.id === id && node.type === type) ||
     (node.children ?? []).some((child) => containsUiNode(child, id, type))
   );
+}
+
+/*** Finds a preserved source node in the canonical UI tree. */
+function uiNode(node: UiNode, id: string): UiNode {
+  if (node.id === id) return node;
+  for (const child of node.children ?? []) {
+    try {
+      return uiNode(child, id);
+    } catch {
+      continue;
+    }
+  }
+  throw new Error(`Missing UI node ${id}.`);
+}
+
+/*** Collects Cards from one Main subtree without counting independent footer surfaces. */
+function cardsInUiNode(node: UiNode): readonly string[] {
+  return [
+    ...(node.type === 'Card' ? [node.id] : []),
+    ...(node.children ?? []).flatMap(cardsInUiNode),
+  ];
 }
 
 /*** Removes source-derived node and property references from semantic comparisons. */
@@ -255,7 +314,7 @@ const expectedSemanticTree = {
         { type: 'Unknown' },
         { type: 'Unknown' },
       ],
-      type: 'Container',
+      type: 'Main',
     },
   ],
   type: 'Container',
