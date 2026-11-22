@@ -14,6 +14,33 @@ Creates the complete registered Design provider from its explicit group-local po
   - options: `DesignRuleProviderOptions`
   - returns: `DesignRuleProvider`
 
+## createWebsiteAssessmentRuleSet
+
+Kind: `function`
+Module: `src/features/website-assessment/createWebsiteAssessmentRuleSet.ts`
+Source: `src/features/website-assessment/createWebsiteAssessmentRuleSet.ts:14:1`
+
+Creates the separately composable follow-on website and contact assessment rules.
+
+### Signatures
+
+- `(options?: WebsiteAssessmentRuleOptions) => RuleSet<WebsiteAssessmentContext>`
+  - options: `WebsiteAssessmentRuleOptions` (optional)
+  - returns: `RuleSet<WebsiteAssessmentContext>`
+
+## createWebsiteRecognitionRuleSet
+
+Kind: `function`
+Module: `src/features/website-recognition/createWebsiteRecognitionRuleSet.ts`
+Source: `src/features/website-recognition/createWebsiteRecognitionRuleSet.ts:8:1`
+
+Declares the versioned, provider-neutral Card predicate in the canonical Rules format.
+
+### Signatures
+
+- `() => RuleSet<WebsiteRecognitionRuleContext>`
+  - returns: `RuleSet<WebsiteRecognitionRuleContext>`
+
 ## DesignAssessmentKind
 
 Kind: `unknown`
@@ -227,6 +254,48 @@ Selects planned catalog entries matching every supplied controlled facet.
   - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
   - returns: `readonly DesignRuleCatalogEntry[]`
 
+## recognizeWebsiteDesignProperties
+
+Kind: `function`
+Module: `src/features/recognition/recognizeWebsiteDesignProperties.ts`
+Source: `src/features/recognition/recognizeWebsiteDesignProperties.ts:18:1`
+
+Recognizes exact design properties from validated website observations without evaluating them.
+
+### Signatures
+
+- `(document: WebsiteObservationDocument) => WebsiteDesignRecognition`
+  - document: `WebsiteObservationDocument`
+  - returns: `WebsiteDesignRecognition`
+
+## recognizeWebsiteDocument
+
+Kind: `function`
+Module: `src/features/recognition/recognizeWebsiteDocument.ts`
+Source: `src/features/recognition/recognizeWebsiteDocument.ts:28:1`
+
+Assembles the public website recognition contract from structural and factual design recognition.
+
+### Signatures
+
+- `(document: WebsiteObservationDocument) => WebsiteRecognitionDocument`
+  - document: `WebsiteObservationDocument`
+  - returns: `WebsiteRecognitionDocument`
+
+## recognizeWebsiteStructure
+
+Kind: `function`
+Module: `src/features/website-recognition/recognizeWebsiteStructure.ts`
+Source: `src/features/website-recognition/recognizeWebsiteStructure.ts:17:1`
+
+Recognizes source-linked canonical component trees from validated website observations.
+
+### Signatures
+
+- `(document: WebsiteObservationDocument) => readonly WebsitePageRecognition[]`
+  - document: `WebsiteObservationDocument`
+  - returns: `readonly WebsitePageRecognition[]`
+
 ## selectDesignRuleProfile
 
 Kind: `function`
@@ -240,3 +309,148 @@ Resolves one named profile independently from the Rule IDs it selects.
 - `(profileId: string) => DesignRuleProfileSelection`
   - profileId: `string`
   - returns: `DesignRuleProfileSelection`
+
+## WebsiteAssessmentRuleOptions
+
+Kind: `type`
+Module: `src/types/websiteAssessment.ts`
+Source: `src/types/websiteAssessment.ts:5:1`
+
+Configures explicit policies for the independently composable website assessment RuleSet.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| legalNoticePolicy | property | `"required" \| "not-required" \| undefined` | no |  |
+| privacyNoticePolicy | property | `"required" \| "not-required" \| undefined` | no |  |
+| referenceYear | property | `number \| undefined` | no |  |
+| trackingConsentPolicy | property | `"ch-information-and-objection" \| "eu-eea-prior-consent" \| undefined` | no |  |
+
+## WebsiteDesignNodeRecognition
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:37:1`
+
+Groups all factual design observations for one stable observed DOM node.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| accessibility | property | `readonly WebsiteDesignPropertyObservation[]` | yes |  |
+| colors | property | `readonly WebsiteDesignPropertyObservation[]` | yes |  |
+| layout | property | `readonly WebsiteDesignPropertyObservation[]` | yes |  |
+| media | property | `readonly WebsiteMediaReference[]` | yes |  |
+| pageId | property | `string` | yes |  |
+| responsive | property | `readonly WebsiteDesignPropertyObservation[]` | yes |  |
+| sourceRef | property | `string` | yes |  |
+| typography | property | `readonly WebsiteDesignPropertyObservation[]` | yes |  |
+| unresolved | property | `readonly WebsiteDesignUnresolvedObservation[]` | yes |  |
+
+## WebsiteDesignPropertyObservation
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:15:1`
+
+Describes one exact observed design value without assigning a quality verdict.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| name | property | `string` | yes |  |
+| pageId | property | `string` | yes |  |
+| provenance | property | `WebsiteObservationProvenance` | yes |  |
+| sourceRef | property | `string` | yes |  |
+| stateId | property | `string` | yes |  |
+| value | property | `SerializableValue` | yes |  |
+| viewportId | property | `string` | yes |  |
+
+## WebsiteDesignRecognition
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:61:1`
+
+Provides the factual design-property contribution for later website recognition assembly.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| nodes | property | `readonly WebsiteDesignNodeRecognition[]` | yes |  |
+| tokenCandidates | property | `readonly WebsiteDesignTokenCandidate[]` | yes |  |
+
+## WebsiteDesignSourceReference
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:9:1`
+
+Identifies one observed DOM node within the page that owns its local source reference.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| pageId | property | `string` | yes |  |
+| sourceRef | property | `string` | yes |  |
+
+## WebsiteDesignTokenCandidate
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:50:1`
+
+Records a repeated observed value as a reusable token candidate without inventing a role.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| confidence | property | `number` | yes |  |
+| inferredRole | property | `null` | yes |  |
+| kind | property | `"color" \| "radius" \| "shadow" \| "spacing" \| "typography"` | yes |  |
+| originalValues | property | `readonly string[]` | yes |  |
+| property | property | `string` | yes |  |
+| sourceRefs | property | `readonly WebsiteDesignSourceReference[]` | yes |  |
+| value | property | `string` | yes |  |
+
+## WebsiteDesignUnresolvedObservation
+
+Kind: `type`
+Module: `src/types/websiteDesignRecognition.ts`
+Source: `src/types/websiteDesignRecognition.ts:26:1`
+
+Retains an unavailable observation instead of substituting or silently omitting design evidence.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| kind | property | `"computed-css" \| "geometry"` | yes |  |
+| missing | property | `WebsiteMissingValue` | yes |  |
+| pageId | property | `string` | yes |  |
+| provenance | property | `WebsiteObservationProvenance` | yes |  |
+| sourceRef | property | `string` | yes |  |
+| stateId | property | `string` | yes |  |
+| viewportId | property | `string` | yes |  |
+
+## WebsiteRecognitionRuleContext
+
+Kind: `type`
+Module: `src/types/websiteRecognitionRules.ts`
+Source: `src/types/websiteRecognitionRules.ts:4:1`
+
+Source-linked facts used by the canonical Rules evaluation for website modules.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| childNodesByParent | property | `ReadonlyMap<string, readonly WebsiteObservedNode[]>` | yes |  |
+| node | property | `WebsiteObservedNode` | yes |  |
+| parent | property | `WebsiteObservedNode \| null` | yes |  |

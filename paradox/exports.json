@@ -39,6 +39,75 @@
     "structuredRows": []
   },
   {
+    "name": "createWebsiteAssessmentRuleSet",
+    "title": null,
+    "description": "Creates the separately composable follow-on website and contact assessment rules.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-assessment/createWebsiteAssessmentRuleSet.ts",
+      "line": 14,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteAssessmentRuleOptions"
+    ],
+    "signatures": [
+      {
+        "label": "(options?: WebsiteAssessmentRuleOptions) => RuleSet<WebsiteAssessmentContext>",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "WebsiteAssessmentRuleOptions",
+            "required": false,
+            "description": null
+          }
+        ],
+        "returnType": "RuleSet<WebsiteAssessmentContext>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "createWebsiteRecognitionRuleSet",
+    "title": null,
+    "description": "Declares the versioned, provider-neutral Card predicate in the canonical Rules format.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteRecognitionRuleContext"
+    ],
+    "signatures": [
+      {
+        "label": "() => RuleSet<WebsiteRecognitionRuleContext>",
+        "parameters": [],
+        "returnType": "RuleSet<WebsiteRecognitionRuleContext>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "DesignAssessmentKind",
     "title": null,
     "description": null,
@@ -733,6 +802,116 @@
     "structuredRows": []
   },
   {
+    "name": "recognizeWebsiteDesignProperties",
+    "title": null,
+    "description": "Recognizes exact design properties from validated website observations without evaluating them.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+    "sourceLocation": {
+      "filePath": "src/features/recognition/recognizeWebsiteDesignProperties.ts",
+      "line": 18,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteDesignRecognition"
+    ],
+    "signatures": [
+      {
+        "label": "(document: WebsiteObservationDocument) => WebsiteDesignRecognition",
+        "parameters": [
+          {
+            "name": "document",
+            "type": "WebsiteObservationDocument",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "WebsiteDesignRecognition",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "recognizeWebsiteDocument",
+    "title": null,
+    "description": "Assembles the public website recognition contract from structural and factual design recognition.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+    "sourceLocation": {
+      "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
+      "line": 28,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "(document: WebsiteObservationDocument) => WebsiteRecognitionDocument",
+        "parameters": [
+          {
+            "name": "document",
+            "type": "WebsiteObservationDocument",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "WebsiteRecognitionDocument",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "recognizeWebsiteStructure",
+    "title": null,
+    "description": "Recognizes source-linked canonical component trees from validated website observations.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
+      "line": 17,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "(document: WebsiteObservationDocument) => readonly WebsitePageRecognition[]",
+        "parameters": [
+          {
+            "name": "document",
+            "type": "WebsiteObservationDocument",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "readonly WebsitePageRecognition[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "selectDesignRuleProfile",
     "title": null,
     "description": "Resolves one named profile independently from the Rule IDs it selects.",
@@ -768,6 +947,485 @@
       }
     ],
     "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteAssessmentRuleOptions",
+    "title": null,
+    "description": "Configures explicit policies for the independently composable website assessment RuleSet.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteAssessment.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteAssessment.ts",
+      "line": 5,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "legalNoticePolicy",
+        "kind": "property",
+        "type": "\"required\" | \"not-required\" | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "privacyNoticePolicy",
+        "kind": "property",
+        "type": "\"required\" | \"not-required\" | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "referenceYear",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "trackingConsentPolicy",
+        "kind": "property",
+        "type": "\"ch-information-and-objection\" | \"eu-eea-prior-consent\" | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignNodeRecognition",
+    "title": null,
+    "description": "Groups all factual design observations for one stable observed DOM node.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 37,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteDesignPropertyObservation",
+      "WebsiteDesignUnresolvedObservation"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "accessibility",
+        "kind": "property",
+        "type": "readonly WebsiteDesignPropertyObservation[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "colors",
+        "kind": "property",
+        "type": "readonly WebsiteDesignPropertyObservation[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "layout",
+        "kind": "property",
+        "type": "readonly WebsiteDesignPropertyObservation[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "media",
+        "kind": "property",
+        "type": "readonly WebsiteMediaReference[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "pageId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "responsive",
+        "kind": "property",
+        "type": "readonly WebsiteDesignPropertyObservation[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRef",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "typography",
+        "kind": "property",
+        "type": "readonly WebsiteDesignPropertyObservation[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "unresolved",
+        "kind": "property",
+        "type": "readonly WebsiteDesignUnresolvedObservation[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignPropertyObservation",
+    "title": null,
+    "description": "Describes one exact observed design value without assigning a quality verdict.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 15,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "name",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "pageId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "provenance",
+        "kind": "property",
+        "type": "WebsiteObservationProvenance",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRef",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "stateId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "value",
+        "kind": "property",
+        "type": "SerializableValue",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "viewportId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignRecognition",
+    "title": null,
+    "description": "Provides the factual design-property contribution for later website recognition assembly.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 61,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteDesignNodeRecognition",
+      "WebsiteDesignTokenCandidate"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "nodes",
+        "kind": "property",
+        "type": "readonly WebsiteDesignNodeRecognition[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "tokenCandidates",
+        "kind": "property",
+        "type": "readonly WebsiteDesignTokenCandidate[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignSourceReference",
+    "title": null,
+    "description": "Identifies one observed DOM node within the page that owns its local source reference.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 9,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "pageId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRef",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignTokenCandidate",
+    "title": null,
+    "description": "Records a repeated observed value as a reusable token candidate without inventing a role.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 50,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteDesignSourceReference"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "confidence",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "inferredRole",
+        "kind": "property",
+        "type": "null",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "\"color\" | \"radius\" | \"shadow\" | \"spacing\" | \"typography\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "originalValues",
+        "kind": "property",
+        "type": "readonly string[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "property",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRefs",
+        "kind": "property",
+        "type": "readonly WebsiteDesignSourceReference[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "value",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteDesignUnresolvedObservation",
+    "title": null,
+    "description": "Retains an unavailable observation instead of substituting or silently omitting design evidence.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteDesignRecognition.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteDesignRecognition.ts",
+      "line": 26,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "\"computed-css\" | \"geometry\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "missing",
+        "kind": "property",
+        "type": "WebsiteMissingValue",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "pageId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "provenance",
+        "kind": "property",
+        "type": "WebsiteObservationProvenance",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRef",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "stateId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "viewportId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteRecognitionRuleContext",
+    "title": null,
+    "description": "Source-linked facts used by the canonical Rules evaluation for website modules.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteRecognitionRules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteRecognitionRules.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "childNodesByParent",
+        "kind": "property",
+        "type": "ReadonlyMap<string, readonly WebsiteObservedNode[]>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "node",
+        "kind": "property",
+        "type": "WebsiteObservedNode",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "parent",
+        "kind": "property",
+        "type": "WebsiteObservedNode | null",
+        "required": true,
+        "description": null
+      }
+    ],
     "structuredRows": []
   }
 ]

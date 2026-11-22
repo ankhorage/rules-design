@@ -1,0 +1,23 @@
+sequenceDiagram
+  participant participant_assembleMedia as assembleMedia
+  participant participant_createWebsiteAssetIndex as createWebsiteAssetIndex
+  participant participant_recognizeWebsiteDesignProperties as recognizeWebsiteDesignProperties
+  participant participant_recognizeWebsiteDocument as recognizeWebsiteDocument
+  participant participant_recognizeWebsiteStructure as recognizeWebsiteStructure
+  participant participant_tokenCandidates as tokenCandidates
+  participant participant_unique as unique
+  participant participant_validateWebsiteObservationDocument as validateWebsiteObservationDocument
+  participant_recognizeWebsiteDocument->>participant_validateWebsiteObservationDocument: validateWebsiteObservationDocument()
+  participant_validateWebsiteObservationDocument->>participant_unique: unique()
+  participant_unique-->>participant_validateWebsiteObservationDocument: return
+  participant_validateWebsiteObservationDocument-->>participant_recognizeWebsiteDocument: return
+  participant_recognizeWebsiteDocument->>participant_recognizeWebsiteDesignProperties: recognizeWebsiteDesignProperties()
+  participant_recognizeWebsiteDesignProperties->>participant_tokenCandidates: tokenCandidates()
+  participant_tokenCandidates-->>participant_recognizeWebsiteDesignProperties: return
+  participant_recognizeWebsiteDesignProperties-->>participant_recognizeWebsiteDocument: return
+  participant_recognizeWebsiteDocument->>participant_recognizeWebsiteStructure: recognizeWebsiteStructure()
+  participant_recognizeWebsiteStructure-->>participant_recognizeWebsiteDocument: return
+  participant_recognizeWebsiteDocument->>participant_assembleMedia: assembleMedia()
+  participant_assembleMedia->>participant_createWebsiteAssetIndex: createWebsiteAssetIndex()
+  participant_createWebsiteAssetIndex-->>participant_assembleMedia: return
+  participant_assembleMedia-->>participant_recognizeWebsiteDocument: return
