@@ -15,5 +15,6 @@ test('compares normalized token sequences exactly and in order', () => {
 test('rejects invalid token-sequence observations before equality evaluation', () => {
   expect(colorObservationValues.strings([])).toBeUndefined();
   expect(colorObservationValues.strings(['blue/100', ''])).toBeUndefined();
+  expect(colorObservationValues.strings(['blue/100', '   '])).toBeUndefined();
   expect(colorObservationValues.strings(['blue/100', 500] satisfies JsonValue)).toBeUndefined();
 });
