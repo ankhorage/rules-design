@@ -1,7 +1,7 @@
 import type { JsonValue } from '@ankhorage/rules';
 
-import type { ColorPolicyRuleId, ColorRulePolicy } from '../../types/color';
-import { colorObservationValues } from './colorObservationValues';
+import type { ColorPolicyRuleId, ColorRulePolicy } from '../../types/color.js';
+import { colorObservationValues } from './colorObservationValues.js';
 
 type Verdict = 'FAIL' | 'INCOMPLETE' | 'PASS';
 

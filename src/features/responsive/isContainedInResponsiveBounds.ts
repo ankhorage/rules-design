@@ -1,4 +1,4 @@
-import type { ResponsiveElement } from '../../types/responsive';
+import type { ResponsiveElement } from '../../types/responsive.js';
 
 /*** Checks whether measured focal geometry remains within the image's visible bounds. */
 export function isContainedInResponsiveBounds(

@@ -1,4 +1,4 @@
-import type { ResponsiveElement, ResponsiveMatrix } from '../../types/responsive';
+import type { ResponsiveElement, ResponsiveMatrix } from '../../types/responsive.js';
 
 /*** Returns all normalized measurements for one semantic element kind. */
 export function responsiveElementsOfKind(

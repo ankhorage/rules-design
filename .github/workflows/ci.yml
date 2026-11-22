@@ -65,6 +65,9 @@ jobs:
             echo "No build script found; skipping."
           fi
 
+      - name: Import packed package from a cold Node consumer
+        run: bun run test:packed-node-consumer
+
       - name: Run packed TypeScript consumer
         run: bun run test:packed-consumer
 

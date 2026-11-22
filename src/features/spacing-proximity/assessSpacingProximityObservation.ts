@@ -1,4 +1,4 @@
-import type { SpacingProximityObservation } from '../../types/spacingProximity';
+import type { SpacingProximityObservation } from '../../types/spacingProximity.js';
 
 interface Failure {
   readonly message: string;

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
 import { evaluateRules, type JsonValue } from '@ankhorage/rules';
 
-import { createWebsiteAssessmentRuleSet } from './createWebsiteAssessmentRuleSet';
+import { createWebsiteAssessmentRuleSet } from './createWebsiteAssessmentRuleSet.js';
 
 const scope = { id: 'site', kind: 'website' };
 const options = {

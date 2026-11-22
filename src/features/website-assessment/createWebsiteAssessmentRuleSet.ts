@@ -7,8 +7,8 @@ import type {
   AssessmentFact,
   WebsiteAssessmentContext,
   WebsiteAssessmentRuleOptions,
-} from '../../types/websiteAssessment';
-import { websiteAssessmentDefinitions } from './websiteAssessmentDefinitions';
+} from '../../types/websiteAssessment.js';
+import { websiteAssessmentDefinitions } from './websiteAssessmentDefinitions.js';
 
 /*** Creates the separately composable follow-on website and contact assessment rules. */
 export function createWebsiteAssessmentRuleSet(

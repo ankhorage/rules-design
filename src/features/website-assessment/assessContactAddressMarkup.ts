@@ -5,10 +5,10 @@ import type {
   AssessmentFact,
   AssessmentFinding,
   AssessmentResult,
-} from '../../types/websiteAssessment';
-import { validatedWebsiteAssessmentValues } from './isWebsiteAssessmentNonNull';
-import { websiteAssessmentResult } from './websiteAssessmentResult';
-import { websiteAssessmentValues } from './websiteAssessmentValues';
+} from '../../types/websiteAssessment.js';
+import { validatedWebsiteAssessmentValues } from './isWebsiteAssessmentNonNull.js';
+import { websiteAssessmentResult } from './websiteAssessmentResult.js';
+import { websiteAssessmentValues } from './websiteAssessmentValues.js';
 
 /*** Assesses semantic contact placement and normalized contact-link matching. */
 export function assessContactAddressMarkup(facts: readonly AssessmentFact[]): AssessmentResult {

@@ -1,6 +1,9 @@
-import type { DesignAssessmentKind, DesignRuleCatalogEntry } from '../../types/designRuleCatalog';
-import { designRuleComposites } from './designRuleComposites';
-import { designRuleSemantics } from './designRuleSemantics';
+import type {
+  DesignAssessmentKind,
+  DesignRuleCatalogEntry,
+} from '../../types/designRuleCatalog.js';
+import { designRuleComposites } from './designRuleComposites.js';
+import { designRuleSemantics } from './designRuleSemantics.js';
 
 type Definition = readonly [id: string, description: string, assessmentKind?: DesignAssessmentKind];
 

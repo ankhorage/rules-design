@@ -8,11 +8,11 @@ import type {
 } from '@ankhorage/contracts/website';
 import { evaluateRules } from '@ankhorage/rules';
 
-import { createWebsiteRecognitionRuleSet } from './createWebsiteRecognitionRuleSet';
-import { recognizeWebsiteStructureProps } from './recognizeWebsiteStructureProps';
-import { websiteStructureEvidence } from './websiteStructureEvidence';
-import { recognizeWebsiteStructureSemanticComponentType } from './websiteStructureSemantics';
-import { createWebsiteStructureTreeNode } from './websiteStructureTreeNodes';
+import { createWebsiteRecognitionRuleSet } from './createWebsiteRecognitionRuleSet.js';
+import { recognizeWebsiteStructureProps } from './recognizeWebsiteStructureProps.js';
+import { websiteStructureEvidence } from './websiteStructureEvidence.js';
+import { recognizeWebsiteStructureSemanticComponentType } from './websiteStructureSemantics.js';
+import { createWebsiteStructureTreeNode } from './websiteStructureTreeNodes.js';
 /*** Recognizes source-linked canonical component trees from validated website observations. */
 export function recognizeWebsiteStructure(
   document: WebsiteObservationDocument,

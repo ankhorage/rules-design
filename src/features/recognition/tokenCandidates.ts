@@ -5,7 +5,7 @@ import type {
   WebsiteDesignPropertyObservation,
   WebsiteDesignSourceReference,
   WebsiteDesignTokenCandidate,
-} from '../../types/websiteDesignRecognition';
+} from '../../types/websiteDesignRecognition.js';
 
 type TokenKind = WebsiteDesignTokenCandidate['kind'];
 type TokenObservation = WebsiteDesignSourceReference & {

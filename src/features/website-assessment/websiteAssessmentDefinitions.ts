@@ -1,10 +1,10 @@
-import type { AssessmentDefinition } from '../../types/websiteAssessment';
-import { assessContactAddressMarkup } from './assessContactAddressMarkup';
-import { assessCopyrightNotice } from './assessCopyrightNotice';
-import { assessDuplicateMediaUse } from './assessDuplicateMediaUse';
-import { assessLegalNotice } from './assessLegalNotice';
-import { assessPrivacyNotice } from './assessPrivacyNotice';
-import { assessTrackingConsent } from './assessTrackingConsent';
+import type { AssessmentDefinition } from '../../types/websiteAssessment.js';
+import { assessContactAddressMarkup } from './assessContactAddressMarkup.js';
+import { assessCopyrightNotice } from './assessCopyrightNotice.js';
+import { assessDuplicateMediaUse } from './assessDuplicateMediaUse.js';
+import { assessLegalNotice } from './assessLegalNotice.js';
+import { assessPrivacyNotice } from './assessPrivacyNotice.js';
+import { assessTrackingConsent } from './assessTrackingConsent.js';
 
 /*** Declares the fixed website-assessment catalog without allowing host verdicts as facts. */
 export const websiteAssessmentDefinitions: readonly AssessmentDefinition[] = [

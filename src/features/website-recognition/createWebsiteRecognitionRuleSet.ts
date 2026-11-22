@@ -1,8 +1,8 @@
 import type { WebsiteObservedNode } from '@ankhorage/contracts/website';
 import type { Rule, RuleEvaluationOutcome, RuleSet } from '@ankhorage/rules';
 
-import type { WebsiteRecognitionRuleContext } from '../../types/websiteRecognitionRules';
-import { websiteStructureEvidence } from './websiteStructureEvidence';
+import type { WebsiteRecognitionRuleContext } from '../../types/websiteRecognitionRules.js';
+import { websiteStructureEvidence } from './websiteStructureEvidence.js';
 
 /*** Declares the versioned, provider-neutral Card predicate in the canonical Rules format. */
 export function createWebsiteRecognitionRuleSet(): RuleSet<WebsiteRecognitionRuleContext> {

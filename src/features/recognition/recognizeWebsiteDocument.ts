@@ -16,13 +16,13 @@ import type {
   WebsiteDesignNodeRecognition,
   WebsiteDesignPropertyObservation,
   WebsiteDesignTokenCandidate,
-} from '../../types/websiteDesignRecognition';
-import { recognizeWebsiteSiteChrome } from '../website-recognition/recognizeWebsiteSiteChrome';
-import { recognizeWebsiteStructure } from '../website-recognition/recognizeWebsiteStructure';
-import { createWebsiteAssetIndex } from './createWebsiteAssetIndex';
-import { qualifyWebsiteRecognitionProps } from './qualifyWebsiteRecognitionProps';
-import { recognizeWebsiteDesignProperties } from './recognizeWebsiteDesignProperties';
-import { validateWebsiteObservationDocument } from './validateWebsiteObservationDocument';
+} from '../../types/websiteDesignRecognition.js';
+import { recognizeWebsiteSiteChrome } from '../website-recognition/recognizeWebsiteSiteChrome.js';
+import { recognizeWebsiteStructure } from '../website-recognition/recognizeWebsiteStructure.js';
+import { createWebsiteAssetIndex } from './createWebsiteAssetIndex.js';
+import { qualifyWebsiteRecognitionProps } from './qualifyWebsiteRecognitionProps.js';
+import { recognizeWebsiteDesignProperties } from './recognizeWebsiteDesignProperties.js';
+import { validateWebsiteObservationDocument } from './validateWebsiteObservationDocument.js';
 
 /*** Assembles the public website recognition contract from structural and factual design recognition. */
 export function recognizeWebsiteDocument(

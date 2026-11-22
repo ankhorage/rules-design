@@ -2,11 +2,11 @@ import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { JsonValue, Rule, RuleEvaluationInput, RuleSubject } from '@ankhorage/rules';
 import { isRecord } from '@ankhorage/utility/object';
 
-import type { ColorPolicyRuleId, ColorRulePolicy } from '../../types/color';
-import type { DesignContext } from '../../types/designRuleProvider';
-import { colorObservationValues } from './colorObservationValues';
-import { evaluateColorPolicyObservation } from './evaluateColorPolicyObservation';
-import { isColorRulePolicy } from './isColorRulePolicy';
+import type { ColorPolicyRuleId, ColorRulePolicy } from '../../types/color.js';
+import type { DesignContext } from '../../types/designRuleProvider.js';
+import { colorObservationValues } from './colorObservationValues.js';
+import { evaluateColorPolicyObservation } from './evaluateColorPolicyObservation.js';
+import { isColorRulePolicy } from './isColorRulePolicy.js';
 
 const policyRuleIds = [
   'design.color.syntax-valid',
@@ -28,7 +28,7 @@ interface ColorObservation {
 }
 const { text } = colorObservationValues;
 
-export type { ColorRulePolicy } from '../../types/color';
+export type { ColorRulePolicy } from '../../types/color.js';
 
 /*** Creates the twelve frozen Color and Tokens policy rules from normalized raw observations. */
 export function createColorPolicyRules(policy: ColorRulePolicy): readonly Rule<DesignContext>[] {

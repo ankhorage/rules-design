@@ -1,10 +1,10 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { Rule, RuleEvaluationOutcome, RuleFacet, RuleScope, RuleSet } from '@ankhorage/rules';
 
-import type { DesignContext } from '../../types/designRuleProvider';
-import type { SpacingProximityRuleId } from '../../types/spacingProximity';
-import { assessSpacingProximityObservation } from './assessSpacingProximityObservation';
-import { parseSpacingProximityMeasurements } from './parseSpacingProximityMeasurements';
+import type { DesignContext } from '../../types/designRuleProvider.js';
+import type { SpacingProximityRuleId } from '../../types/spacingProximity.js';
+import { assessSpacingProximityObservation } from './assessSpacingProximityObservation.js';
+import { parseSpacingProximityMeasurements } from './parseSpacingProximityMeasurements.js';
 
 /*** Creates the independently owned Spacing and Proximity Rules contribution. */
 export function createSpacingProximityRuleSet(): RuleSet<DesignContext> {

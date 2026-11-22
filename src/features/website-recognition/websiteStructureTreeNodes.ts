@@ -1,7 +1,7 @@
 import type { UiNode } from '@ankhorage/contracts';
 import type { WebsiteObservedNode, WebsiteRecognizedProp } from '@ankhorage/contracts/website';
 
-import type { RecognizedTreeNode } from './recognizeWebsiteStructure';
+import type { RecognizedTreeNode } from './recognizeWebsiteStructure.js';
 
 /*** Creates a recognized tree node and retains all descendant source mappings. */
 export function createWebsiteStructureTreeNode(
