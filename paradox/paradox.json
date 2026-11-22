@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.10.0",
+      "value": "v0.10.1",
       "color": "cb3837"
     },
     {
@@ -284,6 +284,14 @@
       "exports": [
         "designRulePlanningManifest"
       ]
+    },
+    {
+      "path": "src/features/color/colorObservationValues.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/color/colorObservationValues.ts"
+      ],
+      "exports": []
     },
     {
       "path": "src/features/color/colorObservationValues.ts",
@@ -8917,6 +8925,11 @@
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
       },
       {
+        "fromPath": "src/features/color/colorObservationValues.test.ts",
+        "toPath": "src/features/color/colorObservationValues.ts",
+        "sourcePath": "src/features/color/colorObservationValues.test.ts"
+      },
+      {
         "fromPath": "src/features/color/createColorPolicyRules.ts",
         "toPath": "src/types/color.ts",
         "sourcePath": "src/features/color/createColorPolicyRules.ts"
@@ -10791,9 +10804,33 @@
         "sourcePath": "src/features/catalog/filterDesignRuleCatalog.ts"
       },
       {
+        "fromSymbol": "src/features/color/colorObservationValues.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/color/colorObservationValues.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/colorObservationValues.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/color/colorObservationValues.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/colorObservationValues.test.ts",
+        "toSymbol": "sequence",
+        "callExpression": "colorObservationValues.sequence",
+        "sourcePath": "src/features/color/colorObservationValues.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/color/colorObservationValues.test.ts",
+        "toSymbol": "strings",
+        "callExpression": "colorObservationValues.strings",
+        "sourcePath": "src/features/color/colorObservationValues.test.ts"
+      },
+      {
         "fromSymbol": "sequence",
-        "toSymbol": "isDeepStrictEqual",
-        "callExpression": "isDeepStrictEqual",
+        "toSymbol": "arraysEqual",
+        "callExpression": "arraysEqual",
         "sourcePath": "src/features/color/colorObservationValues.ts"
       },
       {

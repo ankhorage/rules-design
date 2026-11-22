@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.1
+
+### Patch Changes
+
+- 086f47b: Replace Node-only Color sequence equality with the portable Utility array comparator for React Native consumers.
+
 ## 0.10.0
 
 ### Minor Changes
