@@ -170,7 +170,7 @@
     "modulePath": "src/features/catalog/designRuleCatalog.ts",
     "sourceLocation": {
       "filePath": "src/features/catalog/designRuleCatalog.ts",
-      "line": 220,
+      "line": 223,
       "column": 14
     },
     "exportPaths": [
@@ -779,7 +779,7 @@
     ],
     "signatures": [
       {
-        "label": "(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>) => readonly DesignRuleCatalogEntry[]",
+        "label": "(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../../index.js\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>) => readonly DesignRuleCatalogEntry[]",
         "parameters": [
           {
             "name": "entries",
@@ -789,7 +789,7 @@
           },
           {
             "name": "filter",
-            "type": "Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>",
+            "type": "Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../../index.js\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>",
             "required": true,
             "description": null
           }

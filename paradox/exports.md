@@ -65,7 +65,7 @@ The minimal context shared by Design rules without prescribing its source.
 
 Kind: `value`
 Module: `src/features/catalog/designRuleCatalog.ts`
-Source: `src/features/catalog/designRuleCatalog.ts:220:14`
+Source: `src/features/catalog/designRuleCatalog.ts:223:14`
 
 Exposes the complete planned atomic and composite design rule catalog.
 
@@ -249,9 +249,9 @@ Selects planned catalog entries matching every supplied controlled facet.
 
 ### Signatures
 
-- `(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>) => readonly DesignRuleCatalogEntry[]`
+- `(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../../index.js").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>) => readonly DesignRuleCatalogEntry[]`
   - entries: `readonly DesignRuleCatalogEntry[]`
-  - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
+  - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../../index.js").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
   - returns: `readonly DesignRuleCatalogEntry[]`
 
 ## recognizeWebsiteDesignProperties

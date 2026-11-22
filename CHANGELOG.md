@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.2
+
+### Patch Changes
+
+- 654f719: Emit Node-compatible relative ESM imports from the public package entrypoint.
+
 ## 0.10.1
 
 ### Patch Changes
