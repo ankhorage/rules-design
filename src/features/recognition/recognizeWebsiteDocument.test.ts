@@ -1,12 +1,15 @@
 import { createHash } from 'node:crypto';
 
-import type { UiNode } from '@ankhorage/contracts';
+import type { SerializableValue, UiNode } from '@ankhorage/contracts';
 import type { WebsiteObservationDocument } from '@ankhorage/contracts/website';
 import { expect, test } from 'bun:test';
 
 import expectedRecognition from '../../../test/fixtures/website-recognition-expected.v1.json' with { type: 'json' };
 import observationDocument from '../../../test/fixtures/website-recognition-observation.v1.json' with { type: 'json' };
-import { websiteObservationDocumentFixture } from '../../../test/fixtures/websiteObservationDocument';
+import {
+  websiteAnimationObservationDocumentFixture,
+  websiteObservationDocumentFixture,
+} from '../../../test/fixtures/websiteObservationDocument';
 import {
   createVisibleCardAndDividerDocument,
   createWebsiteRegionDocument,
@@ -101,8 +104,55 @@ test('assembles deterministic page-qualified structural and factual recognition 
   ).toBe(true);
 });
 
+test('assembles animation evidence per observed state without creating pseudo-element nodes', () => {
+  const recognition = recognizeWebsiteDocument(websiteAnimationObservationDocumentFixture());
+  const home = page(recognition, 'home');
+  const animated = node(home, '["home","#animated"]');
+  const missingPseudo = node(home, '["home","#missing-pseudo"]');
+
+  expect(
+    JSON.stringify(animated.props.find((property) => property.name === 'animationEvidence')?.value),
+  ).toContain('"value":"0px"');
+  expect(
+    JSON.stringify(
+      animated.responsive
+        .find((variant) => variant.viewportId === 'desktop')
+        ?.props.find((property) => property.name === 'state:settled:animationEvidence')?.value,
+    ),
+  ).toContain('"value":"75px"');
+  expect(missingPseudo.props.some((property) => property.name.includes('animation-evidence'))).toBe(
+    true,
+  );
+  expect(home.nodes.some((recognizedNode) => recognizedNode.id.includes('::after'))).toBe(false);
+});
+
+test('retains qualified animation and missing-channel sources when a transparent parent is folded', () => {
+  const recognition = recognizeWebsiteDocument(websiteAnimationObservationDocumentFixture());
+  const home = page(recognition, 'home');
+  const foldedChild = node(home, '["home","#animated-parent > #animated-child"]');
+  const animation = foldedChild.props.find((property) => property.name === 'animationEvidence');
+  const missingPseudo = node(home, '["home","#missing-pseudo"]');
+  const missingChannel = missingPseudo.props.find((property) =>
+    property.name.includes('animation-evidence'),
+  );
+
+  expect(foldedChild.sourceRefs).toEqual([
+    '["home","#animated-parent"]',
+    '["home","#animated-parent > #animated-child"]',
+  ]);
+  expect(animationSourceRefs(animation?.originalValues)).toEqual([
+    '["home","#animated-parent > #animated-child"]',
+    '["home","#animated-parent"]',
+  ]);
+  expect(JSON.stringify(JSON.parse(JSON.stringify(animation)))).toBe(JSON.stringify(animation));
+  expect(JSON.stringify(missingChannel?.value)).toContain(
+    '"sourceRef":"[\\"home\\",\\"#missing-pseudo\\"]"',
+  );
+  expect(home.nodes.some((recognizedNode) => recognizedNode.id.includes('::'))).toBe(false);
+});
+
 test('rejects ambiguous page-local source identities instead of silently overwriting them', () => {
-  const document = websiteObservationDocumentFixture();
+  const document = websiteAnimationObservationDocumentFixture();
   const page = first(document.pages);
   const duplicate = { ...first(page.nodes) };
   const invalid = { ...document, pages: [{ ...page, nodes: [...page.nodes, duplicate] }] };
@@ -110,20 +160,28 @@ test('rejects ambiguous page-local source identities instead of silently overwri
   expect(() => recognizeWebsiteDocument(invalid)).toThrow('Duplicate source reference');
 });
 
+test('rejects an animation observation whose state is absent from its page', () => {
+  const document = websiteAnimationObservationDocumentFixture();
+  const page = first(document.pages);
+  const invalid = { ...document, pages: [{ ...page, states: page.states.slice(0, 2) }] };
+
+  expect(() => recognizeWebsiteDocument(invalid)).toThrow('Unknown state settled');
+});
+
 test('retains source and responsive evidence for visible cards and CSS dividers through the public recognizer', () => {
   const recognition = recognizeWebsiteDocument(createVisibleCardAndDividerDocument());
-  const page = pageFor(recognition, 'home');
-  const cards = page.nodes.filter((node) => node.componentType === 'Card');
-  const realization = node(page, '["home","surface:realization"]');
+  const home = page(recognition, 'home');
+  const cards = home.nodes.filter((node) => node.componentType === 'Card');
+  const realization = node(home, '["home","surface:realization"]');
 
   expect(cards).toHaveLength(4);
-  expect(page.nodes.filter((node) => node.componentType === 'Divider')).toHaveLength(1);
+  expect(home.nodes.filter((node) => node.componentType === 'Divider')).toHaveLength(1);
   expect(realization.sourceRefs).toEqual([
     '["home","surface:wrapper"]',
     '["home","surface:realization"]',
   ]);
   expect(
-    node(page, '["home","surface:layout"]').responsive.some(
+    node(home, '["home","surface:layout"]').responsive.some(
       (variant) => variant.viewportId === 'mobile' && variant.props.length > 0,
     ),
   ).toBe(true);
@@ -131,14 +189,14 @@ test('retains source and responsive evidence for visible cards and CSS dividers 
 
 test('retains region source refs and responsive navigation evidence through the public recognizer', () => {
   const recognition = recognizeWebsiteDocument(createWebsiteRegionDocument());
-  const page = pageFor(recognition, 'home');
-  const primaryNavigation = node(page, '["home","surface:primary-nav"]');
-  const mobileNavigation = node(page, '["home","surface:mobile-nav"]');
-  const footerCard = node(page, '["home","surface:footer-cta"]');
+  const home = page(recognition, 'home');
+  const primaryNavigation = node(home, '["home","surface:primary-nav"]');
+  const mobileNavigation = node(home, '["home","surface:mobile-nav"]');
+  const footerCard = node(home, '["home","surface:footer-cta"]');
 
   expect(
     ['surface:header', 'surface:main', 'surface:footer'].map(
-      (sourceRef) => node(page, JSON.stringify(['home', sourceRef])).componentType,
+      (sourceRef) => node(home, JSON.stringify(['home', sourceRef])).componentType,
     ),
   ).toEqual(['Header', 'Main', 'Footer']);
   expect(primaryNavigation.componentType).toBe('Nav');
@@ -185,6 +243,22 @@ function isQualified(value: string): boolean {
   );
 }
 
+/*** Reads the source identity that remains attached to each serialized animation sample. */
+function animationSourceRefs(values: readonly SerializableValue[] | undefined): readonly string[] {
+  if (values === undefined) throw new Error('Missing animation evidence.');
+  return values.map((value) => {
+    if (
+      value === null ||
+      typeof value !== 'object' ||
+      Array.isArray(value) ||
+      !('sourceRef' in value) ||
+      typeof value.sourceRef !== 'string'
+    )
+      throw new Error('Animation evidence lost its source reference.');
+    return value.sourceRef;
+  });
+}
+
 /*** Reads the fixture's required first element without an unsafe assertion. */
 function first<T>(values: readonly T[]): T {
   const [value] = values;
@@ -199,16 +273,6 @@ function page(
 ): (typeof document.pages)[number] {
   const recognizedPage = document.pages.find((candidate) => candidate.id === pageId);
   if (recognizedPage === undefined) throw new Error(`Missing page ${pageId}.`);
-  return recognizedPage;
-}
-
-/*** Reads one public recognition page by its stable observed identity. */
-function pageFor(
-  document: ReturnType<typeof recognizeWebsiteDocument>,
-  pageId: string,
-): (typeof document.pages)[number] {
-  const recognizedPage = document.pages.find((candidate) => candidate.id === pageId);
-  if (recognizedPage === undefined) throw new Error(`Missing recognition page ${pageId}.`);
   return recognizedPage;
 }
 
