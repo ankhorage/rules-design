@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.10.2
+
+### Patch Changes
+
+- 654f719: Emit Node-compatible relative ESM imports from the public package entrypoint.
+
+## 0.10.1
+
+### Patch Changes
+
+- 086f47b: Replace Node-only Color sequence equality with the portable Utility array comparator for React Native consumers.
+
+## 0.10.0
+
+### Minor Changes
+
+- d6ba244: Define versioned website Card recognition through the canonical Rules evaluator with reusable, inspectable owned-background and shadow signals. Decorative borders and radius no longer imply Cards.
+
+## 0.9.4
+
+### Patch Changes
+
+- c0b4205: Recognize HTML and ARIA navigation and main landmarks as canonical website regions while retaining source-linked responsive evidence.
+
+## 0.9.3
+
+### Patch Changes
+
+- 94478d7: Recognize independently visible website cards and provider-neutral CSS dividers.
+
+## 0.9.2
+
+### Patch Changes
+
+- b614a47: Recognize source-grounded site header and footer evidence without asserting cross-page identity.
+
+## 0.9.1
+
+### Patch Changes
+
+- 3346adc: Recognize semantic HTML landmarks and content alongside evidence-backed layout, card, and transparent-wrapper structures without losing child provenance.
+
 ## 0.9.0
 
 ### Minor Changes

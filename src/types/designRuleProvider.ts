@@ -1,10 +1,10 @@
 import type { FactEnvelope } from '@ankhorage/contracts/rules';
 import type { RuleSelection, RuleSet } from '@ankhorage/rules';
 
-import type { AlignmentRuleOptions } from '../features/alignment/createAlignmentRules';
-import type { ColorRulePolicy } from '../features/color/createColorRuleSet';
-import type { MediaRuleOptions } from '../features/media/createMediaRuleSet';
-import type { TypographyRulePolicy } from './typography';
+import type { AlignmentRuleOptions } from '../features/alignment/createAlignmentRules.js';
+import type { ColorRulePolicy } from '../features/color/createColorRuleSet.js';
+import type { MediaRuleOptions } from '../features/media/createMediaRuleSet.js';
+import type { TypographyRulePolicy } from './typography.js';
 
 /*** The minimal context shared by Design rules without prescribing its source. */
 export interface DesignContext {

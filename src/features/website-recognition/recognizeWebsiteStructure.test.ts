@@ -3,9 +3,15 @@ import type { WebsitePageRecognition } from '@ankhorage/contracts/website';
 import { expect, test } from 'bun:test';
 
 import {
+  createCardAndDividerEvidenceDocument,
   createColoredColumnsDocument,
+  createComplexLayoutDocument,
   createDocument,
+  createIncompleteWrapperEvidenceDocument,
   createMalformedDocument,
+  createVisibleCardAndDividerDocument,
+  createWebsiteRegionDocument,
+  createWebsiteRegionFallbackDocument,
   sourceRefsFor,
 } from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteStructure } from './recognizeWebsiteStructure.ts';
@@ -65,6 +71,127 @@ test('does not invent cards and preserves malformed source evidence', () => {
   );
 });
 
+test('prioritizes measured layout, cards, and HTML semantics while folding boxless wrappers', () => {
+  const page = recognizedPage(createComplexLayoutDocument());
+  const grid = recognizedNode(page, 'complex:grid');
+  const firstCard = recognizedNode(page, 'complex:card:one');
+  const secondCard = recognizedNode(page, 'complex:card:two');
+  const heading = recognizedNode(page, 'complex:heading');
+  const unknown = recognizedNode(page, 'complex:unknown');
+
+  expect(recognizedNode(page, 'complex:main').componentType).toBe('Main');
+  expect(recognizedNode(page, 'complex:nav').componentType).toBe('Nav');
+  expect(recognizedNode(page, 'complex:nav-list').componentType).toBe('List');
+  expect(recognizedNode(page, 'complex:nav-link').componentType).toBe('Link');
+  expect(grid.componentType).toBe('Grid');
+  expect(firstCard.componentType).toBe('Card');
+  expect(secondCard.componentType).toBe('Card');
+  expect(heading.sourceRefs).toEqual(['complex:contents', 'complex:heading']);
+  expect(page.nodes.some((node) => node.id === 'complex:contents')).toBe(false);
+  expect(unknown.status).toBe('unresolved');
+  expect(recognizedNode(page, 'complex:unknown-child').componentType).toBe('Heading');
+  expect(
+    page.root.children?.some((node) => containsUiNode(node, 'complex:unknown-child', 'Heading')),
+  ).toBe(true);
+});
+
+test('retains wrappers and recognized children when CSS or layout evidence is unknown', () => {
+  const page = recognizedPage(createIncompleteWrapperEvidenceDocument());
+  const wrapper = recognizedNode(page, 'incomplete-wrapper:wrapper');
+
+  expect(wrapper.status).toBe('unresolved');
+  expect(wrapper.sourceRefs).toEqual(['incomplete-wrapper:wrapper']);
+  expect(recognizedNode(page, 'incomplete-wrapper:heading').componentType).toBe('Heading');
+  expect(
+    containsUiNode(page.root, 'incomplete-wrapper:wrapper', 'Unknown') &&
+      containsUiNode(page.root, 'incomplete-wrapper:heading', 'Heading'),
+  ).toBe(true);
+});
+
+test('recognizes four independently bounded responsive cards and a provider-neutral CSS divider', () => {
+  const document = createVisibleCardAndDividerDocument();
+  const page = recognizedPage(document);
+  const cards = page.nodes.filter((node) => node.componentType === 'Card');
+
+  expect(cards.map((node) => node.id)).toEqual([
+    'surface:marketing',
+    'surface:design',
+    'surface:realization',
+    'surface:websites',
+  ]);
+  expect(recognizedNode(page, 'surface:divider').componentType).toBe('Divider');
+  expect(recognizedNode(page, 'surface:realization').sourceRefs).toEqual([
+    'surface:wrapper',
+    'surface:realization',
+  ]);
+  expect(recognizedNode(page, 'surface:websites').componentType).toBe('Card');
+  expect(page.nodes.some((node) => node.id === 'surface:wrapper')).toBe(false);
+  expect(
+    page.nodes.filter((node) => node.componentType === 'Heading').map((node) => node.id),
+  ).toEqual([
+    'surface:marketing-heading',
+    'surface:design-heading',
+    'surface:realization-heading',
+    'surface:websites-heading',
+  ]);
+  expect(document.pages[0]?.viewports.map((viewport) => viewport.width)).toEqual([1440, 768, 390]);
+});
+
+test('recognizes empty and image surfaces but excludes radius, equal backgrounds, invisible borders, and non-line borders', () => {
+  const page = recognizedPage(createCardAndDividerEvidenceDocument());
+
+  expect(recognizedNode(page, 'surface:empty').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:image').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:radius-only').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:same-background').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:invisible-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:four-sided-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:copyright-border').componentType).not.toBe('Card');
+  expect(recognizedNode(page, 'surface:plain-cell').componentType).not.toBe('Card');
+  expect(
+    ['surface:hr', 'surface:aria', 'surface:css-line'].map(
+      (sourceRef) => recognizedNode(page, sourceRef).componentType,
+    ),
+  ).toEqual(['Divider', 'Divider', 'Divider']);
+  expect(recognizedNode(page, 'surface:section-border').componentType).not.toBe('Divider');
+  expect(recognizedNode(page, 'surface:hidden-line').componentType).not.toBe('Divider');
+});
+
+test('recognizes ordered website regions and keeps four product cards inside Main', () => {
+  const page = recognizedPage(createWebsiteRegionDocument());
+  const main = recognizedNode(page, 'surface:main');
+  const nav = recognizedNode(page, 'surface:primary-nav');
+
+  expect(
+    ['surface:header', 'surface:main', 'surface:footer'].map(
+      (sourceRef) => recognizedNode(page, sourceRef).componentType,
+    ),
+  ).toEqual(['Header', 'Main', 'Footer']);
+  expect(nav.componentType).toBe('Nav');
+  expect(recognizedNode(page, 'surface:mobile-nav').componentType).toBe('Nav');
+  expect(main.sourceRefs).toEqual(['surface:main']);
+  expect(cardsInUiNode(uiNode(page.root, 'surface:main'))).toEqual([
+    'surface:marketing',
+    'surface:design',
+    'surface:realization',
+    'surface:websites',
+  ]);
+  expect(recognizedNode(page, 'surface:footer-cta').componentType).toBe('Card');
+  expect(recognizedNode(page, 'surface:divider').componentType).toBe('Divider');
+});
+
+test('groups pages without main as analysis-only Main while retaining local article landmarks', () => {
+  const page = recognizedPage(createWebsiteRegionFallbackDocument());
+  const fallbackMain = uiNode(page.root, 'page:main');
+
+  expect(page.nodes.some((node) => node.componentType === 'Main')).toBe(false);
+  expect(fallbackMain.type).toBe('Main');
+  expect(fallbackMain.children?.map((node) => node.id)).toContain('surface:main');
+  expect(recognizedNode(page, 'surface:primary-nav').componentType).toBe('Nav');
+  expect(recognizedNode(page, 'surface:article-header').componentType).toBe('Header');
+  expect(recognizedNode(page, 'surface:article-footer').componentType).toBe('Footer');
+});
+
 /*** Returns the single recognition page produced by a complete fixture document. */
 function recognizedPage(
   document: Parameters<typeof recognizeWebsiteStructure>[0],
@@ -87,6 +214,35 @@ function recognizedSourceRefs(page: WebsitePageRecognition): ReadonlySet<string>
 /*** Removes source-only identity while retaining full semantic tree structure and props. */
 function normalizeTree(node: UiNode): unknown {
   return JSON.parse(JSON.stringify(node, removeSourceIdentity));
+}
+
+/*** Finds a source-derived UI node without dropping descendants of an unresolved parent. */
+function containsUiNode(node: UiNode, id: string, type: string): boolean {
+  return (
+    (node.id === id && node.type === type) ||
+    (node.children ?? []).some((child) => containsUiNode(child, id, type))
+  );
+}
+
+/*** Finds a preserved source node in the canonical UI tree. */
+function uiNode(node: UiNode, id: string): UiNode {
+  if (node.id === id) return node;
+  for (const child of node.children ?? []) {
+    try {
+      return uiNode(child, id);
+    } catch {
+      continue;
+    }
+  }
+  throw new Error(`Missing UI node ${id}.`);
+}
+
+/*** Collects Cards from one Main subtree without counting independent footer surfaces. */
+function cardsInUiNode(node: UiNode): readonly string[] {
+  return [
+    ...(node.type === 'Card' ? [node.id] : []),
+    ...(node.children ?? []).flatMap(cardsInUiNode),
+  ];
 }
 
 /*** Removes source-derived node and property references from semantic comparisons. */
@@ -161,7 +317,7 @@ const expectedSemanticTree = {
         { type: 'Unknown' },
         { type: 'Unknown' },
       ],
-      type: 'Container',
+      type: 'Main',
     },
   ],
   type: 'Container',

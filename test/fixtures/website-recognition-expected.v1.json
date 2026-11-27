@@ -999,8 +999,8 @@
       "id": "home",
       "nodes": [
         {
-          "componentType": "Grid",
-          "confidence": 0.98,
+          "componentType": "Main",
+          "confidence": 1,
           "id": "[\"home\",\"#page\"]",
           "props": [
             {
@@ -1972,8 +1972,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Unknown",
-          "confidence": 0,
+          "componentType": "Nav",
+          "confidence": 1,
           "id": "[\"home\",\"#nav\"]",
           "props": [
             {
@@ -2296,11 +2296,8 @@
           ],
           "responsive": [],
           "sourceRefs": ["[\"home\",\"#nav\"]"],
-          "status": "unresolved",
-          "unresolved": {
-            "reason": "Visible source node has no canonical component mapping.",
-            "sourceRefs": ["[\"home\",\"#nav\"]"]
-          }
+          "status": "recognized",
+          "unresolved": null
         },
         {
           "componentType": "Link",
@@ -7936,7 +7933,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Unknown"
+                "type": "Nav"
               },
               {
                 "children": [
@@ -8963,7 +8960,7 @@
               "textDecoration": "none solid rgb(17, 17, 17)",
               "visibility": "visible"
             },
-            "type": "Grid"
+            "type": "Main"
           }
         ],
         "id": "[\"home\",\"home:root\"]",
@@ -8975,8 +8972,8 @@
       "id": "about",
       "nodes": [
         {
-          "componentType": "Grid",
-          "confidence": 0.98,
+          "componentType": "Main",
+          "confidence": 1,
           "id": "[\"about\",\"#page\"]",
           "props": [
             {
@@ -9948,8 +9945,8 @@
           "unresolved": null
         },
         {
-          "componentType": "Unknown",
-          "confidence": 0,
+          "componentType": "Nav",
+          "confidence": 1,
           "id": "[\"about\",\"#nav\"]",
           "props": [
             {
@@ -10272,11 +10269,8 @@
           ],
           "responsive": [],
           "sourceRefs": ["[\"about\",\"#nav\"]"],
-          "status": "unresolved",
-          "unresolved": {
-            "reason": "Visible source node has no canonical component mapping.",
-            "sourceRefs": ["[\"about\",\"#nav\"]"]
-          }
+          "status": "recognized",
+          "unresolved": null
         },
         {
           "componentType": "Link",
@@ -15912,7 +15906,7 @@
                   "textDecoration": "none solid rgb(17, 17, 17)",
                   "visibility": "visible"
                 },
-                "type": "Unknown"
+                "type": "Nav"
               },
               {
                 "children": [
@@ -16939,7 +16933,7 @@
               "textDecoration": "none solid rgb(17, 17, 17)",
               "visibility": "visible"
             },
-            "type": "Grid"
+            "type": "Main"
           }
         ],
         "id": "[\"about\",\"about:root\"]",
@@ -16953,6 +16947,9 @@
   "site": {
     "id": "recognition-example",
     "url": "https://recognition.example/"
+  },
+  "siteChrome": {
+    "candidates": []
   },
   "source": {
     "crawlerId": "fixture",

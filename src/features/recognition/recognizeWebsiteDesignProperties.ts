@@ -11,9 +11,9 @@ import type {
   WebsiteDesignPropertyObservation,
   WebsiteDesignRecognition,
   WebsiteDesignUnresolvedObservation,
-} from '../../types/websiteDesignRecognition';
-import { recognizeWebsiteAnimationEvidence } from './recognizeWebsiteAnimationEvidence';
-import { tokenCandidates } from './tokenCandidates';
+} from '../../types/websiteDesignRecognition.js';
+import { recognizeWebsiteAnimationEvidence } from './recognizeWebsiteAnimationEvidence.js';
+import { tokenCandidates } from './tokenCandidates.js';
 
 /*** Recognizes exact design properties from validated website observations without evaluating them. */
 export function recognizeWebsiteDesignProperties(

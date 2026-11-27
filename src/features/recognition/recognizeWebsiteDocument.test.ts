@@ -10,10 +10,14 @@ import {
   websiteAnimationObservationDocumentFixture,
   websiteObservationDocumentFixture,
 } from '../../../test/fixtures/websiteObservationDocument';
+import {
+  createVisibleCardAndDividerDocument,
+  createWebsiteRegionDocument,
+} from '../../../test/fixtures/websiteRecognition';
 import { recognizeWebsiteDocument } from './recognizeWebsiteDocument';
 
 const expectedRecognitionSha256 =
-  '3f12e7b38305d4ae6c11af012e32945411229e956733984a068981cefa86a94d';
+  '2bf47aca86764d0927e4cee4854f1599f8ff0589fc2c16f120a5c20fc806e5b9';
 const canonicalObservation = observationDocument as unknown as WebsiteObservationDocument;
 
 test('matches the immutable canonical two-page website recognition JSON acceptance fixture', async () => {
@@ -164,6 +168,73 @@ test('rejects an animation observation whose state is absent from its page', () 
   expect(() => recognizeWebsiteDocument(invalid)).toThrow('Unknown state settled');
 });
 
+test('retains source and responsive evidence for visible cards and CSS dividers through the public recognizer', () => {
+  const recognition = recognizeWebsiteDocument(createVisibleCardAndDividerDocument());
+  const home = page(recognition, 'home');
+  const cards = home.nodes.filter((node) => node.componentType === 'Card');
+  const realization = node(home, '["home","surface:realization"]');
+
+  expect(cards).toHaveLength(4);
+  expect(home.nodes.filter((node) => node.componentType === 'Divider')).toHaveLength(1);
+  expect(realization.sourceRefs).toEqual([
+    '["home","surface:wrapper"]',
+    '["home","surface:realization"]',
+  ]);
+  expect(
+    node(home, '["home","surface:layout"]').responsive.some(
+      (variant) => variant.viewportId === 'mobile' && variant.props.length > 0,
+    ),
+  ).toBe(true);
+});
+
+test('retains region source refs and responsive navigation evidence through the public recognizer', () => {
+  const recognition = recognizeWebsiteDocument(createWebsiteRegionDocument());
+  const home = page(recognition, 'home');
+  const primaryNavigation = node(home, '["home","surface:primary-nav"]');
+  const mobileNavigation = node(home, '["home","surface:mobile-nav"]');
+  const footerCard = node(home, '["home","surface:footer-cta"]');
+
+  expect(
+    ['surface:header', 'surface:main', 'surface:footer'].map(
+      (sourceRef) => node(home, JSON.stringify(['home', sourceRef])).componentType,
+    ),
+  ).toEqual(['Header', 'Main', 'Footer']);
+  expect(primaryNavigation.componentType).toBe('Nav');
+  expect(primaryNavigation.sourceRefs).toEqual(['["home","surface:primary-nav"]']);
+  expect(primaryNavigation.props.find((property) => property.name === 'links')?.value).toEqual([
+    {
+      label: 'Startseite',
+      sourceRef: '["home","surface:primary-nav:link:0"]',
+      url: 'https://stage.pixelbrandworks.ch/',
+    },
+    {
+      label: 'Produkte',
+      sourceRef: '["home","surface:primary-nav:link:1"]',
+      url: 'https://stage.pixelbrandworks.ch/produkte/',
+    },
+    {
+      label: 'Über mich',
+      sourceRef: '["home","surface:primary-nav:link:2"]',
+      url: 'https://stage.pixelbrandworks.ch/ueber-mich/',
+    },
+    {
+      label: 'Kontakt',
+      sourceRef: '["home","surface:primary-nav:link:3"]',
+      url: 'https://stage.pixelbrandworks.ch/kontakt/',
+    },
+  ]);
+  expect(displayAt(primaryNavigation, 'mobile')).toBe('none');
+  expect(displayAt(mobileNavigation, 'mobile')).toBe('flex');
+  expect(mobileNavigation.props.find((property) => property.name === 'display')?.value).toBe(
+    'none',
+  );
+  expect(footerCard.componentType).toBe('Card');
+  expect(footerCard.sourceRefs).toEqual(['["home","surface:footer-cta"]']);
+  expect(footerCard.props.find((property) => property.name === 'backgroundColor')?.value).toBe(
+    'rgb(25, 25, 25)',
+  );
+});
+
 /*** Confirms that serialized source identities retain both page and source components. */
 function isQualified(value: string): boolean {
   const parsed: unknown = JSON.parse(value);
@@ -241,6 +312,13 @@ function expectTabletGrid(recognizedNode: ReturnType<typeof node>): void {
           property.value === 'repeat(2, minmax(0px, 1fr))',
       ),
   ).toBe(true);
+}
+
+/*** Reads one viewport-specific display sample without pretending responsive alternatives are absent. */
+function displayAt(recognizedNode: ReturnType<typeof node>, viewportId: string): unknown {
+  return recognizedNode.responsive
+    .find((variant) => variant.viewportId === viewportId)
+    ?.props.find((property) => property.name === 'display')?.value;
 }
 
 /*** Finds a source-qualified UI node without collapsing its observed hierarchy. */

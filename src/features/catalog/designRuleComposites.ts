@@ -1,4 +1,4 @@
-import type { DesignRuleCatalogEntry } from '../../types/designRuleCatalog';
+import type { DesignRuleCatalogEntry } from '../../types/designRuleCatalog.js';
 
 /*** Creates the five planned C.R.A.P. composite nodes from their atomic child rules. */
 export function designRuleComposites(

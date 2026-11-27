@@ -4,7 +4,7 @@ import type { WebsiteNodeObservation, WebsiteObservedNode } from '@ankhorage/con
 import type {
   WebsiteDesignPropertyObservation,
   WebsiteDesignUnresolvedObservation,
-} from '../../types/websiteDesignRecognition';
+} from '../../types/websiteDesignRecognition.js';
 
 /*** Recognizes factual portable animation evidence without inferring a CSS transition outcome. */
 export function recognizeWebsiteAnimationEvidence(pageId: string, node: WebsiteObservedNode) {

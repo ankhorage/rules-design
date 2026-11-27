@@ -1,4 +1,4 @@
-import type { TypographyObservation } from '../../types/typography';
+import type { TypographyObservation } from '../../types/typography.js';
 
 /*** Creates the shared completeness and viewport grouping operations for Typography evidence. */
 export function createTypographyObservationTools() {

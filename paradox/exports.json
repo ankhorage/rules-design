@@ -77,6 +77,37 @@
     "structuredRows": []
   },
   {
+    "name": "createWebsiteRecognitionRuleSet",
+    "title": null,
+    "description": "Declares the versioned, provider-neutral Card predicate in the canonical Rules format.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+    "sourceLocation": {
+      "filePath": "src/features/website-recognition/createWebsiteRecognitionRuleSet.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "WebsiteRecognitionRuleContext"
+    ],
+    "signatures": [
+      {
+        "label": "() => RuleSet<WebsiteRecognitionRuleContext>",
+        "parameters": [],
+        "returnType": "RuleSet<WebsiteRecognitionRuleContext>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "DesignAssessmentKind",
     "title": null,
     "description": null,
@@ -139,7 +170,7 @@
     "modulePath": "src/features/catalog/designRuleCatalog.ts",
     "sourceLocation": {
       "filePath": "src/features/catalog/designRuleCatalog.ts",
-      "line": 220,
+      "line": 223,
       "column": 14
     },
     "exportPaths": [
@@ -748,7 +779,7 @@
     ],
     "signatures": [
       {
-        "label": "(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>) => readonly DesignRuleCatalogEntry[]",
+        "label": "(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../../index.js\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>) => readonly DesignRuleCatalogEntry[]",
         "parameters": [
           {
             "name": "entries",
@@ -758,7 +789,7 @@
           },
           {
             "name": "filter",
-            "type": "Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../..\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>",
+            "type": "Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import(\"../../index.js\").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, \"principles\" | \"scopes\" | \"subjects\" | \"topics\">>",
             "required": true,
             "description": null
           }
@@ -819,7 +850,7 @@
     "modulePath": "src/features/recognition/recognizeWebsiteDocument.ts",
     "sourceLocation": {
       "filePath": "src/features/recognition/recognizeWebsiteDocument.ts",
-      "line": 27,
+      "line": 28,
       "column": 1
     },
     "exportPaths": [
@@ -855,7 +886,7 @@
     "modulePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
     "sourceLocation": {
       "filePath": "src/features/website-recognition/recognizeWebsiteStructure.ts",
-      "line": 15,
+      "line": 17,
       "column": 1
     },
     "exportPaths": [
@@ -1347,6 +1378,50 @@
         "name": "viewportId",
         "kind": "property",
         "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "WebsiteRecognitionRuleContext",
+    "title": null,
+    "description": "Source-linked facts used by the canonical Rules evaluation for website modules.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/websiteRecognitionRules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/websiteRecognitionRules.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "childNodesByParent",
+        "kind": "property",
+        "type": "ReadonlyMap<string, readonly WebsiteObservedNode[]>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "node",
+        "kind": "property",
+        "type": "WebsiteObservedNode",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "parent",
+        "kind": "property",
+        "type": "WebsiteObservedNode | null",
         "required": true,
         "description": null
       }

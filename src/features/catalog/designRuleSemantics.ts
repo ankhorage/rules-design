@@ -1,4 +1,4 @@
-import type { DesignRuleEvidence, DesignRuleScope } from '../../types/designRuleCatalog';
+import type { DesignRuleEvidence, DesignRuleScope } from '../../types/designRuleCatalog.js';
 
 interface RuleSemantics {
   readonly evidence: DesignRuleEvidence;

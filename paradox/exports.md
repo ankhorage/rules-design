@@ -28,6 +28,19 @@ Creates the separately composable follow-on website and contact assessment rules
   - options: `WebsiteAssessmentRuleOptions` (optional)
   - returns: `RuleSet<WebsiteAssessmentContext>`
 
+## createWebsiteRecognitionRuleSet
+
+Kind: `function`
+Module: `src/features/website-recognition/createWebsiteRecognitionRuleSet.ts`
+Source: `src/features/website-recognition/createWebsiteRecognitionRuleSet.ts:8:1`
+
+Declares the versioned, provider-neutral Card predicate in the canonical Rules format.
+
+### Signatures
+
+- `() => RuleSet<WebsiteRecognitionRuleContext>`
+  - returns: `RuleSet<WebsiteRecognitionRuleContext>`
+
 ## DesignAssessmentKind
 
 Kind: `unknown`
@@ -52,7 +65,7 @@ The minimal context shared by Design rules without prescribing its source.
 
 Kind: `value`
 Module: `src/features/catalog/designRuleCatalog.ts`
-Source: `src/features/catalog/designRuleCatalog.ts:220:14`
+Source: `src/features/catalog/designRuleCatalog.ts:223:14`
 
 Exposes the complete planned atomic and composite design rule catalog.
 
@@ -236,9 +249,9 @@ Selects planned catalog entries matching every supplied controlled facet.
 
 ### Signatures
 
-- `(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>) => readonly DesignRuleCatalogEntry[]`
+- `(entries: readonly DesignRuleCatalogEntry[], filter: Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../../index.js").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>) => readonly DesignRuleCatalogEntry[]`
   - entries: `readonly DesignRuleCatalogEntry[]`
-  - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../..").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
+  - filter: `Partial<Pick<{ readonly principles: readonly string[]; readonly scopes: readonly import("../../index.js").DesignRuleScope[]; readonly subjects: readonly string[]; readonly topics: readonly string[]; }, "principles" | "scopes" | "subjects" | "topics">>`
   - returns: `readonly DesignRuleCatalogEntry[]`
 
 ## recognizeWebsiteDesignProperties
@@ -259,7 +272,7 @@ Recognizes exact design properties from validated website observations without e
 
 Kind: `function`
 Module: `src/features/recognition/recognizeWebsiteDocument.ts`
-Source: `src/features/recognition/recognizeWebsiteDocument.ts:27:1`
+Source: `src/features/recognition/recognizeWebsiteDocument.ts:28:1`
 
 Assembles the public website recognition contract from structural and factual design recognition.
 
@@ -273,7 +286,7 @@ Assembles the public website recognition contract from structural and factual de
 
 Kind: `function`
 Module: `src/features/website-recognition/recognizeWebsiteStructure.ts`
-Source: `src/features/website-recognition/recognizeWebsiteStructure.ts:15:1`
+Source: `src/features/website-recognition/recognizeWebsiteStructure.ts:17:1`
 
 Recognizes source-linked canonical component trees from validated website observations.
 
@@ -425,3 +438,19 @@ Retains an unavailable observation instead of substituting or silently omitting 
 | sourceRef | property | `string` | yes |  |
 | stateId | property | `string` | yes |  |
 | viewportId | property | `string` | yes |  |
+
+## WebsiteRecognitionRuleContext
+
+Kind: `type`
+Module: `src/types/websiteRecognitionRules.ts`
+Source: `src/types/websiteRecognitionRules.ts:4:1`
+
+Source-linked facts used by the canonical Rules evaluation for website modules.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| childNodesByParent | property | `ReadonlyMap<string, readonly WebsiteObservedNode[]>` | yes |  |
+| node | property | `WebsiteObservedNode` | yes |  |
+| parent | property | `WebsiteObservedNode \| null` | yes |  |

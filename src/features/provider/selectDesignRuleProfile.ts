@@ -1,7 +1,7 @@
 import type { RuleSelection } from '@ankhorage/rules';
 
-import type { DesignRuleProfileSelection } from '../../types/designRuleProvider';
-import { designRuleProfiles } from '../catalog/designRuleProfiles';
+import type { DesignRuleProfileSelection } from '../../types/designRuleProvider.js';
+import { designRuleProfiles } from '../catalog/designRuleProfiles.js';
 
 /*** Resolves one named profile independently from the Rule IDs it selects. */
 export function selectDesignRuleProfile(profileId: string): DesignRuleProfileSelection {

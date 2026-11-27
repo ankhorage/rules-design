@@ -5,10 +5,10 @@ import type {
   AssessmentFinding,
   AssessmentResult,
   WebsiteAssessmentRuleOptions,
-} from '../../types/websiteAssessment';
-import { validatedWebsiteAssessmentValues } from './isWebsiteAssessmentNonNull';
-import { websiteAssessmentResult } from './websiteAssessmentResult';
-import { websiteAssessmentValues } from './websiteAssessmentValues';
+} from '../../types/websiteAssessment.js';
+import { validatedWebsiteAssessmentValues } from './isWebsiteAssessmentNonNull.js';
+import { websiteAssessmentResult } from './websiteAssessmentResult.js';
+import { websiteAssessmentValues } from './websiteAssessmentValues.js';
 
 /*** Assesses parser-normalized copyright placement and year semantics. */
 export function assessCopyrightNotice(

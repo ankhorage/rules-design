@@ -1,5 +1,5 @@
-import type { DesignRuleProfile } from '../../types/designRuleCatalog';
-import { designRuleCatalog } from './designRuleCatalog';
+import type { DesignRuleProfile } from '../../types/designRuleCatalog.js';
+import { designRuleCatalog } from './designRuleCatalog.js';
 
 const objectiveRuleIds = designRuleCatalog
   .filter((entry) => entry.assessmentKind === 'objective' && !entry.id.startsWith('design.crap'))

@@ -1,6 +1,6 @@
 import type { RuleSubject } from '@ankhorage/rules';
 
-import type { AssessmentFinding, AssessmentResult } from '../../types/websiteAssessment';
+import type { AssessmentFinding, AssessmentResult } from '../../types/websiteAssessment.js';
 
 /*** Produces deterministic outcomes and generic incomplete evidence for website assessment rules. */
 export function websiteAssessmentResult(

@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/rules-design",
-  "version": "0.9.0",
+  "version": "0.10.2",
   "description": "Declarative catalog for reusable design rules.",
   "license": "MIT",
   "homepage": "https://github.com/ankhorage/rules-design#readme",
@@ -84,6 +84,7 @@
     "check-types": "bun x tsc --noEmit -p tsconfig.json",
     "typecheck": "bun run check-types",
     "test": "bun test",
+    "test:packed-node-consumer": "bun test/packedNodeConsumer.ts",
     "lint": "ankhorage-eslint . --max-warnings=0",
     "knip:check": "ankhorage-knip",
     "test:packed-consumer": "bun test/packed-consumer.ts",
@@ -106,8 +107,8 @@
   "dependencies": {
     "@ankhorage/ankh": "^0.13.4",
     "@ankhorage/capability": "^0.2.2",
-    "@ankhorage/contracts": "^26.9.0",
-    "@ankhorage/rules": "^0.4.0",
+    "@ankhorage/contracts": "26.12.0",
+    "@ankhorage/rules": "^0.7.0",
     "@ankhorage/utility": "^1.10.0"
   }
 }

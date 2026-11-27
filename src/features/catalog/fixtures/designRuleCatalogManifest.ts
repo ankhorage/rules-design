@@ -1,6 +1,6 @@
-import type { DesignRulePlanningManifest } from '../../../types/designRuleCatalog';
-import { designRuleCatalog } from '../designRuleCatalog';
-import { designRuleProfiles } from '../designRuleProfiles';
+import type { DesignRulePlanningManifest } from '../../../types/designRuleCatalog.js';
+import { designRuleCatalog } from '../designRuleCatalog.js';
+import { designRuleProfiles } from '../designRuleProfiles.js';
 
 /*** Provides the internal Wave 0 planning manifest without claiming a provider implementation. */
 export const designRulePlanningManifest: DesignRulePlanningManifest = {

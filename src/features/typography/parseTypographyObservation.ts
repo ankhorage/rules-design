@@ -1,6 +1,6 @@
 import { isRecord } from '@ankhorage/utility/object';
 
-import type { TypographyObservation } from '../../types/typography';
+import type { TypographyObservation } from '../../types/typography.js';
 
 /*** Parses one available serialized fact into a normalized Typography observation. */
 export function parseTypographyObservation(
